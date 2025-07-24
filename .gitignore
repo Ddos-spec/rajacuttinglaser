@@ -1,29 +1,24 @@
-#================================================================
-# Astro & Build Artifacts
-# Folder cache dan hasil build. WAJIB di-ignore.
-#================================================================
-.astro/
+# build output
 dist/
-*.log*
+# generated types
+.astro/
 
-#================================================================
-# Dependencies
-# Folder package dari npm/yarn/pnpm. Ukurannya raksasa.
-#================================================================
+# dependencies
 node_modules/
 
-#================================================================
-# Environment Variables
-# File rahasia (API keys, dll). JANGAN PERNAH di-commit.
-#================================================================
-.env
-.env.*
-!.env.example
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-#================================================================
-# IDE & System Files
-# File konfigurasi editor dan file sampah dari OS.
-#================================================================
-.vscode/
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
 .DS_Store
-Thumbs.db
+
+# jetbrains setting folder
+.idea/

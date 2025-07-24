@@ -17,7 +17,7 @@ import Footer from '../components/Footer.astro';
       <div class="container mx-auto px-4">
         <div class="text-center">
           <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
-            <a href="/" class="hover:text-pure-white transition-colors">Beranda</a>
+            <a href={import.meta.env.BASE_URL} class="hover:text-pure-white transition-colors">Beranda</a>
             <span class="mx-2">›</span>
             <span class="text-pure-white">Blog</span>
           </nav>
@@ -73,7 +73,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-8">
               <h3 class="text-2xl md:text-3xl font-bold text-pure-white mb-4 leading-tight">
-                <a href="/blog/panduan-lengkap-laser-cutting" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/panduan-lengkap-laser-cutting" class="hover:text-metallic-silver transition-colors`}>
                   Panduan Lengkap Memilih Jasa Laser Cutting Terbaik untuk Proyek Anda
                 </a>
               </h3>
@@ -85,7 +85,7 @@ import Footer from '../components/Footer.astro';
                 <span>24 Juli 2024</span>
               </div>
               <a 
-                href="/blog/panduan-lengkap-laser-cutting" 
+                href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/panduan-lengkap-laser-cutting`} 
                 class="bg-laser-red hover:bg-red-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 inline-block"
               >
                 Baca Selengkapnya
@@ -116,7 +116,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/akrilik-vs-mdf-laser-cutting" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/akrilik-vs-mdf-laser-cutting" class="hover:text-metallic-silver transition-colors`}>
                   Akrilik vs MDF: Mana yang Lebih Cocok untuk Proyek Anda?
                 </a>
               </h3>
@@ -145,7 +145,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/5-kesalahan-desain-laser-cutting" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/5-kesalahan-desain-laser-cutting" class="hover:text-metallic-silver transition-colors`}>
                   5 Kesalahan Desain yang Sering Terjadi dalam Laser Cutting
                 </a>
               </h3>
@@ -174,7 +174,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/fiber-vs-co2-laser-technology" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/fiber-vs-co2-laser-technology" class="hover:text-metallic-silver transition-colors`}>
                   Fiber Laser vs CO₂ Laser: Teknologi Mana yang Tepat?
                 </a>
               </h3>
@@ -203,7 +203,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/optimasi-cnc-router-tips" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/optimasi-cnc-router-tips" class="hover:text-metallic-silver transition-colors`}>
                   Tips Optimasi CNC Router untuk Hasil 3D Relief Terbaik
                 </a>
               </h3>
@@ -232,7 +232,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/panduan-grade-stainless-steel" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/panduan-grade-stainless-steel" class="hover:text-metallic-silver transition-colors`}>
                   Panduan Lengkap Grade Stainless Steel untuk Laser Cutting
                 </a>
               </h3>
@@ -261,7 +261,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/kerf-width-design-consideration" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/kerf-width-design-consideration" class="hover:text-metallic-silver transition-colors`}>
                   Memahami Kerf Width: Kunci Desain Laser Cutting Presisi
                 </a>
               </h3>
@@ -290,7 +290,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/galvo-scanner-technology-explained" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/galvo-scanner-technology-explained" class="hover:text-metallic-silver transition-colors`}>
                   Teknologi Galvo Scanner: Revolusi Kecepatan Laser Marking
                 </a>
               </h3>
@@ -319,7 +319,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/file-preparation-best-practices" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/file-preparation-best-practices" class="hover:text-metallic-silver transition-colors`}>
                   Best Practices Persiapan File untuk Laser Cutting
                 </a>
               </h3>
@@ -348,7 +348,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href="/blog/aluminum-alloys-laser-cutting-guide" class="hover:text-metallic-silver transition-colors">
+                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/aluminum-alloys-laser-cutting-guide" class="hover:text-metallic-silver transition-colors`}>
                   Aluminum Alloys untuk Laser Cutting: Panduan Komprehensif
                 </a>
               </h3>
@@ -417,7 +417,7 @@ import Footer from '../components/Footer.astro';
             Konsultasi dengan Ahli
           </a>
           <a 
-            href="/kontak" 
+            href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/kontak`} 
             class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]"
           >
             Hubungi Tim Kami

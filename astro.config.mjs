@@ -2,15 +2,13 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
-// https://astro.build/config
 export default defineConfig({
   output: 'static',
-  // URL lengkap website lu setelah di-deploy
-  site: 'https://Ddos-spec.github.io',
-  // Nama repo lu, diawali dan diakhiri garis miring
-  base: '/rajacuttinglaser/',
+  site: 'https://rajametalcutting.com',
+  // Use dynamic base path that will be set by GitHub Actions
+  base: process.env.CI ? undefined : '/raja-metal-cutting-new',
   integrations: [
-    tailwind(), 
+    tailwind(),
     sitemap()
   ],
   build: {
@@ -28,3 +26,4 @@ export default defineConfig({
     }
   }
 });
+
