@@ -1,0 +1,66 @@
+# Nama workflow, bebas mau dinamain apa
+name: Deploy to GitHub Pages
+
+# Kapan workflow ini jalan?
+# Disini, dia bakal jalan setiap kali ada 'push' ke branch 'main'
+on:
+  push:
+    branches:
+      - main
+  # Biar bisa dijalanin manual juga dari tab Actions di GitHub
+  workflow_dispatch:
+
+# Izin yang dibutuhin sama si Actions buat nge-deploy ke Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Cuma ngebolehin satu proses deploy jalan di waktu yang sama
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# Langkah-langkah yang harus dilakuin
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Ambil kode dari repo lu
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Siapin lingkungan Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # Pake Node.js versi 20
+          cache: 'npm'
+
+      # 3. Install semua package yang dibutuhin
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Build website Astro-nya
+      #    Astro bakal otomatis pake site & base dari astro.config.mjs
+      - name: Build
+        run: npm run build
+
+      # 5. Siapin artifact (hasil build) buat di-upload ke Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 6. Upload artifact-nya
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Path ke folder hasil build Astro (default-nya 'dist')
+          path: './dist'
+
+      # 7. Deploy ke GitHub Pages!
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

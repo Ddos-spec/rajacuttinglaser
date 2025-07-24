@@ -1,0 +1,32 @@
+#================================================================
+# Astro & Build Artifacts
+# Folder cache dan hasil build. WAJIB di-ignore.
+#================================================================
+.astro/
+dist/
+*.log*
+
+#================================================================
+# Dependencies
+# Folder package dari npm/yarn/pnpm. Ukurannya raksasa.
+#================================================================
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+#================================================================
+# Environment Variables
+# File rahasia (API keys, dll). JANGAN PERNAH di-commit.
+#================================================================
+.env
+.env.*
+!.env.example
+
+#================================================================
+# IDE & System Files
+# File konfigurasi editor dan file sampah dari OS.
+#================================================================
+.vscode/
+.DS_Store
+Thumbs.db
