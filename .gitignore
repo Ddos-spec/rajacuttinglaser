@@ -11,9 +11,6 @@ dist/
 # Folder package dari npm/yarn/pnpm. Ukurannya raksasa.
 #================================================================
 node_modules/
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
 
 #================================================================
 # Environment Variables
