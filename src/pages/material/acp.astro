@@ -2,10 +2,9 @@
 // src/pages/material/acp.astro
 // Halaman ini sekarang jadi super simpel!
 
-import Layout from '../../layouts/Layout.astro';
-import MaterialDetail from '../../components/MaterialDetail.astro';
-import { MATERIALS, SITE_CONFIG } from '../../utils/constants.js';
-
+import Layout from '@/layouts/Layout.astro';
+import MaterialDetail from '@/components/MaterialDetail.astro';
+import { MATERIALS, SITE_CONFIG } from '@/utils/constants.js';
 // 1. Ambil data spesifik untuk ACP dari pusat data
 const material = MATERIALS.find(m => m.id === 'acp');
 
