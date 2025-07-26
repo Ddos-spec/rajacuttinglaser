@@ -23,7 +23,7 @@ import Footer from '../components/Footer.astro';
           </nav>
           
           <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6 leading-tight">
-            Dari Jurnal Pengalaman Kami
+            Dari Jurnal Perang Kami
           </h1>
           <p class="text-xl text-metallic-silver mb-8 max-w-3xl mx-auto leading-relaxed">
             Tips, trik, dan insight dari para ahli laser cutting untuk membantu proyek Anda mencapai hasil terbaik
@@ -45,6 +45,9 @@ import Footer from '../components/Footer.astro';
             </button>
             <button class="category-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-category="technology">
               Teknologi
+            </button>
+            <button class="category-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-category="innovation">
+              Tren & Inovasi
             </button>
           </div>
         </div>
@@ -85,7 +88,7 @@ import Footer from '../components/Footer.astro';
                 <span>24 Juli 2024</span>
               </div>
               <a 
-                href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/panduan-lengkap-laser-cutting`} 
+                href={import.meta.env.BASE_URL + 'blog/panduan-lengkap-laser-cutting'} 
                 class="bg-laser-red hover:bg-red-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 inline-block"
               >
                 Baca Selengkapnya
@@ -116,7 +119,7 @@ import Footer from '../components/Footer.astro';
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/akrilik-vs-mdf-laser-cutting" class="hover:text-metallic-silver transition-colors`}>
+                <a href={import.meta.env.BASE_URL + 'blog/akrilik-vs-mdf-laser-cutting'} class="hover:text-metallic-silver transition-colors">
                   Akrilik vs MDF: Mana yang Lebih Cocok untuk Proyek Anda?
                 </a>
               </h3>
@@ -479,4 +482,36 @@ import Footer from '../components/Footer.astro';
     @apply bg-laser-red text-white;
   }
 </style>
+
+
+
+          <!-- New Article: Tren Desain Laser Cutting 2024 -->
+          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="innovation">
+            <div class="relative overflow-hidden">
+              <img 
+                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Tren+Desain+2024" 
+                alt="Tren desain laser cutting terbaru 2024"
+                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-medium">Tren & Inovasi</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
+                <a href={import.meta.env.BASE_URL + 'blog/tren-desain-laser-cutting-2024'} class="hover:text-metallic-silver transition-colors">
+                  Tren Desain Laser Cutting 2024: Inovasi yang Mengubah Industri
+                </a>
+              </h3>
+              <p class="text-metallic-silver mb-4">
+                Jelajahi tren terbaru dalam desain laser cutting 2024. Dari pola parametrik hingga sustainable design, temukan inspirasi untuk proyek Anda.
+              </p>
+              <div class="flex items-center justify-between text-sm text-metallic-silver">
+                <span>6 menit baca</span>
+                <span>22 Juli 2024</span>
+              </div>
+            </div>
+          </article>
+
 
