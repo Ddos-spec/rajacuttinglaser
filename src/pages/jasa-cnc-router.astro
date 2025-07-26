@@ -1,378 +1,221 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+// src/pages/jasa-cnc-router.astro
+import BaseLayout from '../components/BaseLayout.astro';
+import { SERVICES } from '../utils/constants.js';
+
+// Ambil data spesifik untuk CNC Router dari pusat data
+const service = SERVICES.find(s => s.id === 'cnc-router');
 ---
 
-<Layout 
-  title="Jasa CNC Router Presisi Tinggi di Bintaro BSD | Raja Metal Cutting"
-  description="Layanan CNC Router profesional untuk cutting dan engraving kayu, MDF, akrilik dengan presisi tinggi. Mesin CNC Router Eropa berkualitas di Bintaro BSD."
-  keywords="jasa cnc router, cnc router Bintaro, cnc router BSD, cutting kayu cnc, engraving cnc router, Raja Metal Cutting"
+<BaseLayout 
+  title={`${service.name} Presisi Tinggi di Bintaro BSD | Raja Metal Cutting`}
+  description={service.description}
+  keywords={`jasa ${service.name.toLowerCase()}, cnc router bintaro, cutting kayu`}
 >
-  <Header />
-  
-  <main id="main-content">
-    <!-- Hero Section -->
-    <section class="relative py-20 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
-              <a href={import.meta.env.BASE_URL} class="hover:text-pure-white transition-colors">Beranda</a>
-              <span class="mx-2">›</span>
-              <span class="text-pure-white">Jasa CNC Router</span>
-            </nav>
-            
-            <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6 leading-tight">
-              Jasa CNC Router Presisi Tinggi di Bintaro BSD
-            </h1>
-            <p class="text-xl text-metallic-silver mb-8 leading-relaxed">
-              Layanan CNC Router profesional untuk cutting dan engraving kayu, MDF, akrilik dengan teknologi mesin Eropa. Hasil presisi tinggi untuk furniture, signage, dan prototype.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4">
-              <a 
-                href="https://wa.me/6281380529998" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg text-center"
-                aria-label="Konsultasi CNC Router"
-              >
-                Konsultasi CNC Router
-              </a>
-              <a 
-                href={import.meta.env.BASE_URL + 'projects'} 
-                class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 text-center"
-              >
-                Lihat Hasil Kerja
-              </a>
-            </div>
-          </div>
-          
-          <div class="relative">
-            <img 
-              src="https://via.placeholder.com/600x400/1A1A1A/C0C0C0?text=CNC+Router+Machine+Process" 
-              alt="Proses CNC Router dengan mesin Eropa berkualitas tinggi"
-              class="w-full rounded-lg shadow-2xl"
-              loading="eager"
-            />
-            <div class="absolute -bottom-4 -right-4 bg-laser-red text-white p-4 rounded-lg shadow-lg">
-              <div class="text-2xl font-bold">3D</div>
-              <div class="text-sm">Relief Cutting</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
+            <a href={import.meta.env.BASE_URL} class="hover:text-pure-white transition-colors">Beranda</a>
+            <span class="mx-2">›</span>
+            <span class="text-pure-white">{service.name}</span>
+          </nav>
 
-    <!-- Benefits Section -->
-    <section class="py-20 bg-charcoal">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Keunggulan CNC Router Kami</h2>
-          <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
-            Mengapa ribuan klien mempercayakan proyek CNC Router mereka kepada kami
+          <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6 leading-tight">
+            {service.name} Presisi Tinggi di Bintaro BSD
+          </h1>
+          <p class="text-xl text-metallic-silver mb-8 leading-relaxed">
+            {service.description}
           </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a 
+              href="https://wa.me/6281380529998" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg text-center"
+              aria-label="Konsultasi CNC Router"
+            >
+              Konsultasi CNC Router
+            </a>
+            <a 
+              href={`${import.meta.env.BASE_URL}projects`} 
+              class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 text-center"
+            >
+              Lihat Hasil Kerja
+            </a>
+          </div>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-16 h-16 bg-laser-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-pure-white mb-3">3D Relief Cutting</h3>
-            <p class="text-metallic-silver">Mampu membuat relief 3D dengan kedalaman hingga 50mm untuk detail furniture premium</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-laser-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-pure-white mb-3">Multi Material</h3>
-            <p class="text-metallic-silver">Dapat memproses kayu solid, MDF, plywood, akrilik, dan foam dengan hasil optimal</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-laser-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-pure-white mb-3">Area Kerja Besar</h3>
-            <p class="text-metallic-silver">Meja kerja 1200x800mm untuk proyek furniture dan signage berukuran besar</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-laser-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-pure-white mb-3">Finishing Halus</h3>
-            <p class="text-metallic-silver">Hasil cutting dan engraving dengan permukaan halus, minimal post-processing</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-laser-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-pure-white mb-3">Desain Kompleks</h3>
-            <p class="text-metallic-silver">Mampu mengerjakan desain rumit dengan detail halus dan pola geometris kompleks</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-laser-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7v10c0 5.55 3.84 9.739 9 11 5.16-1.261 9-5.45 9-11V7l-10-5z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-pure-white mb-3">Garansi Presisi</h3>
-            <p class="text-metallic-silver">Jaminan akurasi dimensi ±0.1mm atau uang kembali 100%</p>
+
+        <div class="relative">
+          <img 
+            src={service.imageHero}
+            alt={service.imageHeroAlt}
+            class="w-full rounded-lg shadow-2xl"
+            loading="eager"
+          />
+          <div class="absolute -bottom-4 -right-4 bg-laser-red text-white p-4 rounded-lg shadow-lg">
+            <div class="text-2xl font-bold">3D</div>
+            <div class="text-sm">Relief Cutting</div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Applications Section -->
-    <section class="py-20 bg-gradient-to-b from-charcoal to-charcoal/95">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Aplikasi CNC Router</h2>
-          <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
-            Beragam kebutuhan industri dan kreatif yang dapat kami layani dengan CNC Router
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center hover:border-laser-red/50 transition-all duration-300">
-            <div class="w-12 h-12 bg-laser-red/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg class="w-6 h-6 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-pure-white mb-2">Furniture Custom</h3>
-            <p class="text-metallic-silver text-sm">Panel furniture, ukiran dekoratif, ornamen kayu</p>
-          </div>
-          
-          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center hover:border-laser-red/50 transition-all duration-300">
-            <div class="w-12 h-12 bg-laser-red/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg class="w-6 h-6 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-pure-white mb-2">Signage 3D</h3>
-            <p class="text-metallic-silver text-sm">Papan nama 3D, huruf timbul, logo relief</p>
-          </div>
-          
-          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center hover:border-laser-red/50 transition-all duration-300">
-            <div class="w-12 h-12 bg-laser-red/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg class="w-6 h-6 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-pure-white mb-2">Mold & Jig</h3>
-            <p class="text-metallic-silver text-sm">Cetakan produksi, jig assembly, fixture</p>
-          </div>
-          
-          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center hover:border-laser-red/50 transition-all duration-300">
-            <div class="w-12 h-12 bg-laser-red/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg class="w-6 h-6 text-laser-red" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-pure-white mb-2">Prototype Produk</h3>
-            <p class="text-metallic-silver text-sm">Mockup, model testing, rapid prototyping</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-charcoal">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Galeri Hasil CNC Router</h2>
-          <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
-            Lihat kualitas hasil kerja CNC Router dengan berbagai tingkat kompleksitas dan material
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="group">
-            <div class="relative overflow-hidden rounded-lg">
-              <img 
-                src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Furniture+Panel+3D+Relief" 
-                alt="Panel furniture dengan relief 3D menggunakan CNC Router"
-                class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="absolute bottom-4 left-4 right-4">
-                  <h3 class="text-lg font-semibold text-pure-white mb-1">Panel Furniture 3D Relief</h3>
-                  <p class="text-metallic-silver text-sm">Kayu jati dengan relief kedalaman 15mm</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="group">
-            <div class="relative overflow-hidden rounded-lg">
-              <img 
-                src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Signage+3D+Logo+Timbul" 
-                alt="Signage 3D dengan logo timbul hasil CNC Router"
-                class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="absolute bottom-4 left-4 right-4">
-                  <h3 class="text-lg font-semibold text-pure-white mb-1">Signage 3D Logo Timbul</h3>
-                  <p class="text-metallic-silver text-sm">MDF 18mm dengan finishing cat duco</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="group">
-            <div class="relative overflow-hidden rounded-lg">
-              <img 
-                src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Mold+Produksi+Presisi" 
-                alt="Mold produksi dengan presisi tinggi hasil CNC Router"
-                class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="absolute bottom-4 left-4 right-4">
-                  <h3 class="text-lg font-semibold text-pure-white mb-1">Mold Produksi Presisi</h3>
-                  <p class="text-metallic-silver text-sm">MDF HD dengan toleransi ±0.1mm</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-20 bg-gradient-to-b from-charcoal/95 to-charcoal">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Pertanyaan yang Sering Diajukan</h2>
-          <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
-            Jawaban untuk pertanyaan umum seputar layanan CNC Router
-          </p>
-        </div>
-        
-        <div class="max-w-3xl mx-auto space-y-4">
-          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg">
-            <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-laser-red" onclick="toggleFAQ(this)">
-              <div class="flex justify-between items-center">
-                <h3 class="text-lg font-semibold text-pure-white">Berapa ukuran maksimal yang bisa dikerjakan dengan CNC Router?</h3>
-                <svg class="w-5 h-5 text-metallic-silver transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </div>
-            </button>
-            <div class="hidden px-6 pb-6">
-              <p class="text-metallic-silver">Area kerja CNC Router kami adalah 1200x800mm dengan ketebalan material hingga 100mm. Untuk proyek dengan ukuran lebih besar, kami dapat membagi menjadi beberapa bagian yang kemudian di-assembly.</p>
-            </div>
-          </div>
-          
-          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg">
-            <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-laser-red" onclick="toggleFAQ(this)">
-              <div class="flex justify-between items-center">
-                <h3 class="text-lg font-semibold text-pure-white">Material apa saja yang bisa diproses dengan CNC Router?</h3>
-                <svg class="w-5 h-5 text-metallic-silver transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </div>
-            </button>
-            <div class="hidden px-6 pb-6">
-              <p class="text-metallic-silver">Kami dapat memproses kayu solid (jati, mahoni, merbau), engineered wood (MDF, plywood, particle board), akrilik, foam, dan beberapa jenis plastik. Setiap material memiliki parameter cutting yang berbeda untuk hasil optimal.</p>
-            </div>
-          </div>
-          
-          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg">
-            <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-laser-red" onclick="toggleFAQ(this)">
-              <div class="flex justify-between items-center">
-                <h3 class="text-lg font-semibold text-pure-white">Berapa lama waktu pengerjaan untuk proyek CNC Router?</h3>
-                <svg class="w-5 h-5 text-metallic-silver transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </div>
-            </button>
-            <div class="hidden px-6 pb-6">
-              <p class="text-metallic-silver">Waktu pengerjaan tergantung kompleksitas desain dan ukuran proyek. Untuk cutting sederhana: 1-2 hari, relief 3D: 3-5 hari, proyek kompleks: 5-10 hari kerja. Kami juga menyediakan layanan express untuk kebutuhan mendesak.</p>
-            </div>
-          </div>
-          
-          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg">
-            <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-laser-red" onclick="toggleFAQ(this)">
-              <div class="flex justify-between items-center">
-                <h3 class="text-lg font-semibold text-pure-white">Format file apa yang diterima untuk CNC Router?</h3>
-                <svg class="w-5 h-5 text-metallic-silver transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </div>
-            </button>
-            <div class="hidden px-6 pb-6">
-              <p class="text-metallic-silver">Kami menerima file 3D dalam format STL, OBJ, 3DM, dan STEP. Untuk file 2D: DXF, DWG, AI, CDR. File 3D relief dapat berupa grayscale image (JPG, PNG) atau model 3D lengkap. Tim kami juga dapat membantu konversi dari format lain.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-laser-red to-red-600">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Siap Mulai Proyek CNC Router Anda?
-        </h2>
-        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-          Konsultasikan kebutuhan CNC Router Anda dengan tim ahli kami. Dapatkan estimasi biaya dan timeline yang akurat untuk proyek furniture, signage, atau prototype Anda.
+  <!-- Benefits Section -->
+  <section class="py-20 bg-charcoal">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Keunggulan {service.name} Kami</h2>
+        <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
+          {service.benefitsIntro}
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a 
-            href="https://wa.me/6281380529998" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="bg-white text-laser-red hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg min-w-[280px]"
-            aria-label="Konsultasi CNC Router Gratis"
-          >
-            Konsultasi Gratis Sekarang
-          </a>
-          <a 
-            href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/projects`} 
-            class="border-2 border-white text-white hover:bg-white hover:text-laser-red px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]"
-          >
-            Lihat Portfolio CNC Router
-          </a>
-        </div>
       </div>
-    </section>
-  </main>
-  
-  <Footer />
-</Layout>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {service.benefits.map((benefit) => (
+          <div class="text-center">
+            <div class="w-16 h-16 bg-laser-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-laser-red" fill="currentColor" viewBox="0 0 24 24">{
+                benefit.iconPath
+              }</svg>
+            </div>
+            <h3 class="text-xl font-semibold text-pure-white mb-3">{benefit.title}</h3>
+            <p class="text-metallic-silver">{benefit.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-<script>
-  function toggleFAQ(button) {
-    const content = button.nextElementSibling;
-    const icon = button.querySelector('svg');
-    
-    if (content.classList.contains('hidden')) {
-      content.classList.remove('hidden');
-      icon.style.transform = 'rotate(180deg)';
-    } else {
-      content.classList.add('hidden');
-      icon.style.transform = 'rotate(0deg)';
+  <!-- Applications Section -->
+  <section class="py-20 bg-gradient-to-b from-charcoal to-charcoal/95">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Aplikasi {service.name}</h2>
+        <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
+          {service.applicationsIntro}
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {service.applications.map((app) => (
+          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center hover:border-laser-red/50 transition-all duration-300">
+            <div class="w-12 h-12 bg-laser-red/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-laser-red" fill="currentColor" viewBox="0 0 24 24">{
+                app.iconPath
+              }</svg>
+            </div>
+            <h3 class="text-lg font-semibold text-pure-white mb-2">{app.title}</h3>
+            <p class="text-metallic-silver text-sm">{app.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="py-20 bg-charcoal">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Galeri Hasil {service.name}</h2>
+        <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
+          {service.galleryIntro}
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {service.gallery.map((img) => (
+          <div class="group">
+            <div class="relative overflow-hidden rounded-lg">
+              <img 
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="absolute bottom-4 left-4 right-4">
+                  <h3 class="text-lg font-semibold text-pure-white mb-1">{img.title}</h3>
+                  <p class="text-metallic-silver text-sm">{img.caption}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 bg-gradient-to-b from-charcoal/95 to-charcoal">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Pertanyaan yang Sering Diajukan</h2>
+        <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
+          {service.faqIntro}
+        </p>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-4">
+        {service.faq.map((item) => (
+          <div class="bg-charcoal border border-metallic-silver/20 rounded-lg">
+            <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-laser-red" onclick="toggleFAQ(this)">
+              <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-pure-white">{item.question}</h3>
+                <svg class="w-5 h-5 text-metallic-silver transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </div>
+            </button>
+            <div class="hidden px-6 pb-6">
+              <p class="text-metallic-silver">{item.answer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-r from-laser-red to-red-600">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        Siap Mulai Proyek {service.name} Anda?
+      </h2>
+      <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+        {service.ctaText}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a 
+          href="https://wa.me/6281380529998" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="bg-white text-laser-red hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg min-w-[280px]"
+          aria-label="Konsultasi CNC Router Gratis"
+        >
+          {service.ctaButton1}
+        </a>
+        <a 
+          href={`${import.meta.env.BASE_URL}projects`} 
+          class="border-2 border-white text-white hover:bg-white hover:text-laser-red px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]"
+        >
+          {service.ctaButton2}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleFAQ(button) {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('svg');
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      }
     }
-  }
-</script>
-
+  </script>
+</BaseLayout>

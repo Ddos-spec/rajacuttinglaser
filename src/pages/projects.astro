@@ -1,444 +1,107 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+// src/pages/portfolio.astro
+import BaseLayout from '../components/BaseLayout.astro';
+import { SITE_CONFIG, PROJECTS, SERVICES } from '../utils/constants.js';
 ---
 
-<Layout 
-  title="Portfolio Proyek Laser Cutting | Raja Metal Cutting"
-  description="Jelajahi portfolio lengkap hasil kerja laser cutting Raja Metal Cutting. CNC Router, Laser CO₂, Fiber Metal, dan Galvo untuk berbagai industri di Bintaro BSD."
-  keywords="portfolio laser cutting, hasil kerja cnc router, portfolio laser co2, portfolio fiber metal, portfolio galvo laser, Raja Metal Cutting"
+<BaseLayout
+  title={SITE_CONFIG.name + ' - Portfolio Proyek'}
+  description={SITE_CONFIG.description}
+  keywords={SITE_CONFIG.keywords}
 >
-  <Header />
-  
   <main id="main-content">
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="relative py-20 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90">
-      <div class="container mx-auto px-4">
-        <div class="text-center">
-          <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
-            <a href={import.meta.env.BASE_URL} class="hover:text-pure-white transition-colors">Beranda</a>
-            <span class="mx-2">›</span>
-            <span class="text-pure-white">Portfolio</span>
-          </nav>
-          
-          <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6 leading-tight">
-            Portfolio Proyek Laser Cutting
-          </h1>
-          <p class="text-xl text-metallic-silver mb-8 max-w-3xl mx-auto leading-relaxed">
-            Jelajahi koleksi lengkap hasil kerja kami yang telah dipercaya oleh ratusan klien profesional di berbagai industri
-          </p>
-          
-          <!-- Filter Buttons -->
-          <div class="flex flex-wrap justify-center gap-2 mb-8">
-            <button class="filter-btn active bg-laser-red text-white px-6 py-2 rounded-lg font-medium transition-all duration-300" data-filter="all">
-              Semua Proyek
-            </button>
-            <button class="filter-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-filter="cnc-router">
-              CNC Router
-            </button>
-            <button class="filter-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-filter="laser-co2">
-              Laser CO₂
-            </button>
-            <button class="filter-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-filter="fiber-metal">
-              Fiber Metal
-            </button>
-            <button class="filter-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-filter="galvo">
-              Galvo 30W
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Portfolio Grid -->
-    <section class="py-20 bg-charcoal">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
-          
-          <!-- CNC Router Projects -->
-          <div class="portfolio-item group" data-category="cnc-router">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Furniture+Panel+3D+Relief" 
-                  alt="Panel furniture dengan relief 3D menggunakan CNC Router"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-laser-red text-white px-3 py-1 rounded-full text-sm font-medium">CNC Router</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">Panel Furniture 3D Relief</h3>
-                <p class="text-metallic-silver mb-4">Panel furniture dengan relief 3D kedalaman 15mm pada kayu jati. Desain custom untuk interior mewah dengan finishing premium.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Kayu Jati</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Relief 3D</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Custom Design</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> Interior Designer Premium
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Laser CO2 Projects -->
-          <div class="portfolio-item group" data-category="laser-co2">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Akrilik+Display+Premium" 
-                  alt="Display akrilik premium dengan edge crystal clear menggunakan Laser CO₂"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">Laser CO₂</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">Display Akrilik Premium</h3>
-                <p class="text-metallic-silver mb-4">Display produk untuk showroom otomotif dengan akrilik transparan 8mm. Edge crystal clear dengan LED backlight terintegrasi.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Akrilik 8mm</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">LED Ready</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Crystal Clear</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> Showroom Otomotif Premium
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Fiber Metal Projects -->
-          <div class="portfolio-item group" data-category="fiber-metal">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Stainless+Steel+Industrial" 
-                  alt="Komponen stainless steel industri dengan cutting presisi menggunakan Fiber Laser"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">Fiber Metal</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">Komponen Industri Presisi</h3>
-                <p class="text-metallic-silver mb-4">Bracket dan housing untuk mesin industri dari stainless steel 304 dengan toleransi ketat ±0.05mm.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">SS 304</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Toleransi Ketat</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Industrial Grade</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> PT Manufaktur Indonesia
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Galvo Projects -->
-          <div class="portfolio-item group" data-category="galvo">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=QR+Code+Marking+Detail" 
-                  alt="QR Code marking dengan detail tinggi menggunakan Galvo 30 Watt"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">Galvo 30W</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">QR Code Marking Industrial</h3>
-                <p class="text-metallic-silver mb-4">Marking QR code untuk traceability produk elektronik. Detail 0.01mm dengan kecepatan marking 2 detik per piece.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">QR Code</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Traceability</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">High Speed</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> PT Elektronik Nusantara
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- More CNC Router Projects -->
-          <div class="portfolio-item group" data-category="cnc-router">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Signage+3D+Logo+Timbul" 
-                  alt="Signage 3D dengan logo timbul menggunakan CNC Router"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-laser-red text-white px-3 py-1 rounded-full text-sm font-medium">CNC Router</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">Signage 3D Logo Timbul</h3>
-                <p class="text-metallic-silver mb-4">Papan nama perusahaan dengan logo timbul 3D dari MDF 18mm. Finishing cat duco dengan detail sempurna.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">MDF 18mm</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">3D Logo</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Cat Duco</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> PT Teknologi Maju
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- More Laser CO2 Projects -->
-          <div class="portfolio-item group" data-category="laser-co2">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Maket+Arsitektur+Kompleks" 
-                  alt="Maket arsitektur kompleks dengan cutting kayu dan akrilik menggunakan Laser CO₂"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">Laser CO₂</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">Maket Arsitektur Kompleks</h3>
-                <p class="text-metallic-silver mb-4">Maket perumahan skala 1:100 dengan detail bangunan, landscape, dan furniture miniatur. Multi-material cutting presisi.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">MDF 3mm</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Akrilik 2mm</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Detail Kompleks</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> Studio Arsitektur Bintaro
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- More Fiber Metal Projects -->
-          <div class="portfolio-item group" data-category="fiber-metal">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Aluminum+Architectural" 
-                  alt="Komponen aluminum untuk arsitektur dengan cutting presisi menggunakan Fiber Laser"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">Fiber Metal</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">Railing Aluminum Arsitektur</h3>
-                <p class="text-metallic-silver mb-4">Komponen railing untuk gedung perkantoran dari aluminum 6061 dengan pola geometris modern dan finishing anodized.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Aluminum 6061</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Pola Geometris</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Anodized</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> Kontraktor Bangunan Tinggi
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- More Galvo Projects -->
-          <div class="portfolio-item group" data-category="galvo">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Logo+Engraving+Premium" 
-                  alt="Logo engraving premium pada produk menggunakan Galvo 30 Watt"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">Galvo 30W</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">Logo Engraving Premium</h3>
-                <p class="text-metallic-silver mb-4">Engraving logo perusahaan pada produk premium dengan detail halus dan kontras tinggi untuk branding eksklusif.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Logo Premium</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Detail Halus</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Branding</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> Brand Fashion Indonesia
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mixed Projects -->
-          <div class="portfolio-item group" data-category="laser-co2">
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
-              <div class="relative overflow-hidden">
-                <img 
-                  src="https://via.placeholder.com/400x300/1A1A1A/C0C0C0?text=Prototype+Multi+Material" 
-                  alt="Prototype produk dengan multi material menggunakan Laser CO₂"
-                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div class="absolute top-4 left-4">
-                  <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">Laser CO₂</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-pure-white mb-2">Prototype Multi-Material</h3>
-                <p class="text-metallic-silver mb-4">Rapid prototyping untuk startup teknologi dengan kombinasi akrilik, kayu, dan karet. Assembly presisi untuk testing konsep.</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Multi-Material</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Rapid Prototype</span>
-                  <span class="bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs">Assembly</span>
-                </div>
-                <div class="text-sm text-metallic-silver">
-                  <strong class="text-pure-white">Klien:</strong> Tech Startup Jakarta
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-20 bg-gradient-to-b from-charcoal/95 to-charcoal">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">Pencapaian Kami</h2>
-          <p class="text-lg text-metallic-silver max-w-2xl mx-auto">
-            Angka-angka yang membuktikan kepercayaan klien terhadap kualitas layanan kami
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-laser-red mb-2">500+</div>
-            <div class="text-lg font-semibold text-pure-white mb-1">Proyek Selesai</div>
-            <div class="text-metallic-silver">Sejak 2020</div>
-          </div>
-          
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-laser-red mb-2">98%</div>
-            <div class="text-lg font-semibold text-pure-white mb-1">Tingkat Kepuasan</div>
-            <div class="text-metallic-silver">Klien Repeat Order</div>
-          </div>
-          
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-laser-red mb-2">24</div>
-            <div class="text-lg font-semibold text-pure-white mb-1">Jam Rata-rata</div>
-            <div class="text-metallic-silver">Waktu Pengerjaan</div>
-          </div>
-          
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-laser-red mb-2">0.1</div>
-            <div class="text-lg font-semibold text-pure-white mb-1">mm Presisi</div>
-            <div class="text-metallic-silver">Akurasi Cutting</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-laser-red to-red-600">
       <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Ingin Proyek Anda Jadi Bagian dari Portfolio Kami?
-        </h2>
-        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-          Bergabunglah dengan ratusan klien yang telah mempercayakan proyek mereka kepada kami. Konsultasi gratis untuk mendiskusikan kebutuhan Anda.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a 
-            href="https://wa.me/6281380529998" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="bg-white text-laser-red hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg min-w-[280px]"
-            aria-label="Konsultasi Proyek Gratis"
-          >
-            Konsultasi Proyek Gratis
-          </a>
-          <a 
-            href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/kontak`} 
-            class="border-2 border-white text-white hover:bg-white hover:text-laser-red px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]"
-          >
-            Hubungi Tim Kami
-          </a>
+        <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-pure-white">Beranda</a>
+          <span class="mx-2">›</span>
+          <span class="text-pure-white">Portfolio</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6">{SITE_CONFIG.portfolio.title}</h1>
+        <p class="text-xl text-metallic-silver max-w-3xl mx-auto">{SITE_CONFIG.portfolio.subtitle}</p>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-2 mt-8">
+          <button class="filter-btn active" data-filter="all">Semua Proyek</button>
+          {SERVICES.map(s => (
+            <button 
+              class="filter-btn" 
+              data-filter={s.id}
+            >
+              {s.name}
+            </button>
+          ))}
         </div>
       </div>
     </section>
-  </main>
-  
-  <Footer />
-</Layout>
 
-<script>
-  // Portfolio Filter Functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    <!-- Grid -->
+    <section class="py-20 bg-charcoal">
+      <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+        {PROJECTS.map(p => (
+          <div class="portfolio-item" data-category={p.category}>
+            <div class="group bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50">
+              <div class="relative overflow-hidden">
+                <img 
+                  src={p.image} 
+                  alt={p.alt} 
+                  class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" 
+                  loading="lazy" 
+                />
+                <div class="absolute top-4 left-4">
+                  <span class="badge">{SERVICES.find(s => s.id === p.category).name}</span>
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-pure-white mb-2">{p.title}</h3>
+                <p class="text-metallic-silver mb-4">{p.description}</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {p.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <div class="text-sm text-metallic-silver">
+                  <strong class="text-pure-white">Klien:</strong> {p.client}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
 
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const filter = button.getAttribute('data-filter');
-        
-        // Update active button
-        filterButtons.forEach(btn => {
-          btn.classList.remove('active', 'bg-laser-red', 'text-white');
-          btn.classList.add('bg-charcoal', 'border', 'border-metallic-silver/20', 'text-metallic-silver');
-        });
-        
-        button.classList.add('active', 'bg-laser-red', 'text-white');
-        button.classList.remove('bg-charcoal', 'border', 'border-metallic-silver/20', 'text-metallic-silver');
-        
-        // Filter portfolio items
-        portfolioItems.forEach(item => {
-          if (filter === 'all' || item.getAttribute('data-category') === filter) {
-            item.style.display = 'block';
-            setTimeout(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'scale(1)';
-            }, 100);
-          } else {
-            item.style.opacity = '0';
-            item.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-              item.style.display = 'none';
-            }, 300);
-          }
+    <!-- Filter Script -->
+    <script>
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+          document.querySelectorAll('.portfolio-item').forEach(item => {
+            const show = filter === 'all' || item.dataset.category === filter;
+            item.style.display = show ? 'block' : 'none';
+          });
         });
       });
-    });
-  });
-</script>
+    </script>
 
-<style>
-  .portfolio-item {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
-  .filter-btn.active {
-    @apply bg-laser-red text-white;
-  }
-</style>
-
+    <!-- Styles -->
+    <style>
+      .filter-btn {
+        @apply bg-charcoal border border-metallic-silver/20 text-metallic-silver px-6 py-2 rounded-lg font-medium transition-all;
+      }
+      .filter-btn.active {
+        @apply bg-laser-red text-white;
+      }
+      .badge {
+        @apply bg-metallic-silver/20 text-metallic-silver px-3 py-1 rounded-full text-sm;
+      }
+      .tag {
+        @apply bg-metallic-silver/20 text-metallic-silver px-2 py-1 rounded text-xs;
+      }
+      .portfolio-item {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+    </style>
+  </main>
+</BaseLayout>

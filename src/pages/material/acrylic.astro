@@ -1,131 +1,24 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+// src/pages/material/acrylic.astro
+// Halaman ini sekarang juga jadi super simpel!
 
-const material = {
-  title: "Laser Cutting Acrylic/Perspex | Raja Metal Cutting",
-  description: "Jasa laser cutting acrylic/perspex dengan edge crystal clear. Untuk display, signage, dan dekorasi premium di Bintaro BSD.",
-  keywords: "laser cutting acrylic, potong acrylic, laser cutting perspex, acrylic display, acrylic signage, Raja Metal Cutting acrylic",
-  name: "Acrylic/Perspex",
-  image: "https://via.placeholder.com/800x600/1A1A1A/C0C0C0?text=Laser+Cutting+Acrylic",
-  alt: "Contoh hasil laser cutting acrylic/perspex",
-  benefits: [
-    "Edge Crystal Clear: Potongan halus seperti kaca dengan transparansi sempurna.",
-    "Presisi Mikron: Detail rumit dan sudut tajam tanpa retak atau pecah.",
-    "Flame Polished: Hasil akhir mengkilap tanpa perlu finishing tambahan.",
-    "Berbagai Ketebalan: Dari 1mm hingga 50mm sesuai kebutuhan aplikasi."
-  ],
-  applications: [
-    "Display & Showcase: Kotak display produk, rak pameran premium.",
-    "Signage Mewah: Huruf timbul, logo, dan papan nama berkelas.",
-    "Interior Design: Partisi artistik, panel dekoratif, dan furniture modern.",
-    "Prototype Produk: Model visual untuk presentasi dan testing.",
-    "Lighting Fixture: Diffuser lampu dan elemen pencahayaan custom."
-  ],
-  properties: [
-    "Transparansi Tinggi: 92% transmisi cahaya, setara dengan kaca.",
-    "Tahan UV: Tidak menguning meski terpapar sinar matahari langsung.",
-    "Ringan & Kuat: 50% lebih ringan dari kaca dengan kekuatan tinggi.",
-    "Mudah Dibentuk: Dapat dipanaskan dan dibentuk sesuai desain."
-  ]
-};
+import Layout from '../../layouts/Layout.astro';
+import MaterialDetail from '../../components/MaterialDetail.astro';
+import { MATERIALS, SITE_CONFIG } from '../../utils/constants.js';
+
+// 1. Ambil data spesifik untuk Acrylic dari pusat data
+const material = MATERIALS.find(m => m.id === 'acrylic');
+
+// 2. Jika data tidak ditemukan, alihkan ke halaman 404
+if (!material) {
+  return Astro.redirect('/404');
+}
 ---
 
-<Layout title={material.title} description={material.description} keywords={material.keywords}>
-  <Header />
-  <main id="main-content">
-    <section class="relative py-20 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90 overflow-hidden">
-      <div class="container mx-auto px-4 relative z-20">
-        <div class="text-center">
-          <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
-            <a href={import.meta.env.BASE_URL} class="hover:text-pure-white transition-colors">Beranda</a>
-            <span class="mx-2">›</span>
-            <a href={import.meta.env.BASE_URL + 'material'} class="hover:text-pure-white transition-colors">Material</a>
-            <span class="mx-2">›</span>
-            <span class="text-pure-white">{material.name}</span>
-          </nav>
-          <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6 leading-tight">
-            Laser Cutting {material.name}
-          </h1>
-          <p class="text-xl text-metallic-silver mb-8 max-w-3xl mx-auto leading-relaxed">
-            {material.description}
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-20 bg-charcoal">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <img 
-              src={material.image} 
-              alt={material.alt}
-              class="w-full rounded-lg shadow-2xl"
-              loading="lazy"
-            />
-          </div>
-          <div>
-            <h2 class="text-3xl font-bold text-pure-white mb-6">Keunggulan Laser Cutting {material.name}</h2>
-            <ul class="space-y-4 text-metallic-silver text-lg">
-              {material.benefits.map(benefit => (
-                <li class="flex items-start">
-                  <svg class="w-6 h-6 text-laser-red mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                  {benefit}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-20 bg-gradient-to-b from-charcoal to-charcoal/95">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-pure-white mb-10 text-center">Aplikasi {material.name}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {material.applications.map(app => (
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center">
-              <h3 class="text-xl font-semibold text-pure-white mb-3">{app}</h3>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="py-20 bg-charcoal">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-pure-white mb-10 text-center">Properti Material {material.name}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {material.properties.map(prop => (
-            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center">
-              <h3 class="text-xl font-semibold text-pure-white mb-3">{prop}</h3>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="py-20 bg-gradient-to-b from-charcoal/95 to-charcoal">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-8">Siap Wujudkan Proyek Anda?</h2>
-        <p class="text-xl text-metallic-silver mb-10 max-w-3xl mx-auto">
-          Hubungi kami sekarang untuk konsultasi gratis dan dapatkan estimasi biaya kilat untuk proyek laser cutting {material.name} Anda.
-        </p>
-        <a 
-          href="https://wa.me/6285165693179" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg inline-block"
-        >
-          Dapatkan Penawaran Sekarang
-        </a>
-      </div>
-    </section>
-  </main>
-  <Footer />
+<Layout
+  title={`${material.title} | ${SITE_CONFIG.name}`}
+  description={material.description}
+  keywords={material.keywords}
+>
+  <MaterialDetail material={material} />
 </Layout>
-

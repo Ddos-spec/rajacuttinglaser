@@ -1,94 +1,89 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+// src/pages/blog.astro
+import BaseLayout from '../components/BaseLayout.astro';
+import { BLOG_POSTS, NAV_CATEGORIES } from '../utils/constants.js';
+
+// Ambil kategori dari query params (jika ada)
+const url = new URL(Astro.request.url);
+const selectedCategory = url.searchParams.get('category') || 'all';
+
+// Filter posts berdasarkan kategori
+const filteredPosts = selectedCategory === 'all'
+  ? BLOG_POSTS
+  : BLOG_POSTS.filter(post => post.category === selectedCategory);
+
+// Featured: post pertama
+const featured = filteredPosts[0];
+// Lainnya: sisanya
+const others = filteredPosts.slice(1);
 ---
 
-<Layout 
+<BaseLayout
   title="Blog Laser Cutting - Tips & Panduan | Raja Metal Cutting"
   description="Kumpulan artikel, tips, dan panduan seputar laser cutting, CNC Router, dan teknologi fabrikasi digital. Insight dari para ahli Raja Metal Cutting."
   keywords="blog laser cutting, tips cnc router, panduan laser co2, tutorial fiber metal, artikel galvo laser, Raja Metal Cutting"
 >
-  <Header />
-  
-  <main id="main-content">
-    <!-- Hero Section -->
-    <section class="relative py-20 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90">
-      <div class="container mx-auto px-4">
-        <div class="text-center">
-          <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
-            <a href={import.meta.env.BASE_URL} class="hover:text-pure-white transition-colors">Beranda</a>
-            <span class="mx-2">›</span>
-            <span class="text-pure-white">Blog</span>
-          </nav>
-          
-          <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6 leading-tight">
-            Dari Jurnal Perang Kami
-          </h1>
-          <p class="text-xl text-metallic-silver mb-8 max-w-3xl mx-auto leading-relaxed">
-            Tips, trik, dan insight dari para ahli laser cutting untuk membantu proyek Anda mencapai hasil terbaik
-          </p>
-          
-          <!-- Category Filter -->
-          <div class="flex flex-wrap justify-center gap-2 mb-8">
-            <button class="category-btn active bg-laser-red text-white px-6 py-2 rounded-lg font-medium transition-all duration-300" data-category="all">
-              Semua Artikel
-            </button>
-            <button class="category-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-category="tips">
-              Tips & Panduan
-            </button>
-            <button class="category-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-category="material">
-              Material Guide
-            </button>
-            <button class="category-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-category="design">
-              Design Tips
-            </button>
-            <button class="category-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-category="technology">
-              Teknologi
-            </button>
-            <button class="category-btn bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:text-pure-white hover:border-laser-red/50 px-6 py-2 rounded-lg font-medium transition-all duration-300" data-category="innovation">
-              Tren & Inovasi
-            </button>
-          </div>
-        </div>
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6 leading-tight">Dari Jurnal Perang Kami</h1>
+      <p class="text-xl text-metallic-silver mb-8 max-w-3xl mx-auto leading-relaxed">
+        Tips, trik, dan insight dari para ahli laser cutting untuk membantu proyek Anda mencapai hasil terbaik
+      </p>
+      <!-- Category Filter -->
+      <div class="flex flex-wrap justify-center gap-2">
+        {NAV_CATEGORIES.map(cat => (
+          <a
+            href={`?category=${cat.id}`}
+            class={
+              `category-btn px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+                selectedCategory === cat.id
+                  ? 'bg-laser-red text-white'
+                  : 'bg-charcoal border border-metallic-silver/20 text-metallic-silver hover:border-laser-red/50 hover:text-pure-white'
+              }`
+            }
+          >
+            {cat.label}
+          </a>
+        ))}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Featured Article -->
+  <!-- Featured Article -->
+  {featured && (
     <section class="py-20 bg-charcoal">
       <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-          <h2 class="text-2xl font-bold text-laser-red mb-2">Artikel Pilihan</h2>
-        </div>
-        
-        <article class="bg-gradient-to-r from-charcoal to-charcoal/95 border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 max-w-4xl mx-auto">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+        <article class="max-w-4xl mx-auto bg-gradient-to-r from-charcoal to-charcoal/95 border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300">
+          <div class="grid grid-cols-1 lg:grid-cols-2">
             <div class="relative">
-              <img 
-                src="https://via.placeholder.com/600x400/1A1A1A/C0C0C0?text=Panduan+Lengkap+Laser+Cutting" 
-                alt="Panduan lengkap memilih jasa laser cutting terbaik"
+              <img
+                src={featured.image}
+                alt={featured.titleAlt}
                 class="w-full h-64 lg:h-full object-cover"
                 loading="eager"
               />
               <div class="absolute top-4 left-4">
-                <span class="bg-laser-red text-white px-3 py-1 rounded-full text-sm font-medium">Tips & Panduan</span>
+                <span class="bg-${featured.categoryColor} text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {featured.categoryLabel}
+                </span>
               </div>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl md:text-3xl font-bold text-pure-white mb-4 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/panduan-lengkap-laser-cutting" class="hover:text-metallic-silver transition-colors`}>
-                  Panduan Lengkap Memilih Jasa Laser Cutting Terbaik untuk Proyek Anda
+              <h2 class="text-2xl md:text-3xl font-bold text-pure-white mb-4 leading-tight">
+                <a href={featured.url} class="hover:text-metallic-silver transition-colors">
+                  {featured.title}
                 </a>
-              </h3>
+              </h2>
               <p class="text-metallic-silver mb-6 text-lg leading-relaxed">
-                Pelajari faktor-faktor penting yang harus dipertimbangkan saat memilih jasa laser cutting. Dari teknologi mesin hingga kualitas hasil, panduan komprehensif untuk keputusan terbaik.
+                {featured.excerpt}
               </p>
               <div class="flex items-center justify-between text-sm text-metallic-silver mb-4">
-                <span>12 menit baca</span>
-                <span>24 Juli 2024</span>
+                <span>{featured.readTime} menit baca</span>
+                <span>{featured.date}</span>
               </div>
-              <a 
-                href={import.meta.env.BASE_URL + 'blog/panduan-lengkap-laser-cutting'} 
+              <a
+                href={featured.url}
                 class="bg-laser-red hover:bg-red-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 inline-block"
               >
                 Baca Selengkapnya
@@ -98,420 +93,105 @@ import Footer from '../components/Footer.astro';
         </article>
       </div>
     </section>
+  )}
 
-    <!-- Blog Grid -->
-    <section class="py-20 bg-gradient-to-b from-charcoal to-charcoal/95">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-grid">
-          
-          <!-- Material Guide Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="material">
+  <!-- Blog Grid -->
+  <section class="py-20 bg-gradient-to-b from-charcoal to-charcoal/95">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {others.map(post => (
+          <article
+            key={post.id}
+            class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group"
+          >
             <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Akrilik+vs+MDF+Comparison" 
-                alt="Perbandingan akrilik vs MDF untuk laser cutting"
+              <img
+                src={post.image}
+                alt={post.titleAlt}
                 class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
               />
               <div class="absolute top-4 left-4">
-                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">Material Guide</span>
+                <span class="bg-${post.categoryColor} text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {post.categoryLabel}
+                </span>
               </div>
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={import.meta.env.BASE_URL + 'blog/akrilik-vs-mdf-laser-cutting'} class="hover:text-metallic-silver transition-colors">
-                  Akrilik vs MDF: Mana yang Lebih Cocok untuk Proyek Anda?
+                <a href={post.url} class="hover:text-metallic-silver transition-colors">
+                  {post.title}
                 </a>
               </h3>
               <p class="text-metallic-silver mb-4">
-                Bandingkan karakteristik, kelebihan, dan kekurangan akrilik dan MDF untuk aplikasi laser cutting. Panduan lengkap untuk memilih material yang tepat.
+                {post.excerpt}
               </p>
               <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>7 menit baca</span>
-                <span>22 Juli 2024</span>
+                <span>{post.readTime} menit baca</span>
+                <span>{post.date}</span>
               </div>
             </div>
           </article>
+        ))}
+      </div>
+      <div class="text-center mt-12">
+        <button class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
+          Muat Artikel Lainnya
+        </button>
+      </div>
+    </div>
+  </section>
 
-          <!-- Design Tips Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="design">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Design+Mistakes+Laser+Cutting" 
-                alt="Kesalahan desain yang sering terjadi dalam laser cutting"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">Design Tips</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/5-kesalahan-desain-laser-cutting" class="hover:text-metallic-silver transition-colors`}>
-                  5 Kesalahan Desain yang Sering Terjadi dalam Laser Cutting
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Hindari kesalahan umum dalam desain yang dapat mempengaruhi kualitas dan biaya produksi laser cutting. Tips dari para ahli untuk hasil optimal.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>6 menit baca</span>
-                <span>20 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Technology Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="technology">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Fiber+vs+CO2+Laser+Tech" 
-                alt="Perbandingan teknologi fiber laser vs CO2 laser"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">Teknologi</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/fiber-vs-co2-laser-technology" class="hover:text-metallic-silver transition-colors`}>
-                  Fiber Laser vs CO₂ Laser: Teknologi Mana yang Tepat?
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Pelajari perbedaan fundamental antara teknologi fiber laser dan CO₂ laser. Panduan untuk memilih teknologi yang sesuai dengan kebutuhan proyek.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>9 menit baca</span>
-                <span>18 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Tips Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="tips">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=CNC+Router+Tips+Optimization" 
-                alt="Tips optimasi CNC Router untuk hasil terbaik"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-laser-red text-white px-3 py-1 rounded-full text-sm font-medium">Tips & Panduan</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/optimasi-cnc-router-tips" class="hover:text-metallic-silver transition-colors`}>
-                  Tips Optimasi CNC Router untuk Hasil 3D Relief Terbaik
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Rahasia mendapatkan hasil 3D relief berkualitas tinggi dengan CNC Router. Parameter cutting, pemilihan bit, dan teknik finishing yang tepat.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>8 menit baca</span>
-                <span>16 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Material Guide Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="material">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Stainless+Steel+Grades+Guide" 
-                alt="Panduan grade stainless steel untuk laser cutting"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">Material Guide</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/panduan-grade-stainless-steel" class="hover:text-metallic-silver transition-colors`}>
-                  Panduan Lengkap Grade Stainless Steel untuk Laser Cutting
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Memahami berbagai grade stainless steel dan karakteristiknya untuk aplikasi laser cutting. Dari SS 304 hingga SS 316L, pilih yang tepat untuk proyek Anda.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>10 menit baca</span>
-                <span>14 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Design Tips Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="design">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Kerf+Width+Design+Consideration" 
-                alt="Pertimbangan kerf width dalam desain laser cutting"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">Design Tips</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/kerf-width-design-consideration" class="hover:text-metallic-silver transition-colors`}>
-                  Memahami Kerf Width: Kunci Desain Laser Cutting Presisi
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Pelajari bagaimana kerf width mempengaruhi dimensi akhir produk dan cara mengompensasinya dalam desain untuk hasil yang akurat.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>6 menit baca</span>
-                <span>12 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Technology Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="technology">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Galvo+Scanner+Technology" 
-                alt="Teknologi galvo scanner untuk laser marking"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">Teknologi</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/galvo-scanner-technology-explained" class="hover:text-metallic-silver transition-colors`}>
-                  Teknologi Galvo Scanner: Revolusi Kecepatan Laser Marking
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Mengenal teknologi galvo scanner yang memungkinkan laser marking dengan kecepatan tinggi dan presisi luar biasa untuk aplikasi industri modern.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>8 menit baca</span>
-                <span>10 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Tips Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="tips">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=File+Preparation+Best+Practices" 
-                alt="Best practices persiapan file untuk laser cutting"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-laser-red text-white px-3 py-1 rounded-full text-sm font-medium">Tips & Panduan</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/file-preparation-best-practices" class="hover:text-metallic-silver transition-colors`}>
-                  Best Practices Persiapan File untuk Laser Cutting
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Panduan lengkap menyiapkan file desain untuk laser cutting. Format file, pengaturan layer, dan tips untuk menghindari masalah produksi.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>7 menit baca</span>
-                <span>8 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Material Guide Articles -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="material">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Aluminum+Alloys+Laser+Cutting" 
-                alt="Panduan aluminum alloys untuk laser cutting"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">Material Guide</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/blog/aluminum-alloys-laser-cutting-guide" class="hover:text-metallic-silver transition-colors`}>
-                  Aluminum Alloys untuk Laser Cutting: Panduan Komprehensif
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Eksplorasi berbagai jenis aluminum alloys dan karakteristiknya untuk laser cutting. Dari 6061 hingga 5052, temukan yang tepat untuk aplikasi Anda.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>9 menit baca</span>
-                <span>6 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-        </div>
-        
-        <!-- Load More Button -->
-        <div class="text-center mt-12">
-          <button class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
-            Muat Artikel Lainnya
+  <!-- Newsletter Section -->
+  <section class="py-20 bg-charcoal">
+    <div class="container mx-auto px-4">
+      <div class="bg-gradient-to-r from-laser-red to-red-600 rounded-lg p-8 md:p-12 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Jangan Lewatkan Update Terbaru
+        </h2>
+        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          Dapatkan tips, panduan, dan insight terbaru seputar laser cutting langsung di inbox Anda. Gratis dan tanpa spam.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="Masukkan email Anda"
+            class="flex-1 px-4 py-3 rounded-lg text-charcoal font-medium focus:outline-none focus:ring-2 focus:ring-white"
+          />
+          <button class="bg-white text-laser-red hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 whitespace-nowrap">
+            Subscribe
           </button>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Newsletter Section -->
-    <section class="py-20 bg-charcoal">
-      <div class="container mx-auto px-4">
-        <div class="bg-gradient-to-r from-laser-red to-red-600 rounded-lg p-8 md:p-12 text-center">
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-            Jangan Lewatkan Update Terbaru
-          </h2>
-          <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Dapatkan tips, panduan, dan insight terbaru seputar laser cutting langsung di inbox Anda. Gratis dan tanpa spam.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
-            <input 
-              type="email" 
-              placeholder="Masukkan email Anda"
-              class="flex-1 px-4 py-3 rounded-lg text-charcoal font-medium focus:outline-none focus:ring-2 focus:ring-white"
-            />
-            <button class="bg-white text-laser-red hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 whitespace-nowrap">
-              Subscribe
-            </button>
-          </div>
-        </div>
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-b from-charcoal/95 to-charcoal">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">
+        Butuh Konsultasi Langsung dengan Ahli?
+      </h2>
+      <p class="text-xl text-metallic-silver mb-8 max-w-2xl mx-auto">
+        Tim ahli kami siap membantu menjawab pertanyaan spesifik tentang proyek laser cutting Anda. Konsultasi gratis dan tanpa komitmen.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="https://wa.me/6281380529998"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg min-w-[280px]"
+          aria-label="Konsultasi dengan Ahli"
+        >
+          Konsultasi dengan Ahli
+        </a>
+        <a
+          href={`${import.meta.env.BASE_URL}/kontak`}
+          class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]"
+        >
+          Hubungi Tim Kami
+        </a>
       </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-b from-charcoal/95 to-charcoal">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-4">
-          Butuh Konsultasi Langsung dengan Ahli?
-        </h2>
-        <p class="text-xl text-metallic-silver mb-8 max-w-2xl mx-auto">
-          Tim ahli kami siap membantu menjawab pertanyaan spesifik tentang proyek laser cutting Anda. Konsultasi gratis dan tanpa komitmen.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a 
-            href="https://wa.me/6281380529998" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg min-w-[280px]"
-            aria-label="Konsultasi dengan Ahli"
-          >
-            Konsultasi dengan Ahli
-          </a>
-          <a 
-            href={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL}/kontak`} 
-            class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]"
-          >
-            Hubungi Tim Kami
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-  
-  <Footer />
-</Layout>
-
-<script>
-  // Blog Category Filter Functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    const blogItems = document.querySelectorAll('.blog-item');
-
-    categoryButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const category = button.getAttribute('data-category');
-        
-        // Update active button
-        categoryButtons.forEach(btn => {
-          btn.classList.remove('active', 'bg-laser-red', 'text-white');
-          btn.classList.add('bg-charcoal', 'border', 'border-metallic-silver/20', 'text-metallic-silver');
-        });
-        
-        button.classList.add('active', 'bg-laser-red', 'text-white');
-        button.classList.remove('bg-charcoal', 'border', 'border-metallic-silver/20', 'text-metallic-silver');
-        
-        // Filter blog items
-        blogItems.forEach(item => {
-          if (category === 'all' || item.getAttribute('data-category') === category) {
-            item.style.display = 'block';
-            setTimeout(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'scale(1)';
-            }, 100);
-          } else {
-            item.style.opacity = '0';
-            item.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-              item.style.display = 'none';
-            }, 300);
-          }
-        });
-      });
-    });
-  });
-</script>
-
-<style>
-  .blog-item {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
-  .category-btn.active {
-    @apply bg-laser-red text-white;
-  }
-</style>
-
-
-
-          <!-- New Article: Tren Desain Laser Cutting 2024 -->
-          <article class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group" data-category="innovation">
-            <div class="relative overflow-hidden">
-              <img 
-                src="https://via.placeholder.com/400x250/1A1A1A/C0C0C0?text=Tren+Desain+2024" 
-                alt="Tren desain laser cutting terbaru 2024"
-                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4">
-                <span class="bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-medium">Tren & Inovasi</span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-pure-white mb-3 leading-tight">
-                <a href={import.meta.env.BASE_URL + 'blog/tren-desain-laser-cutting-2024'} class="hover:text-metallic-silver transition-colors">
-                  Tren Desain Laser Cutting 2024: Inovasi yang Mengubah Industri
-                </a>
-              </h3>
-              <p class="text-metallic-silver mb-4">
-                Jelajahi tren terbaru dalam desain laser cutting 2024. Dari pola parametrik hingga sustainable design, temukan inspirasi untuk proyek Anda.
-              </p>
-              <div class="flex items-center justify-between text-sm text-metallic-silver">
-                <span>6 menit baca</span>
-                <span>22 Juli 2024</span>
-              </div>
-            </div>
-          </article>
-
-
+    </div>
+  </section>
+</BaseLayout>

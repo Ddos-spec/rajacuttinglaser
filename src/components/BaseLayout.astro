@@ -1,0 +1,27 @@
+---
+// src/components/BaseLayout.astro
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { SITE_CONFIG } from '../utils/constants.js';
+
+// Ambil props buat SEO
+const { title, description, keywords } = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE_CONFIG.name}` : `${SITE_CONFIG.name} - Jasa Laser Cutting Presisi`;
+---
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  <slot name="head" />
+</head>
+<body class="bg-charcoal text-metallic-silver font-sans">
+  <Header />
+  <main id="main-content">
+    <slot /> </main>
+  <Footer />
+</body>
+</html>
