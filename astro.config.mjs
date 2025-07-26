@@ -4,9 +4,12 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   output: 'static',
-  site: 'https://ddos-spec.github.io/rajacuttinglaser/',
-  // Use dynamic base path that will be set by GitHub Actionbase: process.env.CI ? 
-    '/rajacuttinglaser' : undefined,  integrations: [
+  
+  // Konfigurasi ini yang udah kita benerin, boss
+  site: 'https://ddos-spec.github.io',
+  base: '/rajacuttinglaser/',
+
+  integrations: [
     tailwind(),
     sitemap()
   ],
@@ -25,4 +28,3 @@ export default defineConfig({
     }
   }
 });
-
