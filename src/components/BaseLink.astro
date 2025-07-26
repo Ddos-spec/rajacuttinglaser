@@ -1,0 +1,18 @@
+---
+// src/components/BaseLink.astro
+
+export interface Props {
+  href: string;
+  class?: string;
+  [key: string]: any; // Nangkep semua properti lain kayak aria-label, dll.
+}
+
+const { href, class: className, ...rest } = Astro.props;
+
+// Ini dia jantungnya. Logika cerdas yang anti-gagal.
+const resolvedHref = new URL(href, Astro.site).pathname;
+---
+
+<a href={resolvedHref} class:list={[className]} {...rest}>
+  <slot />
+</a>
