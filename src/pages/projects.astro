@@ -75,11 +75,11 @@ import { SITE_CONFIG, PROJECTS, SERVICES } from '../utils/constants.js';
     <script>
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          const filter = btn.dataset.filter;
+          const filter = (btn as HTMLElement).dataset.filter;
           document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
           document.querySelectorAll('.portfolio-item').forEach(item => {
-            const show = filter === 'all' || item.dataset.category === filter;
-            item.style.display = show ? 'block' : 'none';
+            const show = filter === 'all' || (item as HTMLElement).dataset.category === filter;
+            (item as HTMLElement).style.display = show ? 'block' : 'none';
           });
         });
       });
