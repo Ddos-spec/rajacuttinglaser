@@ -42,7 +42,7 @@ export const SERVICES = [
     alt: "Sinar laser CO2 sedang memotong plat akrilik.",
   },
   {
-    id: "galvo-fiber",
+    id: "galvo-30-watt", // <-- GANTI DARI 'galvo-fiber'
     name: "Jasa Laser Galvo & Fiber",
     slug: "jasa-galvo-30-watt",
     description: "Marking dan engraving super cepat pada material metal dan non-metal. Ideal untuk branding, penandaan part, dan produksi massal.",
@@ -50,6 +50,13 @@ export const SERVICES = [
     image: `${SITE_CONFIG.url}/placeholder/service-3.jpg`, // Path absolut untuk GitHub Pages
     alt: "Proses laser marking pada plat metal dengan mesin Galvo Fiber.",
   },
+  {
+    id: "fiber-metal", // <-- TAMBAHKAN SERVICE BARU INI
+    name: "Jasa Laser Cutting Fiber Metal",
+    slug: "jasa-laser-cutting-fiber-metal",
+    description: "Cutting presisi untuk plat metal seperti Stainless Steel, Mild Steel, dan Galvanis. Cepat dan akurat untuk kebutuhan industri, otomotif, dan konstruksi.",
+    // ...Lengkapi data lainnya seperti image, alt, dll.
+  }
 ];
 
 
@@ -248,68 +255,4 @@ export const SOCIAL_MEDIA = [
   { name: "Instagram", url: "https://instagram.com/rajacutting", icon: "instagram" },
   { name: "Facebook", url: "https://facebook.com/rajacutting", icon: "facebook" },
   { name: "TikTok", url: "https://tiktok.com/@rajacutting", icon: "tiktok" }
-];
-
-// 6. DATA PORTFOLIO PROJECTS
-// =================================================================================
-export const PROJECTS = [
-  {
-    id: "p1",
-    name: "Laser Cutting Signage Akrilik",
-    category: "laser-co2",
-    image: `${SITE_CONFIG.url}/images/project-akrilik.jpg`,
-    description: "Signage akrilik custom untuk toko retail di BSD. Potongan presisi dan finishing bening."
-  },
-  {
-    id: "p2",
-    name: "CNC Router Fasad ACP",
-    category: "cnc-router",
-    image: `${SITE_CONFIG.url}/images/project-acp.jpg`,
-    description: "Panel ACP untuk fasad gedung perkantoran. Cutting dan grooving rapi sesuai desain arsitek."
-  },
-  {
-    id: "p3",
-    name: "Laser Marking Metal Part",
-    category: "galvo-fiber",
-    image: `${SITE_CONFIG.url}/images/project-metal.jpg`,
-    description: "Marking serial number pada part metal untuk industri otomotif. Hasil tajam dan tahan lama."
-  }
-];
-
-// 7. DATA BLOG POSTS
-// =================================================================================
-export const BLOG_POSTS = [
-  {
-    id: "b1",
-    title: "Akrilik vs MDF: Material Mana yang Terbaik?",
-    category: "Material Guide",
-    date: "2024-07-23",
-    image: `${SITE_CONFIG.url}/images/blog-akrilik-vs-mdf.jpg`,
-    description: "Perbandingan lengkap antara akrilik dan MDF untuk laser cutting. Kelebihan, kekurangan, dan aplikasi terbaik."
-  },
-  {
-    id: "b2",
-    title: "Panduan Lengkap Memilih Jasa Laser Cutting",
-    category: "Tips & Panduan",
-    date: "2024-07-24",
-    image: `${SITE_CONFIG.url}/images/blog-panduan-laser.jpg`,
-    description: "Faktor penting memilih jasa laser cutting untuk hasil presisi dan berkualitas tinggi."
-  },
-  {
-    id: "b3",
-    title: "Tren Desain Laser Cutting 2024",
-    category: "Tren & Inovasi",
-    date: "2024-07-22",
-    image: `${SITE_CONFIG.url}/images/blog-tren-2024.jpg`,
-    description: "Jelajahi tren terbaru dalam desain laser cutting 2024. Inspirasi untuk proyek Anda."
-  }
-];
-
-// 8. KATEGORI BLOG
-// =================================================================================
-export const NAV_CATEGORIES = [
-  { name: "Semua", value: "all" },
-  { name: "Material Guide", value: "Material Guide" },
-  { name: "Tips & Panduan", value: "Tips & Panduan" },
-  { name: "Tren & Inovasi", value: "Tren & Inovasi" }
 ];

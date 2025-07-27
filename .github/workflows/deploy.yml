@@ -1,44 +1,72 @@
+# Nama Workflow-nya, boss, bebas mau apa aja
 name: Deploy to GitHub Pages
 
+# Kapan workflow ini jalan?
 on:
+  # Jalanin otomatis setiap ada push ke branch "main"
   push:
     branches:
       - main
+  # Biar bisa dijalanin manual juga dari tab Actions di GitHub
+  workflow_dispatch:
 
+# Izin yang dibutuhin sama Actions buat nge-deploy
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Settingan buat environment GitHub Pages-nya
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# Daftar kerjaan yang harus dilakuin
 jobs:
+  # Kerjaan pertama: nge-build project-nya
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      # 1. Checkout kode dari repository lo
+      - name: Checkout
         uses: actions/checkout@v4
-        
-      - name: Setup Node.js and Install Dependencies
-        uses: withastro/action@v2
+
+      # 2. Setup Node.js versi 20
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
-          package-manager: npm
-          
-      - name: Build site
+          node-version: "20"
+          cache: "npm" # Biar npm install lebih ngebut
+
+      # 3. Install semua dependency dari package.json
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Jalanin script build Astro-nya
+      #    --base udah di-set di astro.config.mjs, jadi aman
+      - name: Build
         run: npm run build
-        
+
+      # 5. Konfigurasi GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 6. Upload hasil build (dari folder 'dist') sebagai artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          # Path ke folder output build lo
+          path: './dist'
 
+  # Kerjaan kedua: nge-deploy hasil build-nya
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build # Kerjaan ini baru jalan setelah 'build' selesai
     steps:
+      # 1. Deploy ke GitHub Pages!
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

@@ -1,56 +1,11 @@
 ---
+// src/pages/blog.astro
 import BaseLayout from '../components/BaseLayout.astro';
-import { BLOG_POSTS, NAV_CATEGORIES, SITE_CONFIG } from '../utils/constants.js';
+import { BLOG_POSTS, NAV_CATEGORIES } from '../utils/constants.js';
 
+// Ambil kategori dari query params (jika ada)
 const url = new URL(Astro.request.url);
 const selectedCategory = url.searchParams.get('category') || 'all';
-
-// Filter posts berdasarkan kategori
-const filteredPosts = selectedCategory === 'all'
-  ? BLOG_POSTS
-  : BLOG_POSTS.filter(post => post.category === selectedCategory);
-
-// Featured: post pertama
-const featured = filteredPosts[0];
-// Lainnya: sisanya
-const others = filteredPosts.slice(1);
----
----
-import BaseLayout from '../components/BaseLayout.astro';
-import { BLOG_POSTS, NAV_CATEGORIES, SITE_CONFIG } from '../utils/constants.js';
-
-const url = new URL(Astro.request.url);
-const selectedCategory = url.searchParams.get('category') || 'all';
-
-// Filter posts berdasarkan kategori
-const filteredPosts = selectedCategory === 'all'
-  ? BLOG_POSTS
-  : BLOG_POSTS.filter(post => post.category === selectedCategory);
-
-// Featured: post pertama
-const featured = filteredPosts[0];
-// Lainnya: sisanya
-const others = filteredPosts.slice(1);
----
----
-
----
-import BaseLayout from '../components/BaseLayout.astro';
-import { BLOG_POSTS, NAV_CATEGORIES, SITE_CONFIG } from '../utils/constants.js';
-
-const url = new URL(Astro.request.url);
-const selectedCategory = url.searchParams.get('category') || 'all';
-
-// Filter posts berdasarkan kategori
-const filteredPosts = selectedCategory === 'all'
-  ? BLOG_POSTS
-  : BLOG_POSTS.filter(post => post.category === selectedCategory);
-
-// Featured: post pertama
-const featured = filteredPosts[0];
-// Lainnya: sisanya
-const others = filteredPosts.slice(1);
----
 
 // Filter posts berdasarkan kategori
 const filteredPosts = selectedCategory === 'all'
@@ -146,6 +101,7 @@ const others = filteredPosts.slice(1);
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {others.map(post => (
           <article
+            key={post.id}
             class="blog-item bg-charcoal border border-metallic-silver/20 rounded-lg overflow-hidden hover:border-laser-red/50 transition-all duration-300 group"
           >
             <div class="relative overflow-hidden">
@@ -230,7 +186,7 @@ const others = filteredPosts.slice(1);
           Konsultasi dengan Ahli
         </a>
         <a
-          href={`${SITE_CONFIG.url}/kontak`}
+          href={`${import.meta.env.BASE_URL}/kontak`}
           class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]"
         >
           Hubungi Tim Kami

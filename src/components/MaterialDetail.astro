@@ -1,0 +1,84 @@
+---
+// src/components/MaterialDetail.astro
+// Ini adalah "CETAKAN" untuk semua halaman detail material.
+
+import { SITE_CONFIG } from '../utils/constants.js';
+
+// Ambil 'material' yang dikirim dari halaman (misal: acrylic.astro)
+const { material } = Astro.props;
+---
+
+<main id="main-content">
+  <section class="relative py-20 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90 overflow-hidden">
+    <div class="container mx-auto px-4 relative z-20 text-center">
+      <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
+        <a href={SITE_CONFIG.url} class="hover:text-pure-white">Beranda</a>
+        <span class="mx-2">›</span>
+        <span class="text-pure-white">{material.name}</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-bold text-pure-white mb-6 leading-tight">
+        {material.title}
+      </h1>
+      <p class="text-xl text-metallic-silver mb-8 max-w-3xl mx-auto">{material.description}</p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-charcoal">
+    <div class="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <img src={material.image} alt={material.alt} class="w-full rounded-lg shadow-2xl" loading="lazy" />
+      <div>
+        <h2 class="text-3xl font-bold text-pure-white mb-6">Keunggulan Cutting {material.name}</h2>
+        <ul class="space-y-4 text-metallic-silver text-lg">
+          {material.benefits.map((benefit) => (
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-laser-red mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {material.applications && material.applications.length > 0 && (
+    <section class="py-20 bg-gradient-to-b from-charcoal to-charcoal/95">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-pure-white mb-10 text-center">Aplikasi {material.name}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {material.applications.map((app) => (
+            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center transform hover:-translate-y-2 transition-transform duration-300">
+              <h3 class="text-xl font-semibold text-pure-white mb-3">{app}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {material.properties && material.properties.length > 0 && (
+    <section class="py-20 bg-charcoal">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-pure-white mb-10 text-center">Properti Material {material.name}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {material.properties.map((prop) => (
+            <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 text-center">
+              <h3 class="text-xl font-semibold text-pure-white mb-3">{prop}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="py-20 bg-gradient-to-b from-charcoal/95 to-charcoal">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-pure-white mb-8">Siap Wujudkan Proyek Anda?</h2>
+      <p class="text-xl text-metallic-silver mb-10 max-w-3xl mx-auto">Hubungi kami sekarang untuk konsultasi gratis dan dapatkan estimasi biaya kilat untuk proyek cutting {material.name} Anda.</p>
+      <a href={`https://wa.me/${SITE_CONFIG.whatsapp}?text=Halo%20Raja%20Metal%20Cutting,%20saya%20mau%20tanya%20soal%20jasa%20cutting%20${encodeURIComponent(material.name)}`} target="_blank" rel="noopener noreferrer" class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg inline-block">
+        Hubungi via WhatsApp
+      </a>
+    </div>
+  </section>
+</main>

@@ -5,7 +5,7 @@
 import { SITE_CONFIG, NAVIGATION, SOCIAL_MEDIA } from '../utils/constants.js';
 
 const currentYear = new Date().getFullYear();
-const base_url = SITE_CONFIG.url + '/';
+const base_url = import.meta.env.BASE_URL;
 ---
 
 <footer class="bg-charcoal/95 border-t border-metallic-silver/20">
