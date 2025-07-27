@@ -31,7 +31,7 @@ const base_url = import.meta.env.BASE_URL;
           {NAVIGATION.map(item => (
             <li>
               <a 
-                href={item.href.startsWith('/') ? `${base_url}${item.href.substring(1)}` : item.href} 
+                href={item.href ? (item.href.startsWith('#') ? item.href : `${base_url}${item.href}`) : base_url} 
                 class="text-metallic-silver hover:text-pure-white transition-colors duration-300"
               >
                 {item.name}

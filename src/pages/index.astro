@@ -25,13 +25,13 @@ import { SITE_CONFIG, SERVICES, PROJECTS } from '../utils/constants.js';
         </p>
         <div class="flex flex-col sm:flex-row gap-4 mb-8">
           <a
-            href={SITE_CONFIG.cta.link1}
+            href={SITE_CONFIG.cta.link1.startsWith('/') ? `${import.meta.env.BASE_URL}${SITE_CONFIG.cta.link1.substring(1)}` : SITE_CONFIG.cta.link1}
             class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg text-center"
           >
             {SITE_CONFIG.cta.label1}
           </a>
           <a
-            href={SITE_CONFIG.cta.link2}
+            href={SITE_CONFIG.cta.link2.startsWith('/') ? `${import.meta.env.BASE_URL}${SITE_CONFIG.cta.link2.substring(1)}` : SITE_CONFIG.cta.link2}
             class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 text-center"
           >
             {SITE_CONFIG.cta.label2}
@@ -113,7 +113,7 @@ import { SITE_CONFIG, SERVICES, PROJECTS } from '../utils/constants.js';
       ))}
     </div>
     <div class="text-center mt-12">
-      <a href="/projects" class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg">Lihat Semua Portfolio</a>
+      <a href={`${import.meta.env.BASE_URL}portfolio`} class="bg-laser-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg">Lihat Semua Portfolio</a>
     </div>
   </section>
 
@@ -128,7 +128,7 @@ import { SITE_CONFIG, SERVICES, PROJECTS } from '../utils/constants.js';
         <div class="bg-charcoal border border-metallic-silver/20 rounded-lg p-6 hover:border-laser-red/50 transition-all duration-300">
           <div class="text-sm text-laser-red font-medium mb-2">{post.categoryLabel}</div>
           <h3 class="text-xl font-semibold text-pure-white mb-3">
-            <a href={post.url} class="hover:text-metallic-silver transition-colors">{post.title}</a>
+            <a href={`${import.meta.env.BASE_URL}${post.url}`} class="hover:text-metallic-silver transition-colors">{post.title}</a>
           </h3>
           <p class="text-metallic-silver mb-4">{post.excerpt}</p>
           <div class="text-sm text-metallic-silver">{post.readTime} menit baca • {post.date}</div>
@@ -136,7 +136,7 @@ import { SITE_CONFIG, SERVICES, PROJECTS } from '../utils/constants.js';
       ))}
     </div>
     <div class="text-center mt-12">
-      <a href="/blog" class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">Baca Semua Artikel</a>
+      <a href={`${import.meta.env.BASE_URL}blog`} class="border-2 border-pure-white text-pure-white hover:bg-pure-white hover:text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">Baca Semua Artikel</a>
     </div>
   </section>
 
@@ -146,8 +146,8 @@ import { SITE_CONFIG, SERVICES, PROJECTS } from '../utils/constants.js';
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Siap Wujudkan Proyek Impian Anda?</h2>
       <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">Konsultasikan kebutuhan laser cutting Anda dengan tim ahli kami. Dapatkan estimasi biaya dan timeline yang akurat.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="https://wa.me/6281380529998" target="_blank" rel="noopener noreferrer" class="bg-white text-laser-red hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg min-w-[280px]">Konsultasi Gratis Sekarang</a>
-        <a href="/kontak" class="border-2 border-white text-white hover:bg-white hover:text-laser-red px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]">Hubungi Kami</a>
+        <a href={`https://wa.me/${SITE_CONFIG.whatsapp}?text=Halo%20Raja%20Metal%20Cutting,%20saya%20ingin%20konsultasi%20untuk%20proyek%20laser%20cutting`} target="_blank" rel="noopener noreferrer" class="bg-white text-laser-red hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg min-w-[280px]">Konsultasi Gratis Sekarang</a>
+        <a href={`${import.meta.env.BASE_URL}kontak`} class="border-2 border-white text-white hover:bg-white hover:text-laser-red px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 min-w-[280px]">Hubungi Kami</a>
       </div>
     </div>
   </section>

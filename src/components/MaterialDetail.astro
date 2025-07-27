@@ -12,7 +12,7 @@ const { material } = Astro.props;
   <section class="relative py-20 bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90 overflow-hidden">
     <div class="container mx-auto px-4 relative z-20 text-center">
       <nav class="text-sm text-metallic-silver mb-4" aria-label="Breadcrumb">
-        <a href={SITE_CONFIG.url} class="hover:text-pure-white">Beranda</a>
+        <a href={import.meta.env.BASE_URL} class="hover:text-pure-white">Beranda</a>
         <span class="mx-2">›</span>
         <span class="text-pure-white">{material.name}</span>
       </nav>

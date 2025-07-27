@@ -17,6 +17,55 @@ export const SITE_CONFIG = {
   email: "info@rajacutting.com", // <-- GANTI DENGAN EMAIL ASLI
   address: "Jalan Cendrawasih IV No. 1, Sawah Baru, Ciputat, Tangerang Selatan",
   url: "https://ddos-spec.github.io/rajacuttinglaser", // URL GitHub Pages
+  
+  // Hero section untuk halaman utama
+  hero: {
+    title: "Jasa Laser Cutting & CNC Router Profesional",
+    subtitle: "Presisi Tinggi, Hasil Sempurna",
+    text: "Spesialis laser cutting dan CNC router untuk berbagai material dengan teknologi terkini. Melayani kebutuhan industri, arsitektur, dan proyek kreatif.",
+    image: "https://ddos-spec.github.io/rajacuttinglaser/placeholder/hero-image.jpg",
+    imageAlt: "Mesin laser cutting modern di workshop Raja Metal Cutting",
+    badge: {
+      title: "10+ Tahun",
+      subtitle: "Pengalaman"
+    }
+  },
+  
+  // Call-to-action buttons
+  cta: {
+    label1: "Konsultasi Gratis",
+    link1: "https://wa.me/6285165693179?text=Halo%20Raja%20Metal%20Cutting,%20saya%20ingin%20konsultasi",
+    label2: "Lihat Portfolio",
+    link2: "portfolio"
+  },
+  
+  // Why choose us section
+  why: {
+    title: "Mengapa Memilih Kami",
+    subtitle: "Keunggulan layanan Raja Metal Cutting yang membedakan kami dari kompetitor",
+    items: [
+      {
+        title: "Presisi Tinggi",
+        text: "Hasil cutting dengan akurasi hingga 0.01mm untuk keperluan yang membutuhkan ketepatan maksimal",
+        iconPath: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+      },
+      {
+        title: "Teknologi Terkini",
+        text: "Menggunakan mesin laser cutting dan CNC router generasi terbaru dengan kemampuan superior",
+        iconPath: "M13 10V3L4 14h7v7l9-11h-7z"
+      },
+      {
+        title: "Pengalaman 10+ Tahun",
+        text: "Didukung tim teknisi berpengalaman yang telah menangani ribuan proyek kompleks",
+        iconPath: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+      },
+      {
+        title: "Layanan All-in-One",
+        text: "Dari konsultasi desain hingga finishing dan pengiriman, semua dalam satu atap",
+        iconPath: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+      }
+    ]
+  }
 };
 
 
@@ -51,11 +100,13 @@ export const SERVICES = [
     alt: "Proses laser marking pada plat metal dengan mesin Galvo Fiber.",
   },
   {
-    id: "fiber-metal", // <-- TAMBAHKAN SERVICE BARU INI
+    id: "fiber-metal",
     name: "Jasa Laser Cutting Fiber Metal",
     slug: "jasa-laser-cutting-fiber-metal",
     description: "Cutting presisi untuk plat metal seperti Stainless Steel, Mild Steel, dan Galvanis. Cepat dan akurat untuk kebutuhan industri, otomotif, dan konstruksi.",
-    // ...Lengkapi data lainnya seperti image, alt, dll.
+    keywords: "laser cutting metal, potong stainless, plat besi, cutting galvanis, fiber laser",
+    image: `${SITE_CONFIG.url}/placeholder/service-4.jpg`,
+    alt: "Mesin laser fiber memotong plat metal dengan presisi tinggi."
   }
 ];
 
@@ -242,11 +293,12 @@ export const MATERIALS = [
 // 4. KONFIGURASI NAVIGASI MENU
 // =================================================================================
 export const NAVIGATION = [
-  { name: "Beranda", href: "/" },
-  { name: "Layanan", href: "/#layanan" },
-  { name: "Material", href: "/#material" },
-  { name: "Portfolio", href: "/portfolio" },
-  { name: "Kontak", href: "/kontak" },
+  { name: "Beranda", href: "" },
+  { name: "Layanan", href: "layanan" },
+  { name: "Material", href: "material" },
+  { name: "Blog", href: "blog" },
+  { name: "Portfolio", href: "portfolio" },
+  { name: "Kontak", href: "kontak" },
 ];
 
 // 5. LINK MEDIA SOSIAL
@@ -255,4 +307,84 @@ export const SOCIAL_MEDIA = [
   { name: "Instagram", url: "https://instagram.com/rajacutting", icon: "instagram" },
   { name: "Facebook", url: "https://facebook.com/rajacutting", icon: "facebook" },
   { name: "TikTok", url: "https://tiktok.com/@rajacutting", icon: "tiktok" }
+];
+
+// 6. BLOG POSTS
+// =================================================================================
+export const BLOG_POSTS = [
+  {
+    id: "akrilik-vs-mdf",
+    title: "Akrilik vs MDF: Material Mana yang Terbaik untuk Proyek Anda?",
+    slug: "akrilik-vs-mdf-material-terbaik",
+    url: "blog/akrilik-vs-mdf-material-terbaik",
+    excerpt: "Perbandingan lengkap antara akrilik dan MDF untuk laser cutting. Pelajari kelebihan, kekurangan, dan aplikasi terbaik masing-masing material.",
+    date: "23 Juli 2024",
+    readTime: "7",
+    category: "material",
+    categoryLabel: "Material Guide",
+    image: `${SITE_CONFIG.url}/placeholder/blog-1.jpg`,
+    alt: "Perbandingan material akrilik dan MDF untuk laser cutting"
+  },
+  {
+    id: "panduan-laser-cutting",
+    title: "Panduan Lengkap Laser Cutting untuk Pemula",
+    slug: "panduan-lengkap-laser-cutting",
+    url: "blog/panduan-lengkap-laser-cutting",
+    excerpt: "Semua yang perlu Anda ketahui tentang teknologi laser cutting, dari prinsip kerja hingga tips memilih jasa yang tepat untuk proyek Anda.",
+    date: "15 Juli 2024",
+    readTime: "10",
+    category: "tutorial",
+    categoryLabel: "Tutorial",
+    image: `${SITE_CONFIG.url}/placeholder/blog-2.jpg`,
+    alt: "Ilustrasi proses laser cutting untuk pemula"
+  },
+  {
+    id: "tren-desain-2024",
+    title: "Tren Desain Laser Cutting 2024 yang Wajib Anda Ketahui",
+    slug: "tren-desain-laser-cutting-2024",
+    url: "blog/tren-desain-laser-cutting-2024",
+    excerpt: "Eksplorasi tren terbaru dalam desain laser cutting tahun 2024, dari pola geometris kompleks hingga teknik hybrid yang menggabungkan beberapa material.",
+    date: "5 Juli 2024",
+    readTime: "8",
+    category: "design",
+    categoryLabel: "Design Trends",
+    image: `${SITE_CONFIG.url}/placeholder/blog-3.jpg`,
+    alt: "Contoh tren desain laser cutting terbaru tahun 2024"
+  }
+];
+
+// 7. KATEGORI BLOG
+// =================================================================================
+export const NAV_CATEGORIES = [
+  { id: "all", label: "Semua Artikel" },
+  { id: "tutorial", label: "Tutorial" },
+  { id: "material", label: "Material Guide" },
+  { id: "design", label: "Design Trends" },
+  { id: "business", label: "Business Tips" }
+];
+
+// 8. PROJECTS/PORTFOLIO
+// =================================================================================
+export const PROJECTS = [
+  {
+    id: "project-1",
+    title: "Signage Akrilik untuk Bank BCA",
+    caption: "Cutting akrilik presisi untuk signage corporate",
+    image: `${SITE_CONFIG.url}/placeholder/project-1.jpg`,
+    alt: "Signage akrilik BCA hasil laser cutting"
+  },
+  {
+    id: "project-2",
+    title: "Ornamen GRC Masjid Al-Hikmah",
+    caption: "Cutting GRC krawangan untuk fasad masjid",
+    image: `${SITE_CONFIG.url}/placeholder/project-2.jpg`,
+    alt: "Ornamen GRC krawangan masjid hasil cutting CNC"
+  },
+  {
+    id: "project-3",
+    title: "Komponen Metal untuk Industri Otomotif",
+    caption: "Laser cutting presisi untuk part metal",
+    image: `${SITE_CONFIG.url}/placeholder/project-3.jpg`,
+    alt: "Komponen metal hasil laser cutting untuk industri otomotif"
+  }
 ];
