@@ -249,3 +249,19 @@ export const SOCIAL_MEDIA = [
   { name: "Facebook", url: "https://facebook.com/rajacutting", icon: "facebook" },
   { name: "TikTok", url: "https://tiktok.com/@rajacutting", icon: "tiktok" }
 ];
+
+export const BLOG_POSTS = [
+  // Tambahkan data postingan blog Anda di sini
+  // Contoh:
+  // {
+  //   id: 'judul-post-1',
+  //   title: 'Judul Postingan Blog Pertama',
+  //   slug: 'judul-postingan-blog-pertama',
+  //   publishDate: '2023-10-27',
+  //   description: 'Deskripsi singkat postingan blog pertama.',
+  //   image: '/placeholder/blog-1.jpg',
+  //   alt: 'Gambar terkait postingan blog pertama',
+  //   author: 'Nama Penulis',
+  //   tags: ['tag1', 'tag2'],
+  // },
+];
