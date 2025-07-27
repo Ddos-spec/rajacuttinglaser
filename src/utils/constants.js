@@ -80,6 +80,98 @@ export const SERVICES = [
     keywords: "jasa cnc router, cnc router bintaro, cutting kayu, engraving mdf",
     image: `${SITE_CONFIG.url}/placeholder/service-1.jpg`, // Path absolut untuk GitHub Pages
     alt: "Mesin CNC Router sedang bekerja pada material kayu.",
+    imageHero: `${SITE_CONFIG.url}/placeholder/service-1-hero.jpg`,
+    imageHeroAlt: "Mesin CNC Router presisi tinggi sedang memotong material kayu",
+    ctaButton1: "Konsultasi Gratis",
+    ctaButton2: "Lihat Portfolio",
+    ctaText: "Dapatkan penawaran terbaik untuk kebutuhan CNC Router Anda. Konsultasikan proyek Anda dengan tim ahli kami sekarang.",
+    benefitsIntro: "Teknologi CNC Router menawarkan presisi dan fleksibilitas untuk berbagai material seperti kayu, MDF, akrilik, dan PVC.",
+    benefits: [
+      {
+        title: "Presisi Tinggi",
+        text: "Akurasi cutting hingga 0.01mm untuk detail terkecil sekalipun",
+        iconPath: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+      },
+      {
+        title: "Cutting 3D",
+        text: "Kemampuan membuat relief dan bentuk 3D pada material",
+        iconPath: "M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+      },
+      {
+        title: "Multi Material",
+        text: "Dapat mengerjakan kayu, MDF, akrilik, GRC, dan PVC dalam satu mesin",
+        iconPath: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+      }
+    ],
+    applicationsIntro: "CNC Router dapat diaplikasikan untuk berbagai kebutuhan industri dan kreatif dengan hasil yang presisi.",
+    applications: [
+      {
+        title: "Furniture & Interior",
+        text: "Pembuatan furniture custom, kitchen set, dan elemen interior",
+        iconPath: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+      },
+      {
+        title: "Signage & Display",
+        text: "Huruf timbul, logo, dan display produk dengan detail sempurna",
+        iconPath: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+      },
+      {
+        title: "Maket & Arsitektur",
+        text: "Pembuatan maket gedung, miniatur, dan elemen arsitektur",
+        iconPath: "M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+      },
+      {
+        title: "Kerajinan & Souvenir",
+        text: "Cinderamata, hiasan, dan produk kreatif custom",
+        iconPath: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+      }
+    ],
+    galleryIntro: "Beberapa contoh hasil pengerjaan CNC Router yang telah kami selesaikan untuk berbagai klien.",
+    gallery: [
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-cnc-1.jpg`,
+        alt: "Furniture custom hasil CNC Router",
+        title: "Furniture Custom",
+        description: "Cutting dan engraving pada kayu jati dengan detail tinggi",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-cnc-1.jpg`,
+        caption: "Cutting dan engraving pada kayu jati dengan detail tinggi"
+      },
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-cnc-2.jpg`,
+        alt: "Panel GRC krawangan hasil CNC Router",
+        title: "Panel GRC Krawangan",
+        description: "Cutting GRC 8mm untuk fasad bangunan",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-cnc-2.jpg`,
+        caption: "Cutting GRC 8mm untuk fasad bangunan"
+      },
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-cnc-3.jpg`,
+        alt: "Maket arsitektur dari MDF hasil CNC Router",
+        title: "Maket Arsitektur",
+        description: "Cutting MDF 3mm untuk maket gedung perkantoran",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-cnc-3.jpg`,
+        caption: "Cutting MDF 3mm untuk maket gedung perkantoran"
+      }
+    ],
+    faqIntro: "Jawaban untuk pertanyaan umum tentang jasa CNC Router yang kami sediakan.",
+    faq: [
+      {
+        question: "Berapa ketebalan maksimal material yang bisa dipotong dengan CNC Router?",
+        answer: "Untuk kayu dan MDF, kami dapat memotong hingga ketebalan 50mm. Untuk akrilik, ketebalan maksimal adalah 30mm, dan untuk GRC sekitar 20mm. Ketebalan optimal untuk hasil terbaik adalah 3-25mm tergantung jenis material."
+      },
+      {
+        question: "Apakah CNC Router bisa membuat relief 3D?",
+        answer: "Ya, CNC Router kami dilengkapi dengan kemampuan 3D carving yang dapat membuat relief dan bentuk 3D pada material seperti kayu, MDF, dan akrilik. Ideal untuk membuat logo timbul, ornamen dekoratif, dan detail artistik pada furniture."
+      },
+      {
+        question: "Berapa lama waktu pengerjaan untuk CNC Router?",
+        answer: "Waktu pengerjaan bervariasi tergantung kompleksitas desain, ketebalan material, dan jumlah pesanan. Untuk proyek sederhana, kami bisa menyelesaikan dalam 1-3 hari kerja. Untuk proyek besar atau kompleks, mungkin membutuhkan 4-10 hari kerja."
+      },
+      {
+        question: "Apakah saya perlu menyediakan file desain sendiri?",
+        answer: "Anda bisa menyediakan file desain sendiri dalam format AI, CDR, DXF, atau PDF. Jika Anda belum memiliki desain, tim desain kami siap membantu membuat desain sesuai kebutuhan Anda dengan biaya tambahan yang terjangkau."
+      }
+    ],
   },
   {
     id: "laser-co2",
