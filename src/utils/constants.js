@@ -80,7 +80,7 @@ export const SERVICES = [
     keywords: "jasa cnc router, cnc router bintaro, cutting kayu, engraving mdf",
     image: `${SITE_CONFIG.url}/placeholder/service-1.jpg`, // Path absolut untuk GitHub Pages
     alt: "Mesin CNC Router sedang bekerja pada material kayu.",
-    imageHero: `${SITE_CONFIG.url}/placeholder/service-1-hero.jpg`,
+      imageHero: `${SITE_CONFIG.url}/placeholder/service-1-hero.jpg`,
     imageHeroAlt: "Mesin CNC Router presisi tinggi sedang memotong material kayu",
     ctaButton1: "Konsultasi Gratis",
     ctaButton2: "Lihat Portfolio",
@@ -282,6 +282,98 @@ export const SERVICES = [
     keywords: "laser marking, laser engraving, galvo fiber, marking metal",
     image: `${SITE_CONFIG.url}/placeholder/service-3.jpg`, // Path absolut untuk GitHub Pages
     alt: "Proses laser marking pada plat metal dengan mesin Galvo Fiber.",
+    imageHero: `${SITE_CONFIG.url}/placeholder/service-3-hero.jpg`,
+    imageHeroAlt: "Mesin laser galvo fiber sedang melakukan marking pada komponen metal",
+    ctaButton1: "Konsultasi Gratis",
+    ctaButton2: "Lihat Portfolio",
+    ctaText: "Dapatkan penawaran terbaik untuk kebutuhan laser marking dan engraving Anda. Konsultasikan proyek Anda dengan tim ahli kami sekarang.",
+    benefitsIntro: "Teknologi laser galvo dan fiber menawarkan kecepatan dan presisi tinggi untuk marking dan engraving pada berbagai material.",
+    benefits: [
+      {
+        title: "Kecepatan Tinggi",
+        text: "Proses marking hingga 10x lebih cepat dibanding teknologi konvensional",
+        iconPath: "M13 10V3L4 14h7v7l9-11h-7z"
+      },
+      {
+        title: "Permanen & Tahan Lama",
+        text: "Hasil marking yang tidak akan pudar atau terhapus seiring waktu",
+        iconPath: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+      },
+      {
+        title: "Multi Material",
+        text: "Dapat diaplikasikan pada metal, plastik, dan berbagai material lainnya",
+        iconPath: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+      }
+    ],
+    applicationsIntro: "Teknologi laser galvo dan fiber dapat diaplikasikan untuk berbagai kebutuhan industri dan produksi dengan hasil yang presisi.",
+    applications: [
+      {
+        title: "Penandaan Part",
+        text: "Serial number, barcode, dan kode identifikasi pada komponen",
+        iconPath: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+      },
+      {
+        title: "Branding Produk",
+        text: "Logo dan informasi produk pada kemasan atau produk jadi",
+        iconPath: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+      },
+      {
+        title: "Dekorasi & Personalisasi",
+        text: "Engraving gambar dan teks untuk souvenir dan hadiah",
+        iconPath: "M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+      },
+      {
+        title: "Industri Elektronik",
+        text: "Marking PCB dan komponen elektronik dengan presisi tinggi",
+        iconPath: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+      }
+    ],
+    galleryIntro: "Beberapa contoh hasil pengerjaan laser galvo dan fiber yang telah kami selesaikan untuk berbagai klien.",
+    gallery: [
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-galvo-1.jpg`,
+        alt: "Marking serial number pada komponen metal",
+        title: "Serial Number",
+        description: "Marking kode dan serial number pada komponen industri",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-galvo-1.jpg`,
+        caption: "Marking kode dan serial number pada komponen industri"
+      },
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-galvo-2.jpg`,
+        alt: "Logo brand pada produk metal",
+        title: "Branding Metal",
+        description: "Engraving logo perusahaan pada produk stainless steel",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-galvo-2.jpg`,
+        caption: "Engraving logo perusahaan pada produk stainless steel"
+      },
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-galvo-3.jpg`,
+        alt: "Engraving dekoratif pada tumbler",
+        title: "Personalisasi Produk",
+        description: "Engraving nama dan desain pada tumbler stainless steel",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-galvo-3.jpg`,
+        caption: "Engraving nama dan desain pada tumbler stainless steel"
+      }
+    ],
+    faqIntro: "Jawaban untuk pertanyaan umum tentang jasa laser galvo dan fiber yang kami sediakan.",
+    faq: [
+      {
+        question: "Apa perbedaan laser galvo dengan laser cutting?",
+        answer: "Laser galvo dioptimalkan untuk marking dan engraving permukaan, bukan untuk memotong material. Teknologi ini menggunakan cermin galvanometer yang bergerak sangat cepat untuk mengarahkan sinar laser, sehingga proses marking bisa dilakukan dalam hitungan detik."
+      },
+      {
+        question: "Apakah hasil marking dengan laser galvo bisa terhapus?",
+        answer: "Tidak, hasil marking dengan laser galvo bersifat permanen dan tidak akan terhapus oleh gesekan, air, atau bahan kimia. Ini karena laser mengubah struktur permukaan material, bukan hanya menambahkan lapisan tinta seperti pada printing konvensional."
+      },
+      {
+        question: "Material apa saja yang bisa di-marking dengan laser galvo?",
+        answer: "Laser galvo fiber dapat digunakan untuk marking pada hampir semua jenis metal seperti stainless steel, aluminium, dan kuningan. Selain itu, dengan pengaturan yang tepat, juga bisa digunakan untuk marking pada plastik, akrilik, dan beberapa jenis keramik."
+      },
+      {
+        question: "Berapa lama waktu pengerjaan untuk laser galvo?",
+        answer: "Proses marking dengan laser galvo sangat cepat, biasanya hanya membutuhkan waktu beberapa detik hingga menit per item tergantung kompleksitas desain. Untuk produksi massal, kami dapat memproses ratusan hingga ribuan item per hari."
+      }
+    ],
   },
   {
     id: "fiber-metal",
@@ -290,7 +382,104 @@ export const SERVICES = [
     description: "Cutting presisi untuk plat metal seperti Stainless Steel, Mild Steel, dan Galvanis. Cepat dan akurat untuk kebutuhan industri, otomotif, dan konstruksi.",
     keywords: "laser cutting metal, potong stainless, plat besi, cutting galvanis, fiber laser",
     image: `${SITE_CONFIG.url}/placeholder/service-4.jpg`,
-    alt: "Mesin laser fiber memotong plat metal dengan presisi tinggi."
+    alt: "Mesin laser fiber memotong plat metal dengan presisi tinggi.",
+    imageHero: `${SITE_CONFIG.url}/placeholder/service-4-hero.jpg`,
+    imageHeroAlt: "Mesin laser fiber sedang memotong plat stainless steel dengan presisi tinggi",
+    ctaButton1: "Konsultasi Gratis",
+    ctaButton2: "Lihat Portfolio",
+    ctaText: "Dapatkan penawaran terbaik untuk kebutuhan laser cutting metal Anda. Konsultasikan proyek Anda dengan tim ahli kami sekarang.",
+    benefitsIntro: "Teknologi laser fiber menawarkan keunggulan dalam pemotongan material metal dengan presisi dan kecepatan tinggi.",
+    benefits: [
+      {
+        title: "Presisi Tinggi",
+        text: "Hasil potong dengan toleransi hingga 0.1mm untuk detail sempurna",
+        iconPath: "M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+      },
+      {
+        title: "Kecepatan Produksi",
+        text: "Proses cutting yang cepat untuk efisiensi waktu dan biaya",
+        iconPath: "M13 10V3L4 14h7v7l9-11h-7z"
+      },
+      {
+        title: "Hasil Rapih",
+        text: "Tepi potong yang bersih tanpa perlu proses finishing tambahan",
+        iconPath: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+      },
+      {
+        title: "Multi Material Metal",
+        text: "Dapat memotong stainless steel, aluminium, brass, dan mild steel",
+        iconPath: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+      }
+    ],
+    applicationsIntro: "Teknologi laser fiber cutting dapat diaplikasikan untuk berbagai kebutuhan industri dan manufaktur dengan hasil yang presisi.",
+    applications: [
+      {
+        title: "Komponen Mesin",
+        text: "Pembuatan part dan komponen mesin dengan presisi tinggi",
+        iconPath: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+      },
+      {
+        title: "Furniture Metal",
+        text: "Pemotongan komponen untuk furniture dan dekorasi interior",
+        iconPath: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+      },
+      {
+        title: "Signage & Display",
+        text: "Pembuatan huruf timbul, logo, dan display untuk toko",
+        iconPath: "M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"
+      },
+      {
+        title: "Otomotif & Aerospace",
+        text: "Komponen presisi untuk industri otomotif dan aerospace",
+        iconPath: "M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+      }
+    ],
+    galleryIntro: "Beberapa contoh hasil pengerjaan laser cutting fiber metal yang telah kami selesaikan untuk berbagai klien.",
+    gallery: [
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-fiber-1.jpg`,
+        alt: "Komponen mesin dari stainless steel",
+        title: "Komponen Mesin",
+        description: "Cutting part mesin dari stainless steel 3mm",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-fiber-1.jpg`,
+        caption: "Cutting part mesin dari stainless steel 3mm"
+      },
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-fiber-2.jpg`,
+        alt: "Logo timbul dari aluminium",
+        title: "Signage Metal",
+        description: "Logo timbul dari aluminium 2mm untuk branding perusahaan",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-fiber-2.jpg`,
+        caption: "Logo timbul dari aluminium 2mm untuk branding perusahaan"
+      },
+      {
+        image: `${SITE_CONFIG.url}/placeholder/gallery-fiber-3.jpg`,
+        alt: "Komponen furniture dari mild steel",
+        title: "Furniture Metal",
+        description: "Komponen untuk meja dan kursi dari mild steel 5mm",
+        src: `${SITE_CONFIG.url}/placeholder/gallery-fiber-3.jpg`,
+        caption: "Komponen untuk meja dan kursi dari mild steel 5mm"
+      }
+    ],
+    faqIntro: "Jawaban untuk pertanyaan umum tentang jasa laser cutting fiber metal yang kami sediakan.",
+    faq: [
+      {
+        question: "Berapa ketebalan maksimal yang bisa dipotong dengan laser fiber?",
+        answer: "Mesin laser fiber kami dapat memotong stainless steel hingga ketebalan 8mm, mild steel hingga 12mm, dan aluminium hingga 10mm dengan hasil yang presisi. Ketebalan optimal untuk hasil terbaik adalah 0.5mm hingga 6mm."
+      },
+      {
+        question: "Apakah laser fiber bisa memotong semua jenis metal?",
+        answer: "Laser fiber sangat efektif untuk memotong stainless steel, mild steel, aluminium, brass, copper, dan galvanized steel. Namun, untuk material seperti titanium dan beberapa paduan khusus mungkin memerlukan pengaturan khusus atau metode cutting lain."
+      },
+      {
+        question: "Berapa ukuran material maksimal yang bisa diproses?",
+        answer: "Mesin laser fiber kami dapat memproses material dengan ukuran maksimal 1500mm x 3000mm. Untuk ukuran yang lebih besar, kami dapat melakukan pemotongan secara bertahap dan kemudian menggabungkannya."
+      },
+      {
+        question: "Berapa lama waktu pengerjaan untuk laser cutting fiber?",
+        answer: "Waktu pengerjaan bervariasi tergantung kompleksitas desain, ketebalan material, dan jumlah item. Untuk proyek sederhana, kami dapat menyelesaikannya dalam 1-2 hari kerja. Untuk proyek besar atau kompleks, mungkin membutuhkan waktu 3-7 hari kerja."
+      }
+    ],
   }
 ];
 
