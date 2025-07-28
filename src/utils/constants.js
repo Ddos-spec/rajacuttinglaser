@@ -26,7 +26,7 @@ export const SERVICES = [
     description: "Layanan CNC Router presisi tinggi untuk berbagai material kayu, MDF, dan plastik",
     features: ["Presisi 0.1mm", "Material Kayu & MDF", "Ukuran hingga 2x3 meter", "Finishing Premium"],
     price: "Mulai dari Rp 50.000/m²",
-    image: "/rajacuttinglaser/mesin-cnc-router.webp",
+    image: "/rajacuttinglaser/cncrouter.webp",
     keywords: "jasa cnc router bandung, cnc router bekasi, cnc router bogor"
   },
   {
