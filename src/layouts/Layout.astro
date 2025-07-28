@@ -1,51 +1,22 @@
----
-// src/layouts/Layout.astro
-// Ini kerangka utama untuk SEMUA halaman.
-// Header, Footer, dan SEO dasar diatur di sini.
-
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_CONFIG } from '../utils/constants.js';
-
-// Menerima props 'title', 'description', 'keywords' dari setiap halaman.
-// Jika tidak ada, pakai default dari SITE_CONFIG.
-interface Props {
-	title?: string;
-	description?: string;
-  keywords?: string;
-}
-
-const { 
-  title, 
-  description = SITE_CONFIG.description,
-  keywords = 'jasa laser cutting, jasa cnc router, bintaro, bsd, jakarta selatan' 
-} = Astro.props;
-
-// Membuat judul halaman dinamis. Contoh: "Jasa CNC Router | Raja Metal Cutting"
-const pageTitle = title ? `${title} | ${SITE_CONFIG.name}` : SITE_CONFIG.title;
-
-// Menggunakan base path dari astro.config.mjs untuk link absolut
-const base_url = import.meta.env.BASE_URL;
----
-
 <!doctype html>
-<html lang="id" class="scroll-smooth">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-    <meta name="keywords" content={keywords} />
-		<link rel="icon" type="image/svg+xml" href={`${base_url}favicon.svg`} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
-
+		<title>Astro Basics</title>
 	</head>
-	<body class="bg-charcoal text-metallic-silver font-sans">
-    <Header />
-		<slot /> <Footer />
+	<body>
+		<slot />
 	</body>
 </html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

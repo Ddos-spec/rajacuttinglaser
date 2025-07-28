@@ -1,30 +1,31 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
 
+// https://astro.build/config
 export default defineConfig({
-  output: 'static',
-  
-  // Konfigurasi ini yang udah kita benerin, boss
+  // WAJIB: Konfigurasi untuk deploy ke GitHub Pages
+  // Ganti 'ddos-spec' dengan username GitHub lu
+  // Ganti 'jasalasercutting' dengan nama repository lu
   site: 'https://ddos-spec.github.io',
-  base: '/rajacuttinglaser/',
-
-  integrations: [
-    tailwind(),
-    sitemap()
-  ],
-  build: {
-    inlineStylesheets: 'auto'
-  },
+  base: '/rajacuttinglaser',
+  
+  integrations: [tailwind()],
+  
+  // CRITICAL: Custom routing untuk file di root src/
   vite: {
-    build: {
-      cssCodeSplit: false,
-      rollupOptions: {
-        output: {
-          manualChunks: undefined,
-          assetFileNames: 'assets/[name].[hash][extname]'
-        }
+    resolve: {
+      alias: {
+        '@': '/src',
+        '@components': '/src/components',
+        '@styles': '/src/styles',
+        '@utils': '/src/utils'
       }
     }
-  }
+  },
+  
+  // Custom build configuration
+  build: {
+    inlineStylesheets: 'auto',
+    assets: '_assets'
+  },
 });
