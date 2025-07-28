@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../../components/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { PORTFOLIO_ITEMS } from '../../utils/constants.js';
+import BaseLayout from '../components/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { PORTFOLIO } from '../utils/constants.js';
 
-// Sort portfolio items by date (newest first)
-const sortedPortfolio = PORTFOLIO_ITEMS.sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate));
+// Sort portfolio items by id (newest first)
+const sortedPortfolio = PORTFOLIO.sort((a, b) => b.id - a.id);
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -47,20 +47,14 @@ const jsonLd = {
         <button class="portfolio-filter active px-6 py-2 rounded-full bg-blue-600 text-white font-medium transition-colors" data-filter="all">
           Semua Project
         </button>
-        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="laser-cutting">
-          Laser Cutting
-        </button>
         <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="cnc-router">
           CNC Router
         </button>
-        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="engraving">
-          Engraving
+        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="laser-fiber">
+          Laser Fiber
         </button>
-        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="acrylic">
-          Acrylic
-        </button>
-        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="metal">
-          Metal
+        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="laser-co2">
+          Laser CO2
         </button>
       </div>
     </div>
@@ -71,7 +65,7 @@ const jsonLd = {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
         {sortedPortfolio.map((item) => (
-          <article class={`portfolio-item bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1`} data-category={item.category}>
+          <article class={`portfolio-item bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1`} data-category={item.service.toLowerCase().replace(/\s+/g, '-')}>
             <div class="relative group">
               <img 
                 src={item.image} 
@@ -82,7 +76,7 @@ const jsonLd = {
               <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
                 <button 
                   class="opacity-0 group-hover:opacity-100 bg-white text-gray-900 px-4 py-2 rounded-lg font-medium transition-all duration-300 transform translate-y-4 group-hover:translate-y-0"
-                  onclick={`openModal('${item.slug}')`}
+                  onclick={`openModal(${item.id})`}
                 >
                   Lihat Detail
                 </button>
@@ -91,7 +85,7 @@ const jsonLd = {
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">
                 <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">
-                  {item.category}
+                  {item.service}
                 </span>
                 <span class="text-sm text-gray-500">{item.material}</span>
               </div>
@@ -103,17 +97,10 @@ const jsonLd = {
               </p>
               <div class="flex items-center justify-between">
                 <span class="text-sm text-gray-500">
-                  {new Date(item.completedDate).toLocaleDateString('id-ID', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                  })}
+                  {item.category}
                 </span>
-                <div class="flex items-center text-sm text-gray-500">
-                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                  {item.duration}
+                <div class="flex items-center text-sm text-blue-600 font-medium">
+                  {item.service}
                 </div>
               </div>
             </div>
@@ -196,8 +183,8 @@ const jsonLd = {
       
       // Filter portfolio items
       portfolioItems.forEach(item => {
-        const category = item.getAttribute('data-category');
-        if (filter === 'all' || category === filter) {
+        const service = item.getAttribute('data-category');
+        if (filter === 'all' || service === filter) {
           item.style.display = 'block';
           setTimeout(() => {
             item.style.opacity = '1';
@@ -218,45 +205,80 @@ const jsonLd = {
   const modal = document.getElementById('portfolio-modal');
   const modalContent = document.getElementById('modal-content');
 
-  function openModal(slug) {
-    // Find portfolio item by slug
+  function openModal(id) {
+    // Portfolio data berdasarkan constants.js
     const portfolioData = {
-      'signage-acrylic-led': {
-        title: 'Signage Acrylic dengan LED Backlight',
-        image: '/images/portfolio/signage-acrylic-led.jpg',
-        category: 'Acrylic',
-        material: 'Acrylic 5mm',
-        description: 'Project pembuatan signage acrylic premium dengan sistem LED backlight untuk toko modern. Menggunakan acrylic berkualitas tinggi dengan cutting presisi dan finishing sempurna.',
+      1: {
+        title: 'Signage Hotel Bintang 5',
+        image: '/rajacuttinglaser/images/singagehote.webp',
+        category: 'Commercial',
+        material: 'ACP Aluminium',
+        service: 'CNC Router',
+        description: 'Pembuatan signage premium untuk hotel bintang 5 dengan detail presisi tinggi menggunakan teknologi CNC Router terdepan.',
         details: [
-          'Material: Acrylic clear 5mm thickness',
-          'Dimensi: 120cm x 60cm x 10cm',
-          'LED: Strip LED Samsung 2835',
-          'Power Supply: 12V 5A',
-          'Mounting: Wall mounting system'
-        ],
-        duration: '3 Hari',
-        completedDate: '2024-01-15'
-      },
-      'metal-decorative-panel': {
-        title: 'Panel Dekoratif Metal Custom',
-        image: '/images/portfolio/metal-decorative-panel.jpg',
-        category: 'Metal',
-        material: 'Stainless Steel',
-        description: 'Panel dekoratif stainless steel dengan pattern geometris kompleks untuk interior modern. Dikerjakan dengan laser fiber untuk presisi tinggi.',
-        details: [
-          'Material: Stainless Steel 304 - 2mm',
-          'Dimensi: 200cm x 100cm',
-          'Pattern: Custom geometric design',
-          'Finishing: Brushed + coating',
-          'Installation: Hidden mounting system'
+          'Material: ACP Aluminium 4mm thickness',
+          'Dimensi: 300cm x 150cm x 4cm',
+          'Finishing: Anti UV coating',
+          'Mounting: Stainless steel frame',
+          'LED: Integrated LED system'
         ],
         duration: '5 Hari',
+        completedDate: '2024-01-15'
+      },
+      2: {
+        title: 'Furniture Custom Stainless',
+        image: '/rajacuttinglaser/images/furnituremetal.webp',
+        category: 'Industrial',
+        material: 'Stainless Steel',
+        service: 'Laser Fiber',
+        description: 'Cutting furniture stainless steel custom untuk restaurant modern dengan presisi laser fiber.',
+        details: [
+          'Material: Stainless Steel 304 - 3mm',
+          'Dimensi: Custom sesuai design',
+          'Finishing: Mirror polish',
+          'Edge: Precision laser cut',
+          'Quality: Food grade certified'
+        ],
+        duration: '7 Hari',
         completedDate: '2024-01-10'
+      },
+      3: {
+        title: 'Display Acrylic Premium',
+        image: '/rajacuttinglaser/images/displyacrylic.webp',
+        category: 'Retail',
+        material: 'Acrylic',
+        service: 'Laser CO2',
+        description: 'Display acrylic premium untuk toko retail dengan engraving logo menggunakan laser CO2.',
+        details: [
+          'Material: Acrylic clear 8mm',
+          'Dimensi: 50cm x 30cm x 20cm',
+          'Engraving: Laser precision logo',
+          'Edge: Polished finish',
+          'Assembly: Modular system'
+        ],
+        duration: '3 Hari',
+        completedDate: '2024-01-05'
+      },
+      4: {
+        title: 'Prototype Industri',
+        image: '/rajacuttinglaser/images/prototype.webp',
+        category: 'Manufacturing',
+        material: 'PVC',
+        service: 'CNC Router',
+        description: 'Prototype komponen industri dengan presisi tinggi menggunakan PVC berkualitas.',
+        details: [
+          'Material: PVC rigid 10mm',
+          'Dimensi: Sesuai spesifikasi',
+          'Toleransi: ±0.1mm precision',
+          'Surface: Smooth finishing',
+          'Testing: Quality assured'
+        ],
+        duration: '4 Hari',
+        completedDate: '2024-01-01'
       }
-      // Add more portfolio items as needed
     };
 
-    const item = portfolioData[slug];
+    const item = portfolioData[id];
     if (!item) return;
 
     modalContent.innerHTML = `
@@ -264,7 +286,7 @@ const jsonLd = {
       <div class="p-6 md:p-8">
         <div class="flex items-center justify-between mb-4">
           <span class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full font-medium">
-            ${item.category}
+            ${item.service}
           </span>
           <span class="text-sm text-gray-500">${item.material}</span>
         </div>
@@ -291,7 +313,7 @@ const jsonLd = {
                 <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 4v10a2 2 0 002 2h4a2 2 0 002 2V11a2 2 0 00-2-2H10a2 2 0 00-2 2z"></path>
                 </svg>
-                Selesai: ${new Date(item.completedDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                Kategori: ${item.category}
               </div>
             </div>
           </div>

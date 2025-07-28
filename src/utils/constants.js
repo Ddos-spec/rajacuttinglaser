@@ -36,7 +36,7 @@ export const SERVICES = [
     description: "Laser Fiber cutting untuk material metal dengan hasil sempurna dan presisi tinggi",
     features: ["Cutting Metal", "Presisi 0.05mm", "Stainless Steel", "Aluminium & Besi"],
     price: "Mulai dari Rp 75.000/m²",
-    image: "/rajacuttinglaser/mesin-laser-fiber.webp",
+    image: "/rajacuttinglaser/laserfiber.webp",
     keywords: "laser fiber cutting, potong stainless steel, laser metal bekasi"
   },
   {
