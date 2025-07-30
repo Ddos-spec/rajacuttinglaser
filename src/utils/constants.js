@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
   name: "LaserCut Pro",
   title: "Jasa Laser Cutting Akurat & Cepat #1 Jabodetabek - Akrilik, Kayu, Metal",
   description: "Laser cutting presisi tinggi & pengerjaan cepat di Jabodetabek! Spesialis akrilik, kayu, metal dengan teknologi terdepan. 10+ tahun pengalaman, hasil akurat, garansi kualitas. Melayani Jakarta, Bogor, Depok, Tangerang, Bekasi.",
-  url: "https://ddos-spec.github.io/rajacuttinglaser/",
+  url: "https://ddos-spec.github.io/",
   author: "LaserCut Pro Team",
   keywords: "jasa laser cutting jakarta, laser cutting bogor, laser cutting depok, laser cutting tangerang, laser cutting bekasi, cnc router jabodetabek, laser fiber cutting, potong akrilik jakarta, potong kayu bogor, cutting metal depok, laser engraving tangerang, galvo engraving bekasi",
   phone: "+62 812-3456-7890",
@@ -28,7 +28,7 @@ export const SERVICES = [
     description: "Layanan CNC Router presisi tinggi untuk berbagai material kayu, MDF, dan plastik",
     features: ["Presisi 0.1mm", "Material Kayu & MDF", "Ukuran hingga 2x3 meter", "Finishing Premium"],
     price: "Mulai dari Rp 50.000/m²",
-    image: "/rajacuttinglaser/cncrouter.webp",
+    image: "/cncrouter.webp",
     keywords: "jasa cnc router jakarta, cnc router bekasi, cnc router bogor, cnc router depok, cnc router tangerang"
   },
   {
@@ -38,7 +38,7 @@ export const SERVICES = [
     description: "Laser Fiber cutting untuk material metal dengan hasil sempurna dan presisi tinggi",
     features: ["Cutting Metal", "Presisi 0.05mm", "Stainless Steel", "Aluminium & Besi"],
     price: "Mulai dari Rp 75.000/m²",
-    image: "/rajacuttinglaser/laserfiber.webp",
+    image: "/laserfiber.webp",
     keywords: "laser fiber cutting jakarta, potong stainless steel bekasi, laser metal bogor, cutting metal depok, laser fiber tangerang"
   },
   {
@@ -48,7 +48,7 @@ export const SERVICES = [
     description: "Laser CO2 untuk material non-metal seperti acrylic, kayu, dan kain dengan detail sempurna",
     features: ["Acrylic & Kayu", "Engraving Detail", "Cutting Presisi", "Finishing Halus"],
     price: "Mulai dari Rp 40.000/m²",
-    image: "/rajacuttinglaser/co2.webp",
+    image: "/co2.webp",
     keywords: "laser co2 akrilik jakarta, potong acrylic bogor, laser kayu depok, cutting akrilik tangerang, laser co2 bekasi"
   },
   {
@@ -58,7 +58,7 @@ export const SERVICES = [
     description: "Galvo laser engraving untuk marking, logo, dan detail halus pada berbagai material",
     features: ["Marking Presisi", "Logo & Text", "Material Beragam", "Hasil Permanen"],
     price: "Mulai dari Rp 25.000/pcs",
-    image: "/rajacuttinglaser/galvo.webp",
+    image: "/galvo.webp",
     keywords: "laser engraving jakarta, marking laser bekasi, logo engraving bogor, galvo engraving depok, laser marking tangerang"
   }
 ];
@@ -71,7 +71,7 @@ export const MATERIALS = [
     description: "Cutting ACP (Aluminium Composite Panel) untuk signage dan fasad bangunan",
     thickness: "3mm - 6mm",
     applications: ["Signage", "Fasad", "Interior", "Eksterior"],
-    image: "/rajacuttinglaser/acp.webp",
+    image: "/acp.webp",
     keywords: "potong acp aluminium jakarta, cutting acp bekasi, acp laser bogor, potong acp depok, cutting acp tangerang"
   },
   {
@@ -81,7 +81,7 @@ export const MATERIALS = [
     description: "Cutting PVC custom untuk berbagai keperluan industri dan kreatif",
     thickness: "1mm - 10mm",
     applications: ["Signage", "Prototype", "Display", "Packaging"],
-    image: "/rajacuttinglaser/pvc.webp",
+    image: "/pvc.webp",
     keywords: "cutting pvc custom jakarta, potong pvc plastik bekasi, laser pvc bogor, cutting pvc depok, potong pvc tangerang"
   },
   {
@@ -91,7 +91,7 @@ export const MATERIALS = [
     description: "Laser cutting stainless steel dengan presisi tinggi untuk industri",
     thickness: "0.5mm - 20mm",
     applications: ["Industri", "Arsitektur", "Furniture", "Dekorasi"],
-    image: "/rajacuttinglaser/stainlesssteel.webp",
+    image: "/stainlesssteel.webp",
     keywords: "laser cutting stainless steel jakarta, potong besi presisi bekasi, cutting metal bogor, laser stainless depok, potong metal tangerang"
   },
   {
@@ -101,7 +101,7 @@ export const MATERIALS = [
     description: "Cutting dan engraving acrylic untuk display dan dekorasi premium",
     thickness: "2mm - 30mm",
     applications: ["Display", "Signage", "Dekorasi", "Prototype"],
-    image: "/rajacuttinglaser/Acrylic.webp",
+    image: "/Acrylic.webp",
     keywords: "potong acrylic kaca jakarta, laser acrylic bekasi, cutting akrilik bogor, potong akrilik depok, laser acrylic tangerang"
   },
   {
@@ -111,7 +111,7 @@ export const MATERIALS = [
     description: "Cutting dan engraving Ply Wood / Multiplex untuk furniture dan dekorasi",
     thickness: "3mm - 20mm",
     applications: ["Furniture", "Dekorasi", "Kerajinan", "Interior"],
-    image: "/rajacuttinglaser/Ply Wood.webp",
+    image: "/Ply Wood.webp",
     keywords: "potong plywood jakarta, laser kayu bekasi, cutting multiplex bogor, potong kayu depok, laser plywood tangerang"
   },
   {
@@ -121,7 +121,7 @@ export const MATERIALS = [
     description: "Cutting GRC (Glassfibre Reinforced Concrete) untuk fasad dan ornamen bangunan",
     thickness: "8mm - 15mm",
     applications: ["Fasad", "Ornamen", "Panel", "Eksterior"],
-    image: "/rajacuttinglaser/grc.webp",
+    image: "/grc.webp",
     keywords: "potong grc jakarta, grc laser cutting bekasi, fasad grc bogor, cutting grc depok, laser grc tangerang"
   }
 ];
@@ -134,7 +134,7 @@ export const TESTIMONIALS = [
     position: "Project Manager",
     content: "Kualitas laser cutting terbaik yang pernah kami gunakan di Jakarta. Presisi tinggi dan hasil sempurna untuk semua project signage kami.",
     rating: 5,
-    image: "/rajacuttinglaser/budisantoso.webp"
+    image: "/budisantoso.webp"
   },
   {
     id: 2,
@@ -143,7 +143,7 @@ export const TESTIMONIALS = [
     position: "Lead Architect",
     content: "Pelayanan profesional dan hasil cutting yang sangat memuaskan. Recommended untuk semua kebutuhan laser cutting di Jabodetabek.",
     rating: 5,
-    image: "/rajacuttinglaser/Sari Dewi.webp"
+    image: "/Sari Dewi.webp"
   },
   {
     id: 3,
@@ -152,7 +152,7 @@ export const TESTIMONIALS = [
     position: "Owner",
     content: "Sudah 3 tahun menggunakan jasa LaserCut Pro. Selalu puas dengan kualitas dan ketepatan waktu pengerjaan, pengiriman ke Bogor juga cepat.",
     rating: 5,
-    image: "/rajacuttinglaser/Ahmad Rizki.webp"
+    image: "/Ahmad Rizki.webp"
   }
 ];
 
@@ -163,7 +163,7 @@ export const PORTFOLIO = [
     category: "Commercial",
     material: "ACP Aluminium",
     service: "CNC Router",
-    image: "/rajacuttinglaser/singagehote.webp",
+    image: "/singagehote.webp",
     description: "Pembuatan signage premium untuk hotel bintang 5 di Jakarta dengan detail presisi tinggi"
   },
   {
@@ -172,7 +172,7 @@ export const PORTFOLIO = [
     category: "Industrial",
     material: "Stainless Steel",
     service: "Laser Fiber",
-    image: "/rajacuttinglaser/furnituremetal.webp",
+    image: "/furnituremetal.webp",
     description: "Cutting furniture stainless steel custom untuk restaurant modern di Bekasi"
   },
   {
@@ -181,7 +181,7 @@ export const PORTFOLIO = [
     category: "Retail",
     material: "Acrylic",
     service: "Laser CO2",
-    image: "/rajacuttinglaser/displyacrylic.webp",
+    image: "/displyacrylic.webp",
     description: "Display acrylic premium untuk toko retail di Bogor dengan engraving logo"
   },
   {
@@ -190,7 +190,7 @@ export const PORTFOLIO = [
     category: "Manufacturing",
     material: "PVC",
     service: "CNC Router",
-    image: "/rajacuttinglaser/prototype.webp",
+    image: "/prototype.webp",
     description: "Prototype komponen industri dengan presisi tinggi menggunakan PVC untuk klien di Tangerang"
   }
 ];
@@ -237,7 +237,7 @@ export const BLOG_POSTS = [
     category: "Tutorial",
     readTime: "5 menit",
     publishDate: "2024-01-15",
-    image: "/rajacuttinglaser/acp.webp"
+    image: "/acp.webp"
   },
   {
     id: 2,
@@ -247,7 +247,7 @@ export const BLOG_POSTS = [
     category: "Technical",
     readTime: "7 menit",
     publishDate: "2024-01-10",
-    image: "/rajacuttinglaser/laserfiber.webp"
+    image: "/laserfiber.webp"
   },
   { 
     id: 3,
@@ -257,7 +257,7 @@ export const BLOG_POSTS = [
     category: "Industry",
     readTime: "6 menit",
     publishDate: "2024-01-05",
-    image: "/rajacuttinglaser/cncrouter.webp"
+    image: "/cncrouter.webp"
   },
   {
     id: 4,
@@ -267,7 +267,7 @@ export const BLOG_POSTS = [
     category: "Tips",
     readTime: "8 menit",
     publishDate: "2024-01-20",
-    image: "/rajacuttinglaser/co2.webp"
+    image: "/co2.webp"
   },
   {
     id: 5,
@@ -277,7 +277,7 @@ export const BLOG_POSTS = [
     category: "Tutorial",
     readTime: "10 menit",
     publishDate: "2024-01-18",
-    image: "/rajacuttinglaser/engraving.webp"
+    image: "/engraving.webp"
   },
   {
     id: 6,
@@ -287,7 +287,7 @@ export const BLOG_POSTS = [
     category: "Comparison",
     readTime: "9 menit",
     publishDate: "2024-01-16",
-    image: "/rajacuttinglaser/grc.webp"
+    image: "/grc.webp"
   },
   {
     id: 7,
@@ -297,7 +297,7 @@ export const BLOG_POSTS = [
     category: "Technical",
     readTime: "12 menit",
     publishDate: "2024-01-14",
-    image: "/rajacuttinglaser/galvo.webp"
+    image: "/galvo.webp"
   },
   {
     id: 8,
@@ -307,7 +307,7 @@ export const BLOG_POSTS = [
     category: "Case Study",
     readTime: "11 menit",
     publishDate: "2024-01-12",
-    image: "/rajacuttinglaser/Ply Wood.webp"
+    image: "/Ply Wood.webp"
   },
   {
     id: 9,
@@ -317,7 +317,7 @@ export const BLOG_POSTS = [
     category: "Maintenance",
     readTime: "6 menit",
     publishDate: "2024-01-08",
-    image: "/rajacuttinglaser/Acrylic.webp"
+    image: "/Acrylic.webp"
   }
 ];
 
