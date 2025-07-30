@@ -249,7 +249,7 @@ export const BLOG_POSTS = [
     publishDate: "2024-01-10",
     image: "/rajacuttinglaser/laserfiber.webp"
   },
-  {
+  { 
     id: 3,
     title: "Tren Industri Kreatif Jakarta 2024: Peluang Laser Cutting",
     slug: "tren-industri-kreatif-jakarta-2024",
