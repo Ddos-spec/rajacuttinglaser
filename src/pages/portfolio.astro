@@ -247,7 +247,7 @@ const jsonLd = {
 
     const item = portfolioData[id];
     if (!item || !modalContent) return;
-
+ const baseUrl = import.meta.env.BASE_URL;
     modalContent.innerHTML = `
       <img src="${item.image}" alt="${item.title}" class="w-full h-64 md:h-96 object-cover">
       <div class="p-6 md:p-8">
