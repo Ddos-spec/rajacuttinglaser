@@ -28,7 +28,7 @@ export const SERVICES = [
     description: "Layanan CNC Router presisi tinggi untuk berbagai material kayu, MDF, dan plastik",
     features: ["Presisi 0.1mm", "Material Kayu & MDF", "Ukuran hingga 2x3 meter", "Finishing Premium"],
     price: "Mulai dari Rp 50.000/m²",
-    image: "images/cncrouter.webp",
+    image: "/images/cncrouter.webp",
     keywords: "jasa cnc router jakarta, cnc router bekasi, cnc router bogor, cnc router depok, cnc router tangerang"
   },
   {
@@ -38,7 +38,7 @@ export const SERVICES = [
     description: "Laser Fiber cutting untuk material metal dengan hasil sempurna dan presisi tinggi",
     features: ["Cutting Metal", "Presisi 0.05mm", "Stainless Steel", "Aluminium & Besi"],
     price: "Mulai dari Rp 75.000/m²",
-    image: "images/laserfiber.webp",
+    image: "/images/laserfiber.webp",
     keywords: "laser fiber cutting jakarta, potong stainless steel bekasi, laser metal bogor, cutting metal depok, laser fiber tangerang"
   },
   {
@@ -48,7 +48,7 @@ export const SERVICES = [
     description: "Laser CO2 untuk material non-metal seperti acrylic, kayu, dan kain dengan detail sempurna",
     features: ["Acrylic & Kayu", "Engraving Detail", "Cutting Presisi", "Finishing Halus"],
     price: "Mulai dari Rp 40.000/m²",
-    image: "images/co2.webp",
+    image: "/images/co2.webp",
     keywords: "laser co2 akrilik jakarta, potong acrylic bogor, laser kayu depok, cutting akrilik tangerang, laser co2 bekasi"
   },
   {
@@ -58,7 +58,7 @@ export const SERVICES = [
     description: "Galvo laser engraving untuk marking, logo, dan detail halus pada berbagai material",
     features: ["Marking Presisi", "Logo & Text", "Material Beragam", "Hasil Permanen"],
     price: "Mulai dari Rp 25.000/pcs",
-    image: "images/galvo.webp",
+    image: "/images/galvo.webp",
     keywords: "laser engraving jakarta, marking laser bekasi, logo engraving bogor, galvo engraving depok, laser marking tangerang"
   }
 ];
