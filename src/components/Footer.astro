@@ -13,12 +13,12 @@ import { SITE_CONFIG, SERVICES, MATERIALS, NAVIGATION } from '../utils/constants
         <div class="flex items-center space-x-3 mb-6">
           <!-- Debug: Test multiple logo sources -->
           <img 
-            src="/images/logo.webp" 
+            src="images/logo.webp" 
             alt="Tepat Laser Logo" 
             class="h-10 w-auto"
             width="120"
             height="40"
-            onerror="this.onerror=null; this.src='//images/Logo.webp'; console.log('Trying Logo.webp');"
+            onerror="this.onerror=null; this.src='/images/Logo.webp'; console.log('Trying Logo.webp');"
             onload="console.log('Logo loaded successfully');"
           />
           <!-- Fallback jika logo tidak ada -->
