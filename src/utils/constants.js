@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
   name: "LaserCut Pro",
   title: "Jasa Laser Cutting Akurat & Cepat #1 Jabodetabek - Akrilik, Kayu, Metal",
   description: "Laser cutting presisi tinggi & pengerjaan cepat di Jabodetabek! Spesialis akrilik, kayu, metal dengan teknologi terdepan. 10+ tahun pengalaman, hasil akurat, garansi kualitas. Melayani Jakarta, Bogor, Depok, Tangerang, Bekasi.",
-  url: "https://www.rajacuttinglaser.com",
+  url: "https://ddos-spec.github.io/rajacuttinglaser/",
   author: "LaserCut Pro Team",
   keywords: "jasa laser cutting jakarta, laser cutting bogor, laser cutting depok, laser cutting tangerang, laser cutting bekasi, cnc router jabodetabek, laser fiber cutting, potong akrilik jakarta, potong kayu bogor, cutting metal depok, laser engraving tangerang, galvo engraving bekasi",
   phone: "+62 812-3456-7890",

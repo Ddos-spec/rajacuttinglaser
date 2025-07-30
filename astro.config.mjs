@@ -5,8 +5,8 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config  
 export default defineConfig({
   // PENTING: Konfigurasi untuk deploy ke domain kustom Anda
-  site: 'https://www.rajacuttinglaser.com', // Ganti dengan domain utama Anda
-  base: '/', // Karena dihosting di root domain, bukan subfolder
+  site: 'https://ddos-spec.github.io/rajacuttinglaser/', // Ganti dengan domain utama Anda
+  base: 'rajacuttinglaser', // Karena dihosting di root domain, bukan subfolder
   
   integrations: [tailwind()],
   
