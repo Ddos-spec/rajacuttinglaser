@@ -19,13 +19,33 @@ export const SITE_CONFIG = {
 };
 
 export const NAVIGATION = [
-  { name: 'Beranda', url: '/' },
-  { name: 'Tentang Kami', url: '/about/' },
-  { name: 'Layanan', url: '/jasa-laser-co2/' },
-  { name: 'Material', url: '/material-acrylic/' },
-  { name: 'Portfolio', url: '/portfolio/' },
-  { name: 'Blog', url: '/blog/' },
-  { name: 'Kontak', url: '/contact/' }
+  { name: 'Beranda', href: '/' },
+  { name: 'Tentang Kami', href: '/about/' },
+  { 
+    name: 'Layanan', 
+    href: '#',
+    submenu: [
+      { name: 'Laser CO2', href: '/jasa-laser-co2/' },
+      { name: 'Laser Fiber', href: '/jasa-laser-fiber/' },
+      { name: 'CNC Router', href: '/jasa-cnc-router/' },
+      { name: 'Galvo Engraving', href: '/jasa-galvo-engraving/' }
+    ]
+  },
+  { 
+    name: 'Material', 
+    href: '#',
+    submenu: [
+      { name: 'Akrilik', href: '/material-acrylic/' },
+      { name: 'MDF', href: '/material-mdf/' },
+      { name: 'Plywood/Multiplex', href: '/material-ply-wood-multiplex/' },
+      { name: 'Metal (Stainless, Aluminium)', href: '/material-metal/' },
+      { name: 'ACP', href: '/material-acp/' },
+      { name: 'PVC Plastik', href: '/material-pvc/' },
+      { name: 'GRC', href: '/material-grc/' }
+    ]
+  },
+  { name: 'Portfolio', href: '/portfolio/' },
+  { name: 'Blog', href: '/blog/' }
 ];
 
 export const SERVICES = [
@@ -41,7 +61,7 @@ export const SERVICES = [
       "Ideal untuk signage, dekorasi, prototyping"
     ],
     applications: ["Signage", "Dekorasi", "Prototyping", "Kemasan"],
-    image: "/images/co2.webp",
+    image: "/rajacuttinglaser/images/co2.webp", // Fixed GitHub Pages path
     keywords: "jasa laser co2 jakarta, cutting akrilik bogor, laser kayu depok, potong mdf tangerang, laser cutting bekasi, cutting kain jakarta, laser karet bogor"
   },
   {
@@ -56,7 +76,7 @@ export const SERVICES = [
       "Tidak memerlukan bahan kimia berbahaya"
     ],
     applications: ["Industri", "Automotif", "Elektronik", "Branding"],
-    image: "/images/laserfiber.webp",
+    image: "/rajacuttinglaser/images/laserfiber.webp", // Fixed GitHub Pages path
     keywords: "jasa laser fiber jakarta, cutting stainless bogor, laser alumunium depok, potong besi tangerang, laser cutting metal bekasi, marking tembaga jakarta"
   },
   {
@@ -71,7 +91,7 @@ export const SERVICES = [
       "Finishing presisi untuk detail rumit"
     ],
     applications: ["Fasad", "Furniture", "Moulding", "Signage"],
-    image: "/images/cncrouter.webp",
+    image: "/rajacuttinglaser/images/cncrouter.webp", // Fixed GitHub Pages path
     keywords: "jasa cnc router jakarta, cutting acp bogor, laser grc depok, potong kayu tangerang, cnc router bekasi, carving akrilik jakarta"
   },
   {
@@ -86,7 +106,7 @@ export const SERVICES = [
       "Ideal untuk serial number, logo, QR code"
     ],
     applications: ["Branding", "Personalisasi", "Traceability", "Promosi"],
-    image: "/images/galvo.webp",
+    image: "/rajacuttinglaser/images/galvo.webp", // Fixed GitHub Pages path
     keywords: "jasa galvo engraving jakarta, laser engraving bogor, engrave depok, potong engraving tangerang, laser engrave bekasi, branding produk jakarta"
   }
 ];
@@ -99,7 +119,7 @@ export const MATERIALS = [
     description: "Material transparan berkualitas tinggi untuk berbagai aplikasi signage dan dekorasi",
     thickness: "1mm - 20mm",
     applications: ["Signage", "Display", "Dekorasi", "Prototyping"],
-    image: "/images/Acrylic.webp",
+    image: "/rajacuttinglaser/images/Acrylic.webp", // Fixed GitHub Pages path
     keywords: "potong akrilik jakarta, cutting acrylic bekasi, laser acrylic bogor, potong acrylic depok, cutting acrylic tangerang"
   },
   {
@@ -109,7 +129,7 @@ export const MATERIALS = [
     description: "Kayu engineered dengan permukaan halus, ideal untuk painting dan aplikasi dekoratif",
     thickness: "3mm - 25mm",
     applications: ["Furniture", "Dekorasi", "Craft", "Model"],
-    image: "/images/MDF.webp",
+    image: "/rajacuttinglaser/images/MDF.webp", // Fixed GitHub Pages path
     keywords: "potong mdf jakarta, laser cutting mdf bekasi, cutting mdf bogor, potong mdf depok, laser mdf tangerang"
   },
   {
@@ -119,7 +139,7 @@ export const MATERIALS = [
     description: "Kayu lapis berkualitas untuk kekuatan struktural dan tampilan alami yang menarik",
     thickness: "3mm - 25mm",
     applications: ["Furniture", "Dekorasi", "Kerajinan", "Interior"],
-    image: "/images/Ply Wood.webp",
+    image: "/rajacuttinglaser/images/Ply Wood.webp", // Fixed GitHub Pages path
     keywords: "potong plywood jakarta, laser kayu bekasi, cutting multiplex bogor, potong kayu depok, laser plywood tangerang"
   },
   {
@@ -129,7 +149,7 @@ export const MATERIALS = [
     description: "Berbagai jenis logam untuk aplikasi industri, arsitektur, dan branding produk",
     thickness: "0.5mm - 10mm",
     applications: ["Industri", "Arsitektur", "Automotif", "Branding"],
-    image: "/images/Metal.webp",
+    image: "/rajacuttinglaser/images/Metal.webp", // Fixed GitHub Pages path
     keywords: "potong stainless jakarta, laser cutting metal bekasi, cutting alumunium bogor, potong besi depok, laser stainless tangerang"
   },
   {
@@ -139,7 +159,7 @@ export const MATERIALS = [
     description: "Panel komposit ringan namun kuat untuk aplikasi fasad dan signage premium",
     thickness: "2mm - 6mm",
     applications: ["Signage", "Fasad", "Interior", "Eksterior"],
-    image: "/images/acp.webp",
+    image: "/rajacuttinglaser/images/acp.webp", // Fixed GitHub Pages path
     keywords: "potong acp aluminium jakarta, cutting acp bekasi, acp laser bogor, potong acp depok, cutting acp tangerang"
   },
   {
@@ -149,7 +169,7 @@ export const MATERIALS = [
     description: "Cutting PVC custom untuk berbagai keperluan industri dan kreatif",
     thickness: "1mm - 10mm",
     applications: ["Signage", "Prototype", "Display", "Packaging"],
-    image: "/images/pvc.webp",
+    image: "/rajacuttinglaser/images/pvc.webp", // Fixed GitHub Pages path
     keywords: "potong pvc jakarta, cutting pvc bekasi, laser pvc bogor, potong pvc depok, cutting pvc tangerang"
   },
   {
@@ -159,7 +179,7 @@ export const MATERIALS = [
     description: "Cutting GRC (Glassfibre Reinforced Concrete) untuk fasad dan ornamen bangunan",
     thickness: "8mm - 15mm",
     applications: ["Fasad", "Ornamen", "Panel", "Eksterior"],
-    image: "/images/grc.webp",
+    image: "/rajacuttinglaser/images/grc.webp", // Fixed GitHub Pages path
     keywords: "potong grc jakarta, grc laser cutting bekasi, fasad grc bogor, cutting grc depok, laser grc tangerang"
   }
 ];
@@ -172,7 +192,7 @@ export const TESTIMONIALS = [
     position: "Project Manager",
     content: "Kualitas laser cutting terbaik yang pernah kami gunakan di Jakarta. Presisi tinggi dan hasil sempurna untuk semua project signage kami.",
     rating: 5,
-    image: "/images/budisantoso.webp"
+    image: "/rajacuttinglaser/images/budisantoso.webp" // Fixed GitHub Pages path
   },
   {
     id: 2,
@@ -181,7 +201,7 @@ export const TESTIMONIALS = [
     position: "Lead Architect",
     content: "Pelayanan profesional dan hasil cutting yang sangat memuaskan. Recommended untuk semua kebutuhan laser cutting di Jabodetabek.",
     rating: 5,
-    image: "/images/Sari Dewi.webp"
+    image: "/rajacuttinglaser/images/Sari Dewi.webp" // Fixed GitHub Pages path
   },
   {
     id: 3,
@@ -190,7 +210,7 @@ export const TESTIMONIALS = [
     position: "Owner",
     content: "Sudah 3 tahun menggunakan jasa LaserCut Pro. Selalu puas dengan kualitas dan ketepatan waktu pengerjaan, pengiriman ke Bogor juga cepat.",
     rating: 5,
-    image: "/images/Ahmad Rizki.webp"
+    image: "/rajacuttinglaser/images/Ahmad Rizki.webp" // Fixed GitHub Pages path
   }
 ];
 
@@ -201,7 +221,7 @@ export const PORTFOLIO = [
     category: "Commercial",
     material: "ACP Aluminium",
     service: "CNC Router",
-    image: "/images/singagehote.webp",
+    image: "/rajacuttinglaser/images/singagehote.webp", // Fixed GitHub Pages path
     description: "Pembuatan signage premium untuk hotel bintang 5 di Jakarta dengan detail presisi tinggi"
   },
   {
@@ -210,7 +230,7 @@ export const PORTFOLIO = [
     category: "Industrial",
     material: "Stainless Steel",
     service: "Laser Fiber",
-    image: "/images/furnituremetal.webp",
+    image: "/rajacuttinglaser/images/furnituremetal.webp", // Fixed GitHub Pages path
     description: "Cutting furniture stainless steel custom untuk restaurant modern di Bekasi"
   },
   {
@@ -219,7 +239,7 @@ export const PORTFOLIO = [
     category: "Retail",
     material: "Acrylic",
     service: "Laser CO2",
-    image: "/images/displyacrylic.webp",
+    image: "/rajacuttinglaser/images/displyacrylic.webp", // Fixed GitHub Pages path
     description: "Display acrylic premium untuk toko retail di Bogor dengan engraving logo"
   },
   {
@@ -228,7 +248,7 @@ export const PORTFOLIO = [
     category: "Manufacturing",
     material: "PVC",
     service: "CNC Router",
-    image: "/images/prototype.webp",
+    image: "/rajacuttinglaser/images/prototype.webp", // Fixed GitHub Pages path
     description: "Prototype komponen industri dengan presisi tinggi menggunakan PVC untuk klien di Tangerang"
   }
 ];
@@ -270,7 +290,7 @@ export const BLOG_POSTS = [
     category: "Tutorial",
     readTime: "5 menit",
     publishDate: "2024-01-15",
-    image: "/images/acp.webp"
+    image: "/rajacuttinglaser/images/acp.webp" // Fixed GitHub Pages path
   },
   {
     id: 2,
@@ -280,7 +300,7 @@ export const BLOG_POSTS = [
     category: "Technical",
     readTime: "7 menit",
     publishDate: "2024-01-10",
-    image: "/images/laserfiber.webp"
+    image: "/rajacuttinglaser/images/laserfiber.webp" // Fixed GitHub Pages path
   },
   {
     id: 3,
@@ -290,7 +310,7 @@ export const BLOG_POSTS = [
     category: "Industry",
     readTime: "6 menit",
     publishDate: "2024-01-05",
-    image: "/images/cncrouter.webp"
+    image: "/rajacuttinglaser/images/cncrouter.webp" // Fixed GitHub Pages path
   },
   {
     id: 4,
@@ -300,7 +320,7 @@ export const BLOG_POSTS = [
     category: "Tips",
     readTime: "8 menit",
     publishDate: "2024-01-20",
-    image: "/images/co2.webp"
+    image: "/rajacuttinglaser/images/co2.webp" // Fixed GitHub Pages path
   },
   {
     id: 5,
@@ -310,7 +330,7 @@ export const BLOG_POSTS = [
     category: "Tutorial",
     readTime: "10 menit",
     publishDate: "2024-01-18",
-    image: "/images/engraving.webp"
+    image: "/rajacuttinglaser/images/engraving.webp" // Fixed GitHub Pages path
   },
   {
     id: 6,
@@ -320,7 +340,7 @@ export const BLOG_POSTS = [
     category: "Analysis",
     readTime: "9 menit",
     publishDate: "2024-01-08",
-    image: "/images/Metal.webp"
+    image: "/rajacuttinglaser/images/Metal.webp" // Fixed GitHub Pages path
   },
   {
     id: 7,
@@ -330,7 +350,7 @@ export const BLOG_POSTS = [
     category: "Technical",
     readTime: "12 menit",
     publishDate: "2024-01-14",
-    image: "/images/galvo.webp"
+    image: "/rajacuttinglaser/images/galvo.webp" // Fixed GitHub Pages path
   },
   {
     id: 8,
@@ -340,9 +360,36 @@ export const BLOG_POSTS = [
     category: "Case Study",
     readTime: "11 menit",
     publishDate: "2024-01-12",
-    image: "/images/Ply Wood.webp"
+    image: "/rajacuttinglaser/images/Ply Wood.webp" // Fixed GitHub Pages path
   }
 ];
+
+// Helper function to get proper image paths based on environment
+export const getImagePath = (imagePath) => {
+  // Remove leading slash if present
+  const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+  
+  // For GitHub Pages deployment
+  if (import.meta.env.PROD) {
+    return `/rajacuttinglaser/${cleanPath}`;
+  }
+  
+  // For local development
+  return `/${cleanPath}`;
+};
+
+// Helper function to get proper page URLs
+export const getPageUrl = (path) => {
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // For GitHub Pages deployment
+  if (import.meta.env.PROD) {
+    return `/rajacuttinglaser${cleanPath}`;
+  }
+  
+  // For local development
+  return cleanPath;
+};
 
 export const WHATSAPP_MESSAGES = {
   default: "Halo, saya tertarik dengan jasa laser cutting. Bisa konsultasi gratis?",

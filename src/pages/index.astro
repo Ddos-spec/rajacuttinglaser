@@ -25,7 +25,25 @@ const metaTags = generateMetaTags({
 const faqSchema = generateFAQSchema(FAQ);
 const reviewSchema = generateReviewSchema(TESTIMONIALS);
 
-const base = import.meta.env.BASE_URL;
+// Function to create proper URL with base path
+function createUrl(path) {
+  if (!path || path === null || path === undefined) {
+    return SITE_CONFIG.url || '/';
+  }
+  
+  const pathStr = String(path);
+  const cleanPath = pathStr.startsWith('/') ? pathStr.slice(1) : pathStr;
+  
+  if (cleanPath === '' || cleanPath === '/') {
+    return SITE_CONFIG.url || '/';
+  }
+  
+  if (cleanPath.startsWith('#')) {
+    return `${SITE_CONFIG.url || ''}${cleanPath}`;
+  }
+  
+  return `${SITE_CONFIG.url || ''}${cleanPath}`;
+}
 ---
 
 <BaseLayout
@@ -54,7 +72,7 @@ const base = import.meta.env.BASE_URL;
           <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
             <div class="relative overflow-hidden rounded-t-xl">
               <img
-                src={`${base}${service.image.slice(1)}`}
+                src={service.image}
                 alt={service.name}
                 class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                 loading="lazy"
@@ -97,7 +115,7 @@ const base = import.meta.env.BASE_URL;
                   <span>Konsultasi Gratis via WA</span>
                 </a>
 
-                <a href={`${base}${service.slug}/`} class="btn-secondary text-sm px-4 py-2 w-full text-center">
+                <a href={createUrl(service.slug)} class="btn-secondary text-sm px-4 py-2 w-full text-center">
                   Detail Layanan
                 </a>
               </div>
@@ -118,12 +136,12 @@ const base = import.meta.env.BASE_URL;
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {MATERIALS.map((material) => (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {MATERIALS.slice(0, 6).map((material) => (
           <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
             <div class="relative">
               <img
-                src={`${base}${material.image.slice(1)}`}
+                src={material.image}
                 alt={material.name}
                 class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
@@ -150,13 +168,24 @@ const base = import.meta.env.BASE_URL;
                 </div>
               </div>
 
-              <a href={`${base}${material.slug}/`} class="btn-secondary text-sm px-4 py-2 w-full text-center">
+              <a href={createUrl(material.slug)} class="btn-secondary text-sm px-4 py-2 w-full text-center">
                 Lihat Detail
               </a>
             </div>
           </div>
         ))}
       </div>
+
+      {MATERIALS.length > 6 && (
+        <div class="text-center mt-12">
+          <a
+            href={createUrl("material")}
+            class="btn-primary text-lg px-8 py-3"
+          >
+            Lihat Semua Material
+          </a>
+        </div>
+      )}
     </div>
   </section>
 
@@ -174,7 +203,7 @@ const base = import.meta.env.BASE_URL;
         {PORTFOLIO.map((project) => (
           <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <img
-              src={`${base}${project.image.slice(1)}`}
+              src={project.image}
               alt={project.title}
               class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               loading="lazy"
@@ -202,7 +231,7 @@ const base = import.meta.env.BASE_URL;
 
       <div class="text-center mt-12">
         <a
-          href={`${base}portfolio`}
+          href={createUrl("portfolio")}
           class="btn-primary text-lg px-8 py-3"
         >
           Lihat Semua Portfolio
@@ -244,7 +273,7 @@ const base = import.meta.env.BASE_URL;
 
             <div class="flex items-center">
               <img
-                src={`${base}${testimonial.image.slice(1)}`}
+                src={testimonial.image}
                 alt={testimonial.name}
                 class="w-12 h-12 rounded-full object-cover mr-4"
                 loading="lazy"
@@ -402,4 +431,4 @@ const base = import.meta.env.BASE_URL;
     transition-property: transform, opacity, background-color, border-color, color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
-</style>
+</style>  

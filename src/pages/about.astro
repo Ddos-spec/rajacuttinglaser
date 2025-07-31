@@ -1,28 +1,70 @@
 ---
-// about.astro - Halaman tentang kami (FIXED)
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CTA from '../components/CTA.astro';
-import { SITE_CONFIG, TESTIMONIALS } from '../utils/constants.js';
-import { generateMetaTags, generateBreadcrumbSchema } from '../utils/seo.js';
+import { SITE_CONFIG } from '../utils/constants.js';
 
 // SEO Meta Tags
-const metaTags = generateMetaTags({
-  title: "Tentang Kami - Tepat Laser | 10+ Tahun Pengalaman Laser Cutting",
-  description: "Mengenal Tepat Laser, perusahaan laser cutting terpercaya di Jawa Barat dengan 10+ tahun pengalaman, 1000+ proyek selesai, dan komitmen pada kualitas premium.",
-  keywords: "tentang Tepat Laser, sejarah perusahaan, pengalaman laser cutting, tim ahli, visi misi, sertifikat iso",
-  url: "/about",
-  type: "website"
-});
+const metaTags = {
+  title: "Tentang Kami - LaserCut Pro | 10+ Tahun Pengalaman Laser Cutting",
+  description: "Mengenal LaserCut Pro, perusahaan laser cutting terpercaya di Jabodetabek dengan 10+ tahun pengalaman, 1000+ proyek selesai, dan komitmen pada kualitas premium.",
+  keywords: "tentang LaserCut Pro, sejarah perusahaan, pengalaman laser cutting, tim ahli, visi misi, sertifikat iso",
+  canonical: new URL('/about/', Astro.site).href
+};
 
 // Structured Data
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: 'Beranda', url: '/' },
-  { name: 'Tentang Kami', url: '/about' }
-]);
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Beranda",
+      "item": new URL('/', Astro.site).href
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tentang Kami",
+      "item": new URL('/about/', Astro.site).href
+    }
+  ]
+};
 
-const base = import.meta.env.BASE_URL;
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "LaserCut Pro",
+  "description": "Perusahaan laser cutting terpercaya di Jabodetabek dengan pengalaman 10+ tahun",
+  "url": new URL('/', Astro.site).href,
+  "logo": new URL('/images/logo.webp', Astro.site).href,
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": SITE_CONFIG.phone,
+    "contactType": "customer service",
+    "areaServed": "ID",
+    "availableLanguage": "Indonesian"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": SITE_CONFIG.address,
+    "addressCountry": "ID"
+  },
+  "sameAs": [
+    SITE_CONFIG.socialMedia.instagram,
+    SITE_CONFIG.socialMedia.facebook
+  ],
+  "foundingDate": "2013",
+  "numberOfEmployees": "15-50",
+  "slogan": "Presisi Tinggi, Hasil Sempurna"
+};
+
+// Helper function untuk image path
+const getImagePath = (imagePath) => {
+  return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+};
 ---
 
 <BaseLayout 
@@ -30,14 +72,14 @@ const base = import.meta.env.BASE_URL;
   description={metaTags.description}
   keywords={metaTags.keywords}
   url={metaTags.canonical}
-  jsonLd={[breadcrumbSchema]}
+  jsonLd={[breadcrumbSchema, organizationSchema]}
 >
   <Header slot="header" />
   
   <section class="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20 mt-16">
     <div class="absolute inset-0 bg-black/20"></div>
-    <div class="relative z-10 container-custom text-center">
-      <h1 class="heading-xl text-white mb-6">Tentang Tepat Laser</h1>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6">Tentang LaserCut Pro</h1>
       <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
         Lebih dari 10 tahun menghadirkan solusi laser cutting terdepan dengan komitmen pada kualitas dan inovasi
       </p>
@@ -45,11 +87,11 @@ const base = import.meta.env.BASE_URL;
   </section>
   
   <section class="bg-gray-50 py-4">
-    <div class="container-custom">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <nav class="flex" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <a href=`${base}` class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+            <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
               </svg>
@@ -69,13 +111,13 @@ const base = import.meta.env.BASE_URL;
     </div>
   </section>
   
-  <section class="section-padding bg-white">
-    <div class="container-custom">
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 class="heading-lg text-gray-900 mb-6">Siapa Kami</h2>
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Siapa Kami</h2>
           <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-            Tepat Laser adalah perusahaan terdepan dalam industri laser cutting di Jawa Barat yang telah 
+            LaserCut Pro adalah perusahaan terdepan dalam industri laser cutting di Jabodetabek yang telah 
             berpengalaman lebih dari 10 tahun. Kami mengkhususkan diri dalam memberikan solusi cutting 
             dan engraving presisi tinggi untuk berbagai kebutuhan industri dan kreatif.
           </p>
@@ -88,112 +130,188 @@ const base = import.meta.env.BASE_URL;
           </p>
           
           <div class="grid grid-cols-2 gap-6">
-            <div class="text-center p-4 bg-blue-50 rounded-lg">
+            <div class="text-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
               <div class="text-3xl font-bold text-blue-600 mb-2">10+</div>
-              <div class="text-sm text-gray-700">Tahun Pengalaman</div>
+              <div class="text-sm text-gray-700 font-medium">Tahun Pengalaman</div>
             </div>
-            <div class="text-center p-4 bg-green-50 rounded-lg">
+            <div class="text-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
               <div class="text-3xl font-bold text-green-600 mb-2">1000+</div>
-              <div class="text-sm text-gray-700">Proyek Selesai</div>
+              <div class="text-sm text-gray-700 font-medium">Proyek Selesai</div>
             </div>
-            <div class="text-center p-4 bg-purple-50 rounded-lg">
+            <div class="text-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
               <div class="text-3xl font-bold text-purple-600 mb-2">500+</div>
-              <div class="text-sm text-gray-700">Client Puas</div>
+              <div class="text-sm text-gray-700 font-medium">Client Puas</div>
             </div>
-            <div class="text-center p-4 bg-orange-50 rounded-lg">
+            <div class="text-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
               <div class="text-3xl font-bold text-orange-600 mb-2">100%</div>
-              <div class="text-sm text-gray-700">Garansi Kualitas</div>
+              <div class="text-sm text-gray-700 font-medium">Garansi Kualitas</div>
             </div>
           </div>
         </div>
         
         <div class="relative">
           <img 
-            src={`${base}images/team.webp`}
-            alt="Tim Tepat Laser di workshop"
-            class="w-full h-auto rounded-xl shadow-2xl"
+            src="/images/co2.webp"
+            alt="Workshop LaserCut Pro dengan mesin laser cutting modern"
+            class="w-full h-auto rounded-xl shadow-2xl hover:shadow-3xl transition-shadow duration-300"
             loading="lazy"
             width="600"
             height="400"
+            onerror="this.onerror=null; this.src='/images/laserfiber.webp';"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
+          <div class="absolute bottom-4 left-4 text-white">
+            <p class="text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+              Workshop Modern LaserCut Pro
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
   
-  <section class="section-padding bg-gray-50">
-    <div class="container-custom">
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="heading-lg text-gray-900 mb-6">Tim Ahli Kami</h2>
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Visi & Misi Kami</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Komitmen kami untuk menjadi yang terdepan dalam industri laser cutting Indonesia
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900">Visi</h3>
+          </div>
+          <p class="text-gray-700 leading-relaxed">
+            Menjadi perusahaan laser cutting terdepan di Indonesia yang dikenal karena 
+            kualitas premium, inovasi teknologi, dan pelayanan terbaik untuk semua klien.
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900">Misi</h3>
+          </div>
+          <ul class="text-gray-700 space-y-2">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              Memberikan solusi laser cutting berkualitas tinggi
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              Menggunakan teknologi terdepan dan ramah lingkungan
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              Membangun hubungan jangka panjang dengan klien
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              Berkontribusi pada kemajuan industri Indonesia
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Tim Ahli Kami</h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           Tim profesional berpengalaman yang siap memberikan solusi terbaik untuk setiap kebutuhan laser cutting Anda.
         </p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
           <img 
-            src={`${base}images/team-director.webp`}
-            alt="Direktur Tepat Laser"
-            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+            src="/images/budisantoso.webp"
+            alt="Direktur LaserCut Pro"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-blue-100"
             loading="lazy"
             width="96"
             height="96"
+            onerror="this.onerror=null; this.src='/images/co2.webp';"
           />
           <h3 class="text-lg font-bold text-gray-900 mb-2">Budi Santoso</h3>
           <p class="text-blue-600 font-medium mb-3">Direktur & Founder</p>
           <p class="text-sm text-gray-600 leading-relaxed">
             15+ tahun pengalaman di industri manufaktur dan teknologi laser cutting. 
-            Visionaris di balik inovasi dan pertumbuhan Tepat Laser.
+            Visionaris di balik inovasi dan pertumbuhan LaserCut Pro.
           </p>
         </div>
         
-        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
           <img 
-            src={`${base}images/team-technical.webp`}
-            alt="Technical Manager Tepat Laser"
-            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+            src="/images/Ahmad Rizki.webp"
+            alt="Technical Manager LaserCut Pro"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-green-100"
             loading="lazy"
             width="96"
             height="96"
+            onerror="this.onerror=null; this.src='/images/laserfiber.webp';"
           />
           <h3 class="text-lg font-bold text-gray-900 mb-2">Ahmad Rizki</h3>
-          <p class="text-blue-600 font-medium mb-3">Technical Manager</p>
+          <p class="text-green-600 font-medium mb-3">Technical Manager</p>
           <p class="text-sm text-gray-600 leading-relaxed">
             Ahli teknis dengan sertifikasi internasional dalam operasi dan maintenance 
             mesin laser cutting berbagai jenis.
           </p>
         </div>
         
-        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
           <img 
-            src={`${base}images/team-design.webp`}
-            alt="Design Specialist Tepat Laser"
-            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+            src="/images/Sari Dewi.webp"
+            alt="Design Specialist LaserCut Pro"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-purple-100"
             loading="lazy"
             width="96"
             height="96"
+            onerror="this.onerror=null; this.src='/images/galvo.webp';"
           />
           <h3 class="text-lg font-bold text-gray-900 mb-2">Sari Dewi</h3>
-          <p class="text-blue-600 font-medium mb-3">Design Specialist</p>
+          <p class="text-purple-600 font-medium mb-3">Design Specialist</p>
           <p class="text-sm text-gray-600 leading-relaxed">
             Spesialis design dan CAD dengan keahlian dalam optimasi file untuk 
             berbagai jenis material dan aplikasi cutting.
           </p>
         </div>
         
-        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
           <img 
-            src={`${base}images/team-quality.webp`}
-            alt="Quality Control Tepat Laser"
-            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+            src="/images/cncrouter.webp"
+            alt="Quality Control LaserCut Pro"
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-orange-100"
             loading="lazy"
             width="96"
             height="96"
+            onerror="this.onerror=null; this.src='/images/Metal.webp';"
           />
           <h3 class="text-lg font-bold text-gray-900 mb-2">Dedi Kurniawan</h3>
-          <p class="text-blue-600 font-medium mb-3">Quality Control</p>
+          <p class="text-orange-600 font-medium mb-3">Quality Control</p>
           <p class="text-sm text-gray-600 leading-relaxed">
             Bertanggung jawab memastikan setiap hasil cutting memenuhi standar 
             kualitas tinggi sebelum diserahkan kepada klien.
@@ -203,16 +321,277 @@ const base = import.meta.env.BASE_URL;
     </div>
   </section>
 
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Mengapa Memilih LaserCut Pro?</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Keunggulan yang membedakan kami dari kompetitor lain di industri laser cutting
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Presisi Tinggi</h3>
+          <p class="text-gray-600">
+            Teknologi laser cutting dengan toleransi hingga 0.1mm untuk hasil yang sempurna
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Pengerjaan Cepat</h3>
+          <p class="text-gray-600">
+            Proses produksi efisien dengan waktu pengerjaan yang tepat sesuai jadwal
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Harga Kompetitif</h3>
+          <p class="text-gray-600">
+            Harga terbaik di kelasnya tanpa mengurangi kualitas hasil pekerjaan
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Layanan 24/7</h3>
+          <p class="text-gray-600">
+            Konsultasi dan support teknis tersedia kapan saja sesuai kebutuhan Anda
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Garansi Kualitas</h3>
+          <p class="text-gray-600">
+            Jaminan kepuasan 100% dengan garansi kualitas untuk setiap project
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM9 7a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Tim Profesional</h3>
+          <p class="text-gray-600">
+            Didukung oleh tim ahli berpengalaman dan bersertifikat internasional
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <CTA 
     title="Siap Berkolaborasi dengan Kami?"
-    description="Mari wujudkan project laser cutting Anda bersama tim ahli Tepat Laser. Konsultasi gratis dan quote terbaik menanti Anda."
+    description="Mari wujudkan project laser cutting Anda bersama tim ahli LaserCut Pro. Konsultasi gratis dan quote terbaik menanti Anda."
     primaryText="Konsultasi Gratis"
     primaryLink={`https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=Halo,%20saya%20tertarik%20untuk%20berkolaborasi%20dengan%20LaserCut%20Pro.%20Bisa%20konsultasi?`}
     secondaryText="Lihat Portfolio"
-    secondaryLink="/portfolio"
+    secondaryLink="/portfolio/"
     variant="gradient"
     size="lg"
   />
   
   <Footer slot="footer" />
 </BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll untuk internal links
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Animate statistics counters
+    const counters = document.querySelectorAll('.text-3xl.font-bold');
+    const animateCounter = (counter) => {
+      const target = parseInt(counter.textContent.replace(/\D/g, ''));
+      const increment = target / 50;
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          counter.textContent = counter.textContent.replace(/\d+/, target);
+          clearInterval(timer);
+        } else {
+          counter.textContent = counter.textContent.replace(/\d+/, Math.floor(current));
+        }
+      }, 30);
+    };
+
+    // Intersection Observer for counter animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target.querySelector('.text-3xl.font-bold');
+          if (counter && !counter.hasAttribute('data-animated')) {
+            counter.setAttribute('data-animated', 'true');
+            animateCounter(counter);
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+
+    // Observe statistic cards
+    document.querySelectorAll('.bg-blue-50, .bg-green-50, .bg-purple-50, .bg-orange-50').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Fade in animation for team cards
+    const teamCards = document.querySelectorAll('.grid .bg-white.rounded-xl');
+    teamCards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      
+      setTimeout(() => {
+        card.style.transition = 'all 0.6s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, index * 150);
+    });
+
+    // Parallax effect for hero section
+    const hero = document.querySelector('.relative.bg-gradient-to-r');
+    if (hero) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = hero.querySelector('.relative.z-10');
+        if (parallax) {
+          parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Custom animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Smooth hover transitions */
+  .hover\:shadow-3xl:hover {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Loading state for images */
+  img {
+    transition: opacity 0.3s ease;
+  }
+
+  img[loading="lazy"] {
+    opacity: 0;
+  }
+
+  img[loading="lazy"].loaded {
+    opacity: 1;
+  }
+
+  /* Custom gradient background */
+  .bg-gradient-to-r {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 50%, #1e3a8a 100%);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .grid.grid-cols-2 {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .text-4xl.lg\:text-5xl {
+      font-size: 2.5rem;
+    }
+    
+    .text-xl.md\:text-2xl {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* Enhanced card hover effects */
+  .bg-white.rounded-xl {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bg-white.rounded-xl:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Statistics animation */
+  .text-3xl.font-bold {
+    transition: all 0.3s ease;
+  }
+
+  /* Breadcrumb hover effect */
+  nav a:hover {
+    color: #2563eb;
+    transition: color 0.2s ease;
+  }
+</style>
