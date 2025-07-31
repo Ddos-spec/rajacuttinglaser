@@ -1,5 +1,4 @@
 ---
-// blog/index.astro (FIXED)
 import BaseLayout from '../../components/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -8,15 +7,16 @@ import { BLOG_POSTS } from '../../utils/constants.js';
 // Sort blog posts by date (newest first)
 const sortedPosts = BLOG_POSTS.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
 
-// Get base URL from Astro's environment variables. This is the correct way.
-const base = import.meta.env.BASE_URL;
+// Safely construct the base URL
+const baseUrl = Astro.site ? Astro.site.toString() : 'https://ddos-spec.github.io/rajacuttinglaser/'; // Sesuaikan dengan URL produksi Anda
+const blogUrl = `${baseUrl}blog/`;
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
   "name": "Blog LaserCut Pro",
   "description": "Tips, tutorial, dan insight terbaru seputar laser cutting, CNC router, dan teknologi manufaktur",
-  "url": new URL('blog/', Astro.site).href,
+  "url": blogUrl,
   "publisher": {
     "@type": "Organization",
     "name": "LaserCut Pro"
@@ -32,6 +32,7 @@ const jsonLd = {
 >
   <Header slot="header" />
   
+  <!-- Hero Section -->
   <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-4xl lg:text-5xl font-bold mb-6">
@@ -43,21 +44,18 @@ const jsonLd = {
     </div>
   </section>
 
+  <!-- Blog Posts Grid -->
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sortedPosts.map((post) => (
           <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <a href=`${base}blog/${post.slug}/`>
-              <img 
-                src={`${base}${post.image.startsWith('/') ? post.image.slice(1) : post.image}`}
-                alt={post.title}
-                class="w-full h-48 object-cover"
-                loading="lazy"
-                width="400"
-                height="225"
-              />
-            </a>
+            <img 
+              src={post.image} 
+              alt={post.title}
+              class="w-full h-48 object-cover"
+              loading="lazy"
+            />
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">
                 <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">
@@ -66,7 +64,7 @@ const jsonLd = {
                 <span class="text-sm text-gray-500">{post.readTime}</span>
               </div>
               <h2 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                <a href={`${base}blog/${post.slug}/`} class="hover:text-blue-600 transition-colors">
+                <a href={`blog/${post.slug}/`} class="hover:text-blue-600 transition-colors">
                   {post.title}
                 </a>
               </h2>
@@ -75,14 +73,14 @@ const jsonLd = {
               </p>
               <div class="flex items-center justify-between">
                 <span class="text-sm text-gray-500">
-                  {new Date(post.publishDate).toLocaleDateString('id-ID', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </span>
+  {new Date(post.publishDate).toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric' // Pastikan string ditutup dengan '
+  })}
+</span>
                 <a 
-                  href={`${base}blog/${post.slug}/`}
+                  href={`blog/${post.slug}/`}
                   class="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors"
                 >
                   Baca Selengkapnya →
@@ -95,6 +93,7 @@ const jsonLd = {
     </div>
   </section>
 
+  <!-- CTA Section -->
   <section class="py-16 bg-gray-50">
     <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-4">
@@ -116,7 +115,7 @@ const jsonLd = {
           Konsultasi via WhatsApp
         </a>
         <a 
-          href={`${base}contact/`} 
+          href="contact/" 
           class="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
         >
           Request Quote
