@@ -9,16 +9,17 @@ import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema, gene
 const material = MATERIALS.find(m => m.id === 'grc');
 if (!material) throw new Error('Material GRC not found');
 
-// Find recommended service for GRC - Laser CO2 is typically used for GRC
-const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
+// Find recommended service for GRC - CNC Router is typically used for GRC
+const recommendedService = SERVICES.find(s => s.id === 'cnc-router');
+if (!recommendedService) throw new Error('Recommended service not found');
 
 // Generate meta tags
 const metaTags = generateMetaTags({
   title: `${material.name} - Material Laser Cutting | ${SITE_CONFIG.name}`,
   description: `Jasa laser cutting untuk material ${material.name}. ${material.description}`,
   keywords: material.keywords,
-  url: new URL('/material-grc/', SITE_CONFIG.url).href,
-  image: new URL(material.image, SITE_CONFIG.url).href,
+  url: `/material-grc/`,
+  image: material.image,
   type: 'website'
 });
 
@@ -30,13 +31,11 @@ const jsonLd = [
     image: material.image,
     type: 'website'
   }),
-  ...(recommendedService ? [
-    generateServiceSchema({
-      name: recommendedService.name,
-      description: recommendedService.description,
-      image: recommendedService.image
-    })
-  ] : []),
+  generateServiceSchema({
+    name: recommendedService.name,
+    description: recommendedService.description,
+    image: recommendedService.image
+  }),
   generateBreadcrumbSchema([
     { name: 'Beranda', url: '/' },
     { name: 'Material', url: '/#materials' },
@@ -44,34 +43,21 @@ const jsonLd = [
   ])
 ];
 
-const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
-if (!recommendedService) throw new Error('Recommended service not found');
-
-// Generate JSON-LD
-const jsonLd = generateJsonLd({
-  title: `${material.name} - Material Laser Cutting Premium`,
-  description: material.description,
-  url: `${SITE_CONFIG.url}material-grc/`,
-  type: 'Product'
-});
-
+// Add default features for GRC material if not present
+const materialFeatures = [
+  "Tahan cuaca dan korosi",
+  "Ringan namun kuat",
+  "Fleksibilitas desain tinggi",
+  "Permukaan halus dan detail",
+  "Tahan api dan ramah lingkungan"
+];
 ---
-
-<BaseLayoutBaseLayout from '../components/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { MATERIALS, SERVICES } from '../utils/constants.js';
-
-const material = MATERIALS.find(m => m.id === 'grc');
-const recommendedService = SERVICES.find(s => s.id === 'cnc-router');
-
 
 <BaseLayout 
   title={metaTags.title}
   description={metaTags.description}
   keywords={metaTags.keywords}
   url={metaTags.url}
-  image={metaTags.image}
   jsonLd={jsonLd}
 >
   <Header />
@@ -90,7 +76,7 @@ const recommendedService = SERVICES.find(s => s.id === 'cnc-router');
               <div>
                 <h2 class="text-2xl font-semibold text-stone-800 mb-4">Keunggulan Material</h2>
                 <ul class="list-disc list-inside space-y-2">
-                  {material.features.map((feature) => (
+                  {materialFeatures.map((feature) => (
                     <li class="text-stone-600">{feature}</li>
                   ))}
                 </ul>
@@ -103,6 +89,15 @@ const recommendedService = SERVICES.find(s => s.id === 'cnc-router');
                     <li class="text-stone-600">{app}</li>
                   ))}
                 </ul>
+              </div>
+
+              <div>
+                <h2 class="text-2xl font-semibold text-stone-800 mb-4">Spesifikasi</h2>
+                <div class="bg-stone-50 p-4 rounded-lg">
+                  <p class="text-stone-700"><strong>Ketebalan:</strong> {material.thickness}</p>
+                  <p class="text-stone-700 mt-2"><strong>Material:</strong> Glassfibre Reinforced Concrete</p>
+                  <p class="text-stone-700 mt-2"><strong>Metode Cutting:</strong> CNC Router untuk hasil optimal</p>
+                </div>
               </div>
             </div>
           </div>
@@ -117,44 +112,99 @@ const recommendedService = SERVICES.find(s => s.id === 'cnc-router');
               height={400}
             />
 
-            {recommendedService && (
-              <div class="bg-white border border-stone-200 rounded-lg p-6 shadow-sm">
-                <h2 class="text-2xl font-semibold text-stone-800 mb-4">Layanan yang Direkomendasikan</h2>
-                
-                <h3 class="text-xl font-semibold text-stone-700 mb-2">{recommendedService.name}</h3>
-                <p class="text-stone-600 mb-4">{recommendedService.description}</p>
-                
-                <div class="mb-6">
-                  <h4 class="font-semibold text-stone-700 mb-2">Fitur Utama:</h4>
-                  <ul class="list-disc list-inside space-y-2">
-                    {recommendedService.features.map((feature) => (
-                      <li class="text-stone-600">{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div class="space-y-4">
-                  <a
-                    href={`https://wa.me/${SITE_CONFIG.whatsapp}?text=Halo, saya tertarik dengan layanan ${recommendedService.name} untuk material ${material.name}`}
-                    class="block text-center bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition duration-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Dapatkan Penawaran
-                  </a>
-
-                  <img
-                    src={recommendedService.image}
-                    alt={recommendedService.name}
-                    class="w-full rounded-lg mt-6"
-                    width={400}
-                    height={300}
-                  />
-                </div>
+            <div class="bg-white border border-stone-200 rounded-lg p-6 shadow-sm">
+              <h2 class="text-2xl font-semibold text-stone-800 mb-4">Layanan yang Direkomendasikan</h2>
+              
+              <h3 class="text-xl font-semibold text-stone-700 mb-2">{recommendedService.name}</h3>
+              <p class="text-stone-600 mb-4">{recommendedService.description}</p>
+              
+              <div class="mb-6">
+                <h4 class="font-semibold text-stone-700 mb-2">Fitur Utama:</h4>
+                <ul class="list-disc list-inside space-y-2">
+                  {recommendedService.features.map((feature) => (
+                    <li class="text-stone-600">{feature}</li>
+                  ))}
+                </ul>
               </div>
-            )}
+
+              <div class="space-y-4">
+                <a
+                  href={`https://wa.me/${SITE_CONFIG.whatsapp}?text=Halo, saya tertarik dengan layanan ${recommendedService.name} untuk material ${material.name}`}
+                  class="block text-center bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition duration-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Dapatkan Penawaran
+                </a>
+
+                <img
+                  src={recommendedService.image}
+                  alt={recommendedService.name}
+                  class="w-full rounded-lg mt-6"
+                  width={400}
+                  height={300}
+                />
+              </div>
+            </div>
           </div>
           
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Information Section -->
+    <section class="py-16 bg-stone-50">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-stone-800 mb-8 text-center">
+            Mengapa Memilih GRC untuk Proyek Anda?
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <h3 class="text-xl font-semibold text-stone-800 mb-4">Keunggulan GRC</h3>
+              <ul class="space-y-3 text-stone-600">
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span>Kekuatan tinggi dengan berat yang ringan</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span>Tahan terhadap cuaca ekstrem dan korosi</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span>Dapat dibentuk sesuai desain yang kompleks</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-orange-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span>Ramah lingkungan dan berkelanjutan</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <h3 class="text-xl font-semibold text-stone-800 mb-4">Proses Cutting GRC</h3>
+              <ul class="space-y-3 text-stone-600">
+                <li class="flex items-start">
+                  <span class="w-6 h-6 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                  <span>Konsultasi desain dan spesifikasi material</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-6 h-6 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                  <span>Persiapan file cutting dengan CNC Router</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-6 h-6 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                  <span>Proses cutting dengan presisi tinggi</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-6 h-6 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold flex items-center justify-center mr-3 flex-shrink-0">4</span>
+                  <span>Quality control dan finishing</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -162,4 +212,3 @@ const recommendedService = SERVICES.find(s => s.id === 'cnc-router');
 
   <Footer />
 </BaseLayout>
-

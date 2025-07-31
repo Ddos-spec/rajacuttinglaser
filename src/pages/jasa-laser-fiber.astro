@@ -11,31 +11,25 @@ import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } fro
 // Find Laser Fiber service
 const service = SERVICES.find(s => s.slug === 'jasa-laser-fiber');
 
-// --- PERBAIKAN: Tambahkan pengecekan jika service tidak ditemukan ---
+// Tambahkan pengecekan jika service tidak ditemukan
 if (!service) {
-  // Melempar error akan menyebabkan halaman tidak dirender dan Astro menampilkan error 404 atau error page default
-  // Anda juga bisa melakukan redirect ke halaman 404 jika diinginkan.
   throw new Error(`Service with slug 'jasa-laser-fiber' not found.`);
 }
-// -------------------------------------------------------------------
 
-// SEO Meta Tags - PERBAIKAN: Menambahkan publishedTime, modifiedTime, dan author
-// --- PERBAIKAN: Tidak menambahkan tipe di file ini, hanya menambahkan data yang diperlukan untuk generateMetaTags ---
+// SEO Meta Tags
 const metaTags = generateMetaTags({
   title: `${service.name} - Presisi Tinggi untuk Material Metal`,
   description: `${service.description}. Teknologi laser fiber tercepat & akurat untuk cutting stainless steel, carbon steel, aluminium hingga ketebalan 20mm. Quote gratis 24 jam.`,
   keywords: service.keywords,
-  url: `/rajacuttinglaser/${service.slug}/`, // Disesuaikan dengan struktur URL
+  url: `/rajacuttinglaser/${service.slug}/`,
   type: "service",
   image: service.image,
-  // --- TAMBAHAN UNTUK MENGATASI ERROR ---
-  publishedTime: "2024-01-01T00:00:00Z", // Tanggal publikasi statis
-  modifiedTime: "2024-01-01T00:00:00Z", // Tanggal modifikasi statis
-  author: SITE_CONFIG.author // Mengambil author dari konfigurasi
-  // --------------------------------------
+  publishedTime: "2024-01-01T00:00:00Z",
+  modifiedTime: "2024-01-01T00:00:00Z",
+  author: SITE_CONFIG.author
 });
 
-// Structured Data - PERBAIKAN: Pastikan serviceSchema hanya dibuat jika service ada
+// Structured Data
 const serviceSchema = service ? generateServiceSchema(service) : null;
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: 'Beranda', url: '' },
@@ -44,13 +38,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 ---
 <BaseLayout
-  // --- PERBAIKAN: Gunakan optional chaining atau pastikan service tidak null (sudah dicek) ---
-  title={metaTags.title}
-  description={metaTags.description}
-  keywords={metaTags.keywords}
-  url={metaTags.canonical} // --- PERBAIKAN: canonical diakses dengan benar ---
-  // --- PERBAIKAN: Pastikan structured data hanya dimasukkan jika ada ---
-  jsonLd={[serviceSchema, breadcrumbSchema].filter(Boolean)} // Filter null/undefined
+  metaTags={metaTags}
+  jsonLd={[serviceSchema, breadcrumbSchema].filter(Boolean)}
 >
   <Header slot="header" />
 
@@ -305,220 +294,4 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   <CTA />
 
   <Footer slot="footer" />
-</BaseLayout>[{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "2304",
-	"severity": 8,
-	"message": "Cannot find name 'generateJsonLd'.",
-	"source": "ts",
-	"startLineNumber": 15,
-	"startColumn": 16,
-	"endLineNumber": 15,
-	"endColumn": 30,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "2304",
-	"severity": 8,
-	"message": "Cannot find name 'SITE_CONFIG'.",
-	"source": "ts",
-	"startLineNumber": 18,
-	"startColumn": 11,
-	"endLineNumber": 18,
-	"endColumn": 22,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "2304",
-	"severity": 8,
-	"message": "Cannot find name 'BaseLayoutBaseLayout'.",
-	"source": "ts",
-	"startLineNumber": 24,
-	"startColumn": 2,
-	"endLineNumber": 24,
-	"endColumn": 22,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "2783",
-	"severity": 8,
-	"message": "'const' is specified more than once, so this usage will be overwritten.",
-	"source": "ts",
-	"startLineNumber": 29,
-	"startColumn": 1,
-	"endLineNumber": 29,
-	"endColumn": 6,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "1002",
-	"severity": 8,
-	"message": "Unterminated string literal.",
-	"source": "ts",
-	"startLineNumber": 29,
-	"startColumn": 54,
-	"endLineNumber": 29,
-	"endColumn": 54,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "1005",
-	"severity": 8,
-	"message": "':' expected.",
-	"source": "ts",
-	"startLineNumber": 30,
-	"startColumn": 1,
-	"endLineNumber": 30,
-	"endColumn": 6,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "2588",
-	"severity": 8,
-	"message": "Cannot assign to 'recommendedService' because it is a constant.",
-	"source": "ts",
-	"startLineNumber": 30,
-	"startColumn": 7,
-	"endLineNumber": 30,
-	"endColumn": 25,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "1005",
-	"severity": 8,
-	"message": "':' expected.",
-	"source": "ts",
-	"startLineNumber": 30,
-	"startColumn": 7,
-	"endLineNumber": 30,
-	"endColumn": 25,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "2304",
-	"severity": 8,
-	"message": "Cannot find name 's'.",
-	"source": "ts",
-	"startLineNumber": 30,
-	"startColumn": 42,
-	"endLineNumber": 30,
-	"endColumn": 43,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "1005",
-	"severity": 8,
-	"message": "'}' expected.",
-	"source": "ts",
-	"startLineNumber": 30,
-	"startColumn": 47,
-	"endLineNumber": 30,
-	"endColumn": 48,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "1003",
-	"severity": 8,
-	"message": "Identifier expected.",
-	"source": "ts",
-	"startLineNumber": 30,
-	"startColumn": 48,
-	"endLineNumber": 30,
-	"endColumn": 49,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "18048",
-	"severity": 8,
-	"message": "'recommendedService' is possibly 'undefined'.",
-	"source": "ts",
-	"startLineNumber": 191,
-	"startColumn": 16,
-	"endLineNumber": 191,
-	"endColumn": 34,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "18048",
-	"severity": 8,
-	"message": "'recommendedService' is possibly 'undefined'.",
-	"source": "ts",
-	"startLineNumber": 194,
-	"startColumn": 16,
-	"endLineNumber": 194,
-	"endColumn": 34,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "18048",
-	"severity": 8,
-	"message": "'recommendedService' is possibly 'undefined'.",
-	"source": "ts",
-	"startLineNumber": 197,
-	"startColumn": 16,
-	"endLineNumber": 197,
-	"endColumn": 34,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "18048",
-	"severity": 8,
-	"message": "'recommendedService' is possibly 'undefined'.",
-	"source": "ts",
-	"startLineNumber": 207,
-	"startColumn": 64,
-	"endLineNumber": 207,
-	"endColumn": 82,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "2339",
-	"severity": 8,
-	"message": "Property 'price' does not exist on type '{ id: string; name: string; slug: string; description: string; features: string[]; applications: string[]; image: string; keywords: string; }'.",
-	"source": "ts",
-	"startLineNumber": 207,
-	"startColumn": 83,
-	"endLineNumber": 207,
-	"endColumn": 88,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "18048",
-	"severity": 8,
-	"message": "'recommendedService' is possibly 'undefined'.",
-	"source": "ts",
-	"startLineNumber": 212,
-	"startColumn": 20,
-	"endLineNumber": 212,
-	"endColumn": 38,
-	"origin": "extHost1"
-},{
-	"resource": "/c:/Users/Administrator/Downloads/rajacuttinglaser/src/pages/material-grc.astro",
-	"owner": "_generated_diagnostic_collection_name_#0",
-	"code": "18048",
-	"severity": 8,
-	"message": "'recommendedService' is possibly 'undefined'.",
-	"source": "ts",
-	"startLineNumber": 213,
-	"startColumn": 20,
-	"endLineNumber": 213,
-	"endColumn": 38,
-	"origin": "extHost1"
-}]
+</BaseLayout>

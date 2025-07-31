@@ -35,7 +35,7 @@ export interface Props {
   keywords?: string;
   image?: string;
   url?: string;
-  type?: string;
+  type?: "article" | "website" | "blog" | "service" | "CollectionPage";
   noindex?: boolean;
   jsonLd?: any[];
   canonical?: string;
@@ -129,16 +129,18 @@ const siteUrl = Astro.site;
   <link rel="dns-prefetch" href="//fonts.gstatic.com" />
   <link rel="dns-prefetch" href="//api.whatsapp.com" />
   
-  {jsonLd && (
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  {jsonLd && jsonLd.length > 0 && (
+    jsonLd.map((json) => (
+      <script type="application/ld+json" set:html={JSON.stringify(json)} />
+    ))
   )}
   
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Tepat Laser",
-    "url": siteUrl.href, // Menggunakan URL dinamis
-    "logo": new URL('logo-company.webp', siteUrl).href, // Menggunakan URL dinamis
+    "url": siteUrl.href,
+    "logo": new URL('logo-company.webp', siteUrl).href,
     "description": "Solusi laser cutting profesional dengan teknologi terdepan di Jawa Barat",
     "telephone": "+62 812-3456-7890",
     "email": "info@lasercut-pro.com",

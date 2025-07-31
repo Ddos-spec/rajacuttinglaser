@@ -11,20 +11,42 @@ if (!material) throw new Error('Material MDF not found');
 const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
 if (!recommendedService) throw new Error('Recommended service not found');
 
-// Generate JSON-LD
-const jsonLd = generateJsonLd({
+// Generate JSON-LD - Fix: return array instead of object
+const jsonLd = [generateJsonLd({
   title: `${material.name} - Material Laser Cutting Premium`,
   description: material.description,
   url: `${SITE_CONFIG.url}material-mdf/`,
-  type: 'Product'
-});
+  type: 'article' // Fix: change from 'Product' to 'article'
+})];
+
+// Create metaTags object for BaseLayout
+const metaTags = {
+  title: `${material.name} - Material Laser Cutting Premium`,
+  description: material.description,
+  keywords: material.keywords,
+  canonical: `${SITE_CONFIG.url}material-mdf/`,
+  url: `${SITE_CONFIG.url}material-mdf/`,
+  type: 'article', // Fix: valid type
+  openGraph: {
+    title: `${material.name} - Material Laser Cutting Premium`,
+    description: material.description,
+    url: `${SITE_CONFIG.url}material-mdf/`,
+    image: material.image,
+    type: 'article',
+    siteName: 'Tepat Laser',
+    locale: 'id_ID'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${material.name} - Material Laser Cutting Premium`,
+    description: material.description,
+    image: material.image
+  }
+};
 ---
 
 <BaseLayout 
-  title={`${material!.name} - Material Laser Cutting Premium`}
-  description={material!.description}
-  keywords={material!.keywords}
-  image={material!.image}
+  metaTags={metaTags}
   jsonLd={jsonLd}
 >
   <Header slot="header" />

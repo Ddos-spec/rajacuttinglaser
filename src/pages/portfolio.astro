@@ -2,137 +2,166 @@
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { PORTFOLIO, SITE_CONFIG } from '../utils/constants.js';
-import { generateJsonLd } from '../utils/seo.ts';
 
-interface HTMLElementWithStyle extends HTMLElement {
-  style: CSSStyleDeclaration;
-}
+// Data portfolio projects
+const portfolioProjects = [
+  {
+    id: 1,
+    title: "Cutting Plat Besi Custom",
+    category: "Laser Fiber",
+    image: "/rajacuttinglaser/portfolio/portfolio-1.webp",
+    description: "Pemotongan plat besi dengan presisi tinggi untuk komponen industri",
+    client: "PT. Industri Manufaktur",
+    material: "Plat Besi 5mm",
+    technique: "Laser Fiber Cutting"
+  },
+  // ... data lainnya
+];
 
-interface ProjectImage extends HTMLImageElement {
-  dataset: {
-    project: string;
-  };
-}
-
-// Type assertions helper
-const asHTMLElementWithStyle = (el: Element): HTMLElementWithStyle => el as HTMLElementWithStyle;
-const asHTMLImageElement = (el: Element): HTMLImageElement => el as HTMLImageElement;
-
-// Sort portfolio items by id (newest first)
-const sortedPortfolio = PORTFOLIO.sort((a, b) => b.id - a.id);
-
-// Generate JSON-LD schema
-const jsonLd = generateJsonLd({
-  title: "Portfolio - Project Laser Cutting & CNC Router Terbaik",
-  description: "Lihat koleksi project laser cutting, CNC router, dan engraving terbaik dari LaserCut Pro. Hasil berkualitas tinggi dengan presisi sempurna",
-  url: `${SITE_CONFIG.url}portfolio/`,
-  type: 'CollectionPage'
-});
-
-
-
-// Fixed helper function to get proper image path with type safety
-const getImagePath = (imagePath: string): string => {
-  // Remove any existing prefix and clean the path
-  let cleanPath = imagePath.replace('/rajacuttinglaser/', '').replace(/^\/+/, '');
-  cleanPath = cleanPath.replace('images/', '');
-  
-  // IMPORTANT: Do not modify these paths as they are required for proper routing
-  // For GitHub Pages (production)
-  if (import.meta.env.PROD) {
-    // Keep /rajacuttinglaser prefix for GitHub Pages
-    return `/rajacuttinglaser/images/${cleanPath}`;
+// Meta tags untuk SEO
+const metaTags = {
+  title: "Portfolio Proyek Laser Cutting | Tepat Laser - Hasil Berkualitas Tinggi",
+  description: "Lihat hasil kerja profesional kami dalam berbagai proyek laser cutting, CNC router, dan engraving. Lebih dari 1000+ proyek berhasil diselesaikan dengan kualitas premium.",
+  keywords: "portfolio laser cutting, hasil kerja laser cutting, proyek cnc router, galeri laser engraving, contoh hasil cutting, showcase laser cutting jawa barat",
+  canonical: "https://rajacuttinglaser.com/portfolio",
+  url: "https://rajacuttinglaser.com/portfolio",
+  type: "CollectionPage",
+  openGraph: {
+    title: "Portfolio Proyek Laser Cutting | Tepat Laser - Hasil Berkualitas Tinggi",
+    description: "Lihat hasil kerja profesional kami dalam berbagai proyek laser cutting, CNC router, dan engraving. Lebih dari 1000+ proyek berhasil diselesaikan dengan kualitas premium.",
+    url: "https://rajacuttinglaser.com/portfolio",
+    image: "/rajacuttinglaser/portfolio/portfolio-hero.webp",
+    type: "website",
+    siteName: "Tepat Laser",
+    locale: "id_ID"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio Proyek Laser Cutting | Tepat Laser",
+    description: "Lihat hasil kerja profesional kami dalam berbagai proyek laser cutting dan CNC router.",
+    image: "/rajacuttinglaser/portfolio/portfolio-hero.webp"
   }
-  
-  // For local development
-  // Keep /images for local development
-  return `/images/${cleanPath}`;
 };
+
+// JSON-LD Schema untuk Portfolio
+const portfolioJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Portfolio Laser Cutting Tepat Laser",
+    "description": "Galeri hasil kerja profesional dalam bidang laser cutting, CNC router, dan engraving di Jawa Barat",
+    "url": "https://rajacuttinglaser.com/portfolio",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": portfolioProjects.length,
+      "itemListElement": portfolioProjects.map((project, index) => ({
+        "@type": "CreativeWork",
+        "position": index + 1,
+        "name": project.title,
+        "description": project.description,
+        "image": `https://rajacuttinglaser.com${project.image}`,
+        "genre": project.category,
+        "material": project.material,
+        "technique": project.technique
+      }))
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tepat Laser",
+      "url": "https://rajacuttinglaser.com"
+    }
+  }
+];
 ---
 
-<BaseLayout 
-  title="Portfolio - Project Laser Cutting & CNC Router Terbaik"
-  description="Lihat koleksi project laser cutting, CNC router, dan engraving terbaik dari LaserCut Pro. Hasil berkualitas tinggi dengan presisi sempurna"
-  keywords="portfolio laser cutting, project cnc router, hasil laser fiber, karya laser co2, galeri manufaktur"
-  jsonLd={jsonLd}
->
+<BaseLayout metaTags={metaTags} jsonLd={portfolioJsonLd}>
   <Header slot="header" />
   
-  <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl lg:text-5xl font-bold mb-6">
-        Portfolio LaserCut Pro
-      </h1>
-      <p class="text-xl text-blue-100 max-w-3xl mx-auto">
-        Koleksi project laser cutting, CNC router, dan engraving terbaik dengan presisi tinggi dan hasil berkualitas premium
-      </p>
+  <!-- Portfolio Hero Section -->
+  <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center text-white">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          Portfolio Hasil Kerja Kami
+        </h1>
+        <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+          Lihat berbagai proyek laser cutting, CNC router, dan engraving yang telah kami selesaikan dengan kualitas tinggi dan presisi sempurna
+        </p>
+      </div>
     </div>
   </section>
 
+  <!-- Portfolio Filter -->
   <section class="py-8 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-wrap justify-center gap-4">
-        <button class="portfolio-filter active px-6 py-2 rounded-full bg-blue-600 text-white font-medium transition-colors" data-filter="all">
-          Semua Project
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-4" id="portfolio-filters">
+        <button class="filter-btn active px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors" data-filter="all">
+          Semua
         </button>
-        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="cnc-router">
-          CNC Router
-        </button>
-        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="laser-fiber">
+        <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-blue-600 hover:text-white transition-colors" data-filter="laser-fiber">
           Laser Fiber
         </button>
-        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="laser-co2">
+        <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-blue-600 hover:text-white transition-colors" data-filter="laser-co2">
           Laser CO2
         </button>
-        <button class="portfolio-filter px-6 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-blue-600 hover:text-white font-medium transition-colors" data-filter="galvo-engraving">
+        <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-blue-600 hover:text-white transition-colors" data-filter="cnc-router">
+          CNC Router
+        </button>
+        <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 hover:bg-blue-600 hover:text-white transition-colors" data-filter="galvo-engraving">
           Galvo Engraving
         </button>
       </div>
     </div>
   </section>
 
+  <!-- Portfolio Grid -->
   <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
-        {sortedPortfolio.map((item) => (
-          <article 
-            class={`portfolio-item bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1`} 
-            data-category={item.service.toLowerCase().replace(/\s+/g, '-')}
-          >
-            <div class="relative group">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+        {portfolioProjects.map((project) => (
+          <article class="portfolio-item bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" data-category={project.category.toLowerCase().replace(' ', '-')}>
+            <div class="relative overflow-hidden">
               <img 
-                src={getImagePath(item.image)} 
-                alt={item.title} 
-                class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" 
+                src={project.image} 
+                alt={project.title}
+                class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300"
                 loading="lazy"
                 width="400"
-                height="225"
-                onerror={`this.onerror=null; this.src='${getImagePath('placeholder.webp')}';`}
+                height="256"
               />
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
-                <button
-                  class="modal-btn opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-blue-600 hover:text-white"
-                  data-id={item.id}
-                  aria-label={`Lihat detail ${item.title}`}
-                >
-                  Lihat Detail
-                </button>
+              <div class="absolute top-4 left-4">
+                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {project.category}
+                </span>
               </div>
             </div>
+            
             <div class="p-6">
-              <div class="flex items-center justify-between mb-3">
-                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">
-                  {item.service}
-                </span>
-                <span class="text-sm text-gray-500">{item.material}</span>
-              </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
-                {item.title}
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                {project.title}
               </h3>
-              <p class="text-gray-600 text-sm line-clamp-2">
-                {item.description}
+              <p class="text-gray-600 mb-4">
+                {project.description}
               </p>
+              
+              <div class="space-y-2 text-sm text-gray-500">
+                <div class="flex justify-between">
+                  <span>Client:</span>
+                  <span class="font-medium">{project.client}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Material:</span>
+                  <span class="font-medium">{project.material}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Teknik:</span>
+                  <span class="font-medium">{project.technique}</span>
+                </div>
+              </div>
+              
+              <button class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors view-detail-btn" data-project-id={project.id}>
+                Lihat Detail
+              </button>
             </div>
           </article>
         ))}
@@ -140,479 +169,103 @@ const getImagePath = (imagePath: string): string => {
     </div>
   </section>
 
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-4">
-        Siap Memulai Project Anda?
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-blue-600 to-indigo-600">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        Siap Mulai Proyek Anda?
       </h2>
-      <p class="text-xl text-gray-600 mb-8">
-        Tim ahli kami siap membantu mewujudkan ide kreatif Anda menjadi kenyataan dengan teknologi laser cutting terdepan
+      <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+        Konsultasikan kebutuhan laser cutting Anda dengan tim ahli kami. Dapatkan penawaran terbaik dan hasil berkualitas tinggi.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
-          href={`https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=Halo,%20saya%20tertarik%20dengan%20jasa%20laser%20cutting.%20Bisa%20konsultasi?`}
+          href="https://api.whatsapp.com/send?phone=6285165693179&text=Halo,%20saya%20tertarik%20dengan%20jasa%20laser%20cutting%20setelah%20melihat%20portfolio%20Anda."
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
+          class="inline-flex items-center justify-center px-8 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors"
         >
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
           </svg>
-          Konsultasi via WhatsApp
+          Konsultasi Gratis
         </a>
         <a 
-          href="/contact/" 
-          class="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+          href="/kontak" 
+          class="inline-flex items-center justify-center px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
         >
-          Request Quote
+          Hubungi Kami
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Modal -->
-  <div 
-    id="portfolio-modal" 
-    class="fixed inset-0 z-50 hidden overflow-y-auto bg-black bg-opacity-75"
-    aria-labelledby="modal-title"
-    role="dialog"
-    aria-modal="true"
-  >
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
-        <div class="absolute top-4 right-4 z-10">
-          <button
-            id="close-modal"
-            class="text-gray-400 hover:text-gray-600 focus:outline-none bg-white rounded-full p-2 shadow-lg"
-            aria-label="Tutup modal"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-        <div id="modal-content"></div>
-      </div>
-    </div>
-  </div>
-
   <Footer slot="footer" />
 </BaseLayout>
 
+<!-- Portfolio Filter & Modal Script -->
 <script>
-  // Define interface and helper functions for client-side code
-  interface HTMLElementWithStyle extends HTMLElement {
-    style: CSSStyleDeclaration;
-  }
+document.addEventListener('DOMContentLoaded', function() {
+  // Portfolio Filter Functionality
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const portfolioItems = document.querySelectorAll('.portfolio-item') as NodeListOf<HTMLElement>;
 
-  const asHTMLElementWithStyle = (el: Element): HTMLElementWithStyle => el as HTMLElementWithStyle;
-  const asHTMLImageElement = (el: Element): HTMLImageElement => el as HTMLImageElement;
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // Helper function to get correct image path - FIXED VERSION
-    function getCorrectImagePath(imagePath: string): string {
-      // Clean up the path - remove any existing prefixes
-      let cleanPath = imagePath;
-      
-      // Remove various possible prefixes
-      cleanPath = cleanPath.replace('/rajacuttinglaser/', '');
-      cleanPath = cleanPath.replace('/images/', '');
-      cleanPath = cleanPath.replace('images/', '');
-      cleanPath = cleanPath.replace(/^\/+/, ''); // Remove leading slashes
-      
-      // Check if we're in production (GitHub Pages)
-      const isProduction = window.location.hostname.includes('github.io');
-      
-      if (isProduction) {
-        return `/rajacuttinglaser/images/${cleanPath}`;
-      } else {
-        return `/images/${cleanPath}`;
-      }
-    }
-
-    // Portfolio filtering functionality
-    const filterButtons = document.querySelectorAll('.portfolio-filter');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    filterButtons.forEach((button: Element) => {
-      button.addEventListener('click', () => {
-        // Reset all buttons
-        filterButtons.forEach((btn: Element) => {
-          btn.classList.remove('active', 'bg-blue-600', 'text-white');
-          btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
-        });
-        
-        // Activate clicked button
-        button.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-300');
-        button.classList.add('active', 'bg-blue-600', 'text-white');
-        
-        const filter = button.getAttribute('data-filter');
-        
-        // Filter portfolio items with animation
-        portfolioItems.forEach((item: Element) => {
-          const portfolioItem = item as HTMLElementWithStyle;
-          if (filter === 'all' || item.getAttribute('data-category') === filter) {
-            portfolioItem.style.display = 'block';
-            setTimeout(() => {
-              portfolioItem.style.opacity = '1';
-              portfolioItem.style.transform = 'translateY(0)';
-            }, 10);
-          } else {
-            portfolioItem.style.opacity = '0';
-            portfolioItem.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-              portfolioItem.style.display = 'none';
-            }, 300);
-          }
-        });
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'bg-blue-600', 'text-white');
+        b.classList.add('bg-white', 'text-gray-700');
       });
-    });
-
-    // Modal functionality
-    const modalEl = document.getElementById('portfolio-modal');
-    const modalContentEl = document.getElementById('modal-content');
-    const modal = modalEl ? asHTMLElementWithStyle(modalEl) : null;
-    const modalContent = modalContentEl ? asHTMLElementWithStyle(modalContentEl) : null;
-    const closeModalBtn = document.getElementById('close-modal') as HTMLElement;
-
-    // Updated Portfolio data for modal with corrected image paths
-    const portfolioData = {
-      1: {
-        title: "Signage Hotel Bintang 5 Jakarta",
-        category: "Commercial", 
-        material: "ACP Aluminium",
-        service: "CNC Router",
-        image: "singagehote.webp", // Just the filename
-        description: "Pembuatan signage premium untuk hotel bintang 5 di Jakarta dengan detail presisi tinggi menggunakan teknologi CNC Router terkini.",
-        specifications: [
-          'Dimensi: 2000mm x 1000mm', 
-          'Ketebalan: 4mm ACP', 
-          'Finishing: Powder Coating', 
-          'Warna: Silver Metallic'
-        ],
-        duration: '7 Hari',
-        completedDate: '2024-02-15'
-      },
-      2: {
-        title: "Furniture Custom Stainless Bekasi",
-        category: "Industrial",
-        material: "Stainless Steel",
-        service: "Laser Fiber",
-        image: "furnituremetal.webp", // Just the filename
-        description: "Cutting furniture stainless steel custom untuk restaurant modern di Bekasi dengan desain unik dan presisi tinggi menggunakan laser fiber 2000W.",
-        specifications: [
-          'Material: SS304 3mm', 
-          'Dimensi: Custom sesuai desain', 
-          'Toleransi: ±0.1mm', 
-          'Finishing: Brushed'
-        ],
-        duration: '10 Hari',
-        completedDate: '2024-01-30'
-      },
-      3: {
-        title: "Display Acrylic Premium Bogor",
-        category: "Retail",
-        material: "Acrylic",
-        service: "Laser CO2",
-        image: "displyacrylic.webp", // Just the filename
-        description: "Display acrylic premium untuk toko retail di Bogor dengan engraving logo dan cutting presisi menggunakan laser CO2 150W.",
-        specifications: [
-          'Material: Acrylic 5mm', 
-          'Warna: Transparent', 
-          'Engraving: Logo Custom', 
-          'Dimensi: 1200mm x 600mm'
-        ],
-        duration: '5 Hari',
-        completedDate: '2024-02-05'
-      },
-      4: {
-        title: "Prototype Industri Tangerang",
-        category: "Manufacturing",
-        material: "PVC",
-        service: "CNC Router",
-        image: "prototype.webp", // Just the filename
-        description: "Pembuatan prototype industri dari material PVC untuk perusahaan manufaktur di Tangerang dengan toleransi sangat ketat.",
-        specifications: [
-          'Material: PVC 3mm', 
-          'Dimensi: 1500mm x 800mm', 
-          'Toleransi: ±0.05mm', 
-          'Quantity: 10pcs'
-        ],
-        duration: '3 Hari',
-        completedDate: '2024-02-20'
-      }
-    };
       
-    function openModal(id: number) {
-      const item = portfolioData[id as keyof typeof portfolioData];
-      if (!item || !modalContent) return;
+      // Add active class to clicked button
+      btn.classList.add('active', 'bg-blue-600', 'text-white');
+      btn.classList.remove('bg-white', 'text-gray-700');
 
-      const imagePath = getCorrectImagePath(item.image);
+      const filterValue = btn.getAttribute('data-filter');
 
-      modalContent.innerHTML = `
-        <img 
-          src="${imagePath}" 
-          alt="${item.title}" 
-          class="w-full h-64 md:h-96 object-cover"
-          onerror="this.onerror=null; this.src='${getCorrectImagePath('placeholder.webp')}';"
-        >
-        <div class="p-6 md:p-8">
-          <div class="flex items-center justify-between mb-4">
-            <span class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full font-medium">
-              ${item.service}
-            </span>
-            <span class="text-sm text-gray-500">${item.material}</span>
-          </div>
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4" id="modal-title">
-            ${item.title}
-          </h2>
-          <p class="text-gray-600 mb-6">
-            ${item.description}
-          </p>
-          
-          <div class="grid md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-3">Spesifikasi Project</h3>
-              <ul class="space-y-2">
-                ${item.specifications.map((spec: string) => `
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span class="text-gray-700">${spec}</span>
-                  </li>
-                `).join('')}
-              </ul>
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-3">Project Timeline</h3>
-              <div class="space-y-3">
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                  </svg>
-                  <span class="text-gray-700">Durasi Pengerjaan: <strong>${item.duration}</strong></span>
-                </div>
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                  <span class="text-gray-700">Tanggal Selesai: <strong>${item.completedDate}</strong></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="flex flex-wrap gap-4">
-            <a 
-              href="https://api.whatsapp.com/send?phone=6285165693179&text=Halo,%20saya%20tertarik%20dengan%20project%20${encodeURIComponent(item.title)}.%20Bisa%20konsultasi%20lebih%20lanjut?"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center"
-            >
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-              </svg>
-              Konsultasi Project
-            </a>
-          </div>
-        </div>
-      `;
-      
-      if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        // Smooth animation
-        setTimeout(() => {
-          modal.style.opacity = '1';
-        }, 10);
-      }
-    }
-
-    function closeModal() {
-      if (modal) {
-        modal.style.opacity = '0';
-        setTimeout(() => {
-          modal.classList.add('hidden');
-          document.body.style.overflow = 'auto';
-        }, 300);
-      }
-    }
-
-    // Event listeners for modal buttons
-    const modalButtons = document.querySelectorAll('.modal-btn');
-    modalButtons.forEach(btn => {
-      btn.addEventListener('click', (e: Event) => {
-        e.preventDefault();
-        const dataId = btn.getAttribute('data-id');
-        const id = dataId ? parseInt(dataId) : 1;
-        openModal(id);
-      });
-    });
-
-    // Close modal event listeners
-    if (closeModalBtn) {
-      closeModalBtn.addEventListener('click', closeModal);
-    }
-
-    // Close modal when clicking outside
-    if (modal) {
-      modal.addEventListener('click', (e: MouseEvent) => {
-        if (e.target === modal) {
-          closeModal();
+      portfolioItems.forEach(item => {
+        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+          item.style.display = 'block';
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+          }, 10);
+        } else {
+          item.style.opacity = '0';
+          item.style.transform = 'scale(0.8)';
+          setTimeout(() => {
+            item.style.display = 'none';
+          }, 300);
         }
       });
-    }
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
-        closeModal();
-      }
     });
-
-    // Initialize portfolio items with smooth appearance
-    portfolioItems.forEach((item, index) => {
-      const itemEl = asHTMLElementWithStyle(item);
-      itemEl.style.opacity = '0';
-      itemEl.style.transform = 'translateY(20px)';
-      setTimeout(() => {
-        itemEl.style.transition = 'all 0.6s ease';
-        itemEl.style.opacity = '1';
-        itemEl.style.transform = 'translateY(0)';
-      }, index * 100);
-    });
-    
-    // CRITICAL FIX: Fix all portfolio images on page load
-    function fixPortfolioImages() {
-      const portfolioImages = document.querySelectorAll('.portfolio-item img');
-      portfolioImages.forEach(img => {
-        const imgEl = img as HTMLImageElement;
-        // Get the current src and fix it
-        const currentSrc = imgEl.getAttribute('src');
-        if (currentSrc) {
-          const fixedSrc = getCorrectImagePath(currentSrc);
-          if (fixedSrc !== currentSrc) {
-            imgEl.src = fixedSrc;
-          }
-        }
-        
-        // Also fix the onerror attribute
-        const errorFallback = getCorrectImagePath('placeholder.webp');
-        imgEl.onerror = function(this: HTMLImageElement) {
-          this.onerror = null;
-          this.src = errorFallback;
-        };
-      });
-    }
-
-    // Run the fix immediately
-    fixPortfolioImages();
-    
-    // Also run after a short delay to catch any delayed images
-    setTimeout(fixPortfolioImages, 1000);
   });
+
+  // Portfolio Detail Modal (placeholder)
+  const viewDetailBtns = document.querySelectorAll('.view-detail-btn');
+  viewDetailBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const projectId = btn.getAttribute('data-project-id');
+      // Implement modal functionality here
+      console.log('View detail for project:', projectId);
+      // You can add modal implementation here
+    });
+  });
+});
 </script>
 
 <style>
-  .portfolio-item {
-    display: block;
-    transition: all 0.3s ease;
-  }
+.portfolio-item {
+  transition: all 0.3s ease;
+}
 
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+.filter-btn {
+  transition: all 0.3s ease;
+}
 
-  /* Modal animations */
-  #portfolio-modal {
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  #portfolio-modal:not(.hidden) {
-    opacity: 1;
-  }
-
-  #portfolio-modal .inline-block {
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
-  }
-
-  #portfolio-modal:not(.hidden) .inline-block {
-    transform: scale(1);
-  }
-
-  /* Loading animation */
-  .portfolio-item img {
-    transition: opacity 0.3s ease;
-  }
-
-  /* Hover effects */
-  .portfolio-filter:hover {
-    transform: translateY(-2px);
-  }
-
-  .portfolio-item:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-
-  /* Image loading state */
-  .portfolio-item img[src=""] {
-    background: linear-gradient(90deg, #f0f0f0 25%, transparent 37%, #f0f0f0 63%);
-    background-size: 400% 100%;
-    animation: shimmer 1.5s ease-in-out infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .portfolio-item {
-      margin-bottom: 1rem;
-    }
-    
-    #portfolio-modal .inline-block {
-      margin: 1rem;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-  }
-
-  /* Fallback for broken images */
-  .portfolio-item img:not([src]),
-  .portfolio-item img[src=""],
-  .portfolio-item img[src*="placeholder"] {
-    background-color: #f3f4f6;
-    background-image: 
-      linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
-      linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
-      linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
-    background-size: 16px 16px;
-    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
-    position: relative;
-  }
-
-  .portfolio-item img:not([src])::after,
-  .portfolio-item img[src=""]::after {
-    content: "📷";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    opacity: 0.3;
-  }
+.filter-btn.active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
 </style>

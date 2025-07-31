@@ -11,21 +11,42 @@ if (!material) throw new Error('Material PVC not found');
 const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
 if (!recommendedService) throw new Error('Recommended service not found');
 
-// Generate JSON-LD
-const jsonLd = generateJsonLd({
+// Generate JSON-LD - Fix: return array instead of object
+const jsonLd = [generateJsonLd({
   title: `${material.name} - Material Laser Cutting Premium`,
   description: material.description,
   url: `${SITE_CONFIG.url}material-pvc/`,
-  type: 'Product'
-});
+  type: 'article' // Fix: change from 'Product' to 'article'
+})];
 
+// Create metaTags object for BaseLayout
+const metaTags = {
+  title: `${material.name} - Material Laser Cutting Premium`,
+  description: material.description,
+  keywords: material.keywords,
+  canonical: `${SITE_CONFIG.url}material-pvc/`,
+  url: `${SITE_CONFIG.url}material-pvc/`,
+  type: 'article', // Fix: valid type
+  openGraph: {
+    title: `${material.name} - Material Laser Cutting Premium`,
+    description: material.description,
+    url: `${SITE_CONFIG.url}material-pvc/`,
+    image: material.image,
+    type: 'article',
+    siteName: 'Tepat Laser',
+    locale: 'id_ID'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${material.name} - Material Laser Cutting Premium`,
+    description: material.description,
+    image: material.image
+  }
+};
 ---
 
 <BaseLayout 
-  title={`${material.name} - Material Laser Cutting Premium`}
-  description={material.description}
-  keywords={material.keywords}
-  image={material.image}
+  metaTags={metaTags}
   jsonLd={jsonLd}
 >
   <Header slot="header" />
@@ -151,7 +172,7 @@ const jsonLd = generateJsonLd({
         <div class="bg-gray-50 p-8 rounded-lg">
           <h3 class="text-2xl font-bold text-gray-900 mb-6">Aplikasi Umum</h3>
           <div class="grid grid-cols-2 gap-4">
-            {material.applications.map((app) => (
+            {(material.applications || ['Signage', 'Packaging', 'Display', 'Prototyping']).map((app) => (
               <div class="flex items-center space-x-3">
                 <div class="w-2 h-2 bg-green-600 rounded-full"></div>
                 <span class="text-gray-700">{app}</span>
@@ -185,7 +206,7 @@ const jsonLd = generateJsonLd({
               {recommendedService.description}
             </p>
             <div class="space-y-3">
-              {recommendedService.features.map((feature) => (
+              {(recommendedService.features || []).map((feature) => (
                 <div class="flex items-center space-x-3">
                   <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -244,4 +265,3 @@ const jsonLd = generateJsonLd({
 
   <Footer slot="footer" />
 </BaseLayout>
-
