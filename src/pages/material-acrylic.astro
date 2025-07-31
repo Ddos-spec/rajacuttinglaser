@@ -7,26 +7,6 @@ import { MATERIALS, SERVICES } from '../utils/constants.js';
 const material = MATERIALS.find(m => m.id === 'acrylic');
 const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": material.name,
-  "description": material.description,
-  "category": "Laser Cutting Material",
-  "brand": {
-    "@type": "Brand",
-    "name": "Tepat Laser"
-  },
-  "offers": {
-    "@type": "Offer",
-    "availability": "https://schema.org/InStock",
-    "priceCurrency": "IDR",
-    "seller": {
-      "@type": "Organization",
-      "name": "Tepat Laser"
-    }
-  }
-};
 ---
 
 <BaseLayout 
