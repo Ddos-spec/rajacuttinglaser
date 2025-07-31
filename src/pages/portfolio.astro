@@ -5,6 +5,20 @@ import Footer from '../components/Footer.astro';
 import { PORTFOLIO, SITE_CONFIG } from '../utils/constants.js';
 import { generateJsonLd } from '../utils/seo.js';
 
+interface HTMLElementWithStyle extends HTMLElement {
+  style: CSSStyleDeclaration;
+}
+
+interface ProjectImage extends HTMLImageElement {
+  dataset: {
+    project: string;
+  };
+}
+
+// Type assertions helper
+const asHTMLElementWithStyle = (el: Element): HTMLElementWithStyle => el as HTMLElementWithStyle;
+const asHTMLImageElement = (el: Element): HTMLImageElement => el as HTMLImageElement;
+
 // Sort portfolio items by id (newest first)
 const sortedPortfolio = PORTFOLIO.sort((a, b) => b.id - a.id);
 
@@ -18,18 +32,21 @@ const jsonLd = generateJsonLd({
 
 
 
-// Fixed helper function to get proper image path
-const getImagePath = (imagePath) => {
+// Fixed helper function to get proper image path with type safety
+const getImagePath = (imagePath: string): string => {
   // Remove any existing prefix and clean the path
   let cleanPath = imagePath.replace('/rajacuttinglaser/', '').replace(/^\/+/, '');
   cleanPath = cleanPath.replace('images/', '');
   
+  // IMPORTANT: Do not modify these paths as they are required for proper routing
   // For GitHub Pages (production)
   if (import.meta.env.PROD) {
+    // Keep /rajacuttinglaser prefix for GitHub Pages
     return `/rajacuttinglaser/images/${cleanPath}`;
   }
   
   // For local development
+  // Keep /images for local development
   return `/images/${cleanPath}`;
 };
 ---
@@ -183,9 +200,17 @@ const getImagePath = (imagePath) => {
 </BaseLayout>
 
 <script>
+  // Define interface and helper functions for client-side code
+  interface HTMLElementWithStyle extends HTMLElement {
+    style: CSSStyleDeclaration;
+  }
+
+  const asHTMLElementWithStyle = (el: Element): HTMLElementWithStyle => el as HTMLElementWithStyle;
+  const asHTMLImageElement = (el: Element): HTMLImageElement => el as HTMLImageElement;
+
   document.addEventListener('DOMContentLoaded', function() {
     // Helper function to get correct image path - FIXED VERSION
-    function getCorrectImagePath(imagePath) {
+    function getCorrectImagePath(imagePath: string): string {
       // Clean up the path - remove any existing prefixes
       let cleanPath = imagePath;
       
@@ -209,10 +234,10 @@ const getImagePath = (imagePath) => {
     const filterButtons = document.querySelectorAll('.portfolio-filter');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-    filterButtons.forEach(button => {
+    filterButtons.forEach((button: Element) => {
       button.addEventListener('click', () => {
         // Reset all buttons
-        filterButtons.forEach(btn => {
+        filterButtons.forEach((btn: Element) => {
           btn.classList.remove('active', 'bg-blue-600', 'text-white');
           btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
         });
@@ -224,18 +249,19 @@ const getImagePath = (imagePath) => {
         const filter = button.getAttribute('data-filter');
         
         // Filter portfolio items with animation
-        portfolioItems.forEach(item => {
+        portfolioItems.forEach((item: Element) => {
+          const portfolioItem = item as HTMLElementWithStyle;
           if (filter === 'all' || item.getAttribute('data-category') === filter) {
-            item.style.display = 'block';
+            portfolioItem.style.display = 'block';
             setTimeout(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'translateY(0)';
+              portfolioItem.style.opacity = '1';
+              portfolioItem.style.transform = 'translateY(0)';
             }, 10);
           } else {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
+            portfolioItem.style.opacity = '0';
+            portfolioItem.style.transform = 'translateY(20px)';
             setTimeout(() => {
-              item.style.display = 'none';
+              portfolioItem.style.display = 'none';
             }, 300);
           }
         });
@@ -243,9 +269,11 @@ const getImagePath = (imagePath) => {
     });
 
     // Modal functionality
-    const modal = document.getElementById('portfolio-modal');
-    const modalContent = document.getElementById('modal-content');
-    const closeModalBtn = document.getElementById('close-modal');
+    const modalEl = document.getElementById('portfolio-modal');
+    const modalContentEl = document.getElementById('modal-content');
+    const modal = modalEl ? asHTMLElementWithStyle(modalEl) : null;
+    const modalContent = modalContentEl ? asHTMLElementWithStyle(modalContentEl) : null;
+    const closeModalBtn = document.getElementById('close-modal') as HTMLElement;
 
     // Updated Portfolio data for modal with corrected image paths
     const portfolioData = {
@@ -315,8 +343,8 @@ const getImagePath = (imagePath) => {
       }
     };
       
-    function openModal(id) {
-      const item = portfolioData[id];
+    function openModal(id: number) {
+      const item = portfolioData[id as keyof typeof portfolioData];
       if (!item || !modalContent) return;
 
       const imagePath = getCorrectImagePath(item.image);
@@ -346,7 +374,7 @@ const getImagePath = (imagePath) => {
             <div>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Spesifikasi Project</h3>
               <ul class="space-y-2">
-                ${item.specifications.map((spec) => `
+                ${item.specifications.map((spec: string) => `
                   <li class="flex items-start">
                     <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -414,9 +442,10 @@ const getImagePath = (imagePath) => {
     // Event listeners for modal buttons
     const modalButtons = document.querySelectorAll('.modal-btn');
     modalButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', (e: Event) => {
         e.preventDefault();
-        const id = parseInt(btn.getAttribute('data-id'));
+        const dataId = btn.getAttribute('data-id');
+        const id = dataId ? parseInt(dataId) : 1;
         openModal(id);
       });
     });
@@ -428,7 +457,7 @@ const getImagePath = (imagePath) => {
 
     // Close modal when clicking outside
     if (modal) {
-      modal.addEventListener('click', (e) => {
+      modal.addEventListener('click', (e: MouseEvent) => {
         if (e.target === modal) {
           closeModal();
         }
@@ -444,12 +473,13 @@ const getImagePath = (imagePath) => {
 
     // Initialize portfolio items with smooth appearance
     portfolioItems.forEach((item, index) => {
-      item.style.opacity = '0';
-      item.style.transform = 'translateY(20px)';
+      const itemEl = asHTMLElementWithStyle(item);
+      itemEl.style.opacity = '0';
+      itemEl.style.transform = 'translateY(20px)';
       setTimeout(() => {
-        item.style.transition = 'all 0.6s ease';
-        item.style.opacity = '1';
-        item.style.transform = 'translateY(0)';
+        itemEl.style.transition = 'all 0.6s ease';
+        itemEl.style.opacity = '1';
+        itemEl.style.transform = 'translateY(0)';
       }, index * 100);
     });
     
@@ -457,18 +487,19 @@ const getImagePath = (imagePath) => {
     function fixPortfolioImages() {
       const portfolioImages = document.querySelectorAll('.portfolio-item img');
       portfolioImages.forEach(img => {
+        const imgEl = img as HTMLImageElement;
         // Get the current src and fix it
-        const currentSrc = img.getAttribute('src');
+        const currentSrc = imgEl.getAttribute('src');
         if (currentSrc) {
           const fixedSrc = getCorrectImagePath(currentSrc);
           if (fixedSrc !== currentSrc) {
-            img.src = fixedSrc;
+            imgEl.src = fixedSrc;
           }
         }
         
         // Also fix the onerror attribute
         const errorFallback = getCorrectImagePath('placeholder.webp');
-        img.onerror = function() {
+        imgEl.onerror = function(this: HTMLImageElement) {
           this.onerror = null;
           this.src = errorFallback;
         };

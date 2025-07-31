@@ -2,17 +2,29 @@
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { MATERIALS, SERVICES } from '../utils/constants.js';
+import { MATERIALS, SERVICES, SITE_CONFIG } from '../utils/constants.js';
+import { generateJsonLd } from '../utils/seo.js';
 
 const material = MATERIALS.find(m => m.id === 'mdf');
-const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
+if (!material) throw new Error('Material MDF not found');
 
+const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
+if (!recommendedService) throw new Error('Recommended service not found');
+
+// Generate JSON-LD
+const jsonLd = generateJsonLd({
+  title: `${material.name} - Material Laser Cutting Premium`,
+  description: material.description,
+  url: `${SITE_CONFIG.url}material-mdf/`,
+  type: 'Product'
+});
+---
 
 <BaseLayout 
-  title={`${material.name} - Material Laser Cutting Premium`}
-  description={material.description}
-  keywords={material.keywords}
-  image={material.image}
+  title={`${material!.name} - Material Laser Cutting Premium`}
+  description={material!.description}
+  keywords={material!.keywords}
+  image={material!.image}
   jsonLd={jsonLd}
 >
   <Header slot="header" />
@@ -24,10 +36,10 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <h1 class="text-4xl lg:text-5xl font-bold mb-6">
-            Jasa Laser Cutting {material.name}
+            Jasa Laser Cutting {material!.name}
           </h1>
           <p class="text-xl mb-8 text-gray-700">
-            {material.description}
+            {material!.description}
           </p>
           <div class="flex flex-wrap gap-4">
             <a 
@@ -74,7 +86,7 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
             <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-2">Permukaan Halus</h3>
@@ -84,7 +96,7 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="w-12 h-12 bg-brown-100 rounded-lg flex items-center justify-center mb-4">
             <svg class="w-6 h-6 text-brown-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-2">Kepadatan Tinggi</h3>
@@ -94,7 +106,7 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
             <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-2">Mudah Dibentuk</h3>
@@ -155,7 +167,7 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">
-          Mesin Rekomendasi untuk {material.name}
+          Mesin Rekomendasi untuk {material!.name}
         </h2>
         <p class="text-xl text-gray-600">
           Teknologi Laser Cutting presisi tinggi untuk cutting MDF dengan detail yang sempurna
@@ -166,29 +178,29 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
         <div class="grid lg:grid-cols-2 gap-8 items-center">
           <div>
             <h3 class="text-2xl font-bold text-gray-900 mb-4">
-              {recommendedService.name}
+              {recommendedService!.name}
             </h3>
             <p class="text-gray-600 mb-6">
-              {recommendedService.description}
+              {recommendedService!.description}
             </p>
             <div class="space-y-3">
-              {(recommendedService.features || []).map((feature) => (
+              {(recommendedService!.features || []).map((feature) => (
                 <div class="flex items-center space-x-3">
                   <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
                   <span class="text-gray-700">{feature}</span>
                 </div>
               ))}
             </div>
             <div class="mt-6">
-              <span class="text-2xl font-bold text-gray-600">{recommendedService?.price || 'Hubungi untuk harga'}</span>
+              <span class="text-2xl font-bold text-gray-600">Hubungi untuk harga</span>
             </div>
           </div>
           <div>
             <img 
-              src={recommendedService.image} 
-              alt={recommendedService.name}
+              src={recommendedService!.image} 
+              alt={recommendedService!.name}
               class="w-full h-64 object-cover rounded-lg"
               loading="lazy"
             />
