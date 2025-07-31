@@ -2,42 +2,58 @@
 // Header.astro - Komponen header dengan navigasi responsif lengkap dan diperbaiki
 import { NAVIGATION, SITE_CONFIG } from '../utils/constants.js';
 
-// Function to create proper URL with base path
+// Function to create proper URL with base path - FIXED
 function createUrl(path) {
+  // Handle null, undefined, or empty path
+  if (!path || path === null || path === undefined) {
+    return SITE_CONFIG.url || '/';
+  }
+  
+  // Convert to string and handle edge cases
+  const pathStr = String(path);
+  
   // Remove leading slash if exists to avoid double slashes
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  const cleanPath = pathStr.startsWith('/') ? pathStr.slice(1) : pathStr;
   
   // If it's root path, return base URL
   if (cleanPath === '' || cleanPath === '/') {
-    return SITE_CONFIG.url;
+    return SITE_CONFIG.url || '/';
   }
   
   // For hash links (like /#services), append to base URL
   if (cleanPath.startsWith('#')) {
-    return `${SITE_CONFIG.url}${cleanPath}`;
+    return `${SITE_CONFIG.url || ''}${cleanPath}`;
   }
   
   // For regular pages, combine base URL with path
-  return `${SITE_CONFIG.url}${cleanPath}`;
+  return `${SITE_CONFIG.url || ''}${cleanPath}`;
 }
 
 // Filter navigasi untuk menghilangkan link "Kontak"
-const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak");
-// Process navigation to include proper URLs
-const processedNavigation = filteredNavigation.map(item => ({
-  ...item,
-  href: createUrl(item.href),
-  submenu: item.submenu ? item.submenu.map(subitem => ({
-    ...subitem,
-    href: createUrl(subitem.href)
-  })) : undefined
-}));
+const filteredNavigation = NAVIGATION ? NAVIGATION.filter(item => item && item.name !== "Kontak") : [];
+
+// Process navigation to include proper URLs - with safety checks
+const processedNavigation = filteredNavigation.map(item => {
+  if (!item) return null;
+  
+  return {
+    ...item,
+    href: createUrl(item.href),
+    submenu: item.submenu ? item.submenu.map(subitem => {
+      if (!subitem) return null;
+      return {
+        ...subitem,
+        href: createUrl(subitem.href)
+      };
+    }).filter(Boolean) : undefined
+  };
+}).filter(Boolean);
 ---
 <header class="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200" id="main-header">
   <div class="container-custom">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
-        <a href={SITE_CONFIG.url} class="flex items-center space-x-3">
+        <a href={SITE_CONFIG?.url || '/'} class="flex items-center space-x-3">
           <div class="sm:block">
             <h1 class="text-xl font-bold text-gray-900">
               Tepat Laser
@@ -49,8 +65,7 @@ const processedNavigation = filteredNavigation.map(item => ({
       <nav class="hidden lg:flex items-center space-x-8" aria-label="Main navigation">
         {processedNavigation.map((item) => (
           <div class="relative group">
-            {item.submenu 
-? (
+            {item.submenu ? (
               <div class="relative">
                 <button
                   class="flex items-center space-x-1 text-gray-700 hover:text-blue-600 font-medium py-2"
@@ -116,7 +131,7 @@ const processedNavigation = filteredNavigation.map(item => ({
   >
     <div class="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-4">
       <div class="flex items-center">
-        <a href={SITE_CONFIG.url} class="flex items-center space-x-3">
+        <a href={SITE_CONFIG?.url || '/'} class="flex items-center space-x-3">
           <h1 class="text-xl font-bold text-gray-900">Tepat Laser</h1>
         </a>
       </div>
@@ -134,8 +149,7 @@ const processedNavigation = filteredNavigation.map(item => ({
       <nav class="flex-1 px-4 py-6 space-y-2" aria-label="Mobile navigation">
         {processedNavigation.map((item, index) => (
           <div>
-            {item.submenu ?
-(
+            {item.submenu ? (
               <div>
                 <button
                   class="flex items-center justify-between w-full text-left text-gray-700 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
@@ -190,7 +204,7 @@ const processedNavigation = filteredNavigation.map(item => ({
         </a>
         <div class="grid grid-cols-2 gap-3">
           <a
-            href={`https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=${encodeURIComponent("Halo, saya tertarik dengan jasa laser cutting. Bisa konsultasi gratis?")}`}
+            href={`https://api.whatsapp.com/send?phone=${SITE_CONFIG?.whatsapp || ''}&text=${encodeURIComponent("Halo, saya tertarik dengan jasa laser cutting. Bisa konsultasi gratis?")}`}
             target="_blank"
             rel="noopener noreferrer"
             class="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2"
@@ -201,7 +215,7 @@ const processedNavigation = filteredNavigation.map(item => ({
             <span>WhatsApp</span>
           </a>
           <a
-            href={`tel:${SITE_CONFIG.phone}`}
+            href={`tel:${SITE_CONFIG?.phone || ''}`}
             class="bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
