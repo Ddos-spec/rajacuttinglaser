@@ -54,7 +54,7 @@ const base = import.meta.env.BASE_URL;
           <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
             <div class="relative overflow-hidden rounded-t-xl">
               <img
-                src={`${base}${service.image.startsWith('/') ? service.image.slice(1) : service.image}`}
+                src={`${base}${service.image.slice(1)}`}
                 alt={service.name}
                 class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                 loading="lazy"
@@ -97,7 +97,7 @@ const base = import.meta.env.BASE_URL;
                   <span>Konsultasi Gratis via WA</span>
                 </a>
 
-                <a href={`${base}/${service.slug}/`} class="btn-secondary text-sm px-4 py-2 w-full text-center">
+                <a href={`${base}${service.slug}/`} class="btn-secondary text-sm px-4 py-2 w-full text-center">
                   Detail Layanan
                 </a>
               </div>
@@ -123,7 +123,7 @@ const base = import.meta.env.BASE_URL;
           <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
             <div class="relative">
               <img
-                src={`${base}${material.image.startsWith('/') ? material.image.slice(1) : material.image}`}
+                src={`${base}${material.image.slice(1)}`}
                 alt={material.name}
                 class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
@@ -150,7 +150,7 @@ const base = import.meta.env.BASE_URL;
                 </div>
               </div>
 
-              <a href={`${base}/${material.slug}/`} class="btn-secondary text-sm px-4 py-2 w-full text-center">
+              <a href={`${base}${material.slug}/`} class="btn-secondary text-sm px-4 py-2 w-full text-center">
                 Lihat Detail
               </a>
             </div>
@@ -174,7 +174,7 @@ const base = import.meta.env.BASE_URL;
         {PORTFOLIO.map((project) => (
           <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <img
-              src={`${base}${project.image.startsWith('/') ? project.image.slice(1) : project.image}`}
+              src={`${base}${project.image.slice(1)}`}
               alt={project.title}
               class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               loading="lazy"
@@ -202,7 +202,7 @@ const base = import.meta.env.BASE_URL;
 
       <div class="text-center mt-12">
         <a
-          href={`${base}/portfolio`}
+          href={`${base}portfolio`}
           class="btn-primary text-lg px-8 py-3"
         >
           Lihat Semua Portfolio
@@ -244,7 +244,7 @@ const base = import.meta.env.BASE_URL;
 
             <div class="flex items-center">
               <img
-                src={`${base}${testimonial.image.startsWith('/') ? testimonial.image.slice(1) : testimonial.image}`}
+                src={`${base}${testimonial.image.slice(1)}`}
                 alt={testimonial.name}
                 class="w-12 h-12 rounded-full object-cover mr-4"
                 loading="lazy"

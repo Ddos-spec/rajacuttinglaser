@@ -1,5 +1,5 @@
 ---
-// about.astro - Halaman tentang kami
+// about.astro - Halaman tentang kami (FIXED)
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -21,6 +21,8 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   { name: 'Beranda', url: '/' },
   { name: 'Tentang Kami', url: '/about' }
 ]);
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout 
@@ -47,7 +49,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <nav class="flex" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+            <a href=`${base}` class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
               </svg>
@@ -107,7 +109,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         
         <div class="relative">
           <img 
-            src="images/team.webp"
+            src={`${base}images/team.webp`}
             alt="Tim Tepat Laser di workshop"
             class="w-full h-auto rounded-xl shadow-2xl"
             loading="lazy"
@@ -132,7 +134,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
           <img 
-            src="images/team-director.webp"
+            src={`${base}images/team-director.webp`}
             alt="Direktur Tepat Laser"
             class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
@@ -149,7 +151,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         
         <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
           <img 
-            src="images/team-technical.webp"
+            src={`${base}images/team-technical.webp`}
             alt="Technical Manager Tepat Laser"
             class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
@@ -166,7 +168,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         
         <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
           <img 
-            src="images/team-design.webp"
+            src={`${base}images/team-design.webp`}
             alt="Design Specialist Tepat Laser"
             class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
@@ -183,7 +185,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
         
         <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
           <img 
-            src="images/team-quality.webp"
+            src={`${base}images/team-quality.webp`}
             alt="Quality Control Tepat Laser"
             class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
