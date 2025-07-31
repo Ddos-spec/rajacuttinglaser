@@ -3,7 +3,7 @@ import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { MATERIALS, SERVICES, SITE_CONFIG } from '../utils/constants.js';
-import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.js';
+import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.ts';
 
 const material = MATERIALS.find(m => m.id === 'metal');
 if (!material) throw new Error('Material metal not found');

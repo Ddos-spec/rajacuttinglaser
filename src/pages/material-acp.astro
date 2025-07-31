@@ -7,7 +7,7 @@ import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
 import { MATERIALS, SERVICES, SITE_CONFIG, WHATSAPP_MESSAGES } from '../utils/constants.js';
 // Hapus generateMaterialSchema karena tidak diekspor dari seo.js
-import { generateMetaTags, generateBreadcrumbSchema, generateServiceSchema } from '../utils/seo.js';
+import { generateMetaTags, generateBreadcrumbSchema, generateServiceSchema } from '../utils/seo.ts';
 
 // Find ACP material
 const material = MATERIALS.find(m => m.slug === 'material-acp');

@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
 import { SERVICES, SITE_CONFIG, WHATSAPP_MESSAGES } from '../utils/constants.js';
-import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.js';
+import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.ts';
 
 // Find Laser CO2 service
 const service = SERVICES.find(s => s.slug === 'jasa-laser-co2');
@@ -44,13 +44,11 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 ---
 <BaseLayout
-  // --- PERBAIKAN: Gunakan optional chaining atau pastikan service tidak null (sudah dicek) ---
   title={metaTags.title}
   description={metaTags.description}
   keywords={metaTags.keywords}
-  url={metaTags.canonical} // --- PERBAIKAN: canonical diakses dengan benar ---
-  // --- PERBAIKAN: Pastikan structured data hanya dimasukkan jika ada ---
-  jsonLd={[serviceSchema, breadcrumbSchema].filter(Boolean)} // Filter null/undefined
+  url={metaTags.canonical}
+  jsonLd={[serviceSchema, breadcrumbSchema].filter(Boolean)}
 >
   <Header slot="header" />
 

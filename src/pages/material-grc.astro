@@ -1,8 +1,9 @@
--import BaseLayout from '../components/BaseLayout.astro';
+---
+import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { MATERIALS, SERVICES, SITE_CONFIG } from '../utils/constants.js';
-import { generateJsonLd } from '../utils/seo.js';
+import { MATERIALS, SERVICES } from '../utils/constants.js';
+import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.ts';
 
 const material = MATERIALS.find(m => m.id === 'grc');
 if (!material) throw new Error('Material GRC not found');

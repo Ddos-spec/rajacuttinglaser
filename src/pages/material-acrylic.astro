@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { MATERIALS, SERVICES } from '../utils/constants.js';
 
-import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.js';
+import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.ts';
 
 // Find Acrylic material with proper error handling
 const material = MATERIALS.find(m => m.id === 'acrylic');
