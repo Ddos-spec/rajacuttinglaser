@@ -1,5 +1,4 @@
 // src/utils/constants.js
-
 export const SITE_CONFIG = {
   name: "LaserCut Pro",
   title: "Jasa Laser Cutting Akurat & Cepat #1 Jabodetabek - Akrilik, Kayu, Metal",
@@ -17,7 +16,6 @@ export const SITE_CONFIG = {
     facebook: "https://facebook.com/lasercutpro"
   }
 };
-
 export const NAVIGATION = [
   { name: 'Beranda', href: '/' },
   { name: 'Tentang Kami', href: '/about/' },
@@ -47,7 +45,6 @@ export const NAVIGATION = [
   { name: 'Portfolio', href: '/portfolio/' },
   { name: 'Blog', href: '/blog/' }
 ];
-
 export const SERVICES = [
   {
     id: "laser-co2",
@@ -92,7 +89,11 @@ export const SERVICES = [
     ],
     applications: ["Fasad", "Furniture", "Moulding", "Signage"],
     image: "/rajacuttinglaser/images/cncrouter.webp", // Fixed GitHub Pages path
-    keywords: "jasa cnc router jakarta, cutting acp bogor, laser grc depok, potong kayu tangerang, cnc router bekasi, carving akrilik jakarta"
+    keywords: "jasa cnc router jakarta, cutting acp bogor, laser grc depok, potong kayu tangerang, cnc router bekasi, carving akrilik jakarta",
+    // --- Properti yang ditambahkan untuk SERVICES ---
+    tagline: "Solusi tepat untuk proyek kayu dan material keras Anda.",
+    price: "Mulai dari Rp 150.000/m²"
+    // --- Akhir properti yang ditambahkan untuk SERVICES ---
   },
   {
     id: "galvo-engraving",
@@ -110,7 +111,6 @@ export const SERVICES = [
     keywords: "jasa galvo engraving jakarta, laser engraving bogor, engrave depok, potong engraving tangerang, laser engrave bekasi, branding produk jakarta"
   }
 ];
-
 export const MATERIALS = [
   {
     id: "acrylic",
@@ -130,7 +130,32 @@ export const MATERIALS = [
     thickness: "3mm - 25mm",
     applications: ["Furniture", "Dekorasi", "Craft", "Model"],
     image: "/rajacuttinglaser/images/MDF.webp", // Fixed GitHub Pages path
-    keywords: "potong mdf jakarta, laser cutting mdf bekasi, cutting mdf bogor, potong mdf depok, laser mdf tangerang"
+    keywords: "potong mdf jakarta, laser cutting mdf bekasi, cutting mdf bogor, potong mdf depok, laser mdf tangerang",
+    // --- Properti yang ditambahkan untuk MATERIALS ---
+    characteristicsIntro: "MDF menawarkan permukaan yang halus dan konsistensi densitas yang tinggi, menjadikannya pilihan populer untuk berbagai aplikasi.",
+    characteristics: [
+      {
+        icon: '<svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>',
+        title: "Permukaan Halus",
+        description: "Ideal untuk finishing cat atau laminasi."
+      },
+      {
+        icon: '<svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>',
+        title: "Konsistensi",
+        description: "Densitas merata memastikan hasil pemotongan yang akurat."
+      },
+      {
+        icon: '<svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>',
+        title: "Mudah Diproses",
+        description: "Cocok untuk laser cutting, engraving, dan CNC."
+      }
+    ],
+    standardSize: "1220mm x 2440mm",
+    tolerance: "±0.1mm - ±0.3mm",
+    density: "600 - 800 kg/m³",
+    finishing: ["Cat", "Laminasi", "Veneer", "Sanding"],
+    ctaText: "Dapatkan hasil pemotongan MDF berkualitas tinggi dengan detail presisi. Hubungi kami sekarang untuk konsultasi gratis!"
+    // --- Akhir properti yang ditambahkan untuk MATERIALS ---
   },
   {
     id: "plywood",
@@ -183,7 +208,6 @@ export const MATERIALS = [
     keywords: "potong grc jakarta, grc laser cutting bekasi, fasad grc bogor, cutting grc depok, laser grc tangerang"
   }
 ];
-
 export const TESTIMONIALS = [
   {
     id: 1,
@@ -213,7 +237,6 @@ export const TESTIMONIALS = [
     image: "/rajacuttinglaser/images/Ahmad Rizki.webp" // Fixed GitHub Pages path
   }
 ];
-
 export const PORTFOLIO = [
   {
     id: 1,
@@ -252,7 +275,6 @@ export const PORTFOLIO = [
     description: "Prototype komponen industri dengan presisi tinggi menggunakan PVC untuk klien di Tangerang"
   }
 ];
-
 export const FAQ = [
   {
     id: 1,
@@ -280,7 +302,6 @@ export const FAQ = [
     answer: "Tentu, kami menyediakan layanan konsultasi desain gratis untuk membantu Anda memahami kelayakan teknis dan optimalisasi desain sebelum proses produksi dimulai. Untuk jasa pembuatan desain khusus dari nol, terdapat biaya tambahan yang akan diinformasikan oleh tim kami."
   }
 ];
-
 export const BLOG_POSTS = [
   {
     id: 1,
@@ -363,34 +384,27 @@ export const BLOG_POSTS = [
     image: "/rajacuttinglaser/images/Ply Wood.webp" // Fixed GitHub Pages path
   }
 ];
-
 // Helper function to get proper image paths based on environment
 export const getImagePath = (imagePath) => {
   // Remove leading slash if present
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-  
   // For GitHub Pages deployment
   if (import.meta.env.PROD) {
     return `/rajacuttinglaser/${cleanPath}`;
   }
-  
   // For local development
   return `/${cleanPath}`;
 };
-
 // Helper function to get proper page URLs
 export const getPageUrl = (path) => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  
   // For GitHub Pages deployment
   if (import.meta.env.PROD) {
     return `/rajacuttinglaser${cleanPath}`;
   }
-  
   // For local development
   return cleanPath;
 };
-
 export const WHATSAPP_MESSAGES = {
   default: "Halo, saya tertarik dengan jasa laser cutting. Bisa konsultasi gratis?",
   cnc: "Halo, saya butuh informasi tentang jasa CNC Router. Bisa bantu konsultasi gratis?",
