@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import { MATERIALS, SERVICES } from '../utils/constants.js';
 
 const material = MATERIALS.find(m => m.id === 'mdf');
-const recommendedService = SERVICES.find(s => s.id === 'laser');
+const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -159,7 +159,7 @@ const jsonLd = {
         <div class="bg-gray-50 p-8 rounded-lg">
           <h3 class="text-2xl font-bold text-gray-900 mb-6">Aplikasi Umum</h3>
           <div class="grid grid-cols-2 gap-4">
-            {material.applications.map((app) => (
+            {(material.applications || ['Furniture', 'Dekorasi', 'Craft', 'Model']).map((app) => (
               <div class="flex items-center space-x-3">
                 <div class="w-2 h-2 bg-amber-600 rounded-full"></div>
                 <span class="text-gray-700">{app}</span>
@@ -193,7 +193,7 @@ const jsonLd = {
               {recommendedService.description}
             </p>
             <div class="space-y-3">
-              {recommendedService.features.map((feature) => (
+              {(recommendedService.features || []).map((feature) => (
                 <div class="flex items-center space-x-3">
                   <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -203,7 +203,7 @@ const jsonLd = {
               ))}
             </div>
             <div class="mt-6">
-              <span class="text-2xl font-bold text-gray-600">{recommendedService.price}</span>
+              <span class="text-2xl font-bold text-gray-600">{recommendedService?.price || 'Hubungi untuk harga'}</span>
             </div>
           </div>
           <div>
