@@ -1,55 +1,46 @@
 ---
-// jasa-galvo-engraving.astro - Halaman layanan Galvo Engraving
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
 import { SERVICES, SITE_CONFIG, WHATSAPP_MESSAGES } from '../utils/constants.js';
-import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.js';
+import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.ts';
 
 // Find Galvo Engraving service
 const service = SERVICES.find(s => s.slug === 'jasa-galvo-engraving');
 
-// --- PERBAIKAN: Tambahkan pengecekan jika service tidak ditemukan ---
+// Handle case where service is not found
 if (!service) {
-  // Melempar error akan menyebabkan halaman tidak dirender dan Astro menampilkan error 404 atau error page default
-  // Anda juga bisa melakukan redirect ke halaman 404 jika diinginkan.
-  throw new Error(`Service with slug 'jasa-galvo-engraving' not found.`);
+  throw new Error('Galvo Engraving service not found in SERVICES array');
 }
-// -------------------------------------------------------------------
 
-// SEO Meta Tags - PERBAIKAN: Menambahkan publishedTime, modifiedTime, dan author
+// SEO Meta Tags
 const metaTags = generateMetaTags({
-  title: `${service.name} - Engraving Presisi Tinggi untuk Branding Produk`,
-  description: `${service.description}. Teknologi galvo laser tercepat untuk engraving detail tinggi pada logam, plastik, kayu. Ideal untuk branding produk, serial number, QR code. Quote gratis 24 jam.`,
+  title: `${service.name} - Engraving Presisi untuk Material Metal`,
+  description: `${service.description}. Teknologi galvo laser tercepat & akurat untuk engraving stainless steel, aluminium hingga ketebalan 20mm. Quote gratis 24 jam.`,
   keywords: service.keywords,
-  url: `/rajacuttinglaser/${service.slug}/`, // Disesuaikan dengan struktur URL
-  type: "service",
+  url: `/rajacuttinglaser/${service.slug}/`,
+  type: "article",
   image: service.image,
-  // --- TAMBAHAN UNTUK MENGATASI ERROR ---
-  publishedTime: "2024-01-01T00:00:00Z", // Tanggal publikasi statis
-  modifiedTime: "2024-01-01T00:00:00Z", // Tanggal modifikasi statis
-  author: SITE_CONFIG.author // Mengambil author dari konfigurasi
-  // --------------------------------------
+  publishedTime: "2024-01-01T00:00:00Z",
+  modifiedTime: "2024-01-01T00:00:00Z",
+  author: SITE_CONFIG.author
 });
 
-// Structured Data - PERBAIKAN: Pastikan serviceSchema hanya dibuat jika service ada
-const serviceSchema = service ? generateServiceSchema(service) : null;
+// Generate structured data
+const serviceSchema = generateServiceSchema(service);
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: 'Beranda', url: '' },
   { name: 'Layanan', url: '#services' },
   { name: service.name, url: `/rajacuttinglaser/${service.slug}/` }
 ]);
+
+const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
 ---
 <BaseLayout
-  // --- PERBAIKAN: Gunakan optional chaining untuk metaTags ---
-  title={metaTags?.title}
-  description={metaTags?.description}
-  keywords={metaTags?.keywords}
-  url={metaTags?.canonical} // --- PERBAIKAN: canonical diakses dengan benar ---
-  // --- PERBAIKAN: Pastikan structured data hanya dimasukkan jika ada ---
-  jsonLd={[serviceSchema, breadcrumbSchema].filter(Boolean)} // Filter null/undefined
+  metaTags={metaTags}
+  jsonLd={jsonLd}
 >
   <Header slot="header" />
   <!-- Hero Section -->

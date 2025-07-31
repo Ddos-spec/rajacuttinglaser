@@ -4,8 +4,36 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { MATERIALS, SERVICES } from '../utils/constants.js';
 
+import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.js';
+
+// Find Acrylic material with proper error handling
 const material = MATERIALS.find(m => m.id === 'acrylic');
+if (!material) {
+    throw new Error('Material Acrylic not found');
+}
+
 const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
+if (!recommendedService) throw new Error('Recommended service not found');
+
+// Generate Meta Tags with proper typing
+const metaTags = generateMetaTags({
+  title: `${material.name} - Material Laser Cutting Premium`,
+  description: material.description,
+  keywords: material.keywords,
+  image: material.image,
+  type: 'article'
+});
+
+// Generate structured data
+const serviceSchema = recommendedService ? generateServiceSchema(recommendedService) : null;
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Beranda', url: '' },
+  { name: 'Material', url: '#materials' },
+  { name: material.name, url: `/material-acrylic/` }
+]);
+
+// Combine schemas for jsonLd
+const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
 
 ---
 
@@ -183,7 +211,7 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
               ))}
             </div>
             <div class="mt-6">
-              <span class="text-2xl font-bold text-purple-600">{recommendedService.price}</span>
+              <span class="text-2xl font-bold text-purple-600">Hubungi Kami</span>
             </div>
           </div>
           <div>

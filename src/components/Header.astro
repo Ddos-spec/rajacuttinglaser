@@ -2,8 +2,18 @@
 // Header.astro - Komponen header dengan navigasi responsif dan dropdown click
 import { NAVIGATION, SITE_CONFIG } from '../utils/constants.js';
 
+interface NavigationItem {
+  name: string;
+  href: string;
+  submenu?: Array<{
+    name: string;
+    href: string;
+  }>;
+  active?: boolean;
+}
+
 // Function to create proper URL with base path
-function createUrl(path) {
+function createUrl(path: string | null | undefined): string {
   if (!path || path === null || path === undefined) {
     return SITE_CONFIG.url || '/';
   }
@@ -23,24 +33,19 @@ function createUrl(path) {
 }
 
 // Filter navigasi untuk menghilangkan link "Kontak"
-const filteredNavigation = NAVIGATION ? NAVIGATION.filter(item => item && item.name !== "Kontak") : [];
+// Filter and process navigation items
+const filteredNavigation = (NAVIGATION ?? [])
+  .filter((item): item is NavigationItem => Boolean(item) && item.name !== "Kontak");
 
 // Process navigation to include proper URLs
-const processedNavigation = filteredNavigation.map(item => {
-  if (!item) return null;
-  
-  return {
-    ...item,
-    href: createUrl(item.href),
-    submenu: item.submenu ? item.submenu.map(subitem => {
-      if (!subitem) return null;
-      return {
-        ...subitem,
-        href: createUrl(subitem.href)
-      };
-    }).filter(Boolean) : undefined
-  };
-}).filter(Boolean);
+const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
+  ...item,
+  href: createUrl(item.href) || '/',
+  submenu: item.submenu?.map(subitem => ({
+    ...subitem,
+    href: createUrl(subitem.href) || '/'
+  }))
+}));
 ---
 <header class="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200" id="main-header">
   <div class="container-custom">
@@ -58,7 +63,7 @@ const processedNavigation = filteredNavigation.map(item => {
       <nav class="hidden lg:flex items-center space-x-8" aria-label="Main navigation">
         {processedNavigation.map((item, index) => (
           <div class="relative">
-            {item.submenu ? (
+            {item?.submenu ? (
               <div class="relative">
                 <button
                   class="flex items-center space-x-1 text-gray-700 hover:text-blue-600 font-medium py-2 desktop-dropdown-btn"
@@ -76,7 +81,7 @@ const processedNavigation = filteredNavigation.map(item => {
                   data-dropdown-menu={index}
                 >
                   <div class="py-2">
-                    {item.submenu.map((subitem) => (
+                    {item.submenu?.map((subitem) => (
                       <a
                         href={subitem.href}
                         class="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 text-sm font-medium"
@@ -91,7 +96,7 @@ const processedNavigation = filteredNavigation.map(item => {
               <a
                 href={item.href}
                 class="text-gray-700 hover:text-blue-600 font-medium py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
-                class:list={[item.active && 'text-blue-600 after:w-full']}
+                class:list={{'text-blue-600 after:w-full': item.active}}
               >
                 {item.name}
               </a>
@@ -143,10 +148,10 @@ const processedNavigation = filteredNavigation.map(item => {
       </button>
     </div>
     <div class="flex flex-col min-h-screen bg-white">
-      <nav class="flex-1 px-4 py-6 space-y-2" aria-label="Mobile navigation">
+            <nav class="flex-1 px-4 py-6 space-y-2" aria-label="Mobile navigation">
         {processedNavigation.map((item, index) => (
           <div>
-            {item.submenu ? (
+            {item?.submenu ? (
               <div>
                 <button
                   class="flex items-center justify-between w-full text-left text-gray-700 font-medium py-3 px-4 rounded-lg hover:bg-gray-50 mobile-dropdown-btn"
@@ -154,43 +159,35 @@ const processedNavigation = filteredNavigation.map(item => {
                   aria-expanded="false"
                 >
                   <span>{item.name}</span>
-                  <svg 
-                    class="w-5 h-5 mobile-dropdown-arrow" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
                 <div 
-                  class="hidden bg-gray-50 rounded-lg mx-2 mt-1 mobile-submenu"
+                  class="hidden pl-4 space-y-2"
                   data-mobile-submenu={index}
                 >
-                  <div class="pl-4 pt-2 pb-2 space-y-1">
-                    {item.submenu.map((subitem) => (
-                      <a
-                        href={subitem.href}
-                        class="block text-gray-600 hover:text-blue-600 py-2 px-4 rounded-lg hover:bg-white text-sm font-medium"
-                      >
-                        {subitem.name}
-                      </a>
-                    ))}
-                  </div>
+                  {item.submenu?.map((subitem) => (
+                    <a
+                      href={subitem.href}
+                      class="block px-4 py-2 text-gray-700 hover:text-blue-600 text-sm"
+                    >
+                      {subitem.name}
+                    </a>
+                  ))}
                 </div>
               </div>
             ) : (
               <a
                 href={item.href}
-                class="block text-gray-700 hover:text-blue-600 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
-                class:list={[item.active && 'text-blue-600 bg-blue-50']}
+                class="block w-full text-left text-gray-700 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
+                class:list={{'text-blue-600 bg-blue-50': item.active}}
               >
                 {item.name}
               </a>
             )}
           </div>
         ))}
-      </nav>
       <div class="p-4 border-t border-gray-200 space-y-3 bg-white">
         <a
           href={createUrl("contact")}

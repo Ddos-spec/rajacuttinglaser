@@ -11,10 +11,13 @@ export const SITE_CONFIG = {
   email: "info@rajacuttinglaser.com",
   address: "Jl. Raya Bogor No. 123, Jakarta Timur",
   phone: "+62 851 6569 3179",
+  businessHours: "Senin - Sabtu: 08.00 - 17.00 WIB",
   socialMedia: {
     whatsapp: "https://api.whatsapp.com/send?phone=6285165693179",
     instagram: "https://instagram.com/lasercutpro",
-    facebook: "https://facebook.com/lasercutpro"
+    facebook: "https://facebook.com/lasercutpro",
+    youtube: "https://youtube.com/lasercutpro",
+    linkedin: "https://linkedin.com/company/lasercutpro"
   }
 };
 

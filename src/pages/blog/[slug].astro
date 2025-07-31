@@ -5,6 +5,15 @@ import Footer from '../../components/Footer.astro';
 import { BLOG_POSTS } from '../../utils/constants.js';
 import { generateBlogPostSchema, generateBreadcrumbSchema } from '../../utils/seo.js';
 
+type Post = {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  category: string;
+  image: string;
+};
+
 export async function getStaticPaths() {
   return BLOG_POSTS.map((post) => ({
     params: { slug: post.slug },

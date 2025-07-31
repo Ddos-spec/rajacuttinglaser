@@ -114,8 +114,8 @@ const siteUrl = Astro.site;
   
   <meta name="twitter:card" content={meta.twitter.card} />
   <meta name="twitter:title" content={meta.twitter.title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={fullImage.href} />
+  <meta name="twitter:description" content={meta.twitter.description} />
+  <meta name="twitter:image" content={new URL(meta.twitter.image, siteUrl).href} />
   <meta name="twitter:site" content="@lasercutpro" />
   <meta name="twitter:creator" content="@lasercutpro" />
   

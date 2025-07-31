@@ -7,7 +7,7 @@ interface MetaTagOptions {
   keywords?: string;
   image?: string;
   url?: string;
-  type?: 'website' | 'article' | 'blog';
+  type?: 'website' | 'article' | 'blog' | 'service';
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
@@ -164,4 +164,107 @@ function calculateAverageRating(reviews: Review[]): number {
   if (!reviews || reviews.length === 0) return 5;
   const total = reviews.reduce((sum, review) => sum + review.rating, 0);
   return Number((total / reviews.length).toFixed(1));
+}
+
+/**
+ * Generate JSON-LD untuk Schema.org
+ */
+export function generateJsonLd(options: MetaTagOptions = {}): object {
+  const fullTitle = options.title ? `${options.title} | ${SITE_CONFIG.name}` : SITE_CONFIG.title;
+  const fullDescription = options.description || SITE_CONFIG.description;
+  const fullUrl = options.url ? `${SITE_CONFIG.url}${options.url}` : SITE_CONFIG.url;
+  const fullImage = options.image ? `${SITE_CONFIG.url}${options.image}` : `${SITE_CONFIG.url}/logo.webp`;
+  
+  return {
+    '@context': 'https://schema.org',
+    '@type': options.type || 'WebSite',
+    name: fullTitle,
+    description: fullDescription,
+    url: fullUrl,
+    image: fullImage,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_CONFIG.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_CONFIG.url}/logo.webp`
+      }
+    }
+  };
+}
+
+/**
+ * Generate Service Schema
+ */
+export function generateServiceSchema(service: {name: string; description: string; image?: string; price?: string}): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.name,
+    description: service.description,
+    provider: {
+      '@type': 'Organization',
+      name: SITE_CONFIG.name
+    },
+    ...(service.image && {
+      image: `${SITE_CONFIG.url}${service.image}`
+    }),
+    ...(service.price && {
+      offers: {
+        '@type': 'Offer',
+        price: service.price,
+        priceCurrency: 'IDR'
+      }
+    })
+  };
+}
+
+/**
+ * Generate Breadcrumb Schema
+ */
+export function generateBreadcrumbSchema(items: Array<{name: string; url: string}>): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'WebPage',
+        '@id': `${SITE_CONFIG.url}${item.url}`,
+        name: item.name
+      }
+    }))
+  };
+}
+
+/**
+ * Generate Blog Post Schema
+ */
+export function generateBlogPostSchema(post: {title: string; excerpt?: string; image?: string; publishDate: string; slug: string}): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image ? `${SITE_CONFIG.url}${post.image}` : undefined,
+    datePublished: post.publishDate,
+    dateModified: post.publishDate,
+    author: {
+      '@type': 'Organization',
+      name: SITE_CONFIG.name
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_CONFIG.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_CONFIG.url}/logo.webp`
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_CONFIG.url}/blog/${post.slug}`
+    }
+  };
 }

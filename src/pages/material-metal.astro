@@ -3,7 +3,7 @@ import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { MATERIALS, SERVICES, SITE_CONFIG } from '../utils/constants.js';
-import { generateJsonLd } from '../utils/seo.js';
+import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.js';
 
 const material = MATERIALS.find(m => m.id === 'metal');
 if (!material) throw new Error('Material metal not found');
@@ -11,22 +11,39 @@ if (!material) throw new Error('Material metal not found');
 const recommendedService = SERVICES.find(s => s.id === 'laser-fiber');
 if (!recommendedService) throw new Error('Recommended service not found');
 
-// Generate JSON-LD
-const jsonLd = generateJsonLd({
+// Generate Meta Tags
+const metaTags = generateMetaTags({
   title: `${material.name} - Material Laser Cutting Premium`,
   description: material.description,
-  url: `${SITE_CONFIG.url}material-metal/`,
-  type: 'Product'
+  keywords: material.keywords,
+  url: `/rajacuttinglaser/material-metal/`,
+  type: "article" // Changed to supported type, // Using supported type from MetaTags interface
+  image: material.image,
+  publishedTime: "2024-01-01T00:00:00Z", 
+  modifiedTime: "2024-01-01T00:00:00Z",
+  author: SITE_CONFIG.author
 });
+
+// Generate structured data
+const serviceSchema = recommendedService ? generateServiceSchema(recommendedService) : null;
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Beranda', url: '' },
+  { name: 'Material', url: '#materials' },
+  { name: material.name, url: `/rajacuttinglaser/material-metal/` }
+]);
+
+// Combine schemas for jsonLd
+const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
 
 ---
 
-<BaseLayout 
-  title={`${material.name} - Material Laser Cutting Premium`}
-  description={material.description}
-  keywords={material.keywords}
-  image={material.image}
+<BaseLayout
+  title={metaTags.title}
+  description={metaTags.description}
+  keywords={metaTags.keywords}
+  url={metaTags.canonical}
   jsonLd={jsonLd}
+  type="article"
 >
   <Header slot="header" />
   
@@ -195,7 +212,7 @@ const jsonLd = generateJsonLd({
               ))}
             </div>
             <div class="mt-6">
-              <span class="text-2xl font-bold text-red-600">{recommendedService.price}</span>
+              <span class="text-2xl font-bold text-red-600">Hubungi untuk harga</span>
             </div>
           </div>
           <div>
