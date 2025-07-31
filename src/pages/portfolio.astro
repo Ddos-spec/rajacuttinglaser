@@ -13,9 +13,94 @@ const portfolioProjects = [
     description: "Pemotongan plat besi dengan presisi tinggi untuk komponen industri",
     client: "PT. Industri Manufaktur",
     material: "Plat Besi 5mm",
-    technique: "Laser Fiber Cutting"
+    technique: "Laser Fiber Cutting",
+    gallery: [
+      "/rajacuttinglaser/portfolio/portfolio-1.webp",
+      "/rajacuttinglaser/portfolio/portfolio-1-detail1.webp",
+      "/rajacuttinglaser/portfolio/portfolio-1-detail2.webp"
+    ],
+    detailDescription: "Proyek pemotongan plat besi custom dengan ketebalan 5mm menggunakan teknologi laser fiber. Hasil potongan sangat presisi dengan toleransi ±0.1mm, cocok untuk komponen industri yang membutuhkan akurasi tinggi."
   },
-  // ... data lainnya
+  {
+    id: 2,
+    title: "Engraving Logo Perusahaan",
+    category: "Galvo Engraving",
+    image: "/rajacuttinglaser/portfolio/portfolio-2.webp",
+    description: "Engraving logo perusahaan pada berbagai material dengan detail tinggi",
+    client: "CV. Karya Mandiri",
+    material: "Stainless Steel",
+    technique: "Galvo Laser Engraving",
+    gallery: [
+      "/rajacuttinglaser/portfolio/portfolio-2.webp",
+      "/rajacuttinglaser/portfolio/portfolio-2-detail1.webp",
+      "/rajacuttinglaser/portfolio/portfolio-2-detail2.webp"
+    ],
+    detailDescription: "Engraving logo perusahaan dengan teknologi galvo laser pada material stainless steel. Hasil engraving sangat detail dan tahan lama, cocok untuk branding perusahaan yang berkualitas tinggi."
+  },
+  {
+    id: 3,
+    title: "Cutting Akrilik Dekoratif",
+    category: "Laser CO2",
+    image: "/rajacuttinglaser/portfolio/portfolio-3.webp",
+    description: "Pemotongan akrilik untuk keperluan dekorasi interior dengan desain custom",
+    client: "Interior Design Studio",
+    material: "Akrilik 8mm",
+    technique: "CO2 Laser Cutting",
+    gallery: [
+      "/rajacuttinglaser/portfolio/portfolio-3.webp",
+      "/rajacuttinglaser/portfolio/portfolio-3-detail1.webp",
+      "/rajacuttinglaser/portfolio/portfolio-3-detail2.webp"
+    ],
+    detailDescription: "Pemotongan akrilik dekoratif dengan ketebalan 8mm menggunakan laser CO2. Menghasilkan potongan yang halus dan bersih tanpa crack, sempurna untuk aplikasi dekorasi interior yang elegan."
+  },
+  {
+    id: 4,
+    title: "CNC Router Kayu Jati",
+    category: "CNC Router",
+    image: "/rajacuttinglaser/portfolio/portfolio-4.webp",
+    description: "Pengerjaan kayu jati dengan CNC router untuk furniture custom",
+    client: "Furniture Artisan",
+    material: "Kayu Jati Solid",
+    technique: "CNC Router Machining",
+    gallery: [
+      "/rajacuttinglaser/portfolio/portfolio-4.webp",
+      "/rajacuttinglaser/portfolio/portfolio-4-detail1.webp",
+      "/rajacuttinglaser/portfolio/portfolio-4-detail2.webp"
+    ],
+    detailDescription: "Pengerjaan kayu jati solid menggunakan CNC router dengan presisi tinggi. Menghasilkan detail ukiran dan bentuk yang kompleks sesuai desain custom untuk furniture berkualitas premium."
+  },
+  {
+    id: 5,
+    title: "Cutting Plat Aluminium",
+    category: "Laser Fiber",
+    image: "/rajacuttinglaser/portfolio/portfolio-5.webp",
+    description: "Pemotongan plat aluminium untuk komponen otomotif",
+    client: "PT. Otomotif Nusantara",
+    material: "Aluminium 3mm",
+    technique: "Fiber Laser Cutting",
+    gallery: [
+      "/rajacuttinglaser/portfolio/portfolio-5.webp",
+      "/rajacuttinglaser/portfolio/portfolio-5-detail1.webp",
+      "/rajacuttinglaser/portfolio/portfolio-5-detail2.webp"
+    ],
+    detailDescription: "Pemotongan plat aluminium dengan ketebalan 3mm untuk komponen otomotif. Menggunakan laser fiber yang menghasilkan potongan bersih tanpa burr dan presisi tinggi sesuai standar industri otomotif."
+  },
+  {
+    id: 6,
+    title: "Engraving Kayu Mahoni",
+    category: "Laser CO2",
+    image: "/rajacuttinglaser/portfolio/portfolio-6.webp",
+    description: "Engraving detail pada kayu mahoni untuk souvenir eksklusif",
+    client: "Souvenir Premium",
+    material: "Kayu Mahoni",
+    technique: "CO2 Laser Engraving",
+    gallery: [
+      "/rajacuttinglaser/portfolio/portfolio-6.webp",
+      "/rajacuttinglaser/portfolio/portfolio-6-detail1.webp",
+      "/rajacuttinglaser/portfolio/portfolio-6-detail2.webp"
+    ],
+    detailDescription: "Engraving detail pada kayu mahoni premium menggunakan laser CO2. Menghasilkan detail ukiran yang halus dan artistik, cocok untuk souvenir eksklusif dan produk kerajinan berkualitas tinggi."
+  }
 ];
 
 // Meta tags untuk SEO
@@ -201,6 +286,106 @@ const portfolioJsonLd = [
   </section>
 
   <Footer slot="footer" />
+
+  <!-- Portfolio Detail Modal -->
+  <div id="portfolio-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-screen overflow-y-auto">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-6 border-b">
+          <h2 id="modal-title" class="text-2xl font-bold text-gray-900"></h2>
+          <button id="close-modal" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="p-6">
+          <!-- Image Gallery -->
+          <div class="mb-6">
+            <div class="relative">
+              <img id="modal-main-image" src="" alt="" class="w-full h-80 object-cover rounded-lg">
+              <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center opacity-0 hover:opacity-100">
+                <button id="expand-image" class="bg-white bg-opacity-90 p-2 rounded-full hover:bg-opacity-100 transition-all">
+                  <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Thumbnail Gallery -->
+            <div id="thumbnail-gallery" class="flex gap-2 mt-4 overflow-x-auto">
+              <!-- Thumbnails will be inserted here -->
+            </div>
+          </div>
+          
+          <!-- Project Details -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Detail Proyek</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between border-b pb-2">
+                  <span class="text-gray-600">Client:</span>
+                  <span id="modal-client" class="font-medium text-gray-900"></span>
+                </div>
+                <div class="flex justify-between border-b pb-2">
+                  <span class="text-gray-600">Material:</span>
+                  <span id="modal-material" class="font-medium text-gray-900"></span>
+                </div>
+                <div class="flex justify-between border-b pb-2">
+                  <span class="text-gray-600">Teknik:</span>
+                  <span id="modal-technique" class="font-medium text-gray-900"></span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Kategori:</span>
+                  <span id="modal-category" class="font-medium text-blue-600"></span>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Deskripsi</h3>
+              <p id="modal-description" class="text-gray-600 leading-relaxed"></p>
+            </div>
+          </div>
+          
+          <!-- Contact CTA -->
+          <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <h4 class="font-semibold text-gray-900">Tertarik dengan proyek serupa?</h4>
+                <p class="text-gray-600 text-sm">Konsultasikan kebutuhan Anda dengan tim ahli kami</p>
+              </div>
+              <a href="https://api.whatsapp.com/send?phone=6285165693179&text=Halo,%20saya%20tertarik%20dengan%20proyek%20laser%20cutting%20serupa." 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+                Konsultasi
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Lightbox Modal -->
+  <div id="image-lightbox" class="fixed inset-0 bg-black bg-opacity-90 hidden z-60 flex items-center justify-center">
+    <div class="relative max-w-screen-lg max-h-screen p-4">
+      <img id="lightbox-image" src="" alt="" class="max-w-full max-h-full object-contain">
+      <button id="close-lightbox" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
 </BaseLayout>
 
 <!-- Portfolio Filter & Modal Script -->
@@ -242,15 +427,204 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Portfolio Detail Modal (placeholder)
+  // Portfolio projects data for modal
+  const portfolioData = [
+    {
+      id: 1,
+      title: "Cutting Plat Besi Custom",
+      category: "Laser Fiber",
+      client: "PT. Industri Manufaktur",
+      material: "Plat Besi 5mm",
+      technique: "Laser Fiber Cutting",
+      gallery: [
+        "/rajacuttinglaser/portfolio/portfolio-1.webp",
+        "/rajacuttinglaser/portfolio/portfolio-1-detail1.webp",
+        "/rajacuttinglaser/portfolio/portfolio-1-detail2.webp"
+      ],
+      detailDescription: "Proyek pemotongan plat besi custom dengan ketebalan 5mm menggunakan teknologi laser fiber. Hasil potongan sangat presisi dengan toleransi ±0.1mm, cocok untuk komponen industri yang membutuhkan akurasi tinggi."
+    },
+    {
+      id: 2,
+      title: "Engraving Logo Perusahaan",
+      category: "Galvo Engraving",
+      client: "CV. Karya Mandiri",
+      material: "Stainless Steel",
+      technique: "Galvo Laser Engraving",
+      gallery: [
+        "/rajacuttinglaser/portfolio/portfolio-2.webp",
+        "/rajacuttinglaser/portfolio/portfolio-2-detail1.webp",
+        "/rajacuttinglaser/portfolio/portfolio-2-detail2.webp"
+      ],
+      detailDescription: "Engraving logo perusahaan dengan teknologi galvo laser pada material stainless steel. Hasil engraving sangat detail dan tahan lama, cocok untuk branding perusahaan yang berkualitas tinggi."
+    },
+    {
+      id: 3,
+      title: "Cutting Akrilik Dekoratif",
+      category: "Laser CO2",
+      client: "Interior Design Studio",
+      material: "Akrilik 8mm",
+      technique: "CO2 Laser Cutting",
+      gallery: [
+        "/rajacuttinglaser/portfolio/portfolio-3.webp",
+        "/rajacuttinglaser/portfolio/portfolio-3-detail1.webp",
+        "/rajacuttinglaser/portfolio/portfolio-3-detail2.webp"
+      ],
+      detailDescription: "Pemotongan akrilik dekoratif dengan ketebalan 8mm menggunakan laser CO2. Menghasilkan potongan yang halus dan bersih tanpa crack, sempurna untuk aplikasi dekorasi interior yang elegan."
+    },
+    {
+      id: 4,
+      title: "CNC Router Kayu Jati",
+      category: "CNC Router",
+      client: "Furniture Artisan",
+      material: "Kayu Jati Solid",
+      technique: "CNC Router Machining",
+      gallery: [
+        "/rajacuttinglaser/portfolio/portfolio-4.webp",
+        "/rajacuttinglaser/portfolio/portfolio-4-detail1.webp",
+        "/rajacuttinglaser/portfolio/portfolio-4-detail2.webp"
+      ],
+      detailDescription: "Pengerjaan kayu jati solid menggunakan CNC router dengan presisi tinggi. Menghasilkan detail ukiran dan bentuk yang kompleks sesuai desain custom untuk furniture berkualitas premium."
+    },
+    {
+      id: 5,
+      title: "Cutting Plat Aluminium",
+      category: "Laser Fiber",
+      client: "PT. Otomotif Nusantara",
+      material: "Aluminium 3mm",
+      technique: "Fiber Laser Cutting",
+      gallery: [
+        "/rajacuttinglaser/portfolio/portfolio-5.webp",
+        "/rajacuttinglaser/portfolio/portfolio-5-detail1.webp",
+        "/rajacuttinglaser/portfolio/portfolio-5-detail2.webp"
+      ],
+      detailDescription: "Pemotongan plat aluminium dengan ketebalan 3mm untuk komponen otomotif. Menggunakan laser fiber yang menghasilkan potongan bersih tanpa burr dan presisi tinggi sesuai standar industri otomotif."
+    },
+    {
+      id: 6,
+      title: "Engraving Kayu Mahoni",
+      category: "Laser CO2",
+      client: "Souvenir Premium",
+      material: "Kayu Mahoni",
+      technique: "CO2 Laser Engraving",
+      gallery: [
+        "/rajacuttinglaser/portfolio/portfolio-6.webp",
+        "/rajacuttinglaser/portfolio/portfolio-6-detail1.webp",
+        "/rajacuttinglaser/portfolio/portfolio-6-detail2.webp"
+      ],
+      detailDescription: "Engraving detail pada kayu mahoni premium menggunakan laser CO2. Menghasilkan detail ukiran yang halus dan artistik, cocok untuk souvenir eksklusif dan produk kerajinan berkualitas tinggi."
+    }
+  ];
+
+  // Modal elements
+  const modal = document.getElementById('portfolio-modal');
+  const closeModalBtn = document.getElementById('close-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalMainImage = document.getElementById('modal-main-image') as HTMLImageElement;
+  const modalClient = document.getElementById('modal-client');
+  const modalMaterial = document.getElementById('modal-material');
+  const modalTechnique = document.getElementById('modal-technique');
+  const modalCategory = document.getElementById('modal-category');
+  const modalDescription = document.getElementById('modal-description');
+  const thumbnailGallery = document.getElementById('thumbnail-gallery');
+
+  // Lightbox elements
+  const lightbox = document.getElementById('image-lightbox');
+  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const closeLightboxBtn = document.getElementById('close-lightbox');
+  const expandImageBtn = document.getElementById('expand-image');
+
+  // Portfolio Detail Modal functionality
   const viewDetailBtns = document.querySelectorAll('.view-detail-btn');
   viewDetailBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const projectId = btn.getAttribute('data-project-id');
-      // Implement modal functionality here
-      console.log('View detail for project:', projectId);
-      // You can add modal implementation here
+      const projectId = parseInt(btn.getAttribute('data-project-id') || '0');
+      const project = portfolioData.find(p => p.id === projectId);
+      
+      if (project && modal && modalTitle && modalMainImage && modalClient && modalMaterial && modalTechnique && modalCategory && modalDescription && thumbnailGallery) {
+        // Populate modal with project data
+        modalTitle.textContent = project.title;
+        modalMainImage.src = project.gallery[0];
+        modalMainImage.alt = project.title;
+        modalClient.textContent = project.client;
+        modalMaterial.textContent = project.material;
+        modalTechnique.textContent = project.technique;
+        modalCategory.textContent = project.category;
+        modalDescription.textContent = project.detailDescription;
+
+        // Create thumbnail gallery
+        thumbnailGallery.innerHTML = '';
+        project.gallery.forEach((imageSrc, index) => {
+          const thumbnail = document.createElement('img');
+          thumbnail.src = imageSrc;
+          thumbnail.alt = `${project.title} - Image ${index + 1}`;
+          thumbnail.className = 'w-20 h-20 object-cover rounded-lg cursor-pointer hover:opacity-75 transition-opacity';
+          thumbnail.addEventListener('click', () => {
+            modalMainImage.src = imageSrc;
+          });
+          thumbnailGallery.appendChild(thumbnail);
+        });
+
+        // Show modal
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
     });
+  });
+
+  // Close modal functionality
+  if (closeModalBtn && modal) {
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    });
+  }
+
+  // Close modal when clicking outside
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  }
+
+  // Image lightbox functionality
+  if (expandImageBtn && lightbox && lightboxImage) {
+    expandImageBtn.addEventListener('click', () => {
+      if (modalMainImage) {
+        lightboxImage.src = modalMainImage.src;
+        lightboxImage.alt = modalMainImage.alt;
+        lightbox.classList.remove('hidden');
+      }
+    });
+  }
+
+  // Close lightbox functionality
+  if (closeLightboxBtn && lightbox) {
+    closeLightboxBtn.addEventListener('click', () => {
+      lightbox.classList.add('hidden');
+    });
+  }
+
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.add('hidden');
+      }
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (lightbox && !lightbox.classList.contains('hidden')) {
+        lightbox.classList.add('hidden');
+      } else if (modal && !modal.classList.contains('hidden')) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    }
   });
 });
 </script>
