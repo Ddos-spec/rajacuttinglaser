@@ -15,7 +15,7 @@ export function generateMetaTags({
   const fullTitle = title ? `${title} | ${SITE_CONFIG.name}` : SITE_CONFIG.title;
   const fullDescription = description || SITE_CONFIG.description;
   const fullUrl = url ? `${SITE_CONFIG.url}${url}` : SITE_CONFIG.url;
-  const fullImage = image ? `${SITE_CONFIG.url}${image}` : `${SITE_CONFIG.url}/hero-laser.webp`;
+  const fullImage = image ? `${SITE_CONFIG.url}${image}` : `${SITE_CONFIG.url}/logo.webp`;
   
   // Fixed: Added default keywords to SITE_CONFIG or provide fallback
   const defaultKeywords = 'laser cutting, cnc router, laser fiber, laser co2, jabodetabek';
