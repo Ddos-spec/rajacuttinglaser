@@ -21,16 +21,17 @@ const jsonLd = {
 
 // Fixed helper function to get proper image path
 const getImagePath = (imagePath) => {
-  // Remove any existing prefix
+  // Remove any existing prefix and clean the path
   let cleanPath = imagePath.replace('/rajacuttinglaser/', '').replace(/^\/+/, '');
+  cleanPath = cleanPath.replace('images/', '');
   
   // For GitHub Pages (production)
   if (import.meta.env.PROD) {
-    return `/rajacuttinglaser/images/${cleanPath.replace('images/', '')}`;
+    return `/rajacuttinglaser/images/${cleanPath}`;
   }
   
   // For local development
-  return `/images/${cleanPath.replace('images/', '')}`;
+  return `/images/${cleanPath}`;
 };
 ---
 
@@ -91,7 +92,7 @@ const getImagePath = (imagePath) => {
                 loading="lazy"
                 width="400"
                 height="225"
-                onerror="this.onerror=null; this.src='/rajacuttinglaser/images/placeholder.webp';"
+                onerror={`this.onerror=null; this.src='${getImagePath('placeholder.webp')}';`}
               />
               <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
                 <button
@@ -184,11 +185,16 @@ const getImagePath = (imagePath) => {
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Helper function to get correct image path
+    // Helper function to get correct image path - FIXED VERSION
     function getCorrectImagePath(imagePath) {
-      // Remove any existing prefix and clean up the path
-      let cleanPath = imagePath.replace('/rajacuttinglaser/', '').replace(/^\/+/, '');
+      // Clean up the path - remove any existing prefixes
+      let cleanPath = imagePath;
+      
+      // Remove various possible prefixes
+      cleanPath = cleanPath.replace('/rajacuttinglaser/', '');
+      cleanPath = cleanPath.replace('/images/', '');
       cleanPath = cleanPath.replace('images/', '');
+      cleanPath = cleanPath.replace(/^\/+/, ''); // Remove leading slashes
       
       // Check if we're in production (GitHub Pages)
       const isProduction = window.location.hostname.includes('github.io');
@@ -448,15 +454,33 @@ const getImagePath = (imagePath) => {
       }, index * 100);
     });
     
-    // Fix all existing images on page load
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-      const currentSrc = img.src;
-      if (currentSrc.includes('singagehote') || currentSrc.includes('furnituremetal') || 
-          currentSrc.includes('displyacrylic') || currentSrc.includes('prototype')) {
-        img.src = getCorrectImagePath(currentSrc);
-      }
-    });
+    // CRITICAL FIX: Fix all portfolio images on page load
+    function fixPortfolioImages() {
+      const portfolioImages = document.querySelectorAll('.portfolio-item img');
+      portfolioImages.forEach(img => {
+        // Get the current src and fix it
+        const currentSrc = img.getAttribute('src');
+        if (currentSrc) {
+          const fixedSrc = getCorrectImagePath(currentSrc);
+          if (fixedSrc !== currentSrc) {
+            img.src = fixedSrc;
+          }
+        }
+        
+        // Also fix the onerror attribute
+        const errorFallback = getCorrectImagePath('placeholder.webp');
+        img.onerror = function() {
+          this.onerror = null;
+          this.src = errorFallback;
+        };
+      });
+    }
+
+    // Run the fix immediately
+    fixPortfolioImages();
+    
+    // Also run after a short delay to catch any delayed images
+    setTimeout(fixPortfolioImages, 1000);
   });
 </script>
 
@@ -507,6 +531,22 @@ const getImagePath = (imagePath) => {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
+  /* Image loading state */
+  .portfolio-item img[src=""] {
+    background: linear-gradient(90deg, #f0f0f0 25%, transparent 37%, #f0f0f0 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .portfolio-item {
@@ -518,5 +558,31 @@ const getImagePath = (imagePath) => {
       max-height: 90vh;
       overflow-y: auto;
     }
+  }
+
+  /* Fallback for broken images */
+  .portfolio-item img:not([src]),
+  .portfolio-item img[src=""],
+  .portfolio-item img[src*="placeholder"] {
+    background-color: #f3f4f6;
+    background-image: 
+      linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
+      linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
+      linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    position: relative;
+  }
+
+  .portfolio-item img:not([src])::after,
+  .portfolio-item img[src=""]::after {
+    content: "📷";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    opacity: 0.3;
   }
 </style>
