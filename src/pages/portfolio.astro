@@ -19,12 +19,18 @@ const jsonLd = {
   }
 };
 
-// Helper function to get proper image path
+// Fixed helper function to get proper image path
 const getImagePath = (imagePath) => {
-  if (imagePath.startsWith('/rajacuttinglaser/')) {
-    return imagePath.replace('/rajacuttinglaser/', '/');
+  // Remove any existing prefix
+  let cleanPath = imagePath.replace('/rajacuttinglaser/', '').replace(/^\/+/, '');
+  
+  // For GitHub Pages (production)
+  if (import.meta.env.PROD) {
+    return `/rajacuttinglaser/images/${cleanPath.replace('images/', '')}`;
   }
-  return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+  
+  // For local development
+  return `/images/${cleanPath.replace('images/', '')}`;
 };
 ---
 
@@ -85,7 +91,7 @@ const getImagePath = (imagePath) => {
                 loading="lazy"
                 width="400"
                 height="225"
-                onerror="this.onerror=null; this.src='/images/placeholder.webp';"
+                onerror="this.onerror=null; this.src='/rajacuttinglaser/images/placeholder.webp';"
               />
               <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
                 <button
@@ -178,6 +184,22 @@ const getImagePath = (imagePath) => {
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Helper function to get correct image path
+    function getCorrectImagePath(imagePath) {
+      // Remove any existing prefix and clean up the path
+      let cleanPath = imagePath.replace('/rajacuttinglaser/', '').replace(/^\/+/, '');
+      cleanPath = cleanPath.replace('images/', '');
+      
+      // Check if we're in production (GitHub Pages)
+      const isProduction = window.location.hostname.includes('github.io');
+      
+      if (isProduction) {
+        return `/rajacuttinglaser/images/${cleanPath}`;
+      } else {
+        return `/images/${cleanPath}`;
+      }
+    }
+
     // Portfolio filtering functionality
     const filterButtons = document.querySelectorAll('.portfolio-filter');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
@@ -220,14 +242,14 @@ const getImagePath = (imagePath) => {
     const modalContent = document.getElementById('modal-content');
     const closeModalBtn = document.getElementById('close-modal');
 
-    // Portfolio data for modal
+    // Updated Portfolio data for modal with corrected image paths
     const portfolioData = {
       1: {
         title: "Signage Hotel Bintang 5 Jakarta",
-        category: "Commercial",
+        category: "Commercial", 
         material: "ACP Aluminium",
         service: "CNC Router",
-        image: "/images/singagehote.webp",
+        image: "singagehote.webp", // Just the filename
         description: "Pembuatan signage premium untuk hotel bintang 5 di Jakarta dengan detail presisi tinggi menggunakan teknologi CNC Router terkini.",
         specifications: [
           'Dimensi: 2000mm x 1000mm', 
@@ -243,7 +265,7 @@ const getImagePath = (imagePath) => {
         category: "Industrial",
         material: "Stainless Steel",
         service: "Laser Fiber",
-        image: "/images/furnituremetal.webp",
+        image: "furnituremetal.webp", // Just the filename
         description: "Cutting furniture stainless steel custom untuk restaurant modern di Bekasi dengan desain unik dan presisi tinggi menggunakan laser fiber 2000W.",
         specifications: [
           'Material: SS304 3mm', 
@@ -259,7 +281,7 @@ const getImagePath = (imagePath) => {
         category: "Retail",
         material: "Acrylic",
         service: "Laser CO2",
-        image: "/images/displyacrylic.webp",
+        image: "displyacrylic.webp", // Just the filename
         description: "Display acrylic premium untuk toko retail di Bogor dengan engraving logo dan cutting presisi menggunakan laser CO2 150W.",
         specifications: [
           'Material: Acrylic 5mm', 
@@ -275,7 +297,7 @@ const getImagePath = (imagePath) => {
         category: "Manufacturing",
         material: "PVC",
         service: "CNC Router",
-        image: "/images/prototype.webp",
+        image: "prototype.webp", // Just the filename
         description: "Pembuatan prototype industri dari material PVC untuk perusahaan manufaktur di Tangerang dengan toleransi sangat ketat.",
         specifications: [
           'Material: PVC 3mm', 
@@ -292,12 +314,14 @@ const getImagePath = (imagePath) => {
       const item = portfolioData[id];
       if (!item || !modalContent) return;
 
+      const imagePath = getCorrectImagePath(item.image);
+
       modalContent.innerHTML = `
         <img 
-          src="${item.image}" 
+          src="${imagePath}" 
           alt="${item.title}" 
           class="w-full h-64 md:h-96 object-cover"
-          onerror="this.onerror=null; this.src='/images/placeholder.webp';"
+          onerror="this.onerror=null; this.src='${getCorrectImagePath('placeholder.webp')}';"
         >
         <div class="p-6 md:p-8">
           <div class="flex items-center justify-between mb-4">
@@ -422,6 +446,16 @@ const getImagePath = (imagePath) => {
         item.style.opacity = '1';
         item.style.transform = 'translateY(0)';
       }, index * 100);
+    });
+    
+    // Fix all existing images on page load
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+      const currentSrc = img.src;
+      if (currentSrc.includes('singagehote') || currentSrc.includes('furnituremetal') || 
+          currentSrc.includes('displyacrylic') || currentSrc.includes('prototype')) {
+        img.src = getCorrectImagePath(currentSrc);
+      }
     });
   });
 </script>
