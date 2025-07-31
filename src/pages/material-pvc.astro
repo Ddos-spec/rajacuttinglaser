@@ -2,11 +2,24 @@
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { MATERIALS, SERVICES } from '../utils/constants.js';
+import { MATERIALS, SERVICES, SITE_CONFIG } from '../utils/constants.js';
+import { generateJsonLd } from '../utils/seo.js';
 
 const material = MATERIALS.find(m => m.id === 'pvc');
-const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
+if (!material) throw new Error('Material PVC not found');
 
+const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
+if (!recommendedService) throw new Error('Recommended service not found');
+
+// Generate JSON-LD
+const jsonLd = generateJsonLd({
+  title: `${material.name} - Material Laser Cutting Premium`,
+  description: material.description,
+  url: `${SITE_CONFIG.url}material-pvc/`,
+  type: 'Product'
+});
+
+---
 
 <BaseLayout 
   title={`${material.name} - Material Laser Cutting Premium`}
@@ -74,7 +87,7 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
             <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-2">Tahan Kimia</h3>
@@ -84,7 +97,7 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-2">Fleksibel</h3>
@@ -94,7 +107,7 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
             <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-2">Ekonomis</h3>
@@ -175,14 +188,14 @@ const recommendedService = SERVICES.find(s => s.id === 'laser-co2');
               {recommendedService.features.map((feature) => (
                 <div class="flex items-center space-x-3">
                   <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
                   <span class="text-gray-700">{feature}</span>
                 </div>
               ))}
             </div>
             <div class="mt-6">
-              <span class="text-2xl font-bold text-green-600">{recommendedService.price}</span>
+              <span class="text-2xl font-bold text-green-600">Hubungi untuk harga</span>
             </div>
           </div>
           <div>

@@ -7,15 +7,19 @@ import CTA from '../components/CTA.astro';
 import { FAQ, SITE_CONFIG, WHATSAPP_MESSAGES } from '../utils/constants.js';
 import { generateMetaTags } from '../utils/seo.js';
 
-// --- PERBAIKAN: Gunakan type assertion saat menggunakan metaTags ---
-const metaTags = generateMetaTags({
+import type { Props as BaseLayoutProps } from '../components/BaseLayout.astro';
+
+const seoData = {
   title: "Kontak Kami - LaserCut Pro Jabodetabek",
   description: "Hubungi LaserCut Pro untuk layanan laser cutting, engraving, dan CNC router terbaik di Jakarta, Bogor, Depok, Tangerang, Bekasi. Dapatkan konsultasi & harga terbaik!",
   keywords: "kontak laser cutting, jasa laser jakarta, laser cutting bekasi, laser engraving bogor, cnc router depok, tangerang laser service",
   url: "/rajacuttinglaser/contact/",
-  type: "website",
+  type: "website" as const,
   image: "/rajacuttinglaser/images/logo.webp"
-});
+};
+
+// Get meta tags with proper typing
+const metaTags = generateMetaTags(seoData) as BaseLayoutProps;
 // ---
 ---
 
@@ -88,11 +92,12 @@ const metaTags = generateMetaTags({
 <!-- --- --- -->
 
 <BaseLayout
-  // --- PERBAIKAN: Gunakan type assertion saat mengakses properti metaTags ---
   title={metaTags.title}
   description={metaTags.description}
   keywords={metaTags.keywords}
-  url={metaTags.canonical} // --- PERBAIKAN: canonical diakses dengan benar ---
+  url={metaTags.canonical}
+  type="website"
+  jsonLd={metaTags.jsonLd}
 >
   <Header slot="header" />
 
@@ -209,9 +214,7 @@ const metaTags = generateMetaTags({
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Jam Operasional</h3>
-                <!-- --- PERBAIKAN: Gunakan SITE_CONFIG.hours sesuai dengan constants.js --->
-                <p class="text-gray-600">{SITE_CONFIG.hours}</p>
-                <!-- --- --->
+                <p class="text-gray-600">Senin - Sabtu: 08:00 - 17:00 WIB</p>
               </div>
             </div>
           </div>
@@ -306,14 +309,33 @@ const metaTags = generateMetaTags({
       </div>
       <div class="max-w-3xl mx-auto space-y-6">
         <!-- --- PERBAIKAN: Tambahkan tipe untuk parameter index --->
-        {FAQ.map((faq, index) => (
-        <!-- --- --->
-          <div key={faq.id} class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <button class="flex items-center justify-between w-full text-left p-6" onclick={`toggleContactFAQ(${index})`}>
+        {FAQ.map((faq: { question: string; answer: string }, index: number) => (
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <button 
+              class="flex items-center justify-between w-full text-left p-6" 
+              onclick={`toggleContactFAQ(${index})`}
+              type="button"
+            >
               <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
-              <svg class="w-6 h-6 text-gray-500 transform transition-transform duration-300" id={`contact-faq-icon-${index}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <svg 
+                class="w-6 h-6 text-gray-500 transform transition-transform duration-300" 
+                id={`contact-faq-icon-${index}`} 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
             </button>
-            <div class="px-6 pb-6 text-gray-700 leading-relaxed hidden" id={`contact-faq-answer-${index}`}>
+            <div 
+              class="px-6 pb-6 text-gray-700 leading-relaxed hidden" 
+              id={`contact-faq-answer-${index}`}
+            >
               {faq.answer}
             </div>
           </div>

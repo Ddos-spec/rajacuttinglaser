@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
 import { SERVICES, MATERIALS, TESTIMONIALS, PORTFOLIO, FAQ, SITE_CONFIG } from '../utils/constants.js';
-import { generateMetaTags, generateFAQSchema, generateReviewSchema } from '../utils/seo.js';
+import { generateMetaTags, generateFAQSchema, generateReviewSchema } from '../utils/seo.ts';
 
 // SEO Meta Tags - Dioptimalkan untuk Jabodetabek
 const metaTags = generateMetaTags({
@@ -47,10 +47,7 @@ function createUrl(path: string | undefined | null): string {
 ---
 
 <BaseLayout
-  title={metaTags.title}
-  description={metaTags.description}
-  keywords={metaTags.keywords}
-  url={metaTags.canonical}
+  metaTags={metaTags}
   jsonLd={[faqSchema, reviewSchema]}
 >
   <Header slot="header" />
@@ -376,16 +373,18 @@ function createUrl(path: string | undefined | null): string {
     });
 
     // Smooth scroll for anchor links - Fixed typing
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor: Element) => {
+      anchor.addEventListener('click', function(this: HTMLAnchorElement, e: Event) {
         e.preventDefault();
-        const href = (this as HTMLAnchorElement).getAttribute('href');
-        const target = document.querySelector(href || '');
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+        const href = this.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
         }
       });
     });

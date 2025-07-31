@@ -2,11 +2,24 @@
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { MATERIALS, SERVICES } from '../utils/constants.js';
+import { MATERIALS, SERVICES, SITE_CONFIG } from '../utils/constants.js';
+import { generateJsonLd } from '../utils/seo.js';
 
 const material = MATERIALS.find(m => m.id === 'metal');
-const recommendedService = SERVICES.find(s => s.id === 'laser-fiber');
+if (!material) throw new Error('Material metal not found');
 
+const recommendedService = SERVICES.find(s => s.id === 'laser-fiber');
+if (!recommendedService) throw new Error('Recommended service not found');
+
+// Generate JSON-LD
+const jsonLd = generateJsonLd({
+  title: `${material.name} - Material Laser Cutting Premium`,
+  description: material.description,
+  url: `${SITE_CONFIG.url}material-metal/`,
+  type: 'Product'
+});
+
+---
 
 <BaseLayout 
   title={`${material.name} - Material Laser Cutting Premium`}
