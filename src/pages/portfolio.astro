@@ -1,22 +1,22 @@
 ---
-// portfolio.astro - Halaman portfolio dengan filter dan modal detail
+// portfolio.astro - Halaman portfolio dengan filter dan modal detail (FIXED)
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { PORTFOLIO } from '../utils/constants.js';
+import { PORTFOLIO, SITE_CONFIG } from '../utils/constants.js';
 
 // Sort portfolio items by id (newest first)
 const sortedPortfolio = PORTFOLIO.sort((a, b) => b.id - a.id);
 
-// Base URL untuk gambar
-const baseURL = import.meta.env.BASE_URL || '/';
+// Get base URL from Astro's environment variables. This is the correct way.
+const base = import.meta.env.BASE_URL;
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "Portfolio LaserCut Pro",
   "description": "Koleksi project laser cutting, CNC router, dan engraving terbaik dari LaserCut Pro",
-  "url": `${Astro.site}portfolio/`,
+  "url": new URL('portfolio/', Astro.site).href,
   "publisher": {
     "@type": "Organization",
     "name": "LaserCut Pro"
@@ -75,10 +75,12 @@ const jsonLd = {
           >
             <div class="relative group">
               <img 
-                src={baseURL + item.image} 
+                src={`${base}${item.image.startsWith('/') ? item.image.slice(1) : item.image}`} 
                 alt={item.title} 
                 class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" 
                 loading="lazy"
+                width="400"
+                height="225"
               />
               <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
                 <button
@@ -120,7 +122,7 @@ const jsonLd = {
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
-          href="https://api.whatsapp.com/send?phone=6285165693179&text=Halo,%20saya%20tertarik%20dengan%20jasa%20laser%20cutting.%20Bisa%20konsultasi?"
+          href={`https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=Halo,%20saya%20tertarik%20dengan%20jasa%20laser%20cutting.%20Bisa%20konsultasi?`}
           target="_blank"
           rel="noopener noreferrer"
           class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
@@ -131,7 +133,7 @@ const jsonLd = {
           Konsultasi via WhatsApp
         </a>
         <a 
-          href={baseURL + "contact"} 
+          href={`${base}contact/`} 
           class="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
         >
           Request Quote
@@ -201,16 +203,15 @@ const jsonLd = {
   const modalContent = document.getElementById('modal-content');
 
   // Get base URL for images
-  const baseURL = import.meta.env.BASE_URL || '/';
+  const baseURL = import.meta.env.BASE_URL.replace(/\/$/, ''); // Remove trailing slash if any
 
-  function openModal(id) {
-    const portfolioData = {
+  const portfolioData = {
       1: {
         title: "Signage Hotel Bintang 5 Jakarta",
         category: "Commercial",
         material: "ACP Aluminium",
         service: "CNC Router",
-        image: "images/singagehote.webp",
+        image: "/images/singagehote.webp",
         description: "Pembuatan signage premium untuk hotel bintang 5 di Jakarta dengan detail presisi tinggi menggunakan teknologi CNC Router terkini.",
         specifications: ['Dimensi: 2000mm x 1000mm', 'Ketebalan: 4mm ACP', 'Finishing: Powder Coating', 'Warna: Silver Metallic'],
         duration: '7 Hari',
@@ -221,7 +222,7 @@ const jsonLd = {
         category: "Industrial",
         material: "Stainless Steel",
         service: "Laser Fiber",
-        image: "images/furnituremetal.webp",
+        image: "/images/furnituremetal.webp",
         description: "Cutting furniture stainless steel custom untuk restaurant modern di Bekasi dengan desain unik dan presisi tinggi menggunakan laser fiber 2000W.",
         specifications: ['Material: SS304 3mm', 'Dimensi: Custom sesuai desain', 'Toleransi: ±0.1mm', 'Finishing: Brushed'],
         duration: '10 Hari',
@@ -232,7 +233,7 @@ const jsonLd = {
         category: "Retail",
         material: "Acrylic",
         service: "Laser CO2",
-        image: "images/displyacrylic.webp",
+        image: "/images/displyacrylic.webp",
         description: "Display acrylic premium untuk toko retail di Bogor dengan engraving logo dan cutting presisi menggunakan laser CO2 150W.",
         specifications: ['Material: Acrylic 5mm', 'Warna: Transparent', 'Engraving: Logo Custom', 'Dimensi: 1200mm x 600mm'],
         duration: '5 Hari',
@@ -243,14 +244,15 @@ const jsonLd = {
         category: "Manufacturing",
         material: "PVC",
         service: "CNC Router",
-        image: "images/prototype.webp",
+        image: "/images/prototype.webp",
         description: "Pembuatan prototype industri dari material PVC untuk perusahaan manufaktur di Tangerang dengan toleransi sangat ketat.",
         specifications: ['Material: PVC 3mm', 'Dimensi: 1500mm x 800mm', 'Toleransi: ±0.05mm', 'Quantity: 10pcs'],
         duration: '3 Hari',
         completedDate: '2024-02-20'
       }
     };
-
+    
+  function openModal(id) {
     const item = portfolioData[id];
     if (!item || !modalContent) return;
 
