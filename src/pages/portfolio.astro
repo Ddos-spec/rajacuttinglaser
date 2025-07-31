@@ -1,5 +1,5 @@
 ---
-// portfolio.astro - Halaman portfolio dengan filter dan modal detail (FIXED)
+// portfolio.astro - Halaman portfolio dengan filter dan modal detail (FIXED IMAGE DISPLAY)
 import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -7,9 +7,6 @@ import { PORTFOLIO, SITE_CONFIG } from '../utils/constants.js';
 
 // Sort portfolio items by id (newest first)
 const sortedPortfolio = PORTFOLIO.sort((a, b) => b.id - a.id);
-
-// Get base URL from Astro's environment variables. This is the correct way.
-const base = import.meta.env.BASE_URL;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -75,7 +72,7 @@ const jsonLd = {
           >
             <div class="relative group">
               <img 
-                src={`${base}${item.image.startsWith('/') ? item.image.slice(1) : item.image}`} 
+                src={item.image} 
                 alt={item.title} 
                 class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" 
                 loading="lazy"
@@ -133,7 +130,7 @@ const jsonLd = {
           Konsultasi via WhatsApp
         </a>
         <a 
-          href={`${base}contact/`} 
+          href="contact/" 
           class="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
         >
           Request Quote
@@ -142,6 +139,7 @@ const jsonLd = {
     </div>
   </section>
 
+  <!-- Modal -->
   <div 
     id="portfolio-modal" 
     class="fixed inset-0 z-50 hidden overflow-y-auto"
@@ -150,7 +148,6 @@ const jsonLd = {
     aria-modal="true"
   >
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-      
       <div class="fixed inset-0 bg-black bg-opacity-75 transition-opacity" aria-hidden="true"></div>
       
       <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
@@ -165,8 +162,7 @@ const jsonLd = {
             </svg>
           </button>
         </div>
-        <div id="modal-content">
-          </div>
+        <div id="modal-content"></div>
       </div>
     </div>
   </div>
@@ -175,89 +171,113 @@ const jsonLd = {
 </BaseLayout>
 
 <script>
+  // Portfolio filtering functionality
   const filterButtons = document.querySelectorAll('.portfolio-filter');
   const portfolioItems = document.querySelectorAll('.portfolio-item');
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-      filterButtons.forEach(btn => btn.classList.remove('active', 'bg-blue-600', 'text-white'));
-      filterButtons.forEach(btn => btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300'));
+      // Reset all buttons
+      filterButtons.forEach(btn => {
+        btn.classList.remove('active', 'bg-blue-600', 'text-white');
+        btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+      });
       
+      // Activate clicked button
       button.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-300');
       button.classList.add('active', 'bg-blue-600', 'text-white');
       
       const filter = button.getAttribute('data-filter');
       
+      // Filter portfolio items
       portfolioItems.forEach(item => {
-        const htmlItem = item;
-        if (filter === 'all' || htmlItem.getAttribute('data-category') === filter) {
-          htmlItem.style.display = 'block';
+        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+          item.style.display = 'block';
         } else {
-          htmlItem.style.display = 'none';
+          item.style.display = 'none';
         }
       });
     });
   });
 
+  // Modal functionality
   const modal = document.getElementById('portfolio-modal');
   const modalContent = document.getElementById('modal-content');
 
-  // Get base URL for images
-  const baseURL = import.meta.env.BASE_URL.replace(/\/$/, ''); // Remove trailing slash if any
-
+  // Portfolio data for modal - menggunakan path langsung seperti di blog
   const portfolioData = {
-      1: {
-        title: "Signage Hotel Bintang 5 Jakarta",
-        category: "Commercial",
-        material: "ACP Aluminium",
-        service: "CNC Router",
-        image: "/images/singagehote.webp",
-        description: "Pembuatan signage premium untuk hotel bintang 5 di Jakarta dengan detail presisi tinggi menggunakan teknologi CNC Router terkini.",
-        specifications: ['Dimensi: 2000mm x 1000mm', 'Ketebalan: 4mm ACP', 'Finishing: Powder Coating', 'Warna: Silver Metallic'],
-        duration: '7 Hari',
-        completedDate: '2024-02-15'
-      },
-      2: {
-        title: "Furniture Custom Stainless Bekasi",
-        category: "Industrial",
-        material: "Stainless Steel",
-        service: "Laser Fiber",
-        image: "/images/furnituremetal.webp",
-        description: "Cutting furniture stainless steel custom untuk restaurant modern di Bekasi dengan desain unik dan presisi tinggi menggunakan laser fiber 2000W.",
-        specifications: ['Material: SS304 3mm', 'Dimensi: Custom sesuai desain', 'Toleransi: ±0.1mm', 'Finishing: Brushed'],
-        duration: '10 Hari',
-        completedDate: '2024-01-30'
-      },
-      3: {
-        title: "Display Acrylic Premium Bogor",
-        category: "Retail",
-        material: "Acrylic",
-        service: "Laser CO2",
-        image: "/images/displyacrylic.webp",
-        description: "Display acrylic premium untuk toko retail di Bogor dengan engraving logo dan cutting presisi menggunakan laser CO2 150W.",
-        specifications: ['Material: Acrylic 5mm', 'Warna: Transparent', 'Engraving: Logo Custom', 'Dimensi: 1200mm x 600mm'],
-        duration: '5 Hari',
-        completedDate: '2024-02-05'
-      },
-      4: {
-        title: "Prototype Industri Tangerang",
-        category: "Manufacturing",
-        material: "PVC",
-        service: "CNC Router",
-        image: "/images/prototype.webp",
-        description: "Pembuatan prototype industri dari material PVC untuk perusahaan manufaktur di Tangerang dengan toleransi sangat ketat.",
-        specifications: ['Material: PVC 3mm', 'Dimensi: 1500mm x 800mm', 'Toleransi: ±0.05mm', 'Quantity: 10pcs'],
-        duration: '3 Hari',
-        completedDate: '2024-02-20'
-      }
-    };
+    1: {
+      title: "Signage Hotel Bintang 5 Jakarta",
+      category: "Commercial",
+      material: "ACP Aluminium",
+      service: "CNC Router",
+      image: "/images/singagehote.webp",
+      description: "Pembuatan signage premium untuk hotel bintang 5 di Jakarta dengan detail presisi tinggi menggunakan teknologi CNC Router terkini.",
+      specifications: [
+        'Dimensi: 2000mm x 1000mm', 
+        'Ketebalan: 4mm ACP', 
+        'Finishing: Powder Coating', 
+        'Warna: Silver Metallic'
+      ],
+      duration: '7 Hari',
+      completedDate: '2024-02-15'
+    },
+    2: {
+      title: "Furniture Custom Stainless Bekasi",
+      category: "Industrial",
+      material: "Stainless Steel",
+      service: "Laser Fiber",
+      image: "/images/furnituremetal.webp",
+      description: "Cutting furniture stainless steel custom untuk restaurant modern di Bekasi dengan desain unik dan presisi tinggi menggunakan laser fiber 2000W.",
+      specifications: [
+        'Material: SS304 3mm', 
+        'Dimensi: Custom sesuai desain', 
+        'Toleransi: ±0.1mm', 
+        'Finishing: Brushed'
+      ],
+      duration: '10 Hari',
+      completedDate: '2024-01-30'
+    },
+    3: {
+      title: "Display Acrylic Premium Bogor",
+      category: "Retail",
+      material: "Acrylic",
+      service: "Laser CO2",
+      image: "/images/displyacrylic.webp",
+      description: "Display acrylic premium untuk toko retail di Bogor dengan engraving logo dan cutting presisi menggunakan laser CO2 150W.",
+      specifications: [
+        'Material: Acrylic 5mm', 
+        'Warna: Transparent', 
+        'Engraving: Logo Custom', 
+        'Dimensi: 1200mm x 600mm'
+      ],
+      duration: '5 Hari',
+      completedDate: '2024-02-05'
+    },
+    4: {
+      title: "Prototype Industri Tangerang",
+      category: "Manufacturing",
+      material: "PVC",
+      service: "CNC Router",
+      image: "/images/prototype.webp",
+      description: "Pembuatan prototype industri dari material PVC untuk perusahaan manufaktur di Tangerang dengan toleransi sangat ketat.",
+      specifications: [
+        'Material: PVC 3mm', 
+        'Dimensi: 1500mm x 800mm', 
+        'Toleransi: ±0.05mm', 
+        'Quantity: 10pcs'
+      ],
+      duration: '3 Hari',
+      completedDate: '2024-02-20'
+    }
+  };
     
   function openModal(id) {
     const item = portfolioData[id];
     if (!item || !modalContent) return;
 
     modalContent.innerHTML = `
-      <img src="${baseURL}${item.image}" alt="${item.title}" class="w-full h-64 md:h-96 object-cover">
+      <img src="${item.image}" alt="${item.title}" class="w-full h-64 md:h-96 object-cover">
       <div class="p-6 md:p-8">
         <div class="flex items-center justify-between mb-4">
           <span class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full font-medium">
@@ -312,26 +332,33 @@ const jsonLd = {
             rel="noopener noreferrer"
             class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center"
           >
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+            </svg>
             Konsultasi Project
           </a>
         </div>
       </div>
     `;
+    
     if (modal) {
       modal.style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent body scroll
     }
   }
 
   function closeModal() {
     if (modal) {
       modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restore body scroll
     }
   }
 
+  // Make functions globally available
   window.openModal = openModal;
   window.closeModal = closeModal;
 
+  // Close modal when clicking outside
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
@@ -340,6 +367,7 @@ const jsonLd = {
     });
   }
 
+  // Close modal with Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal && modal.style.display === 'block') {
       closeModal();
@@ -357,5 +385,34 @@ const jsonLd = {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Loading state untuk gambar */
+.portfolio-item img {
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-item img[loading="lazy"] {
+  opacity: 0;
+}
+
+.portfolio-item img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Modal animation */
+#portfolio-modal {
+  backdrop-filter: blur(4px);
+}
+
+#portfolio-modal .inline-block {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+#portfolio-modal:not(.hidden) .inline-block {
+  transform: translateY(0);
+  opacity: 1;
 }
 </style>
