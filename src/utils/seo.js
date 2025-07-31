@@ -11,12 +11,16 @@ export function generateMetaTags({
   publishedTime,
   modifiedTime,
   author
-}) {
+} = {}) { // Added default empty object
   const fullTitle = title ? `${title} | ${SITE_CONFIG.name}` : SITE_CONFIG.title;
   const fullDescription = description || SITE_CONFIG.description;
   const fullUrl = url ? `${SITE_CONFIG.url}${url}` : SITE_CONFIG.url;
   const fullImage = image ? `${SITE_CONFIG.url}${image}` : `${SITE_CONFIG.url}/hero-laser.webp`;
-  const fullKeywords = keywords ? `${keywords}, ${SITE_CONFIG.keywords}` : SITE_CONFIG.keywords;
+  
+  // Fixed: Added default keywords to SITE_CONFIG or provide fallback
+  const defaultKeywords = 'laser cutting, cnc router, laser fiber, laser co2, jabodetabek';
+  const siteKeywords = SITE_CONFIG.keywords || defaultKeywords;
+  const fullKeywords = keywords ? `${keywords}, ${siteKeywords}` : siteKeywords;
 
   return {
     title: fullTitle,
@@ -47,26 +51,33 @@ export function generateMetaTags({
   };
 }
 
-export function generateJsonLd({ title, description, url, image, type = 'website' }) {
+export function generateJsonLd({ title, description, url, image, type = 'website' } = {}) { // Added default empty object
+  // Fixed: Added null checks and default values
+  const safeTitle = title || SITE_CONFIG.title || 'LaserCut Pro';
+  const safeDescription = description || SITE_CONFIG.description || 'Jasa laser cutting terpercaya';
+  const safeUrl = url || SITE_CONFIG.url || 'https://example.com';
+  const safeImage = image || `${SITE_CONFIG.url}/logo-company.webp`;
+  
+  // Fixed: Added safe access to SITE_CONFIG properties
   const baseSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: SITE_CONFIG.name,
-    url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/logo-company.webp`,
-    description: SITE_CONFIG.description,
-    telephone: SITE_CONFIG.phone,
-    email: SITE_CONFIG.email,
+    name: SITE_CONFIG.name || 'LaserCut Pro',
+    url: SITE_CONFIG.url || 'https://example.com',
+    logo: `${SITE_CONFIG.url || 'https://example.com'}/logo-company.webp`,
+    description: SITE_CONFIG.description || 'Jasa laser cutting terpercaya',
+    telephone: SITE_CONFIG.phone || '+62 851 6569 3179',
+    email: SITE_CONFIG.email || 'info@lasercutpro.com',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: SITE_CONFIG.address,
+      streetAddress: SITE_CONFIG.address || 'Jl. Raya Bogor No. 123',
       addressLocality: 'Jakarta Selatan',
       addressRegion: 'DKI Jakarta',
       postalCode: '12560',
       addressCountry: 'ID'
     },
     openingHours: 'Mo-Sa 08:00-17:00',
-    sameAs: Object.values(SITE_CONFIG.socialMedia),
+    sameAs: SITE_CONFIG.socialMedia ? Object.values(SITE_CONFIG.socialMedia) : [],
     areaServed: [
       'Jakarta',
       'Bogor', 
@@ -103,14 +114,14 @@ export function generateJsonLd({ title, description, url, image, type = 'website
     return {
       ...baseSchema,
       '@type': 'Service',
-      name: title,
-      description: description,
-      url: url,
-      image: image,
+      name: safeTitle,
+      description: safeDescription,
+      url: safeUrl,
+      image: safeImage,
       provider: {
         '@type': 'Organization',
-        name: SITE_CONFIG.name,
-        url: SITE_CONFIG.url
+        name: SITE_CONFIG.name || 'LaserCut Pro',
+        url: SITE_CONFIG.url || 'https://example.com'
       },
       areaServed: baseSchema.areaServed,
       serviceType: baseSchema.serviceType
@@ -121,22 +132,22 @@ export function generateJsonLd({ title, description, url, image, type = 'website
     return {
       '@context': 'https://schema.org',
       '@type': 'Article',
-      headline: title,
-      description: description,
-      url: url,
-      image: image,
+      headline: safeTitle,
+      description: safeDescription,
+      url: safeUrl,
+      image: safeImage,
       author: {
         '@type': 'Organization',
-        name: SITE_CONFIG.name,
-        url: SITE_CONFIG.url
+        name: SITE_CONFIG.name || 'LaserCut Pro',
+        url: SITE_CONFIG.url || 'https://example.com'
       },
       publisher: {
         '@type': 'Organization',
-        name: SITE_CONFIG.name,
-        url: SITE_CONFIG.url,
+        name: SITE_CONFIG.name || 'LaserCut Pro',
+        url: SITE_CONFIG.url || 'https://example.com',
         logo: {
           '@type': 'ImageObject',
-          url: `${SITE_CONFIG.url}/logo-company.webp`
+          url: `${SITE_CONFIG.url || 'https://example.com'}/logo-company.webp`
         }
       }
     };
@@ -145,7 +156,7 @@ export function generateJsonLd({ title, description, url, image, type = 'website
   return baseSchema;
 }
 
-export function generateBreadcrumbSchema(breadcrumbs) {
+export function generateBreadcrumbSchema(breadcrumbs = []) { // Added default empty array
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -153,12 +164,12 @@ export function generateBreadcrumbSchema(breadcrumbs) {
       '@type': 'ListItem',
       position: index + 1,
       name: crumb.name,
-      item: `${SITE_CONFIG.url}${crumb.url}`
+      item: `${SITE_CONFIG.url || 'https://example.com'}${crumb.url}`
     }))
   };
 }
 
-export function generateFAQSchema(faqs) {
+export function generateFAQSchema(faqs = []) { // Added default empty array
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -173,11 +184,11 @@ export function generateFAQSchema(faqs) {
   };
 }
 
-export function generateReviewSchema(reviews) {
+export function generateReviewSchema(reviews = []) { // Added default empty array
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: SITE_CONFIG.name,
+    name: SITE_CONFIG.name || 'LaserCut Pro',
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.9',
@@ -202,18 +213,18 @@ export function generateReviewSchema(reviews) {
   };
 }
 
-export function generateServiceSchema(service) {
+export function generateServiceSchema(service = {}) { // Added default empty object
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: service.name,
-    description: service.description,
+    name: service.name || 'Laser Cutting Service',
+    description: service.description || 'Professional laser cutting service',
     provider: {
       '@type': 'Organization',
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-      telephone: SITE_CONFIG.phone,
-      email: SITE_CONFIG.email
+      name: SITE_CONFIG.name || 'LaserCut Pro',
+      url: SITE_CONFIG.url || 'https://example.com',
+      telephone: SITE_CONFIG.phone || '+62 851 6569 3179',
+      email: SITE_CONFIG.email || 'info@lasercutpro.com'
     },
     areaServed: [
       'Jakarta',
@@ -237,28 +248,28 @@ export function generateServiceSchema(service) {
     ],
     offers: {
       '@type': 'Offer',
-      description: service.price,
+      description: service.price || 'Competitive pricing',
       priceCurrency: 'IDR',
       availability: 'https://schema.org/InStock'
     }
   };
 }
 
-export function generateProductSchema(material) {
+export function generateProductSchema(material = {}) { // Added default empty object
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: material.name,
-    description: material.description,
-    image: `${SITE_CONFIG.url}${material.image}`,
+    name: material.name || 'Laser Cutting Material',
+    description: material.description || 'High quality material for laser cutting',
+    image: `${SITE_CONFIG.url || 'https://example.com'}${material.image || '/images/default.webp'}`,
     brand: {
       '@type': 'Brand',
-      name: SITE_CONFIG.name
+      name: SITE_CONFIG.name || 'LaserCut Pro'
     },
     manufacturer: {
       '@type': 'Organization',
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url
+      name: SITE_CONFIG.name || 'LaserCut Pro',
+      url: SITE_CONFIG.url || 'https://example.com'
     },
     offers: {
       '@type': 'Offer',
@@ -307,11 +318,12 @@ export function generateSitemapUrls() {
 
 // Utility untuk robots.txt - Updated for Jabodetabek
 export function generateRobotsTxt() {
+  const siteUrl = SITE_CONFIG.url || 'https://example.com';
   return `User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: ${SITE_CONFIG.url}/sitemap.xml
+Sitemap: ${siteUrl}/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1
@@ -332,7 +344,7 @@ Allow: /contact`;
 }
 
 // Generate local business schema for Jabodetabek cities
-export function generateLocalBusinessSchema(city) {
+export function generateLocalBusinessSchema(city = 'Jakarta') { // Added default value
   const cityCoordinates = {
     'Jakarta': { lat: -6.2088, lng: 106.8456 },
     'Bogor': { lat: -6.5971, lng: 106.8060 },
@@ -342,16 +354,18 @@ export function generateLocalBusinessSchema(city) {
   };
 
   const coords = cityCoordinates[city] || cityCoordinates['Jakarta'];
+  const siteUrl = SITE_CONFIG.url || 'https://example.com';
+  const siteName = SITE_CONFIG.name || 'LaserCut Pro';
 
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': `${SITE_CONFIG.url}#business-${city.toLowerCase()}`,
-    name: `${SITE_CONFIG.name} - Laser Cutting ${city}`,
+    '@id': `${siteUrl}#business-${city.toLowerCase()}`,
+    name: `${siteName} - Laser Cutting ${city}`,
     description: `Jasa laser cutting akurat & cepat di ${city}. Spesialis akrilik, kayu, metal dengan teknologi terdepan.`,
-    url: SITE_CONFIG.url,
-    telephone: SITE_CONFIG.phone,
-    email: SITE_CONFIG.email,
+    url: siteUrl,
+    telephone: SITE_CONFIG.phone || '+62 851 6569 3179',
+    email: SITE_CONFIG.email || 'info@lasercutpro.com',
     address: {
       '@type': 'PostalAddress',
       addressLocality: city,
