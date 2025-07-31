@@ -340,7 +340,7 @@ export const BLOG_POSTS = [
     category: "Analysis",
     readTime: "9 menit",
     publishDate: "2024-01-08",
-    image: "/rajacuttinglaser/images/Metal.webp" // Fixed GitHub Pages path
+    image: "/rajacuttinglaser/images/pvc.webp" // Fixed GitHub Pages path
   },
   {
     id: 7,
