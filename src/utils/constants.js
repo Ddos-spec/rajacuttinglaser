@@ -337,3 +337,14 @@ export const BLOG_POSTS = [
     image: "/images/Ply Wood.webp" // Diperbaiki
   }
 ];
+
+// --- EKSPOR WHATSAPP_MESSAGES yang DIBUTUHKAN oleh CTA.astro ---
+export const WHATSAPP_MESSAGES = {
+  default: "Halo, saya tertarik dengan jasa laser cutting. Bisa konsultasi gratis?",
+  cnc: "Halo, saya butuh informasi tentang jasa CNC Router. Bisa bantu konsultasi gratis?",
+  fiber: "Halo, saya ingin tanya tentang laser fiber cutting untuk material metal. Bisa konsultasi gratis?",
+  co2: "Halo, saya tertarik dengan laser CO2 untuk cutting acrylic. Bisa konsultasi gratis?",
+  engraving: "Halo, saya butuh jasa laser engraving. Bisa konsultasi gratis?",
+  quote: "Halo, saya ingin request quote untuk project laser cutting. Bisa konsultasi gratis dulu?"
+};
+// --- AKHIR EKSPOR WHATSAPP_MESSAGES ---
