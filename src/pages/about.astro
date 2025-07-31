@@ -71,7 +71,7 @@ const metaTags = {
         <!-- Main Image -->
         <div>
           <img 
-            src="/images/co2.webp"
+            src="/rajacuttinglaser/images/co2.webp"
             alt="Workshop LaserCut Pro"
             class="w-full rounded-xl shadow-lg"
             loading="lazy"
@@ -95,7 +95,7 @@ const metaTags = {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white rounded-xl p-6 text-center shadow-lg">
           <img 
-            src="/images/budisantoso.webp"
+            src="/rajacuttinglaser/images/budisantoso.webp"
             alt="Budi Santoso - Direktur"
             class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
@@ -109,7 +109,7 @@ const metaTags = {
         
         <div class="bg-white rounded-xl p-6 text-center shadow-lg">
           <img 
-            src="/images/Ahmad Rizki.webp"
+            src="/rajacuttinglaser/images/Ahmad Rizki.webp"
             alt="Ahmad Rizki - Technical Manager"
             class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
@@ -123,7 +123,7 @@ const metaTags = {
         
         <div class="bg-white rounded-xl p-6 text-center shadow-lg">
           <img 
-            src="/images/Sari Dewi.webp"
+            src="/rajacuttinglaser/images/Sari Dewi.webp"
             alt="Sari Dewi - Design Specialist"
             class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
@@ -146,56 +146,56 @@ const metaTags = {
       <!-- Gallery Grid -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/laserfiber.webp" alt="Laser Fiber" class="w-full h-48 object-cover" />
+          <img src="/rajacuttinglaser/images/laserfiber.webp" alt="Laser Fiber" class="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">Laser Fiber</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/cncrouter.webp" alt="CNC Router" class="w-full h-48 object-cover" />
+          <img src="/rajacuttinglaser/images/cncrouter.webp" alt="CNC Router" class="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">CNC Router</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/galvo.webp" alt="Galvo Engraving" class="w-full h-48 object-cover" />
+          <img src="/rajacuttinglaser/images/galvo.webp" alt="Galvo Engraving" class="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">Galvo Engraving</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/Acrylic.webp" alt="Material Acrylic" class="w-full h-48 object-cover" />
+          <img src="/rajacuttinglaser/images/Acrylic.webp" alt="Material Acrylic" class="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">Acrylic</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/acp.webp" alt="Material ACP" class="w-full h-48 object-cover" />
+          <img src="/rajacuttinglaser/images/acp.webp" alt="Material ACP" class="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">ACP</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/pvc.webp" alt="Material PVC" class="w-full h-48 object-cover" />
+          <img src="/rajacuttinglaser/images/pvc.webp" alt="Material PVC" class="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">PVC</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/grc.webp" alt="Material GRC" class="w-full h-48 object-cover" />
+          <img src="/rajacuttinglaser/images/grc.webp" alt="Material GRC" class="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">GRC</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/prototype.webp" alt="Prototype Project" class="w-full h-48 object-cover" />
+          <img src="/rajacuttinglaser/images/prototype.webp" alt="Prototype Project" class="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">Prototype</p>
           </div>
@@ -218,10 +218,10 @@ const metaTags = {
 </BaseLayout>
 
 <script>
-  // Simple image error handling
+  // Simple image error handling with fallback to logo
   document.querySelectorAll('img').forEach(img => {
     img.onerror = function() {
-      this.src = '/images/logo.webp';
+      this.src = '/rajacuttinglaser/images/logo.webp';
     };
   });
 </script>
