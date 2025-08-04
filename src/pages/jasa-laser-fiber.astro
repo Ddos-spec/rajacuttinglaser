@@ -21,11 +21,11 @@ const metaTags = generateMetaTags({
   title: `${service.name} - Presisi Tinggi untuk Material Metal`,
   description: `${service.description}. Teknologi laser fiber tercepat & akurat untuk cutting stainless steel, carbon steel, aluminium hingga ketebalan 20mm. Quote gratis 24 jam.`,
   keywords: service.keywords,
-  url: `/rajacuttinglaser/${service.slug}/`,
+  url: `/jasalasercutting/${service.slug}/`,
   type: "service",
   image: service.image,
-  publishedTime: "2024-01-01T00:00:00Z",
-  modifiedTime: "2024-01-01T00:00:00Z",
+  publishedTime: "2025-01-01T00:00:00Z",
+  modifiedTime: "2025-01-01T00:00:00Z",
   author: SITE_CONFIG.author
 });
 
@@ -34,7 +34,7 @@ const serviceSchema = service ? generateServiceSchema(service) : null;
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: 'Beranda', url: '' },
   { name: 'Layanan', url: '#services' },
-  { name: service.name, url: `/rajacuttinglaser/${service.slug}/` }
+  { name: service.name, url: `/jasalasercutting/${service.slug}/` }
 ]);
 ---
 <BaseLayout

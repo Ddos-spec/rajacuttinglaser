@@ -1,90 +1,51 @@
 ---
-// Header.astro - Komponen header dengan navigasi responsif dan dropdown click
+// Header.astro - Komponen header dengan navigasi responsif lengkap dan diperbaiki
 import { NAVIGATION, SITE_CONFIG } from '../utils/constants.js';
 
-interface NavigationItem {
-  name: string;
-  href: string;
-  submenu?: Array<{
-    name: string;
-    href: string;
-  }>;
-  active?: boolean;
-}
-
-// Function to create proper URL with base path
-function createUrl(path: string | null | undefined): string {
-  if (!path || path === null || path === undefined) {
-    return SITE_CONFIG.url || '/';
-  }
-  
-  const pathStr = String(path);
-  const cleanPath = pathStr.startsWith('/') ? pathStr.slice(1) : pathStr;
-  
-  if (cleanPath === '' || cleanPath === '/') {
-    return SITE_CONFIG.url || '/';
-  }
-  
-  if (cleanPath.startsWith('#')) {
-    return `${SITE_CONFIG.url || ''}${cleanPath}`;
-  }
-  
-  return `${SITE_CONFIG.url || ''}${cleanPath}`;
-}
-
 // Filter navigasi untuk menghilangkan link "Kontak"
-// Filter and process navigation items
-const filteredNavigation = (NAVIGATION ?? [])
-  .filter((item): item is NavigationItem => Boolean(item) && item.name !== "Kontak");
-
-// Process navigation to include proper URLs
-const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
+const currentPath = new URL(Astro.request.url).pathname;
+const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map(item => ({
   ...item,
-  href: createUrl(item.href) || '/',
-  submenu: item.submenu?.map(subitem => ({
-    ...subitem,
-    href: createUrl(subitem.href) || '/'
-  }))
+  active: currentPath === `/jasalasercutting${item.href}` || (item.submenu && item.submenu.some(subitem => currentPath === `/jasalasercutting${subitem.href}`))
 }));
 ---
 <header class="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200" id="main-header">
   <div class="container-custom">
     <div class="flex items-center justify-between h-16">
+      <!-- Logo Section -->
       <div class="flex items-center">
-        <a href={SITE_CONFIG?.url || '/'} class="flex items-center space-x-3">
+        <a href="/jasalasercutting/" class="flex items-center space-x-3">
           <div class="sm:block">
             <h1 class="text-xl font-bold text-gray-900">
-              Tepat Laser
+              Jasa Cutting Laser
             </h1>
             <p class="text-xs text-gray-600 hidden lg:block">Laser Cutting Terpercaya</p>
           </div>
         </a>
       </div>
+      <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-8" aria-label="Main navigation">
-        {processedNavigation.map((item, index) => (
+        {filteredNavigation.map((item, index) => (
           <div class="relative">
-            {item?.submenu ? (
+            {item.submenu ? (
               <div class="relative">
                 <button
-                  class="flex items-center space-x-1 text-gray-700 hover:text-blue-600 font-medium py-2 desktop-dropdown-btn"
-                  data-dropdown-index={index}
+                  class="flex items-center space-x-1 text-gray-700 hover:text-[#00C853] font-medium py-2"
                   aria-haspopup="true"
                   aria-expanded="false"
+                  data-desktop-dropdown={index}
                 >
                   <span>{item.name}</span>
-                  <svg class="w-4 h-4 dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                   </svg>
                 </button>
-                <div 
-                  class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden dropdown-menu"
-                  data-dropdown-menu={index}
-                >
+                <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden" data-desktop-menu={index}>
                   <div class="py-2">
-                    {item.submenu?.map((subitem) => (
+                    {item.submenu.map((subitem) => (
                       <a
-                        href={subitem.href}
-                        class="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 text-sm font-medium"
+                        href={`/jasalasercutting${subitem.href}`}
+                        class="block px-4 py-3 text-gray-700 hover:text-[#00C853] hover:bg-green-50 text-sm font-medium"
                       >
                         {subitem.name}
                       </a>
@@ -94,9 +55,9 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
               </div>
             ) : (
               <a
-                href={item.href}
-                class="text-gray-700 hover:text-blue-600 font-medium py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
-                class:list={{'text-blue-600 after:w-full': item.active}}
+                href={`/jasalasercutting${item.href}`}
+                class="text-gray-700 hover:text-[#00C853] font-medium py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#00C853] after:transition-all after:duration-300 hover:after:w-full"
+                class:list={[item.active && 'text-[#00C853] after:w-full']}
               >
                 {item.name}
               </a>
@@ -104,14 +65,16 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
           </div>
         ))}
       </nav>
+      <!-- Desktop Action Buttons -->
       <div class="hidden lg:flex items-center space-x-4">
         <a
-          href={createUrl("contact")}
+          href="/jasalasercutting/contact"
           class="btn-primary text-sm px-4 py-2"
         >
           Kontak Kita
         </a>
       </div>
+      <!-- Mobile Menu Button -->
       <button
         class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100"
         id="mobile-menu-button"
@@ -127,17 +90,20 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
       </button>
     </div>
   </div>
+  <!-- Mobile Menu -->
   <div
     class="lg:hidden fixed inset-0 top-0 bg-white z-50 hidden overflow-y-auto"
     id="mobile-menu"
   >
+    <!-- Mobile Header Spacer -->
     <div class="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-4">
       <div class="flex items-center">
-        <a href={SITE_CONFIG?.url || '/'} class="flex items-center space-x-3">
+        <a href="/jasalasercutting/" class="flex items-center space-x-3">
           <h1 class="text-xl font-bold text-gray-900">Tepat Laser</h1>
         </a>
       </div>
-       <button
+       <!-- Close Button inside mobile menu -->
+      <button
         class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100"
         id="mobile-menu-close-button"
         aria-label="Close mobile menu"
@@ -148,56 +114,68 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
       </button>
     </div>
     <div class="flex flex-col min-h-screen bg-white">
-            <nav class="flex-1 px-4 py-6 space-y-2" aria-label="Mobile navigation">
-        {processedNavigation.map((item, index) => (
+      <!-- Mobile Navigation -->
+      <nav class="flex-1 px-4 py-6 space-y-2" aria-label="Mobile navigation">
+        {filteredNavigation.map((item, index) => (
           <div>
-            {item?.submenu ? (
+            {item.submenu ? (
               <div>
                 <button
-                  class="flex items-center justify-between w-full text-left text-gray-700 font-medium py-3 px-4 rounded-lg hover:bg-gray-50 mobile-dropdown-btn"
-                  data-mobile-submenu-index={index}
+                  class="flex items-center justify-between w-full text-left text-gray-700 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
+                  data-submenu-index={index}
                   aria-expanded="false"
                 >
                   <span>{item.name}</span>
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  <svg 
+                    class="w-5 h-5" 
+                    id={`submenu-icon-${index}`}
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                   </svg>
                 </button>
                 <div 
-                  class="hidden pl-4 space-y-2"
-                  data-mobile-submenu={index}
+                  class="hidden bg-gray-50 rounded-lg mx-2 mt-1"
+                  id={`submenu-${index}`}
                 >
-                  {item.submenu?.map((subitem) => (
-                    <a
-                      href={subitem.href}
-                      class="block px-4 py-2 text-gray-700 hover:text-blue-600 text-sm"
-                    >
-                      {subitem.name}
-                    </a>
-                  ))}
+                  <div class="pl-4 pt-2 pb-2 space-y-1">
+                    {item.submenu.map((subitem) => (
+                      <a
+                        href={`/jasalasercutting${subitem.href}`}
+                        class="block text-gray-600 hover:text-[#00C853] py-2 px-4 rounded-lg hover:bg-white text-sm font-medium"
+                      >
+                        {subitem.name}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             ) : (
               <a
-                href={item.href}
-                class="block w-full text-left text-gray-700 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
-                class:list={{'text-blue-600 bg-blue-50': item.active}}
+                href={`/jasalasercutting${item.href}`}
+                class="block text-gray-700 hover:text-[#00C853] font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
+                class:list={[item.active && 'text-[#00C853] bg-green-50']}
               >
                 {item.name}
               </a>
             )}
           </div>
         ))}
+      </nav>
+      <!-- Mobile Action Buttons -->
       <div class="p-4 border-t border-gray-200 space-y-3 bg-white">
         <a
-          href={createUrl("contact")}
+          href="/jasalasercutting/contact"
           class="btn-primary w-full text-center block py-3"
         >
           Kontak Kita
         </a>
+        <!-- Mobile Quick Actions -->
         <div class="grid grid-cols-2 gap-3">
           <a
-            href={`https://api.whatsapp.com/send?phone=${SITE_CONFIG?.whatsapp || ''}&text=${encodeURIComponent("Halo, saya tertarik dengan jasa laser cutting. Bisa konsultasi gratis?")}`}
+            href={`https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=${encodeURIComponent("Halo, saya tertarik dengan jasa laser cutting. Bisa konsultasi gratis?")}`}
             target="_blank"
             rel="noopener noreferrer"
             class="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2"
@@ -208,7 +186,7 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
             <span>WhatsApp</span>
           </a>
           <a
-            href={`tel:${SITE_CONFIG?.phone || ''}`}
+            href={`tel:${SITE_CONFIG.phone}`}
             class="bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg text-sm font-medium flex items-center justify-center space-x-2"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,6 +199,7 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
     </div>
   </div>
 </header>
+<!-- Mobile Menu Overlay -->
 <div
   class="lg:hidden fixed inset-0 bg-black/50 z-20 hidden"
   id="mobile-menu-overlay"
@@ -233,10 +212,67 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
     const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
+    const header = document.getElementById('main-header');
 
     // Desktop dropdown functionality
-    const desktopDropdownBtns = document.querySelectorAll('.desktop-dropdown-btn');
-    const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+    let activeDesktopDropdown = null;
+
+    function closeAllDesktopDropdowns() {
+      document.querySelectorAll('[data-desktop-menu]').forEach((menu) => {
+        menu.classList.add('hidden');
+      });
+      document.querySelectorAll('[data-desktop-dropdown] svg').forEach((icon) => {
+        icon.style.transform = 'rotate(0deg)';
+      });
+      document.querySelectorAll('[data-desktop-dropdown]').forEach((button) => {
+        button.setAttribute('aria-expanded', 'false');
+      });
+      activeDesktopDropdown = null;
+    }
+
+    function toggleDesktopDropdown(index) {
+      const menu = document.querySelector(`[data-desktop-menu="${index}"]`);
+      const button = document.querySelector(`[data-desktop-dropdown="${index}"]`);
+      const icon = button?.querySelector('svg');
+
+      if (!menu || !button || !icon) return;
+
+      const isOpen = !menu.classList.contains('hidden');
+
+      if (isOpen && activeDesktopDropdown === index) {
+        // Close current dropdown
+        menu.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+        button.setAttribute('aria-expanded', 'false');
+        activeDesktopDropdown = null;
+      } else {
+        // Close all dropdowns first
+        closeAllDesktopDropdowns();
+        
+        // Open clicked dropdown
+        menu.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+        button.setAttribute('aria-expanded', 'true');
+        activeDesktopDropdown = index;
+      }
+    }
+
+    // Desktop dropdown event listeners
+    document.querySelectorAll('[data-desktop-dropdown]').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const index = parseInt(button.getAttribute('data-desktop-dropdown'));
+        toggleDesktopDropdown(index);
+      });
+    });
+
+    // Close desktop dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('[data-desktop-dropdown]') && !e.target.closest('[data-desktop-menu]')) {
+        closeAllDesktopDropdowns();
+      }
+    });
 
     // Mobile menu toggle functions
     function openMobileMenu() {
@@ -259,120 +295,77 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
         mobileMenuButton?.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
 
-        // Reset mobile submenus
-        document.querySelectorAll('.mobile-submenu').forEach((submenu) => {
+        // Reset submenus
+        document.querySelectorAll('[id^="submenu-"]').forEach((submenu) => {
           submenu.classList.add('hidden');
         });
-        document.querySelectorAll('.mobile-dropdown-arrow').forEach((arrow) => {
-          arrow.style.transform = 'rotate(0deg)';
+        document.querySelectorAll('[id^="submenu-icon-"]').forEach((icon) => {
+          icon.style.transform = 'rotate(0deg)';
         });
-        document.querySelectorAll('.mobile-dropdown-btn').forEach((button) => {
+        document.querySelectorAll('[data-submenu-index]').forEach((button) => {
           button.setAttribute('aria-expanded', 'false');
         });
       }
     }
 
-    // Desktop dropdown click handlers
-    desktopDropdownBtns.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const index = btn.getAttribute('data-dropdown-index');
-        const targetMenu = document.querySelector(`[data-dropdown-menu="${index}"]`);
-        const arrow = btn.querySelector('.dropdown-arrow');
-        
-        if (!targetMenu) return;
-
-        const isOpen = !targetMenu.classList.contains('hidden');
-        
-        // Close all other dropdowns
-        dropdownMenus.forEach((menu, menuIndex) => {
-          if (menu !== targetMenu) {
-            menu.classList.add('hidden');
-            const otherBtn = document.querySelector(`[data-dropdown-index="${menuIndex}"]`);
-            const otherArrow = otherBtn?.querySelector('.dropdown-arrow');
-            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
-            if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
-          }
-        });
-
-        // Toggle current dropdown
-        if (isOpen) {
-          targetMenu.classList.add('hidden');
-          btn.setAttribute('aria-expanded', 'false');
-          if (arrow) arrow.style.transform = 'rotate(0deg)';
-        } else {
-          targetMenu.classList.remove('hidden');
-          btn.setAttribute('aria-expanded', 'true');
-          if (arrow) arrow.style.transform = 'rotate(180deg)';
-        }
-      });
-    });
+    function toggleMobileMenu() {
+      if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
 
     // Mobile submenu toggle function
-    function toggleMobileSubmenu(index) {
-      const submenu = document.querySelector(`[data-mobile-submenu="${index}"]`);
-      const arrow = document.querySelector(`[data-mobile-submenu-index="${index}"] .mobile-dropdown-arrow`);
-      const button = document.querySelector(`[data-mobile-submenu-index="${index}"]`);
+    function toggleSubmenu(index) {
+      const submenu = document.getElementById(`submenu-${index}`);
+      const icon = document.getElementById(`submenu-icon-${index}`);
+      const button = document.querySelector(`[data-submenu-index="${index}"]`);
 
-      if (!submenu || !arrow || !button) return;
+      if (!submenu || !icon || !button) return;
 
       const isOpen = !submenu.classList.contains('hidden');
+
       if (isOpen) {
         submenu.classList.add('hidden');
-        arrow.style.transform = 'rotate(0deg)';
+        icon.style.transform = 'rotate(0deg)';
         button.setAttribute('aria-expanded', 'false');
       } else {
         // Close other submenus first
-        document.querySelectorAll('.mobile-submenu').forEach((otherSubmenu, otherIndex) => {
-          if (otherSubmenu !== submenu) {
-            otherSubmenu.classList.add('hidden');
-            const otherArrow = document.querySelector(`[data-mobile-submenu-index="${otherIndex}"] .mobile-dropdown-arrow`);
-            const otherButton = document.querySelector(`[data-mobile-submenu-index="${otherIndex}"]`);
-            if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
-            if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
-          }
+        document.querySelectorAll('[id^="submenu-"]:not(#submenu-' + index + ')').forEach((otherSubmenu) => {
+          otherSubmenu.classList.add('hidden');
+          const otherIndex = otherSubmenu.id.split('-')[1];
+          const otherIcon = document.getElementById(`submenu-icon-${otherIndex}`);
+          const otherButton = document.querySelector(`[data-submenu-index="${otherIndex}"]`);
+          if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+          if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
         });
 
         submenu.classList.remove('hidden');
-        arrow.style.transform = 'rotate(180deg)';
+        icon.style.transform = 'rotate(180deg)';
         button.setAttribute('aria-expanded', 'true');
       }
     }
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.relative')) {
-        dropdownMenus.forEach((menu, index) => {
-          menu.classList.add('hidden');
-          const btn = document.querySelector(`[data-dropdown-index="${index}"]`);
-          const arrow = btn?.querySelector('.dropdown-arrow');
-          if (btn) btn.setAttribute('aria-expanded', 'false');
-          if (arrow) arrow.style.transform = 'rotate(0deg)';
-        });
-      }
-    });
-
-    // Event listeners
+    // Mobile menu event listeners
     mobileMenuButton?.addEventListener('click', (e) => {
       e.preventDefault();
-      openMobileMenu();
+      toggleMobileMenu();
     });
-    
+
     mobileMenuCloseButton?.addEventListener('click', (e) => {
       e.preventDefault();
       closeMobileMenu();
     });
-    
+
     mobileMenuOverlay?.addEventListener('click', closeMobileMenu);
 
     // Mobile submenu button event listeners
-    document.querySelectorAll('.mobile-dropdown-btn').forEach((button) => {
+    document.querySelectorAll('[data-submenu-index]').forEach((button) => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
-        const index = parseInt(button.getAttribute('data-mobile-submenu-index') || '0');
-        toggleMobileSubmenu(index);
+        const index = parseInt(button.getAttribute('data-submenu-index') || '0');
+        toggleSubmenu(index);
       });
     });
 
@@ -389,24 +382,17 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 1024) {
         closeMobileMenu();
+        closeAllDesktopDropdowns();
       }
     });
 
     // Handle escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        // Close desktop dropdowns
-        dropdownMenus.forEach((menu, index) => {
-          menu.classList.add('hidden');
-          const btn = document.querySelector(`[data-dropdown-index="${index}"]`);
-          const arrow = btn?.querySelector('.dropdown-arrow');
-          if (btn) btn.setAttribute('aria-expanded', 'false');
-          if (arrow) arrow.style.transform = 'rotate(0deg)';
-        });
-        
-        // Close mobile menu if open
         if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
           closeMobileMenu();
+        } else {
+          closeAllDesktopDropdowns();
         }
       }
     });
@@ -416,6 +402,11 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
   /* Header styles */
   #main-header {
     transition: none;
+  }
+
+  /* Mobile submenu */
+  [id^="submenu-"] {
+    /* Hapus transition */
   }
 
   /* Smooth scrolling for mobile menu */
@@ -431,9 +422,9 @@ const processedNavigation: NavigationItem[] = filteredNavigation.map(item => ({
     border-radius: 4px;
   }
 
-  /* Dropdown arrow rotation */
-  .dropdown-arrow,
-  .mobile-dropdown-arrow {
+  /* Submenu icon rotation */
+  [id^="submenu-icon-"],
+  [data-desktop-dropdown] svg {
     transition: transform 0.2s ease-in-out;
   }
 

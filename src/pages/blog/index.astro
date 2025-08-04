@@ -9,7 +9,7 @@ import { BLOG_POSTS } from '../../utils/constants.js';
 const sortedPosts = BLOG_POSTS.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
 
 // Safely construct the base URL
-const baseUrl = Astro.site ? Astro.site.toString() : 'https://ddos-spec.github.io/rajacuttinglaser/'; // Sesuaikan dengan URL produksi Anda
+const baseUrl = Astro.site ? Astro.site.toString() : 'https://ddos-spec.github.io/jasalasercutting/'; // Sesuaikan dengan URL produksi Anda
 const blogUrl = `${baseUrl}blog/`;
 
 const jsonLd = {

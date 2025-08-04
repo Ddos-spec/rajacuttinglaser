@@ -31,11 +31,11 @@ const metaTags = generateMetaTags({
   title: `${material.name} Berkualitas Tinggi - ${SITE_CONFIG.name}`,
   description: `${material.description}. ${material.thickness}. Aplikasi: ${material.applications.join(', ')}. Dapatkan harga terbaik & konsultasi gratis untuk kebutuhan project Anda di Jabodetabek.`,
   keywords: material.keywords,
-  url: `/rajacuttinglaser/${material.slug}/`,
+  url: `/jasalasercutting/${material.slug}/`,
   type: "article", // Harus string, sesuai dengan BaseLayout
   image: material.image,
-  publishedTime: "2024-01-01T00:00:00Z",
-  modifiedTime: "2024-01-01T00:00:00Z",
+  publishedTime: "2025-01-01T00:00:00Z",
+  modifiedTime: "2025-01-01T00:00:00Z",
   author: SITE_CONFIG.author
 });
 
@@ -45,7 +45,7 @@ const serviceSchema = serviceForSchema ? generateServiceSchema(serviceForSchema)
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: 'Beranda', url: '' },
   { name: 'Material', url: '#materials' },
-  { name: material.name, url: `/rajacuttinglaser/${material.slug}/` }
+  { name: material.name, url: `/jasalasercutting/${material.slug}/` }
 ]);
 
 // Gabungkan schema untuk jsonLd (filter null/undefined)
@@ -286,7 +286,7 @@ const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
                   ))}
                 </ul>
                 <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-                  <a href={`/rajacuttinglaser/${recommendedService.slug}/`} class="btn-primary text-center">
+                  <a href={`/jasalasercutting/${recommendedService.slug}/`} class="btn-primary text-center">
                     Lihat Layanan
                   </a>
                   <a href={`https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=${WHATSAPP_MESSAGES.cnc}`} target="_blank" rel="noopener noreferrer" class="btn-secondary text-center">
