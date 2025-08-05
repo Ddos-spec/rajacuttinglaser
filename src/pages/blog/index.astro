@@ -9,35 +9,35 @@ import { BLOG_POSTS } from '../../utils/constants.js';
 const sortedPosts = BLOG_POSTS.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
 
 // Safely construct the base URL
-const baseUrl = Astro.site ? Astro.site.toString() : 'https://ddos-spec.github.io/jasalasercutting/'; // Sesuaikan dengan URL produksi Anda
+const baseUrl = Astro.site ? Astro.site.toString() : 'https://jasalasercutting.com'; // Sesuaikan dengan URL produksi Anda
 const blogUrl = `${baseUrl}blog/`;
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "name": "Blog LaserCut Pro",
+  "name": "Blog jasa cutting laser",
   "description": "Tips, tutorial, dan insight terbaru seputar laser cutting, CNC router, dan teknologi manufaktur",
   "url": blogUrl,
   "publisher": {
     "@type": "Organization",
-    "name": "LaserCut Pro"
+    "name": "jasa cutting laser"
   }
 };
 ---
 
 <BaseLayout 
   title="Blog - Tips & Tutorial Laser Cutting Terbaru"
-  description="Dapatkan tips, tutorial, dan insight terbaru seputar laser cutting, CNC router, dan teknologi manufaktur dari para ahli LaserCut Pro"
+  description="Dapatkan tips, tutorial, dan insight terbaru seputar laser cutting, CNC router, dan teknologi manufaktur dari para ahli jasa cutting laser"
   keywords="blog laser cutting, tutorial cnc router, tips laser fiber, panduan laser co2, artikel manufaktur"
   jsonLd={[jsonLd]}
 >
   <Header slot="header" />
 
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-20">
+  <section class="bg-laser-green text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-4xl lg:text-5xl font-bold mb-6">
-        Blog LaserCut Pro
+        Blog jasa cutting laser
       </h1>
       <p class="text-xl text-blue-100 max-w-3xl mx-auto">
         Tips, tutorial, dan insight terbaru seputar laser cutting, CNC router, dan teknologi manufaktur dari para ahli
@@ -65,7 +65,7 @@ const jsonLd = {
                 <span class="text-sm text-gray-500">{post.readTime}</span>
               </div>
               <h2 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                <a href={`blog/${post.slug}/`} class="hover:text-blue-600 transition-colors">
+                <a href={`/blog/${post.slug}`} class="hover:text-blue-600 transition-colors">
                   {post.title}
                 </a>
               </h2>
@@ -74,14 +74,14 @@ const jsonLd = {
               </p>
               <div class="flex items-center justify-between">
                 <span class="text-sm text-gray-500">
-  {new Date(post.publishDate).toLocaleDateString('id-ID', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric' // Pastikan string ditutup dengan '
-  })}
-</span>
+                  {new Date(post.publishDate).toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </span>
                 <a 
-                  href={`blog/${post.slug}/`}
+                  href={`/blog/${post.slug}/`}
                   class="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors"
                 >
                   Baca Selengkapnya →
@@ -142,4 +142,4 @@ const jsonLd = {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-</style>
+</style>    

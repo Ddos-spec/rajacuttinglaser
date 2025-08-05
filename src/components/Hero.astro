@@ -12,6 +12,7 @@ export interface Props {
   backgroundImage?: string;
   showTrustSignals?: boolean;
   whatsappMessage?: string;
+  bgClass?: string;
 }
 
 const {
@@ -22,13 +23,14 @@ const {
   primaryCTALink = `https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=${encodeURIComponent(WHATSAPP_MESSAGES.default)}`,
   secondaryCTA = "Lihat Portfolio Kami",
   secondaryCTALink = "/jasalasercutting/portfolio",
-  backgroundImage = "/jasalasercutting/images/logo.webp",
+  backgroundImage = "/images/logo.webp",
   showTrustSignals = true,
-  whatsappMessage = WHATSAPP_MESSAGES.default
+  whatsappMessage = WHATSAPP_MESSAGES.default,
+  bgClass = "bg-gradient-to-br from-silver-light via-white to-silver-light"
 } = Astro.props;
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-silver-light via-white to-silver-light">
+<section class:list={["relative min-h-screen flex items-center justify-center overflow-hidden", bgClass]}>
   <!-- Background Pattern -->
   <div class="absolute inset-0 opacity-5">
     <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(31,32,35,0.15) 1px, transparent 0); background-size: 40px 40px;"></div>
