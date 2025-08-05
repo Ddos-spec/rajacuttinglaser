@@ -1,6 +1,6 @@
 # jasa cutting laser - Website Laser Cutting
 
-Website profesional untuk jasa laser cutting dengan teknologi Astro.js, Tailwind CSS, dan optimasi SEO lengkap.
+Website profesional untuk raja cutting laser dengan teknologi Astro.js, Tailwind CSS, dan optimasi SEO lengkap.
 
 ## 🚀 Fitur Utama
 

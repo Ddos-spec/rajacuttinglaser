@@ -331,7 +331,7 @@ export function generateLocalBusinessSchema(city: string = 'Jakarta'): object {
     '@type': 'LocalBusiness',
     '@id': `${SITE_CONFIG.url}#business-${city.toLowerCase()}`,
     name: `${SITE_CONFIG.name} - Laser Cutting ${city}`,
-    description: `Jasa laser cutting akurat & cepat di ${city}. Spesialis akrilik, kayu, metal dengan teknologi terdepan.`,
+    description: `raja cutting laser akurat & cepat di ${city}. Spesialis akrilik, kayu, metal dengan teknologi terdepan.`,
     url: SITE_CONFIG.url,
     telephone: SITE_CONFIG.phone,
     email: SITE_CONFIG.email,

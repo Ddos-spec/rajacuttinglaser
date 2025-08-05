@@ -4,9 +4,9 @@
 // ===== KONFIGURASI SITUS =====
 export const SITE_CONFIG = {
   name: "Jasa Cutting Laser",
-  title: "Jasa Laser Cutting Profesional & Akurat #1 indonesia - Akrilik, Kayu, Metal",
+  title: "raja cutting laser Profesional & Akurat #1 indonesia - Akrilik, Kayu, Metal",
   description: "Laser cutting presisi tinggi & pengerjaan cepat di indonesia! Spesialis akrilik, kayu, metal dengan teknologi terdepan. 10+ tahun pengalaman, hasil akurat, garansi kualitas. Melayani Serang, Tangerang, Cilegon.",
-  keywords: "jasa laser cutting indonesia, laser cutting serang, laser cutting tangerang, cnc router indonesia, laser fiber cutting, potong akrilik serang, potong kayu tangerang, cutting metal cilegon",
+  keywords: "raja cutting laser indonesia, laser cutting serang, laser cutting tangerang, cnc router indonesia, laser fiber cutting, potong akrilik serang, potong kayu tangerang, cutting metal cilegon",
   url: "https://jasalasercutting.com",
   phone: "+62 851 6569 3179",
   whatsapp: "6285165693179",
@@ -570,7 +570,7 @@ export const FAQ = [
 
 // ===== PESAN WHATSAPP =====
 export const WHATSAPP_MESSAGES = {
-  default: "Halo, saya tertarik dengan jasa laser cutting. Bisa konsultasi gratis?",
+  default: "Halo, saya tertarik dengan raja cutting laser. Bisa konsultasi gratis?",
   cnc: "Halo, saya butuh jasa CNC Router untuk material kayu/MDF. Bisa konsultasi?",
   fiber: "Halo, saya perlu laser fiber untuk cutting metal. Bisa diskusi project saya?",
   co2: "Halo, saya tertarik laser CO2 untuk cutting acrylic/kayu. Bisa konsultasi?",
@@ -988,7 +988,7 @@ export const SERVICE_AREAS = [
     id: 4,
     city: "Pandeglang",
     province: "indonesia",
-    description: "Jasa laser cutting berkualitas di Pandeglang dengan layanan konsultasi gratis.",
+    description: "raja cutting laser berkualitas di Pandeglang dengan layanan konsultasi gratis.",
     keywords: "laser cutting pandeglang, cnc router pandeglang, jasa laser pandeglang",
     coordinates: { lat: -6.3086, lng: 106.1067 }
   },
@@ -1264,7 +1264,7 @@ export const CERTIFICATIONS = [
     issuer: "Indonesia Manufacturing Awards",
     category: "Industry Recognition",
     year: "2024",
-    description: "Penghargaan sebagai penyedia jasa laser cutting terbaik"
+    description: "Penghargaan sebagai penyedia raja cutting laser terbaik"
   }
 ];
 
