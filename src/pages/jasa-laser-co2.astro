@@ -25,7 +25,7 @@ const metaTags = generateMetaTags({
   title: `${service.name} - Cutting & Engraving Material Non-Metal`,
   description: `${service.description}. Teknologi laser CO2 terdepan untuk cutting dan engraving acrylic, kayu, kain dengan detail sempurna. Quote gratis 24 jam.`,
   keywords: service.keywords,
-  url: `/jasalasercutting/${service.slug}/`, // Disesuaikan dengan struktur URL
+  url: `/rajacuttinglaser/${service.slug}/`, // Disesuaikan dengan struktur URL
   type: "service",
   image: service.image,
   // --- TAMBAHAN UNTUK MENGATASI ERROR ---
@@ -40,7 +40,7 @@ const serviceSchema = service ? generateServiceSchema(service) : null;
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: 'Beranda', url: '' },
   { name: 'Layanan', url: '#services' },
-  { name: service.name, url: `/jasalasercutting/${service.slug}/` }
+  { name: service.name, url: `/rajacuttinglaser/${service.slug}/` }
 ]);
 ---
 <BaseLayout

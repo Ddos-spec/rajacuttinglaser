@@ -20,7 +20,7 @@ const metaTags = generateMetaTags({
   title: `${service.name} - Engraving Presisi untuk Material Metal`,
   description: `${service.description}. Teknologi galvo laser tercepat & akurat untuk engraving stainless steel, aluminium hingga ketebalan 20mm. Quote gratis 24 jam.`,
   keywords: service.keywords,
-  url: `/jasalasercutting/${service.slug}/`,
+  url: `/rajacuttinglaser/${service.slug}/`,
   type: "article",
   image: service.image,
   publishedTime: "2025-01-01T00:00:00Z",
@@ -33,7 +33,7 @@ const serviceSchema = generateServiceSchema(service);
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: 'Beranda', url: '' },
   { name: 'Layanan', url: '#services' },
-  { name: service.name, url: `/jasalasercutting/${service.slug}/` }
+  { name: service.name, url: `/rajacuttinglaser/${service.slug}/` }
 ]);
 
 const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);

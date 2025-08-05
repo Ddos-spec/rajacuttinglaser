@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   title: "raja cutting laser Profesional & Akurat #1 indonesia - Akrilik, Kayu, Metal",
   description: "Laser cutting presisi tinggi & pengerjaan cepat di indonesia! Spesialis akrilik, kayu, metal dengan teknologi terdepan. 10+ tahun pengalaman, hasil akurat, garansi kualitas. Melayani Serang, Tangerang, Cilegon.",
   keywords: "raja cutting laser indonesia, laser cutting serang, laser cutting tangerang, cnc router indonesia, laser fiber cutting, potong akrilik serang, potong kayu tangerang, cutting metal cilegon",
-  url: "https://jasalasercutting.com",
+  url: "https://rajacuttinglaser.com",
   phone: "+62 851 6569 3179",
   whatsapp: "6285165693179",
   email: "info@rajacuttinglaser.com",
@@ -15,10 +15,9 @@ export const SITE_CONFIG = {
   businessHours: "Senin - Sabtu, 08:00 - 17:00 WIB",
   author: "raja cutting laser Team",
   socialMedia: {
-    facebook: "https://www.facebook.com/pagarlasercutting",
+    facebook: "https://www.facebook.com/profile.php?id=100054220779104",
     instagram: "https://www.instagram.com/jasalasercutting.tangsel/",
     youtube: "https://www.youtube.com/@heriasari4189",
-    linkedin: "https://linkedin.com/company/rajacuttinglaser"
   }
 };
 
