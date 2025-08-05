@@ -1,4 +1,4 @@
-# jasa cutting laser - Website Laser Cutting
+# raja cutting laser - Website Laser Cutting
 
 Website profesional untuk raja cutting laser dengan teknologi Astro.js, Tailwind CSS, dan optimasi SEO lengkap.
 
@@ -179,7 +179,7 @@ Untuk pertanyaan teknis atau kustomisasi lebih lanjut:
 
 ## 📄 License
 
-Copyright © 2025 jasa cutting laser. All rights reserved.
+Copyright © 2025 raja cutting laser. All rights reserved.
 
 ---
 
@@ -471,5 +471,5 @@ Dokumentasi ini harus diupdate ketika:
 
 ---
 
-*Dokumentasi ini dibuat untuk memudahkan maintenance dan development website jasa cutting laser. Selalu update dokumentasi ketika melakukan perubahan signifikan pada codebase.*
+*Dokumentasi ini dibuat untuk memudahkan maintenance dan development website raja cutting laser. Selalu update dokumentasi ketika melakukan perubahan signifikan pada codebase.*
 
