@@ -10,15 +10,15 @@ export const SITE_CONFIG = {
   url: "https://jasalasercutting.com",
   phone: "+62 851 6569 3179",
   whatsapp: "6285165693179",
-  email: "info@tepatlaser.com",
+  email: "info@rajacuttinglaser.com",
   address: "Jl. Raya Serang No. 123, Serang, indonesia 42111",
   businessHours: "Senin - Sabtu, 08:00 - 17:00 WIB",
   author: "Jasa Cutting Laser Team",
   socialMedia: {
-    facebook: "https://facebook.com/tepatlaser",
-    instagram: "https://instagram.com/tepatlaser",
-    youtube: "https://youtube.com/tepatlaser",
-    linkedin: "https://linkedin.com/company/tepatlaser"
+    facebook: "https://facebook.com/rajacuttinglaser",
+    instagram: "https://instagram.com/rajacuttinglaser",
+    youtube: "https://youtube.com/rajacuttinglaser",
+    linkedin: "https://linkedin.com/company/rajacuttinglaser"
   }
 };
 
