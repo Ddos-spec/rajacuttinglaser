@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS untuk optimasi performa dan SEO */
+/* Custom CSS for optimasi performa dan SEO */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -11,8 +11,8 @@
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: #1F2023;        /* charcoal */
-    background-color: #F5F6F7; /* silver-light */
+    color: #FFFFFF;        /* text-main */
+    background-color: #121212; /* background */
   }
   
   /* Optimasi font loading */
@@ -44,41 +44,33 @@
 @layer components {
   /* Button Components */
   .btn-primary {
-    @apply bg-laser-green hover:bg-laser-green/90 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-laser-green focus:ring-offset-2 shadow-md;
+    @apply bg-button hover:bg-highlight text-white hover:text-button font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-button focus:ring-offset-2 shadow-md;
   }
   
   .btn-secondary {
-    @apply border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-charcoal focus:ring-offset-2;
-  }
-  
-  .btn-success {
-    @apply bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
-  }
-  
-  .btn-warning {
-    @apply bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+    @apply border-2 border-button text-button hover:bg-button hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-button focus:ring-offset-2;
   }
   
   /* Typography */
   .heading-xl {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-charcoal;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-text-main;
   }
   
   .heading-lg {
-    @apply text-3xl md:text-4xl font-bold leading-tight text-charcoal;
+    @apply text-3xl md:text-4xl font-bold leading-tight text-text-main;
   }
   
   .heading-md {
-    @apply text-2xl md:text-3xl font-semibold leading-tight text-charcoal;
+    @apply text-2xl md:text-3xl font-semibold leading-tight text-text-main;
   }
   
   .heading-sm {
-    @apply text-xl md:text-2xl font-semibold leading-tight text-charcoal;
+    @apply text-xl md:text-2xl font-semibold leading-tight text-text-main;
   }
   
   /* Paragraph */
   p {
-    @apply text-graphite;
+    @apply text-text-secondary;
   }
   
   /* Layout */
@@ -111,11 +103,11 @@
   }
   
   .bg-gradient-primary {
-    background: linear-gradient(135deg, #00C853 0%, #00A045 100%);
+    background: linear-gradient(135deg, #E63946 0%, #C0C0C0 100%);
   }
   
   .bg-gradient-secondary {
-    background: linear-gradient(135deg, #1F2023 0%, #4A4B4E 100%);
+    background: linear-gradient(135deg, #2E2E2E 0%, #121212 100%);
   }
 }
 
@@ -176,6 +168,6 @@ img {
 
 /* Focus styles */
 .focus-visible {
-  outline: 2px solid #00C853;
+  outline: 2px solid #E63946;
   outline-offset: 2px;
 }

@@ -9,17 +9,17 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
   active: currentPath === `${item.href}` || (item.submenu && item.submenu.some(subitem => currentPath === `${subitem.href}`))
 }));
 ---
-<header class="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200" id="main-header">
+<header class="fixed top-0 left-0 right-0 z-40 bg-container border-b border-primary" id="main-header">
   <div class="container-custom">
     <div class="flex items-center justify-between h-16">
       <!-- Logo Section -->
       <div class="flex items-center">
         <a href="/" class="flex items-center space-x-3">
           <div class="sm:block">
-            <h1 class="text-xl font-bold text-gray-900">
+            <h1 class="text-xl font-bold text-text-main">
               Jasa Cutting Laser
             </h1>
-            <p class="text-xs text-gray-600 hidden lg:block">Laser Cutting Terpercaya</p>
+            <p class="text-xs text-text-secondary hidden lg:block">Laser Cutting Terpercaya</p>
           </div>
         </a>
       </div>
@@ -30,7 +30,7 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
             {item.submenu ? (
               <div class="relative">
                 <button
-                  class="flex items-center space-x-1 text-gray-700 hover:text-[#00C853] font-medium py-2"
+                  class="flex items-center space-x-1 text-text-secondary hover:text-highlight font-medium py-2"
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-desktop-dropdown={index}
@@ -40,12 +40,12 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                   </svg>
                 </button>
-                <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden" data-desktop-menu={index}>
+                <div class="absolute top-full left-0 mt-2 w-56 bg-container rounded-lg shadow-lg border border-primary hidden" data-desktop-menu={index}>
                   <div class="py-2">
                     {item.submenu.map((subitem) => (
                       <a
                         href={subitem.href}
-                        class="block px-4 py-3 text-gray-700 hover:text-[#00C853] hover:bg-green-50 text-sm font-medium"
+                        class="block px-4 py-3 text-text-secondary hover:text-highlight hover:bg-background text-sm font-medium"
                       >
                         {subitem.name}
                       </a>
@@ -56,8 +56,8 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
             ) : (
               <a
                 href={item.href}
-                class="text-gray-700 hover:text-[#00C853] font-medium py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#00C853] after:transition-all after:duration-300 hover:after:w-full"
-                class:list={[item.active && 'text-[#00C853] after:w-full']}
+                class="text-text-secondary hover:text-highlight font-medium py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-highlight after:transition-all after:duration-300 hover:after:w-full"
+                class:list={[item.active && 'text-highlight after:w-full']}
               >
                 {item.name}
               </a>
@@ -76,15 +76,15 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
       </div>
       <!-- Mobile Menu Button -->
       <button
-        class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100"
+        class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-container"
         id="mobile-menu-button"
         aria-label="Toggle mobile menu"
         aria-expanded="false"
       >
-        <svg class="w-6 h-6 text-gray-700" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 text-text-secondary" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
-        <svg class="w-6 h-6 text-gray-700 hidden" id="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 text-text-secondary hidden" id="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
@@ -92,28 +92,28 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
   </div>
   <!-- Mobile Menu -->
   <div
-    class="lg:hidden fixed inset-0 top-0 bg-white z-50 hidden overflow-y-auto"
+    class="lg:hidden fixed inset-0 top-0 bg-background z-50 hidden overflow-y-auto"
     id="mobile-menu"
   >
     <!-- Mobile Header Spacer -->
-    <div class="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-4">
+    <div class="h-16 border-b border-primary bg-container flex items-center justify-between px-4">
       <div class="flex items-center">
         <a href="/" class="flex items-center space-x-3">
-          <h1 class="text-xl font-bold text-gray-900">Tepat Laser</h1>
+          <h1 class="text-xl font-bold text-text-main">Tepat Laser</h1>
         </a>
       </div>
        <!-- Close Button inside mobile menu -->
       <button
-        class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100"
+        class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-container"
         id="mobile-menu-close-button"
         aria-label="Close mobile menu"
       >
-        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
-    <div class="flex flex-col min-h-screen bg-white">
+    <div class="flex flex-col min-h-screen bg-background">
       <!-- Mobile Navigation -->
       <nav class="flex-1 px-4 py-6 space-y-2" aria-label="Mobile navigation">
         {filteredNavigation.map((item, index) => (
@@ -121,7 +121,7 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
             {item.submenu ? (
               <div>
                 <button
-                  class="flex items-center justify-between w-full text-left text-gray-700 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
+                  class="flex items-center justify-between w-full text-left text-text-secondary font-medium py-3 px-4 rounded-lg hover:bg-container"
                   data-submenu-index={index}
                   aria-expanded="false"
                 >
@@ -137,14 +137,14 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
                   </svg>
                 </button>
                 <div 
-                  class="hidden bg-gray-50 rounded-lg mx-2 mt-1"
+                  class="hidden bg-container rounded-lg mx-2 mt-1"
                   id={`submenu-${index}`}
                 >
                   <div class="pl-4 pt-2 pb-2 space-y-1">
                     {item.submenu.map((subitem) => (
                       <a
                         href={subitem.href}
-                        class="block text-gray-600 hover:text-[#00C853] py-2 px-4 rounded-lg hover:bg-white text-sm font-medium"
+                        class="block text-text-secondary hover:text-highlight py-2 px-4 rounded-lg hover:bg-background text-sm font-medium"
                       >
                         {subitem.name}
                       </a>
@@ -155,8 +155,8 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
             ) : (
               <a
                 href={item.href}
-                class="block text-gray-700 hover:text-[#00C853] font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
-                class:list={[item.active && 'text-[#00C853] bg-green-50']}
+                class="block text-text-secondary hover:text-highlight font-medium py-3 px-4 rounded-lg hover:bg-container"
+                class:list={[item.active && 'text-highlight bg-container']}
               >
                 {item.name}
               </a>
@@ -165,7 +165,7 @@ const filteredNavigation = NAVIGATION.filter(item => item.name !== "Kontak").map
         ))}
       </nav>
       <!-- Mobile Action Buttons -->
-      <div class="p-4 border-t border-gray-200 space-y-3 bg-white">
+      <div class="p-4 border-t border-primary space-y-3 bg-background">
         <a
           href="/contact/"
           class="btn-primary w-full text-center block py-3"
