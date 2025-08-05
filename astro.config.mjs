@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config  
 export default defineConfig({
   // PENTING: Konfigurasi untuk deploy ke domain kustom Anda
-  site: 'https://jasalasercutting.com', // Ganti dengan domain utama Anda
+  site: 'https://rajacuttinglaser.com', // Ganti dengan domain utama Anda
   base: '/', // Karena dihosting di root domain, bukan subfolder
   
   integrations: [tailwind(), sitemap()],
