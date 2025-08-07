@@ -47,7 +47,7 @@ jobs:
           # Folder hasil build Astro yang akan di-upload (dist bukan out)
           local-dir: ./dist/
           # Folder tujuan di hosting (sesuaikan dengan domain kamu)
-          server-dir: public_html/rajacuttinglaser.com
+          server-dir: public_html/rajacuttinglaser.com/
           # Exclude file tertentu jika perlu
           exclude: |
             **/.git*
