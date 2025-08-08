@@ -4,6 +4,7 @@ import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CTA from '../components/CTA.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 import { FAQ, SITE_CONFIG, WHATSAPP_MESSAGES } from '../utils/constants.js';
 import { generateMetaTags } from '../utils/seo.ts';
 
@@ -86,6 +87,23 @@ const metaTags = generateMetaTags(seoData) as BaseLayoutProps;
       });
     }
     // ---
+
+    // Form submission tracking
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        // Import tracking function
+        import('../utils/tracker.js').then(({ trackFormSubmission }) => {
+          const formData = new FormData(e.target);
+          trackFormSubmission('contact_form', {
+            name: formData.get('name'),
+            phone: formData.get('phone'),
+            email: formData.get('email'),
+            message: formData.get('message')
+          });
+        });
+      });
+    }
   });
   // ---
 </script>
@@ -226,10 +244,49 @@ const metaTags = generateMetaTags(seoData) as BaseLayoutProps;
                 <h3 class="text-xl font-bold mb-2">Chat Langsung via WhatsApp</h3>
                 <p class="opacity-90">Dapatkan respon cepat & penawaran instan</p>
               </div>
-              <a href={`https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=${WHATSAPP_MESSAGES.default}`} target="_blank" rel="noopener noreferrer" class="btn-secondary bg-white text-green-600 hover:bg-gray-100">
-                Chat Sekarang
-              </a>
+              <WhatsAppButton 
+                message={WHATSAPP_MESSAGES.default}
+                className="bg-white text-green-600 hover:bg-gray-100 border-0"
+                source="contact_page"
+              />
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Customer Service Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">
+          Hubungi Kami Sekarang
+        </h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Dapatkan respon cepat melalui WhatsApp untuk konsultasi dan quote gratis
+        </p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="text-xl font-semibold mb-4">Customer Service 1</h3>
+            <WhatsAppButton 
+              message="Halo, saya ingin konsultasi tentang layanan laser cutting"
+              className="w-full justify-center"
+              source="contact_cs1"
+            />
+            <p class="text-gray-600 mt-4">085165693179</p>
+          </div>
+          
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="text-xl font-semibold mb-4">Customer Service 2</h3>
+            <WhatsAppButton 
+              message="Halo, saya ingin konsultasi tentang layanan laser cutting"
+              className="w-full justify-center"
+              number="6281210134134"
+              source="contact_cs2"
+            />
+            <p class="text-gray-600 mt-4">081210134134</p>
           </div>
         </div>
       </div>

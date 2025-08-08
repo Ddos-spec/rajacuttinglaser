@@ -208,10 +208,9 @@ const metaTags = {
   <CTA 
     title="Siap Berkolaborasi dengan Kami?"
     description="Mari wujudkan project laser cutting Anda bersama tim ahli raja cutting laser."
-    primaryText="Konsultasi Gratis"
-    primaryLink={`https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=Halo, saya tertarik berkolaborasi dengan raja cutting laser`}
     secondaryText="Lihat Portfolio"
     secondaryLink="/portfolio/"
+    whatsappMessage="Halo, saya tertarik berkolaborasi dengan raja cutting laser"
   />
   
   <Footer slot="footer" />
@@ -241,7 +240,9 @@ const metaTags = {
   }
 </style>
 
-<script>
+<script type="module">
   import { addWhatsAppTrackers } from '../utils/tracker.js';
-  addWhatsAppTrackers();
+  document.addEventListener('DOMContentLoaded', () => {
+    addWhatsAppTrackers();
+  });
 </script>
