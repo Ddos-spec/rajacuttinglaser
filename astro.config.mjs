@@ -12,7 +12,7 @@ export default defineConfig({
   integrations: [tailwind(), sitemap()],
   
   // Enable hybrid rendering for API routes
-  output: 'hybrid',
+  output: 'static',
   
   // CRITICAL: Custom routing untuk file di root src/
   vite: {
