@@ -21,12 +21,6 @@ export const SITE_CONFIG = {
   }
 };
 
-// ===== KONFIGURASI N8N =====
-export const N8N_CONFIG = {
-  production: "https://projek-n8n-n8n.qk6yxt.easypanel.host/webhook/d75d199c-60c2-4840-a065-d648788089bb",
-  testing: "https://projek-n8n-n8n.qk6yxt.easypanel.host/webhook-test/d75d199c-60c2-4840-a065-d648788089bb"
-};
-
 // ===== NAVIGASI UTAMA =====
 export const NAVIGATION = [
   {
