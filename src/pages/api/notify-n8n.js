@@ -18,7 +18,7 @@ export async function POST({ request }) {
 
     // Prepare payload for N8N
     const payload = {
-      event: 'whatsapp_click',
+      event: 'whatsapp_button_click',
       source: source || 'unknown',
       message_template: message || 'No message provided',
       timestamp: new Date().toISOString(),

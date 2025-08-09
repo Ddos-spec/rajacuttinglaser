@@ -1,19 +1,13 @@
 // /api/ai-chat.js
 // Astro API endpoint to interact with OpenRouter AI and log conversations to Supabase.
 
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
 
 const openRouterApiKey = import.meta.env.OPENROUTER_API_KEY;
-const supabaseUrl = import.meta.env.SUPABASE_URL;
-const supabaseKey = import.meta.env.SUPABASE_ANON_KEY;
-
-// Initialize Supabase client
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST({ request }) {
-  // 1. Check for API keys
-  if (!openRouterApiKey || !supabaseUrl || !supabaseKey) {
-    console.error('Missing environment variables for AI Chat API.');
+  if (!openRouterApiKey) {
+    console.error('OPENROUTER_API_KEY is not set.');
     return new Response(JSON.stringify({ error: 'Server configuration error.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
@@ -21,16 +15,28 @@ export async function POST({ request }) {
   }
 
   try {
-    // 2. Parse incoming request
-    const { message, whatsappNumber } = await request.json();
+    const { message, whatsappNumber, conversationHistory = [] } = await request.json();
     if (!message || !whatsappNumber) {
-      return new Response(JSON.stringify({ error: 'Missing `message` or `whatsappNumber` in request body.' }), {
+      return new Response(JSON.stringify({ error: 'Missing `message` or `whatsappNumber`.' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    // 3. Call OpenRouter API (DeepSeek)
+    // Construct messages for the AI, including history for context
+    const messages = [
+      { 
+        role: 'system', 
+        content: `You are a friendly and professional customer service assistant for "Raja Cutting Laser", a laser cutting company in Indonesia. Your goal is to answer questions, provide information, and determine if the user is a potential lead.
+        - Be concise and helpful.
+        - If asked about prices, explain that prices depend on material, thickness, and design complexity, and offer to provide a quote if they provide these details.
+        - Your primary language is Indonesian.
+        - If the user seems interested in a service, ask for their name, location, and details about their project to qualify them as a lead.`
+      },
+      ...conversationHistory, // Spread the history if provided
+      { role: 'user', content: message },
+    ];
+
     const aiResponse = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -38,11 +44,8 @@ export async function POST({ request }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'deepseek/chat', // As requested by the user
-        messages: [
-          { role: 'system', content: 'You are a helpful customer service assistant for Raja Cutting Laser, a laser cutting company. Be concise and helpful.' },
-          { role: 'user', content: message },
-        ],
+        model: 'deepseek/chat',
+        messages: messages,
       }),
     });
 
@@ -59,24 +62,19 @@ export async function POST({ request }) {
       throw new Error('Invalid response structure from OpenRouter API.');
     }
 
-    // 4. Log conversation to Supabase
+    // Log conversation to Supabase
     const { error: logError } = await supabase
       .from('conversations')
-      .insert([
-        {
-          whatsapp_number: whatsappNumber,
-          message_text: message,
-          ai_response_text: aiMessageContent,
-          created_at: new Date().toISOString(),
-        },
-      ]);
+      .insert({
+        whatsapp_number: whatsappNumber,
+        message_text: message,
+        ai_response_text: aiMessageContent,
+      });
 
     if (logError) {
-      // Log the error but still return the AI response to the user
       console.error('Supabase logging error:', logError);
     }
 
-    // 5. Return AI response to the client (e.g., N8N)
     return new Response(JSON.stringify({ reply: aiMessageContent }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },

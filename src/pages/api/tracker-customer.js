@@ -1,185 +1,122 @@
-// /api/track-customer.js
-// Astro API endpoint to store customer data and conversation history
-import { createClient } from '@supabase/supabase-js';
+// /api/tracker-customer.js
+// Astro API endpoint to create or update customer profiles in Supabase.
 
-// Initialize Supabase client from environment variables
-const supabaseUrl = import.meta.env.SUPABASE_URL;
-const supabaseKey = import.meta.env.SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Supabase credentials not configured in environment variables.');
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from '@/integrations/supabase/client';
 
 export async function POST({ request }) {
-  if (!supabaseUrl || !supabaseKey) {
-    return new Response(JSON.stringify({ 
-      status: 'error', 
-      message: 'Database configuration missing' 
-    }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
   try {
     const body = await request.json();
-    console.log('Customer tracking data received:', JSON.stringify(body, null, 2));
-
     const {
       whatsappNumber,
-      messageText,
-      aiResponseText,
-      extractedName,
-      extractedPhone,
-      extractedLocation,
-      extractedProductInterest,
-      isLeadReady,
-      timestamp
+      name,
+      phone,
+      location,
+      productInterest,
+      isLead,
     } = body;
-    
-    if (!whatsappNumber || !messageText) {
-      return new Response(JSON.stringify({ 
-        status: 'error', 
-        message: 'Missing required fields: whatsappNumber and messageText' 
-      }), {
+
+    if (!whatsappNumber) {
+      return new Response(JSON.stringify({ error: '`whatsappNumber` is required.' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
     }
-    
+
+    // Data to be inserted or updated
     const customerData = {
       whatsapp_number: whatsappNumber,
-      message_text: messageText,
-      ai_response_text: aiResponseText || null,
-      extracted_name: extractedName || null,
-      extracted_phone: extractedPhone || null,
-      extracted_location: extractedLocation || null,
-      extracted_product_interest: extractedProductInterest || null,
-      is_lead_ready: isLeadReady || false,
-      created_at: timestamp || new Date().toISOString()
+      name: name,
+      phone: phone,
+      location: location,
+      product_interest: productInterest,
+      is_lead: isLead,
+      last_interaction: new Date().toISOString(),
     };
-    
-    const { error: insertError } = await supabase
-      .from('conversations')
-      .insert(customerData);
 
-    if (insertError) {
-      console.error('Supabase insert failed:', insertError);
-      throw new Error(`Supabase insert failed: ${insertError.message}`);
+    // Remove null/undefined fields so they don't overwrite existing data with nulls
+    Object.keys(customerData).forEach(key => {
+      if (customerData[key] === null || customerData[key] === undefined) {
+        delete customerData[key];
+      }
+    });
+
+    // Perform an "upsert" operation
+    const { data, error } = await supabase
+      .from('customers')
+      .upsert(customerData, { onConflict: 'whatsapp_number' })
+      .select();
+
+    if (error) {
+      console.error('Supabase upsert error:', error);
+      throw error;
     }
-    
-    console.log('Successfully stored customer data in Supabase');
-    
-    if (extractedName || extractedPhone || extractedLocation) {
-      await updateCustomerProfile({
-        whatsappNumber,
-        extractedName,
-        extractedPhone,
-        extractedLocation,
-        extractedProductInterest,
-        isLeadReady
-      });
-    }
-    
-    return new Response(JSON.stringify({ 
-      status: 'success',
-      message: 'Customer data stored successfully'
-    }), {
+
+    return new Response(JSON.stringify({ status: 'success', data: data }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
-    
+
   } catch (error) {
-    console.error('Error processing customer tracking request:', error);
-    return new Response(JSON.stringify({ 
-      status: 'error', 
-      message: 'Internal server error' 
-    }), {
+    console.error('Error in /api/tracker-customer:', error);
+    return new Response(JSON.stringify({ error: 'An internal error occurred.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 }
 
-async function updateCustomerProfile(data) {
-  try {
-    const { data: existingCustomers, error: checkError } = await supabase
-      .from('customers')
-      .select('id')
-      .eq('whatsapp_number', data.whatsappNumber)
-      .limit(1);
-
-    if (checkError) {
-      console.error('Failed to check existing customer:', checkError);
-      return;
-    }
-
-    const customerProfileData = {
-      whatsapp_number: data.whatsappNumber,
-      name: data.extractedName || null,
-      phone: data.extractedPhone || null,
-      location: data.extractedLocation || null,
-      product_interest: data.extractedProductInterest || null,
-      is_lead: data.isLeadReady || false,
-      last_interaction: new Date().toISOString()
-    };
-
-    if (existingCustomers && existingCustomers.length > 0) {
-      const { error: updateError } = await supabase
-        .from('customers')
-        .update(customerProfileData)
-        .eq('whatsapp_number', data.whatsappNumber);
-      
-      if (updateError) console.error('Failed to update customer profile:', updateError);
-      else console.log('Customer profile updated successfully');
-    } else {
-      const { error: createError } = await supabase
-        .from('customers')
-        .insert({ ...customerProfileData, created_at: new Date().toISOString() });
-      
-      if (createError) console.error('Failed to create customer profile:', createError);
-      else console.log('Customer profile created successfully');
-    }
-  } catch (error) {
-    console.error('Error updating customer profile:', error);
-  }
-}
-
+// GET method to retrieve customer data and conversation history
 export async function GET({ request }) {
-  if (!supabaseUrl || !supabaseKey) {
-    return new Response(JSON.stringify({ status: 'error', message: 'Database configuration missing' }), { status: 500 });
-  }
-  
-  try {
     const url = new URL(request.url);
     const whatsappNumber = url.searchParams.get('whatsapp_number');
-    
+
     if (!whatsappNumber) {
-      return new Response(JSON.stringify({ status: 'error', message: 'Missing whatsapp_number parameter' }), { status: 400 });
+        return new Response(JSON.stringify({ error: '`whatsapp_number` query parameter is required.' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' },
+        });
     }
-    
-    const { data: conversations, error: convError } = await supabase
-      .from('conversations')
-      .select('*')
-      .eq('whatsapp_number', whatsappNumber)
-      .order('created_at', { ascending: false });
 
-    if (convError) throw convError;
+    try {
+        // Fetch customer profile
+        const { data: customer, error: customerError } = await supabase
+            .from('customers')
+            .select('*')
+            .eq('whatsapp_number', whatsappNumber)
+            .single();
 
-    const { data: customer, error: custError } = await supabase
-      .from('customers')
-      .select('*')
-      .eq('whatsapp_number', whatsappNumber)
-      .maybeSingle();
+        if (customerError && customerError.code !== 'PGRST116') { // Ignore "single row not found" error
+            throw customerError;
+        }
 
-    if (custError) throw custError;
-    
-    return new Response(JSON.stringify({ status: 'success', data: { customer, conversations } }), { status: 200 });
-    
-  } catch (error) {
-    console.error('Error retrieving customer data:', error);
-    return new Response(JSON.stringify({ status: 'error', message: 'Internal server error' }), { status: 500 });
-  }
+        // Fetch conversation history
+        const { data: conversations, error: conversationsError } = await supabase
+            .from('conversations')
+            .select('message_text, ai_response_text, created_at')
+            .eq('whatsapp_number', whatsappNumber)
+            .order('created_at', { ascending: true })
+            .limit(20); // Limit history to the last 20 messages for context
+
+        if (conversationsError) {
+            throw conversationsError;
+        }
+
+        return new Response(JSON.stringify({
+            status: 'success',
+            data: {
+                customer,
+                conversations,
+            },
+        }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+    } catch (error) {
+        console.error('Error fetching customer data:', error);
+        return new Response(JSON.stringify({ error: 'An internal error occurred.' }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
 }
