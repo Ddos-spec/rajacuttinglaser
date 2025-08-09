@@ -61,29 +61,30 @@ export async function POST({ request }) {
       });
     }
     
-    // Forward to N8N webhook
-    // This URL should be configured to point to your N8N webhook endpoint
-    const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL || 'http://localhost:5678/webhook/whatsapp-customer-service';
+    // Forward to N8N webhook using environment variable
+    const n8nWebhookUrl = import.meta.env.N8N_WEBHOOK_URL;
     
-    try {
-      const n8nResponse = await fetch(n8nWebhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(messageData),
-      });
-      
-      if (!n8nResponse.ok) {
-        console.error('Failed to forward to N8N:', n8nResponse.status, n8nResponse.statusText);
-        throw new Error(`N8N webhook failed: ${n8nResponse.status}`);
+    if (n8nWebhookUrl) {
+      try {
+        const n8nResponse = await fetch(n8nWebhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(messageData),
+        });
+        
+        if (!n8nResponse.ok) {
+          console.error('Failed to forward to N8N:', n8nResponse.status, n8nResponse.statusText);
+        } else {
+          console.log('Successfully forwarded message to N8N');
+        }
+        
+      } catch (error) {
+        console.error('Error forwarding to N8N:', error);
       }
-      
-      console.log('Successfully forwarded message to N8N');
-      
-    } catch (error) {
-      console.error('Error forwarding to N8N:', error);
-      // Continue processing even if N8N fails
+    } else {
+      console.warn('N8N_WEBHOOK_URL is not set. Skipping forwarding.');
     }
     
     // Return success response to WhatsApp
@@ -116,8 +117,8 @@ export async function GET({ request }) {
   const token = url.searchParams.get('hub.verify_token');
   const challenge = url.searchParams.get('hub.challenge');
   
-  // Verify token (should match what you set in WhatsApp webhook configuration)
-  const verifyToken = process.env.WHATSAPP_VERIFY_TOKEN || 'your_verify_token_here';
+  // Verify token from environment variable
+  const verifyToken = import.meta.env.WHATSAPP_VERIFY_TOKEN;
   
   if (mode === 'subscribe' && token === verifyToken) {
     console.log('WhatsApp webhook verified successfully');
@@ -128,7 +129,7 @@ export async function GET({ request }) {
       },
     });
   } else {
-    console.log('WhatsApp webhook verification failed');
+    console.log('WhatsApp webhook verification failed. Make sure WHATSAPP_VERIFY_TOKEN is set correctly.');
     return new Response('Forbidden', {
       status: 403,
       headers: {
@@ -137,4 +138,3 @@ export async function GET({ request }) {
     });
   }
 }
-
