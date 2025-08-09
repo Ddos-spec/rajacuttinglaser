@@ -6,7 +6,7 @@ export async function POST({ request }) {
 
   if (!n8nWebhookUrl) {
     console.error('N8N_WEBHOOK_URL is not set. Cannot forward WhatsApp message.');
-    // Still return 200 to WhatsApp to prevent it from disabling the webhook.
+    // Still return 200 to the webhook provider to prevent it from being disabled.
     return new Response(JSON.stringify({ status: 'ok', message: 'Server configuration error.' }), { status: 200 });
   }
 
@@ -21,11 +21,11 @@ export async function POST({ request }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     }).catch(error => {
-      // Log the error but don't block the response to WhatsApp
+      // Log the error but don't block the response to the webhook provider
       console.error('Error forwarding to N8N:', error);
     });
 
-    // Acknowledge receipt to WhatsApp immediately
+    // Acknowledge receipt to the webhook provider immediately
     return new Response(JSON.stringify({ status: 'ok' }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -37,31 +37,5 @@ export async function POST({ request }) {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
-  }
-}
-
-// Handle webhook verification (required by WhatsApp)
-export async function GET({ request }) {
-  const url = new URL(request.url);
-  const mode = url.searchParams.get('hub.mode');
-  const token = url.searchParams.get('hub.verify_token');
-  const challenge = url.searchParams.get('hub.challenge');
-
-  const verifyToken = import.meta.env.WHATSAPP_VERIFY_TOKEN;
-
-  if (!verifyToken) {
-    console.error('WHATSAPP_VERIFY_TOKEN is not set.');
-    return new Response('Forbidden: Server configuration missing.', { status: 403 });
-  }
-
-  if (mode === 'subscribe' && token === verifyToken) {
-    console.log('WhatsApp webhook verified successfully.');
-    return new Response(challenge, {
-      status: 200,
-      headers: { 'Content-Type': 'text/plain' },
-    });
-  } else {
-    console.error('WhatsApp webhook verification failed. Tokens do not match.');
-    return new Response('Forbidden', { status: 403 });
   }
 }
