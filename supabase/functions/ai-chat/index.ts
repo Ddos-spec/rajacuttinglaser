@@ -1,29 +1,41 @@
-// /api/ai-chat.js
-// Astro API endpoint to interact with OpenRouter AI and log conversations to Supabase.
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts"
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0'
 
-import { supabaseAdmin } from '@/integrations/supabase/serverClient';
+// CORS headers wajib untuk Supabase Edge Functions
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
 
-const openRouterApiKey = import.meta.env.OPENROUTER_API_KEY;
-
-export async function POST({ request }) {
-  if (!openRouterApiKey) {
-    console.error('OPENROUTER_API_KEY is not set.');
-    return new Response(JSON.stringify({ error: 'Server configuration error.' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+serve(async (req) => {
+  // Menangani preflight request OPTIONS
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders })
   }
 
   try {
-    const { message, whatsappNumber, conversationHistory = [] } = await request.json();
+    // Mengambil OpenRouter API key dari environment variables (secrets)
+    const openRouterApiKey = Deno.env.get('OPENROUTER_API_KEY');
+    if (!openRouterApiKey) {
+      throw new Error('OPENROUTER_API_KEY belum diatur di dalam function secrets.');
+    }
+
+    // Mengambil body dari request
+    const { message, whatsappNumber, conversationHistory = [] } = await req.json();
     if (!message || !whatsappNumber) {
-      return new Response(JSON.stringify({ error: 'Missing `message` or `whatsappNumber`.' }), {
+      return new Response(JSON.stringify({ error: '`message` atau `whatsappNumber` tidak ada.' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    // Construct messages for the AI, including history for context
+    // Membuat Supabase client dengan service role key untuk akses admin
+    const supabaseAdmin = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    );
+
+    // Menyusun pesan untuk AI, termasuk histori percakapan
     const messages = [
       { 
         role: 'system', 
@@ -34,10 +46,11 @@ export async function POST({ request }) {
         - If the user seems interested in a service, ask for their name, location, and details about their project to qualify them as a lead.
         - **IMPORTANT ESCALATION RULE:** If the user insists on getting a price quote, asks a very complex technical question you cannot answer, or seems angry/frustrated, you MUST end your response with the exact phrase: [ESKALASI_MANUSIA]. Do not explain why, just add the phrase.`
       },
-      ...conversationHistory, // Spread the history if provided
+      ...conversationHistory,
       { role: 'user', content: message },
     ];
 
+    // Memanggil OpenRouter API
     const aiResponse = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -53,17 +66,17 @@ export async function POST({ request }) {
     if (!aiResponse.ok) {
       const errorBody = await aiResponse.text();
       console.error('OpenRouter API error:', errorBody);
-      throw new Error(`OpenRouter API failed with status: ${aiResponse.status}`);
+      throw new Error(`OpenRouter API gagal dengan status: ${aiResponse.status}`);
     }
 
     const aiData = await aiResponse.json();
     const aiMessageContent = aiData.choices[0]?.message?.content;
 
     if (!aiMessageContent) {
-      throw new Error('Invalid response structure from OpenRouter API.');
+      throw new Error('Struktur respons dari OpenRouter API tidak valid.');
     }
 
-    // Log conversation to Supabase using the admin client
+    // Menyimpan percakapan ke Supabase
     const { error: logError } = await supabaseAdmin
       .from('conversations')
       .insert({
@@ -73,19 +86,21 @@ export async function POST({ request }) {
       });
 
     if (logError) {
+      // Catat error tapi jangan gagalkan respons ke pengguna
       console.error('Supabase logging error:', logError);
     }
 
+    // Mengembalikan balasan dari AI
     return new Response(JSON.stringify({ reply: aiMessageContent }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
 
   } catch (error) {
-    console.error('Error in /api/ai-chat:', error);
-    return new Response(JSON.stringify({ error: 'An internal error occurred.' }), {
+    console.error('Error di dalam fungsi ai-chat:', error);
+    return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
-}
+})
