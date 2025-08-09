@@ -1,7 +1,7 @@
 // /api/ai-chat.js
 // Astro API endpoint to interact with OpenRouter AI and log conversations to Supabase.
 
-import { supabase } from '@/integrations/supabase/client';
+import { supabaseAdmin } from '@/integrations/supabase/serverClient';
 
 const openRouterApiKey = import.meta.env.OPENROUTER_API_KEY;
 
@@ -62,8 +62,8 @@ export async function POST({ request }) {
       throw new Error('Invalid response structure from OpenRouter API.');
     }
 
-    // Log conversation to Supabase
-    const { error: logError } = await supabase
+    // Log conversation to Supabase using the admin client
+    const { error: logError } = await supabaseAdmin
       .from('conversations')
       .insert({
         whatsapp_number: whatsappNumber,

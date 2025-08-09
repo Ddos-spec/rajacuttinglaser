@@ -1,7 +1,7 @@
 // /api/tracker-customer.js
 // Astro API endpoint to create or update customer profiles in Supabase.
 
-import { supabase } from '@/integrations/supabase/client';
+import { supabaseAdmin } from '@/integrations/supabase/serverClient';
 
 export async function POST({ request }) {
   try {
@@ -40,8 +40,8 @@ export async function POST({ request }) {
       }
     });
 
-    // Perform an "upsert" operation
-    const { data, error } = await supabase
+    // Perform an "upsert" operation using the admin client
+    const { data, error } = await supabaseAdmin
       .from('customers')
       .upsert(customerData, { onConflict: 'whatsapp_number' })
       .select();
@@ -78,8 +78,8 @@ export async function GET({ request }) {
     }
 
     try {
-        // Fetch customer profile
-        const { data: customer, error: customerError } = await supabase
+        // Fetch customer profile using the admin client
+        const { data: customer, error: customerError } = await supabaseAdmin
             .from('customers')
             .select('*')
             .eq('whatsapp_number', whatsappNumber)
@@ -89,8 +89,8 @@ export async function GET({ request }) {
             throw customerError;
         }
 
-        // Fetch conversation history
-        const { data: conversations, error: conversationsError } = await supabase
+        // Fetch conversation history using the admin client
+        const { data: conversations, error: conversationsError } = await supabaseAdmin
             .from('conversations')
             .select('message_text, ai_response_text, created_at')
             .eq('whatsapp_number', whatsappNumber)
