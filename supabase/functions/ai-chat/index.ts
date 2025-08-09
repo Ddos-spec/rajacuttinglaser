@@ -58,7 +58,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'deepseek/chat',
+        model: 'openai/gpt-3.5-turbo', // <-- PERUBAHAN DI SINI
         messages: messages,
       }),
     });
