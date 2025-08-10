@@ -87,23 +87,6 @@ const metaTags = generateMetaTags(seoData) as BaseLayoutProps;
       });
     }
     // ---
-
-    // Form submission tracking
-    const form = document.getElementById('contact-form');
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        // Import tracking function
-        import('../utils/tracker.js').then(({ trackFormSubmission }) => {
-          const formData = new FormData(e.target);
-          trackFormSubmission('contact_form', {
-            name: formData.get('name'),
-            phone: formData.get('phone'),
-            email: formData.get('email'),
-            message: formData.get('message')
-          });
-        });
-      });
-    }
   });
   // ---
 </script>
@@ -412,4 +395,3 @@ const metaTags = generateMetaTags(seoData) as BaseLayoutProps;
 
   <Footer slot="footer" />
 </BaseLayout>
-
