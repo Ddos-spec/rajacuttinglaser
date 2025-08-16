@@ -81,7 +81,7 @@ const siteUrl = new URL(Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-Equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <title>{meta.title}</title>
     <meta name="description" content={meta.description} />
@@ -90,6 +90,7 @@ const siteUrl = new URL(Astro.site);
     <link rel="canonical" href={meta.canonical} />
     <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"} />
 
+    <!-- Open Graph -->
     <meta property="og:type" content={meta.openGraph.type} />
     <meta property="og:title" content={meta.openGraph.title} />
     <meta property="og:description" content={meta.openGraph.description} />
@@ -100,25 +101,38 @@ const siteUrl = new URL(Astro.site);
     <meta property="og:site_name" content={meta.openGraph.siteName} />
     <meta property="og:locale" content={meta.openGraph.locale} />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content={meta.twitter.card} />
     <meta name="twitter:title" content={meta.twitter.title} />
     <meta name="twitter:description" content={meta.twitter.description} />
     <meta name="twitter:image" content={new URL(meta.twitter.image, siteUrl).href} />
 
+    <!-- Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="icon" type="image/webp" href="/images/logo.webp" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- Preload critical brand image -->
     <link rel="preload" href="/images/logo.webp" as="image" type="image/webp" />
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin />
 
+    <!-- Resource Hints for performance -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="preconnect" href="https://api.whatsapp.com" />
     <link rel="dns-prefetch" href="//api.whatsapp.com" />
+
+    <!-- Alternate representations -->
+    <link rel="alternate" type="application/rss+xml" title="{meta.title} - RSS" href="/rss.xml" />
+    <link rel="alternate" hrefLang="id" href={meta.canonical} />
+    <link rel="alternate" hrefLang="x-default" href={meta.canonical} />
 
     {jsonLd && jsonLd.length > 0 && jsonLd.map(json => (
       <script type="application/ld+json" set:html={JSON.stringify(json)} />
     ))}
 
+    <!-- Organization Schema -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -140,8 +154,7 @@ const siteUrl = new URL(Astro.site);
       sameAs: [
         "https://facebook.com/rajacuttinglaser",
         "https://instagram.com/rajacuttinglaser",
-        "https://youtube.com/rajacuttinglaser",
-        
+        "https://youtube.com/rajacuttinglaser"
       ],
       areaServed: ["Serang", "Tangerang", "Cilegon", "Pandeglang", "Lebak"],
       serviceType: ["Laser Cutting", "CNC Router", "Laser Fiber", "Laser CO2", "Galvo Engraving"]
