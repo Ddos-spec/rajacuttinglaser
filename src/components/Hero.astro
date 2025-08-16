@@ -22,7 +22,7 @@ const {
   primaryCTA = "Konsultasi Gratis Sekarang",
   primaryCTALink = `https://api.whatsapp.com/send?phone=${SITE_CONFIG.whatsapp}&text=${encodeURIComponent(WHATSAPP_MESSAGES.default)}`,
   secondaryCTA = "Lihat Portfolio Kami",
-  secondaryCTALink = "/rajacuttinglaser/portfolio",
+  secondaryCTALink = "/portfolio",
   backgroundImage = "/images/logo.webp",
   showTrustSignals = true,
   whatsappMessage = WHATSAPP_MESSAGES.default,
@@ -43,8 +43,11 @@ const {
       alt="Laser cutting technology"
       class="w-full h-full object-cover opacity-10"
       loading="eager"
+      fetchpriority="high"
+      decoding="async"
       width="1920"
       height="1080"
+      sizes="100vw"
     />
     <div class="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-container/90"></div>
   </div>
@@ -209,4 +212,3 @@ const {
     transform: translateY(30px);
   }
 </style>
-

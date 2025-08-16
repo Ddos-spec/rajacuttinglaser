@@ -71,7 +71,7 @@ const related = posts
   {post.data.image && (
     <section class="bg-background">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <img src={post.data.image} alt={post.data.title} width="1200" height="576" class="w-full h-72 object-cover rounded-lg -mt-8 border-4 border-container" loading="eager" />
+        <img src={post.data.image} alt={post.data.title} width="1200" height="630" sizes="(max-width: 1024px) 100vw, 1200px" class="w-full h-72 object-cover rounded-lg -mt-8 border-4 border-container" loading="eager" decoding="async" />
       </div>
     </section>
   )}
@@ -109,7 +109,7 @@ const related = posts
           {related.map((item) => (
             <article class="bg-background rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
               {item.data.image && (
-                <img src={item.data.image} alt={item.data.title} width="800" height="320" class="w-full h-40 object-cover" loading="lazy" />
+                <img src={item.data.image} alt={item.data.title} width="800" height="320" sizes="(max-width: 1024px) 100vw, 800px" class="w-full h-40 object-cover" loading="lazy" decoding="async" />
               )}
               <div class="p-6">
                 <div class="flex items-center justify-between mb-3">
