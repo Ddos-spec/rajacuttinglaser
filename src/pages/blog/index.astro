@@ -5,9 +5,29 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import { BLOG_POSTS } from '../../utils/constants.js';
+import { getCollection } from 'astro:content';
+
+// Ambil posts dari Content Collections (fallback ke BLOG_POSTS jika kosong)
+const collectionPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+const mapCollectionToView = (p) => ({
+  title: p.data.title,
+  slug: p.slug,
+  excerpt: p.data.description,
+  category: p.data.category,
+  image: p.data.image,
+  publishDate: p.data.pubDate,
+  readTime: p.data.readTime,
+});
+
+const sourcePosts = (collectionPosts &amp;&amp; collectionPosts.length &gt; 0)
+  ? collectionPosts.map(mapCollectionToView)
+  : BLOG_POSTS;
 
 // Sort blog posts by date (newest first)
-const sortedPosts = BLOG_POSTS.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+const sortedPosts = sourcePosts
+  .filter((p) => p.publishDate)
+  .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
 
 // Safely construct the base URL
 const baseUrl = Astro.site ? Astro.site.toString() : 'https://rajacuttinglaser.com'; // Sesuaikan dengan URL produksi Anda
@@ -27,7 +47,7 @@ const jsonLd = {
 ---
 
 <BaseLayout 
-  title="Blog - Tips & Tutorial Laser Cutting Terbaru"
+  title="Blog - Tips &amp; Tutorial Laser Cutting Terbaru"
   description="Dapatkan tips, tutorial, dan insight terbaru seputar laser cutting, CNC router, dan teknologi manufaktur dari para ahli raja cutting laser"
   keywords="blog laser cutting, tutorial cnc router, tips laser fiber, panduan laser co2, artikel manufaktur"
   jsonLd={[jsonLd]}
@@ -106,7 +126,7 @@ const jsonLd = {
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
-          href="https://api.whatsapp.com/send?phone=6285165693179&text=Halo,%20saya%20tertarik%20dengan%20jasa%20laser%20cutting.%20Bisa%20konsultasi?"
+          href="https://api.whatsapp.com/send?phone=6285165693179&amp;text=Halo,%20saya%20tertarik%20dengan%20jasa%20laser%20cutting.%20Bisa%20konsultasi?"
           target="_blank"
           rel="noopener noreferrer"
           class="bg-button hover:bg-highlight text-white hover:text-button px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
