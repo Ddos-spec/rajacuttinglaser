@@ -11,10 +11,7 @@ export default defineConfig({
 
   output: 'static',
 
-  // Safe optional optimization (supported in Astro 5.12.8)
-  experimental: {
-    directRenderScript: true
-  },
+  // No experimental flags to ensure CI stability
 
   vite: {
     resolve: {
