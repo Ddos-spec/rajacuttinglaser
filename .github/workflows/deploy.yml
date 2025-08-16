@@ -26,9 +26,13 @@ jobs:
           node-version: "20" # Versi Node.js yang direkomendasikan untuk Astro
           cache: 'npm'
 
-      # 3. Install semua dependencies
+      # 3. Install semua dependencies (gunakan npm ci jika lockfile cocok, fallback ke npm install)
       - name: Install Dependencies
-        run: npm install
+        run: npm ci || npm install
+
+      # 3.5 Sinkronisasi Content Collections (generate types/validations)
+      - name: Astro Content Sync
+        run: npx astro sync
 
       # 4. Build project Astro jadi file statis di folder 'dist'
       - name: Build Astro Project
@@ -52,4 +56,4 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
-            **/node_modules/** 
+            **/node_modules/**
