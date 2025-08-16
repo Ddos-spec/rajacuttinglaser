@@ -56,10 +56,8 @@ const related = posts
         <span>{new Date(post.data.pubDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
         <span>•</span>
         <span>{post.data.readTime}</span>
-        {post.data.author && <>
-          <span>•</span>
-          <span>Oleh {post.data.author}</span>
-        </>}
+        {post.data.author && (<span>•</span>)}
+        {post.data.author && (<span>Oleh {post.data.author}</span>)}
       </div>
     </div>
   </section>
