@@ -3,17 +3,15 @@ import BaseLayout from '../../components/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
-import { BLOG_POSTS } from '../../utils/constants.js';
 import { generateBlogPostSchema, generateBreadcrumbSchema } from '../../utils/seo';
 import { getCollection } from 'astro:content';
 
 /**
- * Gunakan Content Collections sebagai sumber utama.
- * Tetap sediakan fallback ke BLOG_POSTS (backup) sesuai permintaan.
+ * Detail blog page hanya menggunakan Content Collections.
+ * Fallback BLOG_POSTS sudah dihapus sesuai instruksi.
  */
 
 type PostView = {
-  id?: number;
   title: string;
   slug: string;
   excerpt?: string;
@@ -22,7 +20,6 @@ type PostView = {
   publishDate?: string | Date;
   readTime?: string;
   author?: string;
-  contentHtml?: string;
 };
 
 export async function getStaticPaths() {
@@ -32,50 +29,31 @@ export async function getStaticPaths() {
 
 const paramSlug = Astro.params.slug as string;
 
-// Ambil dari Content Collections terlebih dahulu
 const collectionPosts = await getCollection('blog', ({ data }) => !data.draft);
 const collectionEntry = collectionPosts.find((p) => p.slug === paramSlug);
 
-let postView: PostView | null = null;
-let Content: any = null;
-
-if (collectionEntry) {
-  const rendered = await collectionEntry.render();
-  Content = rendered.Content;
-  postView = {
-    title: collectionEntry.data.title,
-    slug: collectionEntry.slug,
-    excerpt: collectionEntry.data.description,
-    category: collectionEntry.data.category,
-    image: collectionEntry.data.image,
-    publishDate: collectionEntry.data.pubDate,
-    readTime: collectionEntry.data.readTime,
-    author: collectionEntry.data.author,
-  };
-} else {
-  // Fallback ke BLOG_POSTS (backup)
-  const legacy = BLOG_POSTS.find((p) => p.slug === paramSlug);
-  if (!legacy) {
-    throw new Error(`Blog post not found for slug: ${paramSlug}`);
-  }
-  postView = {
-    id: legacy.id,
-    title: legacy.title,
-    slug: legacy.slug,
-    excerpt: legacy.excerpt,
-    category: legacy.category,
-    image: legacy.image,
-    publishDate: legacy.publishDate,
-    readTime: legacy.readTime,
-    author: legacy.author,
-    contentHtml: legacy.content,
-  };
+if (!collectionEntry) {
+  throw new Error(`Blog post not found for slug: ${paramSlug}`);
 }
 
-// Related posts: ambil dari collection bila ada, jika tidak ambil dari BLOG_POSTS
-const relatedFromCollection = collectionPosts
-  .filter((p) => (!postView?.slug || p.slug !== postView.slug))
-  .filter((p) => p.data.category === postView?.category || p.data.tags.some((t) => (postView?.excerpt || '').toLowerCase().includes(t.toLowerCase())))
+const rendered = await collectionEntry.render();
+const { Content } = rendered;
+
+const postView: PostView = {
+  title: collectionEntry.data.title,
+  slug: collectionEntry.slug,
+  excerpt: collectionEntry.data.description,
+  category: collectionEntry.data.category,
+  image: collectionEntry.data.image,
+  publishDate: collectionEntry.data.pubDate,
+  readTime: collectionEntry.data.readTime,
+  author: collectionEntry.data.author,
+};
+
+// Related posts from Content Collections
+const relatedPosts = collectionPosts
+  .filter((p) => p.slug !== postView.slug)
+  .filter((p) => p.data.category === postView.category || p.data.tags.some((t) => (postView.excerpt || '').toLowerCase().includes(t.toLowerCase())))
   .slice(0, 3)
   .map((p) => ({
     title: p.data.title,
@@ -85,21 +63,6 @@ const relatedFromCollection = collectionPosts
     readTime: p.data.readTime,
     excerpt: p.data.description,
   }));
-
-const relatedFromLegacy = BLOG_POSTS
-  .filter((p) => p.slug !== postView?.slug)
-  .filter((p) => p.category === postView?.category)
-  .slice(0, 3)
-  .map((p) => ({
-    title: p.title,
-    slug: p.slug,
-    category: p.category,
-    image: p.image,
-    readTime: p.readTime,
-    excerpt: p.excerpt,
-  }));
-
-const relatedPosts = relatedFromCollection.length > 0 ? relatedFromCollection : relatedFromLegacy;
 
 // JSON-LD dan Breadcrumb
 const jsonLd = generateBlogPostSchema({
@@ -179,13 +142,9 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
         </div>
       )}
 
-      <!-- Article Content -->
+      <!-- Article Content (from Markdown) -->
       <div class="prose prose-lg max-w-none">
-        {Content ? (
-          <Content />
-        ) : (
-          <div set:html={postView.contentHtml}></div>
-        )}
+        <Content />
       </div>
 
       <!-- CTA Section -->

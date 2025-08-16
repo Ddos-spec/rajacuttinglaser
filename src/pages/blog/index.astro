@@ -4,10 +4,9 @@ import BaseLayout from '../../components/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
-import { BLOG_POSTS } from '../../utils/constants.js';
 import { getCollection } from 'astro:content';
 
-// Ambil posts dari Content Collections (fallback ke BLOG_POSTS jika kosong)
+// Ambil posts dari Content Collections
 const collectionPosts = await getCollection('blog', ({ data }) => !data.draft);
 
 const mapCollectionToView = (p) => ({
@@ -20,9 +19,7 @@ const mapCollectionToView = (p) => ({
   readTime: p.data.readTime,
 });
 
-const sourcePosts = (collectionPosts && collectionPosts.length > 0)
-  ? collectionPosts.map(mapCollectionToView)
-  : BLOG_POSTS;
+const sourcePosts = collectionPosts.map(mapCollectionToView);
 
 // Sort blog posts by date (newest first)
 const sortedPosts = sourcePosts
