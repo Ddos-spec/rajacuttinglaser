@@ -13,6 +13,12 @@ export default defineConfig({
   
   // Enable hybrid rendering for API routes
   output: 'static',
+
+  // Experimental optimizations for better perf
+  experimental: {
+    viewTransitions: true,
+    optimizeHoistedScript: true
+  },
   
   // CRITICAL: Custom routing untuk file di root src/
   vite: {

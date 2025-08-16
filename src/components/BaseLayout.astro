@@ -90,6 +90,21 @@ const siteUrl = new URL(Astro.site);
     <link rel="canonical" href={meta.canonical} />
     <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"} />
 
+    <!-- Inline Critical CSS: header + hero skeleton (<=4KB) -->
+    <style data-critical>
+      :root{--bg:#0b0b0f;--text:#e5e7eb;--muted:#9ca3af;--btn:#2563eb}
+      html{color-scheme:dark}
+      body{margin:0;background:var(--bg);color:var(--text)}
+      header#main-header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;background:rgba(17,24,39,.9);backdrop-filter:saturate(180%) blur(6px);border-bottom:1px solid rgba(59,130,246,.25);z-index:40}
+      main{min-height:100vh}
+      .container-custom{max-width:1280px;margin:0 auto;padding:0 1rem}
+      .heading-xl{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:0.5rem 0 1rem}
+      .section-padding{padding:4rem 0}
+      .btn-primary{background:var(--btn);color:#fff;border-radius:.75rem}
+      .btn-secondary{border-radius:.75rem}
+      img{height:auto}
+    </style>
+
     <!-- Open Graph -->
     <meta property="og:type" content={meta.openGraph.type} />
     <meta property="og:title" content={meta.openGraph.title} />
@@ -161,6 +176,18 @@ const siteUrl = new URL(Astro.site);
     })} />
 
     <meta name="theme-color" content="#00C853" />
+
+    <!-- Core Web Vitals lightweight monitoring (no external deps) -->
+    <script>
+      (function(){
+        try{
+          let cls=0; new PerformanceObserver(list=>{for (const e of list.getEntries()){if(!e.hadRecentInput){cls += e.value}}}).observe({type:'layout-shift', buffered:true});
+          new PerformanceObserver(list=>{const e=list.getEntries().pop(); if(e){console.log('[CWV] LCP', e.renderTime||e.loadTime)}}).observe({type:'largest-contentful-paint', buffered:true});
+          new PerformanceObserver(list=>{const e=list.getEntries().pop(); if(e){console.log('[CWV] FID', e.processingStart - e.startTime)}}).observe({type:'first-input', buffered:true});
+          window.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden'){ console.log('[CWV] CLS', cls.toFixed(3)); }});
+        }catch(err){}
+      })();
+    </script>
   </head>
   <body class="antialiased bg-background text-text-main">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-laser-green text-white px-4 py-2 rounded-md z-50">
