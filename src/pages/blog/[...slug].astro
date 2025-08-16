@@ -8,7 +8,7 @@ import { generateBlogPostSchema, generateBreadcrumbSchema } from '../../utils/se
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map((p) => ({ params: { slug: p.slug.split('/') } }));
+  return posts.map((p) => ({ params: { slug: p.slug } }));
 }
 
 const slugParam = Astro.params.slug;
