@@ -1,5 +1,8 @@
 ---
-import '../styles/global.css';
+// Remove direct CSS import to allow non-blocking load
+// import '../styles/global.css';
+
+const globalCss = Astro.resolve('../styles/global.css');
 
 interface MetaTags {
   title: string;
@@ -103,7 +106,14 @@ const siteUrl = new URL(Astro.site);
       .btn-primary{background:var(--btn);color:#fff;border-radius:.75rem}
       .btn-secondary{border-radius:.75rem}
       img{height:auto}
+      /* Defer rendering of below-the-fold sections safely */
+      .cv-auto{content-visibility:auto;contain-intrinsic-size: 1px 1000px}
     </style>
+
+    <!-- Non-blocking global CSS: preload + print/onload swap -->
+    <link rel="preload" href={globalCss} as="style" />
+    <link rel="stylesheet" href={globalCss} media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href={globalCss} /></noscript>
 
     <!-- Open Graph -->
     <meta property="og:type" content={meta.openGraph.type} />

@@ -1,12 +1,10 @@
 ---
-// blog./index,astro (filecode)
 import BaseLayout from '../../components/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import { getCollection } from 'astro:content';
 
-// Ambil posts dari Content Collections
 const collectionPosts = await getCollection('blog', ({ data }) => !data.draft);
 
 const mapCollectionToView = (p) => ({
@@ -21,13 +19,11 @@ const mapCollectionToView = (p) => ({
 
 const sourcePosts = collectionPosts.map(mapCollectionToView);
 
-// Sort blog posts by date (newest first)
 const sortedPosts = sourcePosts
   .filter((p) => p.publishDate)
   .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
 
-// Safely construct the base URL
-const baseUrl = Astro.site ? Astro.site.toString() : 'https://rajacuttinglaser.com'; // Sesuaikan dengan URL produksi Anda
+const baseUrl = Astro.site ? Astro.site.toString() : 'https://rajacuttinglaser.com';
 const blogUrl = `${baseUrl}blog/`;
 
 const jsonLd = {
@@ -64,7 +60,7 @@ const jsonLd = {
   </section>
 
   <!-- Blog Posts Grid -->
-  <section class="py-16 bg-background">
+  <section class="py-16 bg-background cv-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sortedPosts.map((post) => (
@@ -72,10 +68,10 @@ const jsonLd = {
             <img 
               src={post.image} 
               alt={post.title}
-              width="800"
-              height="384"
               class="w-full h-48 object-cover"
               loading="lazy"
+              width="800"
+              height="384"
             />
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">

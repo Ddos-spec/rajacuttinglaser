@@ -37,7 +37,6 @@ const jsonLd = generateBlogPostSchema({
   slug: post.slug
 });
 
-// Related posts (same category or shared tags)
 const related = posts
   .filter(p => p.slug !== post.slug)
   .filter(p => p.data.category === post.data.category || p.data.tags.some(t => post.data.tags.includes(t)))
@@ -69,7 +68,7 @@ const related = posts
 
   <!-- Featured Image -->
   {post.data.image && (
-    <section class="bg-background">
+    <section class="bg-background cv-auto">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <img src={post.data.image} alt={post.data.title} width="1200" height="630" sizes="(max-width: 1024px) 100vw, 1200px" class="w-full h-72 object-cover rounded-lg -mt-8 border-4 border-container" loading="eager" decoding="async" />
       </div>
@@ -77,7 +76,7 @@ const related = posts
   )}
 
   <!-- Content -->
-  <section class="py-12 bg-background">
+  <section class="py-12 bg-background cv-auto">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <article class="prose prose-invert max-w-none">
         <Content />
@@ -102,7 +101,7 @@ const related = posts
 
   <!-- Related Posts -->
   {related.length > 0 && (
-    <section class="py-16 bg-container">
+    <section class="py-16 bg-container cv-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-2xl font-bold text-text-main mb-6">Artikel Terkait</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -146,7 +145,6 @@ const related = posts
   overflow: hidden;
 }
 
-/* Keep styling minimal to preserve global look */
 .prose :where(h1,h2,h3,h4){
   color: var(--tw-prose-headings, #fff);
 }
