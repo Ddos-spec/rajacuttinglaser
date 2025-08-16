@@ -6,6 +6,11 @@ import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import { getCollection } from 'astro:content';
 import { generateBlogPostSchema, generateBreadcrumbSchema } from '../../utils/seo';
 
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((p) => ({ params: { slug: p.slug.split('/') } }));
+}
+
 const slugParam = Astro.params.slug;
 const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam;
 
