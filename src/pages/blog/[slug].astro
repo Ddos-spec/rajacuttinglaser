@@ -2,49 +2,127 @@
 import BaseLayout from '../../components/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import { BLOG_POSTS } from '../../utils/constants.js';
 import { generateBlogPostSchema, generateBreadcrumbSchema } from '../../utils/seo';
+import { getCollection } from 'astro:content';
 
-type Post = {
-  id: number;
+/**
+ * Gunakan Content Collections sebagai sumber utama.
+ * Tetap sediakan fallback ke BLOG_POSTS (backup) sesuai permintaan.
+ */
+
+type PostView = {
+  id?: number;
   title: string;
   slug: string;
-  excerpt: string;
-  category: string;
-  image: string;
+  excerpt?: string;
+  category?: string;
+  image?: string;
+  publishDate?: string | Date;
+  readTime?: string;
+  author?: string;
+  contentHtml?: string;
 };
 
 export async function getStaticPaths() {
-  return BLOG_POSTS.map((post) => ({
-    params: { slug: post.slug },
-    props: { post }
-  }));
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((p) => ({ params: { slug: p.slug } }));
 }
 
-const { post } = Astro.props;
+const paramSlug = Astro.params.slug as string;
 
-// Get related posts (same category, excluding current post)
-const relatedPosts = BLOG_POSTS
-  .filter(p => p.category === post.category && p.id !== post.id)
-  .slice(0, 3);
+// Ambil dari Content Collections terlebih dahulu
+const collectionPosts = await getCollection('blog', ({ data }) => !data.draft);
+const collectionEntry = collectionPosts.find((p) => p.slug === paramSlug);
 
-// Generate JSON-LD for blog post
-const jsonLd = generateBlogPostSchema(post);
+let postView: PostView | null = null;
+let Content: any = null;
 
-// Generate breadcrumb schema with correct base path
+if (collectionEntry) {
+  const rendered = await collectionEntry.render();
+  Content = rendered.Content;
+  postView = {
+    title: collectionEntry.data.title,
+    slug: collectionEntry.slug,
+    excerpt: collectionEntry.data.description,
+    category: collectionEntry.data.category,
+    image: collectionEntry.data.image,
+    publishDate: collectionEntry.data.pubDate,
+    readTime: collectionEntry.data.readTime,
+    author: collectionEntry.data.author,
+  };
+} else {
+  // Fallback ke BLOG_POSTS (backup)
+  const legacy = BLOG_POSTS.find((p) => p.slug === paramSlug);
+  if (!legacy) {
+    throw new Error(`Blog post not found for slug: ${paramSlug}`);
+  }
+  postView = {
+    id: legacy.id,
+    title: legacy.title,
+    slug: legacy.slug,
+    excerpt: legacy.excerpt,
+    category: legacy.category,
+    image: legacy.image,
+    publishDate: legacy.publishDate,
+    readTime: legacy.readTime,
+    author: legacy.author,
+    contentHtml: legacy.content,
+  };
+}
+
+// Related posts: ambil dari collection bila ada, jika tidak ambil dari BLOG_POSTS
+const relatedFromCollection = collectionPosts
+  .filter((p) => (!postView?.slug || p.slug !== postView.slug))
+  .filter((p) => p.data.category === postView?.category || p.data.tags.some((t) => (postView?.excerpt || '').toLowerCase().includes(t.toLowerCase())))
+  .slice(0, 3)
+  .map((p) => ({
+    title: p.data.title,
+    slug: p.slug,
+    category: p.data.category,
+    image: p.data.image,
+    readTime: p.data.readTime,
+    excerpt: p.data.description,
+  }));
+
+const relatedFromLegacy = BLOG_POSTS
+  .filter((p) => p.slug !== postView?.slug)
+  .filter((p) => p.category === postView?.category)
+  .slice(0, 3)
+  .map((p) => ({
+    title: p.title,
+    slug: p.slug,
+    category: p.category,
+    image: p.image,
+    readTime: p.readTime,
+    excerpt: p.excerpt,
+  }));
+
+const relatedPosts = relatedFromCollection.length > 0 ? relatedFromCollection : relatedFromLegacy;
+
+// JSON-LD dan Breadcrumb
+const jsonLd = generateBlogPostSchema({
+  title: postView.title,
+  excerpt: postView.excerpt,
+  image: postView.image,
+  publishDate: (postView.publishDate instanceof Date) ? postView.publishDate.toISOString() : String(postView.publishDate),
+  slug: postView.slug,
+});
+
 const breadcrumbs = [
   { name: 'Beranda', url: '/rajacuttinglaser/' },
   { name: 'Blog', url: '/rajacuttinglaser/blog/' },
-  { name: post.title, url: `/rajacuttinglaser/blog/${post.slug}/` }
+  { name: postView.title, url: `/rajacuttinglaser/blog/${postView.slug}/` }
 ];
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 ---
 
 <BaseLayout 
-  title={`${post.title} | Blog raja cutting laser`}
-  description={post.excerpt}
-  keywords={`${post.title.toLowerCase()}, laser cutting, cnc router, ${post.category.toLowerCase()}`}
-  image={post.image}
+  title={`${postView.title} | Blog raja cutting laser`}
+  description={postView.excerpt}
+  keywords={`${postView.title.toLowerCase()}, laser cutting, cnc router, ${postView.category ? postView.category.toLowerCase() : ''}`}
+  image={postView.image}
   type="article"
   jsonLd={[jsonLd, breadcrumbSchema]}
 >
@@ -60,7 +138,7 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
           <li>/</li>
           <li><a href="/rajacuttinglaser/blog/" class="hover:text-blue-600">Blog</a></li>
           <li>/</li>
-          <li class="text-gray-900">{post.title}</li>
+          <li class="text-gray-900">{postView.title}</li>
         </ol>
       </nav>
 
@@ -68,37 +146,46 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
       <div class="mb-8">
         <div class="flex items-center space-x-4 mb-4">
           <span class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full font-medium">
-            {post.category}
+            {postView.category}
           </span>
-          <span class="text-gray-500">{post.readTime}</span>
+          <span class="text-gray-500">{postView.readTime}</span>
           <span class="text-gray-500">
-            {new Date(post.publishDate).toLocaleDateString('id-ID', { 
+            {postView.publishDate && (new Date(postView.publishDate).toLocaleDateString('id-ID', { 
               year: 'numeric', 
               month: 'long', 
               day: 'numeric' 
-            })}
+            }))}
           </span>
         </div>
         <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-          {post.title}
+          {postView.title}
         </h1>
-        <p class="text-xl text-gray-600 leading-relaxed">
-          {post.excerpt}
-        </p>
+        {postView.excerpt && (
+          <p class="text-xl text-gray-600 leading-relaxed">
+            {postView.excerpt}
+          </p>
+        )}
       </div>
 
       <!-- Featured Image -->
-      <div class="mb-12">
-        <img 
-          src={post.image} 
-          alt={post.title}
-          class="w-full h-96 object-cover rounded-lg shadow-lg"
-          loading="eager"
-        />
-      </div>
+      {postView.image && (
+        <div class="mb-12">
+          <img 
+            src={postView.image} 
+            alt={postView.title}
+            class="w-full h-96 object-cover rounded-lg shadow-lg"
+            loading="eager"
+          />
+        </div>
+      )}
 
       <!-- Article Content -->
-      <div class="prose prose-lg max-w-none" set:html={post.content}>
+      <div class="prose prose-lg max-w-none">
+        {Content ? (
+          <Content />
+        ) : (
+          <div set:html={postView.contentHtml}></div>
+        )}
       </div>
 
       <!-- CTA Section -->
@@ -112,7 +199,7 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="https://api.whatsapp.com/send?phone=6285165693179&text=Halo,%20saya%20tertarik%20dengan%20jasa%20laser%20cutting.%20Bisa%20konsultasi?"
+              href="https://api.whatsapp.com/send?phone=6285165693179&amp;text=Halo,%20saya%20tertarik%20dengan%20jasa%20laser%20cutting.%20Bisa%20konsultasi?"
               target="_blank"
               rel="noopener noreferrer"
               class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
@@ -142,35 +229,27 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
           Artikel Terkait
         </h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {relatedPosts.map((relatedPost) => (
+          {relatedPosts.map((item) => (
             <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
               <img 
-                src={relatedPost.image} 
-                alt={relatedPost.title}
+                src={item.image} 
+                alt={item.title}
                 class="w-full h-48 object-cover"
                 loading="lazy"
               />
               <div class="p-6">
                 <div class="flex items-center justify-between mb-3">
                   <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">
-                    {relatedPost.category}
+                    {item.category}
                   </span>
-                  <span class="text-sm text-gray-500">{relatedPost.readTime}</span>
+                  <span class="text-sm text-gray-500">{item.readTime}</span>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">
-                  <a href={`/rajacuttinglaser/blog/${relatedPost.slug}/`} class="hover:text-blue-600 transition-colors">
-                    {relatedPost.title}
+                  <a href={`/blog/${item.slug}/`} class="hover:text-blue-600">
+                    {item.title}
                   </a>
                 </h3>
-                <p class="text-gray-600 mb-4">
-                  {relatedPost.excerpt}
-                </p>
-                <a 
-                  href={`/blog/${relatedPost.slug}/`}
-                  class="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors"
-                >
-                  Baca Selengkapnya →
-                </a>
+                <p class="text-gray-600 line-clamp-3">{item.excerpt}</p>
               </div>
             </article>
           ))}
