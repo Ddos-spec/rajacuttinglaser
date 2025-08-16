@@ -20,7 +20,7 @@ const mapCollectionToView = (p) => ({
   readTime: p.data.readTime,
 });
 
-const sourcePosts = (collectionPosts &amp;&amp; collectionPosts.length &gt; 0)
+const sourcePosts = (collectionPosts && collectionPosts.length > 0)
   ? collectionPosts.map(mapCollectionToView)
   : BLOG_POSTS;
 
