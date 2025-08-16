@@ -1,8 +1,6 @@
 ---
-// Remove direct CSS import to allow non-blocking load
-// import '../styles/global.css';
-
-const globalCss = Astro.resolve('../styles/global.css');
+// Non-blocking CSS without Astro.resolve (avoid build error)
+const globalCss = '/src/styles/global.css';
 
 interface MetaTags {
   title: string;
@@ -93,7 +91,6 @@ const siteUrl = new URL(Astro.site);
     <link rel="canonical" href={meta.canonical} />
     <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"} />
 
-    <!-- Inline Critical CSS: header + hero skeleton (<=4KB) -->
     <style data-critical>
       :root{--bg:#0b0b0f;--text:#e5e7eb;--muted:#9ca3af;--btn:#2563eb}
       html{color-scheme:dark}
@@ -106,16 +103,13 @@ const siteUrl = new URL(Astro.site);
       .btn-primary{background:var(--btn);color:#fff;border-radius:.75rem}
       .btn-secondary{border-radius:.75rem}
       img{height:auto}
-      /* Defer rendering of below-the-fold sections safely */
       .cv-auto{content-visibility:auto;contain-intrinsic-size: 1px 1000px}
     </style>
 
-    <!-- Non-blocking global CSS: preload + print/onload swap -->
     <link rel="preload" href={globalCss} as="style" />
     <link rel="stylesheet" href={globalCss} media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href={globalCss} /></noscript>
 
-    <!-- Open Graph -->
     <meta property="og:type" content={meta.openGraph.type} />
     <meta property="og:title" content={meta.openGraph.title} />
     <meta property="og:description" content={meta.openGraph.description} />
@@ -126,21 +120,17 @@ const siteUrl = new URL(Astro.site);
     <meta property="og:site_name" content={meta.openGraph.siteName} />
     <meta property="og:locale" content={meta.openGraph.locale} />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content={meta.twitter.card} />
     <meta name="twitter:title" content={meta.twitter.title} />
     <meta name="twitter:description" content={meta.twitter.description} />
     <meta name="twitter:image" content={new URL(meta.twitter.image, siteUrl).href} />
 
-    <!-- Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="icon" type="image/webp" href="/images/logo.webp" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Preload critical brand image -->
     <link rel="preload" href="/images/logo.webp" as="image" type="image/webp" />
 
-    <!-- Resource Hints for performance -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
@@ -148,7 +138,6 @@ const siteUrl = new URL(Astro.site);
     <link rel="preconnect" href="https://api.whatsapp.com" />
     <link rel="dns-prefetch" href="//api.whatsapp.com" />
 
-    <!-- Alternate representations -->
     <link rel="alternate" type="application/rss+xml" title="{meta.title} - RSS" href="/rss.xml" />
     <link rel="alternate" hrefLang="id" href={meta.canonical} />
     <link rel="alternate" hrefLang="x-default" href={meta.canonical} />
@@ -157,7 +146,6 @@ const siteUrl = new URL(Astro.site);
       <script type="application/ld+json" set:html={JSON.stringify(json)} />
     ))}
 
-    <!-- Organization Schema -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -167,27 +155,15 @@ const siteUrl = new URL(Astro.site);
       description: "Solusi laser cutting profesional dengan teknologi terdepan di Jawa Barat",
       telephone: "+62 851 6569 3179",
       email: "info@rajacuttinglaser.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Jl. Raya Serang No. 123",
-        addressLocality: "Serang",
-        addressRegion: "indonesia",
-        postalCode: "42111",
-        addressCountry: "ID"
-      },
+      address: {"@type": "PostalAddress", streetAddress: "Jl. Raya Serang No. 123", addressLocality: "Serang", addressRegion: "indonesia", postalCode: "42111", addressCountry: "ID"},
       openingHours: "Mo-Sa 08:00-17:00",
-      sameAs: [
-        "https://facebook.com/rajacuttinglaser",
-        "https://instagram.com/rajacuttinglaser",
-        "https://youtube.com/rajacuttinglaser"
-      ],
+      sameAs: ["https://facebook.com/rajacuttinglaser", "https://instagram.com/rajacuttinglaser", "https://youtube.com/rajacuttinglaser"],
       areaServed: ["Serang", "Tangerang", "Cilegon", "Pandeglang", "Lebak"],
       serviceType: ["Laser Cutting", "CNC Router", "Laser Fiber", "Laser CO2", "Galvo Engraving"]
     })} />
 
     <meta name="theme-color" content="#00C853" />
 
-    <!-- Core Web Vitals lightweight monitoring (no external deps) -->
     <script>
       (function(){
         try{
@@ -200,16 +176,9 @@ const siteUrl = new URL(Astro.site);
     </script>
   </head>
   <body class="antialiased bg-background text-text-main">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-laser-green text-white px-4 py-2 rounded-md z-50">
-      Skip to main content
-    </a>
-
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-laser-green text-white px-4 py-2 rounded-md z-50">Skip to main content</a>
     <slot name="header" />
-
-    <main id="main-content" class="min-h-screen">
-      <slot />
-    </main>
-
+    <main id="main-content" class="min-h-screen"><slot /></main>
     <slot name="footer" />
   </body>
 </html>
