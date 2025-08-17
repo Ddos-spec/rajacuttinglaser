@@ -3,11 +3,11 @@ import BaseLayout from '../../components/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 const collectionPosts = await getCollection('blog', ({ data }) => !data.draft);
 
-const mapCollectionToView = (p) => ({
+const mapCollectionToView = (p: CollectionEntry<'blog'>) => ({
   title: p.data.title,
   slug: p.slug,
   excerpt: p.data.description,
