@@ -1,4 +1,6 @@
 ---
+import '@fontsource/inter';
+
 // Non-blocking CSS without Astro.resolve (avoid build error)
 const globalCss = '/src/styles/global.css';
 
@@ -131,10 +133,6 @@ const siteUrl = new URL(Astro.site);
 
     <link rel="preload" href="/images/logo.webp" as="image" type="image/webp" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="preconnect" href="https://api.whatsapp.com" />
     <link rel="dns-prefetch" href="//api.whatsapp.com" />
 

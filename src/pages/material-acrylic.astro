@@ -3,6 +3,7 @@ import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { MATERIALS, SERVICES } from '../utils/constants.js';
+import OptimizedImage from '../components/OptimizedImage.astro';
 
 import { generateMetaTags, generateServiceSchema, generateBreadcrumbSchema } from '../utils/seo.ts';
 
@@ -76,10 +77,10 @@ const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
           </div>
         </div>
         <div class="relative">
-          <img 
+          <OptimizedImage 
             src={material.image} 
             alt={`Sample ${material.name}`}
-            class="w-full h-96 object-cover rounded-lg shadow-2xl"
+            className="w-full h-96 object-cover rounded-lg shadow-2xl"
             loading="eager"
           />
         </div>
@@ -167,10 +168,10 @@ const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
         <div class="bg-container p-8 rounded-lg">
           <h3 class="text-2xl font-bold text-text-main mb-6">Contoh Aplikasi</h3>
           <div class="grid grid-cols-2 gap-4">
-            <img src="/images/akrilik (1).webp" alt="Contoh Aplikasi 1" class="w-full h-40 object-cover rounded-lg shadow-md">
-            <img src="/images/akrilik (2).webp" alt="Contoh Aplikasi 2" class="w-full h-40 object-cover rounded-lg shadow-md">
-            <img src="/images/akrilik (3).webp" alt="Contoh Aplikasi 3" class="w-full h-40 object-cover rounded-lg shadow-md">
-            <img src="/images/akrilik (4).webp" alt="Contoh Aplikasi 4" class="w-full h-40 object-cover rounded-lg shadow-md">
+            <OptimizedImage src="/images/akrilik (1).webp" alt="Contoh Aplikasi 1" className="w-full h-40 object-cover rounded-lg shadow-md" />
+            <OptimizedImage src="/images/akrilik (2).webp" alt="Contoh Aplikasi 2" className="w-full h-40 object-cover rounded-lg shadow-md" />
+            <OptimizedImage src="/images/akrilik (3).webp" alt="Contoh Aplikasi 3" className="w-full h-40 object-cover rounded-lg shadow-md" />
+            <OptimizedImage src="/images/akrilik (4).webp" alt="Contoh Aplikasi 4" className="w-full h-40 object-cover rounded-lg shadow-md" />
           </div>
         </div>
       </div>
@@ -213,10 +214,10 @@ const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
             </div>
           </div>
           <div>
-            <img 
+            <OptimizedImage 
               src={recommendedService.image} 
               alt={recommendedService.name}
-              class="w-full h-64 object-cover rounded-lg"
+              className="w-full h-64 object-cover rounded-lg"
               loading="lazy"
             />
           </div>

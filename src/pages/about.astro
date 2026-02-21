@@ -3,6 +3,7 @@ import BaseLayout from '../components/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CTA from '../components/CTA.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import { SITE_CONFIG } from '../utils/constants.js';
 
 const metaTags = {
@@ -70,10 +71,10 @@ const metaTags = {
         
         <!-- Main Image -->
         <div>
-          <img 
+          <OptimizedImage 
             src="/images/team.webp"
             alt="Workshop raja cutting laser"
-            class="w-full rounded-xl shadow-lg"
+            className="w-full rounded-xl shadow-lg"
             loading="lazy"
           />
         </div>
@@ -94,10 +95,10 @@ const metaTags = {
       <!-- Team Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-background rounded-xl p-6 text-center shadow-lg">
-          <img 
+          <OptimizedImage 
             src="/images/budisantoso.webp"
             alt="Budi Santoso - Direktur"
-            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+            className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
           />
           <h4 class="text-lg font-bold mb-2 text-text-main">Budi Santoso</h4>
@@ -108,10 +109,10 @@ const metaTags = {
         </div>
         
         <div class="bg-background rounded-xl p-6 text-center shadow-lg">
-          <img 
+          <OptimizedImage 
             src="/images/Ahmad Rizki.webp"
             alt="Ahmad Rizki - Technical Manager"
-            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+            className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
           />
           <h4 class="text-lg font-bold mb-2 text-text-main">Ahmad Rizki</h4>
@@ -122,10 +123,10 @@ const metaTags = {
         </div>
         
         <div class="bg-background rounded-xl p-6 text-center shadow-lg">
-          <img 
+          <OptimizedImage 
             src="/images/Sari Dewi.webp"
             alt="Sari Dewi - Design Specialist"
-            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+            className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
             loading="lazy"
           />
           <h4 class="text-lg font-bold mb-2 text-text-main">Sari Dewi</h4>
@@ -146,56 +147,56 @@ const metaTags = {
       <!-- Gallery Grid -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/laserfiber.webp" alt="Laser Fiber" class="w-full h-48 object-cover" />
+          <OptimizedImage src="/images/laserfiber.webp" alt="Laser Fiber" className="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">Laser Fiber</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/cncrouter.webp" alt="CNC Router" class="w-full h-48 object-cover" />
+          <OptimizedImage src="/images/cncrouter.webp" alt="CNC Router" className="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">CNC Router</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/galvo.webp" alt="Galvo Engraving" class="w-full h-48 object-cover" />
+          <OptimizedImage src="/images/galvo.webp" alt="Galvo Engraving" className="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">Galvo Engraving</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/Acrylic.webp" alt="Material Acrylic" class="w-full h-48 object-cover" />
+          <OptimizedImage src="/images/Acrylic.webp" alt="Material Acrylic" className="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">Acrylic</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/acp.webp" alt="Material ACP" class="w-full h-48 object-cover" />
+          <OptimizedImage src="/images/acp.webp" alt="Material ACP" className="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">ACP</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/pvc.webp" alt="Material PVC" class="w-full h-48 object-cover" />
+          <OptimizedImage src="/images/pvc.webp" alt="Material PVC" className="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">PVC</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/grc.webp" alt="Material GRC" class="w-full h-48 object-cover" />
+          <OptimizedImage src="/images/grc.webp" alt="Material GRC" className="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">GRC</p>
           </div>
         </div>
         
         <div class="relative overflow-hidden rounded-lg">
-          <img src="/images/prototype.webp" alt="Prototype Project" class="w-full h-48 object-cover" />
+          <OptimizedImage src="/images/prototype.webp" alt="Prototype Project" className="w-full h-48 object-cover" />
           <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <p class="text-white font-medium">Prototype</p>
           </div>

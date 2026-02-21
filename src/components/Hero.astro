@@ -1,4 +1,5 @@
 ---
+import OptimizedImage from './OptimizedImage.astro';
 import { SITE_CONFIG, WHATSAPP_MESSAGES } from '../utils/constants.js';
 
 export interface Props {
@@ -38,16 +39,12 @@ const {
   
   <!-- Background Image with Overlay -->
   <div class="absolute inset-0 z-0">
-    <img 
+    <OptimizedImage 
       src={backgroundImage}
       alt="Laser cutting technology"
-      class="w-full h-full object-cover opacity-10"
+      className="w-full h-full object-cover opacity-10"
       loading="eager"
       fetchpriority="high"
-      decoding="async"
-      width="1920"
-      height="1080"
-      sizes="100vw"
     />
     <div class="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-container/90"></div>
   </div>

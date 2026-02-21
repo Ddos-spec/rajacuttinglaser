@@ -3,6 +3,7 @@ import BaseLayout from '../../components/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 const collectionPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -65,13 +66,13 @@ const jsonLd = {
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sortedPosts.map((post) => (
           <article class="bg-container rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <img 
+            <OptimizedImage 
               src={post.image} 
               alt={post.title}
-              class="w-full h-48 object-cover"
+              className="w-full h-48 object-cover"
               loading="lazy"
-              width="800"
-              height="384"
+              width={800}
+              height={384}
             />
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">

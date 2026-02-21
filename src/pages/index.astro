@@ -16,6 +16,7 @@ import { SERVICES, MATERIALS, TESTIMONIALS, PORTFOLIO, FAQ, SITE_CONFIG } from '
 
 // Import fungsi-fungsi SEO dari seo.ts
 import { generateMetaTags, generateFAQSchema, generateReviewSchema } from '../utils/seo.ts';
+import OptimizedImage from '../components/OptimizedImage.astro';
 
 // 1. GENERATE META TAGS
 // Semua meta tags (title, description, OG, Twitter card) dibuat secara dinamis
@@ -67,13 +68,13 @@ const reviewSchema = generateReviewSchema(TESTIMONIALS);
           {SERVICES.map((service, index) => (
             <div class="group bg-container rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 flex flex-col overflow-hidden border border-primary/50">
               <div class="relative overflow-hidden">
-                <img
+                <OptimizedImage
                   src={service.image}
                   alt={`Layanan ${service.name} di indonesia`}
-                  class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
                   loading="lazy"
-                  width="400"
-                  height="224"
+                  width={400}
+                  height={224}
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="absolute top-4 left-4">
@@ -152,13 +153,13 @@ const reviewSchema = generateReviewSchema(TESTIMONIALS);
           {MATERIALS.slice(0, 6).map((material, index) => (
             <div class="group bg-container rounded-2xl shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-primary/50">
               <div class="relative overflow-hidden">
-                <img
+                <OptimizedImage
                   src={material.image}
                   alt={`raja cutting laser material ${material.name}`}
-                  class="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-700"
                   loading="lazy"
-                  width="400"
-                  height="208"
+                  width={400}
+                  height={208}
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="absolute top-4 right-4">
@@ -227,13 +228,13 @@ const reviewSchema = generateReviewSchema(TESTIMONIALS);
           {PORTFOLIO.map((project, index) => (
             <a href="/portfolio/" class="group relative block overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
               <div class="relative overflow-hidden">
-                <img
+                <OptimizedImage
                   src={project.image}
                   alt={project.title}
-                  class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
                   loading="lazy"
-                  width="400"
-                  height="320"
+                  width={400}
+                  height={320}
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent"></div>
                 
@@ -316,13 +317,13 @@ const reviewSchema = generateReviewSchema(TESTIMONIALS);
               <!-- Client Info -->
               <div class="flex items-center">
                 <div class="relative">
-                  <img
+                  <OptimizedImage
                     src={testimonial.image}
                     alt={testimonial.name}
-                    class="w-14 h-14 rounded-full object-cover mr-4 border-2 border-primary group-hover:border-button transition-colors duration-300"
+                    className="w-14 h-14 rounded-full object-cover mr-4 border-2 border-primary group-hover:border-button transition-colors duration-300"
                     loading="lazy"
-                    width="56"
-                    height="56"
+                    width={56}
+                    height={56}
                   />
                   <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-button rounded-full flex items-center justify-center" aria-hidden="true">
                     <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,5 +1,6 @@
 ---
   import { SITE_CONFIG, SERVICES, MATERIALS } from '../utils/constants.js';
+  import OptimizedImage from './OptimizedImage.astro';
   ---
   
   <footer class="bg-container text-text-secondary relative overflow-hidden">
@@ -17,14 +18,12 @@
           <div class="lg:col-span-1">
             <div class="flex items-center space-x-4 mb-8">
               <div class="relative">
-                <img
+                <OptimizedImage
                   src="/images/logo.webp"
                   alt="raja cutting laser Logo"
-                  class="h-12 w-auto"
-                  width="120"
-                  height="48"
-                  loading="lazy"
-                  decoding="async"
+                  className="h-12 w-auto"
+                  width={120}
+                  height={48}
                 />
               </div>
               <div>
