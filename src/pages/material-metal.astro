@@ -13,10 +13,10 @@ if (!recommendedService) throw new Error('Recommended service not found');
 
 // Generate Meta Tags
 const metaTags = generateMetaTags({
-  title: `${material.name} - Material Laser Cutting Premium`,
-  description: material.description,
+  title: "Cutting Stainless Steel & Metal - SS304, SS316 | Raja Cutting Laser",
+  description: "Jasa cutting stainless steel & metal dengan laser fiber. Grade SS304, SS316, SS201. Ketebalan 0.5-20mm, toleransi ±0.05mm. Finishing mirror, hairline. Hubungi sekarang!",
   keywords: material.keywords,
-  url: `/rajacuttinglaser/material-metal/`,
+  url: `/material-metal/`,
   type: "article",
   image: material.image,
   publishedTime: "2025-01-01T00:00:00Z", 
@@ -27,9 +27,9 @@ const metaTags = generateMetaTags({
 // Generate structured data
 const serviceSchema = recommendedService ? generateServiceSchema(recommendedService) : null;
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: 'Beranda', url: '' },
-  { name: 'Material', url: '#materials' },
-  { name: material.name, url: `/rajacuttinglaser/material-metal/` }
+  { name: 'Beranda', url: '/' },
+  { name: 'Material', url: '/#materials' },
+  { name: material.name, url: `/material-metal/` }
 ]);
 
 // Combine schemas for jsonLd
@@ -54,7 +54,7 @@ const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <h1 class="text-4xl lg:text-5xl font-bold mb-6">
-            raja cutting laser {material.name}
+            Jasa Cutting Metal & Stainless Steel dengan Laser Fiber
           </h1>
           <p class="text-xl mb-8 text-text-secondary">
             {material.description}

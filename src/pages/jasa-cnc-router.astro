@@ -11,8 +11,8 @@ const service = SERVICES.find(s => s.slug === 'jasa-cnc-router');
 if (!service) { throw new Error('CNC Router service not found in SERVICES array'); }
 
 const metaTags = generateMetaTags({
-  title: `${service.name} - Presisi Tinggi untuk Material Kayu & MDF`,
-  description: `${service.description}. Teknologi CNC Router terdepan dengan presisi 0.1mm. Melayani cutting kayu, MDF, dan plastik hingga ukuran 2x3 meter. Quote gratis 24 jam.`,
+  title: "Jasa CNC Router Tangerang Selatan - Presisi 0.1mm | Raja Cutting Laser",
+  description: "Jasa CNC Router profesional untuk cutting & engraving kayu, MDF, plastik. Presisi hingga 0.1mm, area kerja 2x3 meter. Melayani Jabodetabek. Konsultasi gratis!",
   keywords: service.keywords,
   url: `/jasa-cnc-router/`,
   type: "service",
@@ -41,7 +41,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   
   <!-- Hero Section -->
   <Hero
-    title={`${service.name} Profesional`}
+    title="Jasa CNC Router Profesional di Tangerang - Cutting Kayu & MDF Presisi Tinggi"
     subtitle="Presisi 0.1mm | Material Kayu & MDF | Ukuran hingga 2x3 Meter"
     description="Teknologi CNC Router terdepan untuk cutting dan engraving material kayu, MDF, dan plastik dengan hasil sempurna. Cocok untuk furniture, signage, prototype, dan dekorasi."
     primaryCTA="Konsultasi CNC Router"
@@ -214,22 +214,65 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       <div class="text-center mb-16">
         <h2 class="heading-lg text-text-main mb-4">Keunggulan Layanan CNC Router Kami</h2>
         <p class="text-xl text-text-secondary max-w-3xl mx-auto">
-          Mengapa memilih layanan CNC Router dari raja cutting laser untuk project Anda
+          Mengapa memilih layanan CNC Router dari Raja Cutting Laser untuk project Anda
         </p>
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {service.features.map((feature, index) => (
-          <div class="bg-background rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-background rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
             <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4">
               <svg class="w-8 h-8 text-button" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h3 class="text-lg font-bold text-text-main mb-2">{feature}</h3>
-            <p class="text-text-secondary text-sm">Feature unggulan yang menjadikan layanan kami terdepan di industri</p>
-          </div>
-        ))}
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.features[0]}</h3>
+            <p class="text-text-secondary text-sm">Hasil pemotongan akurat dengan toleransi sangat ketat untuk detail sempurna.</p>
+        </div>
+        <div class="bg-background rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-button" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.features[1]}</h3>
+            <p class="text-text-secondary text-sm">Kapasitas mesin besar memungkinkan pengerjaan material ukuran penuh tanpa sambungan.</p>
+        </div>
+        <div class="bg-background rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-button" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.features[2]}</h3>
+            <p class="text-text-secondary text-sm">Kemampuan memproses berbagai material seperti kayu, MDF, ACP, PVC, dan akrilik.</p>
+        </div>
+        <div class="bg-background rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4">
+               <svg class="w-8 h-8 text-button" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.features[3]}</h3>
+            <p class="text-text-secondary text-sm">Mampu membuat ukiran 3D dan grafir detail untuk kebutuhan artistik.</p>
+        </div>
+        <div class="bg-background rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4">
+               <svg class="w-8 h-8 text-button" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.features[4]}</h3>
+            <p class="text-text-secondary text-sm">Hasil potongan bersih dan rapi, meminimalkan kebutuhan proses finishing lanjutan.</p>
+        </div>
+        <div class="bg-background rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4">
+               <svg class="w-8 h-8 text-button" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.features[5]}</h3>
+            <p class="text-text-secondary text-sm">Didukung mesin berkecepatan tinggi untuk efisiensi produksi massal.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -245,13 +288,36 @@ const breadcrumbSchema = generateBreadcrumbSchema([
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {service.applications.map((application, index) => (
           <div class="bg-gradient-to-br from-container to-background rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
-            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4 shadow-md"><span class="text-2xl font-bold text-button">{index + 1}</span></div>
-            <h3 class="text-lg font-bold text-text-main mb-2">{application}</h3>
-            <p class="text-text-secondary text-sm">Solusi profesional untuk industri {application.toLowerCase()}</p>
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4 shadow-md"><span class="text-2xl font-bold text-button">1</span></div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.applications[0]}</h3>
+            <p class="text-text-secondary text-sm">Pembuatan komponen furniture presisi, panel dekoratif, dan ornamen ukiran kayu.</p>
           </div>
-        ))}
+          <div class="bg-gradient-to-br from-container to-background rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4 shadow-md"><span class="text-2xl font-bold text-button">2</span></div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.applications[1]}</h3>
+            <p class="text-text-secondary text-sm">Huruf timbul, neon box, dan display produk dari bahan akrilik atau PVC.</p>
+          </div>
+          <div class="bg-gradient-to-br from-container to-background rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4 shadow-md"><span class="text-2xl font-bold text-button">3</span></div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.applications[2]}</h3>
+            <p class="text-text-secondary text-sm">Pembuatan model skala dan purwarupa produk dengan akurasi dimensi tinggi.</p>
+          </div>
+          <div class="bg-gradient-to-br from-container to-background rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4 shadow-md"><span class="text-2xl font-bold text-button">4</span></div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.applications[3]}</h3>
+            <p class="text-text-secondary text-sm">Partisi ruangan (room divider), wall panel 3D, dan elemen dekoratif interior.</p>
+          </div>
+          <div class="bg-gradient-to-br from-container to-background rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4 shadow-md"><span class="text-2xl font-bold text-button">5</span></div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.applications[4]}</h3>
+            <p class="text-text-secondary text-sm">Suku cadang mesin, jig, dan fixture dari material engineering plastic.</p>
+          </div>
+          <div class="bg-gradient-to-br from-container to-background rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+            <div class="w-16 h-16 bg-container rounded-full flex items-center justify-center mx-auto mb-4 shadow-md"><span class="text-2xl font-bold text-button">6</span></div>
+            <h3 class="text-lg font-bold text-text-main mb-2">{service.applications[5]}</h3>
+            <p class="text-text-secondary text-sm">Produk kerajinan tangan, souvenir, dan merchandise kayu dengan desain custom.</p>
+          </div>
       </div>
     </div>
   </section>

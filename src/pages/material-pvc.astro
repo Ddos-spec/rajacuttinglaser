@@ -15,8 +15,8 @@ if (!recommendedService) throw new Error('Recommended service not found');
 
 // Generate Meta Tags with proper typing
 const metaTags = generateMetaTags({
-  title: `${material.name} - Material Laser Cutting Premium`,
-  description: material.description,
+  title: "Cutting PVC Foam Board - Signage & Display Outdoor | Raja Cutting Laser",
+  description: "Jasa cutting PVC untuk signage outdoor & display. Tahan cuaca, ringan, ekonomis. Melayani Jabodetabek. Dapatkan penawaran harga terbaik!",
   keywords: material.keywords,
   image: material.image,
   type: 'article'
@@ -25,8 +25,8 @@ const metaTags = generateMetaTags({
 // Generate structured data
 const serviceSchema = recommendedService ? generateServiceSchema(recommendedService) : null;
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: 'Beranda', url: '' },
-  { name: 'Material', url: '#materials' },
+  { name: 'Beranda', url: '/' },
+  { name: 'Material', url: '/#materials' },
   { name: material.name, url: `/material-pvc/` }
 ]);
 
@@ -35,10 +35,10 @@ const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
 ---
 
 <BaseLayout 
-  title={`${material.name} - Material Laser Cutting Premium`}
-  description={material.description}
-  keywords={material.keywords}
-  image={material.image}
+  title={metaTags.title}
+  description={metaTags.description}
+  keywords={metaTags.keywords}
+  image={metaTags.image}
   jsonLd={jsonLd}
 >
   <Header slot="header" />
@@ -50,7 +50,7 @@ const jsonLd = [serviceSchema, breadcrumbSchema].filter(Boolean);
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <h1 class="text-4xl lg:text-5xl font-bold mb-6">
-            raja cutting laser {material.name}
+            Jasa Cutting PVC untuk Signage Outdoor & Display
           </h1>
           <p class="text-xl mb-8 text-text-secondary">
             {material.description}

@@ -11,8 +11,8 @@ const service = SERVICES.find(s => s.slug === 'jasa-galvo-engraving');
 if (!service) { throw new Error('Galvo Engraving service not found in SERVICES array'); }
 
 const metaTags = generateMetaTags({
-  title: `${service.name} - Engraving Presisi untuk Material Metal`,
-  description: `${service.description}. Teknologi galvo laser tercepat & akurat untuk engraving stainless steel, aluminium hingga ketebalan 20mm. Quote gratis 24 jam.`,
+  title: "Jasa Galvo Engraving Tangerang - Branding & Serial Number Presisi",
+  description: "Jasa Galvo Engraving super cepat untuk marking logam, plastik, kayu. Ideal untuk serial number, barcode, logo. Presisi tinggi. Hubungi kami!",
   keywords: service.keywords,
   url: `/${service.slug}/`,
   type: "article",
@@ -39,7 +39,7 @@ const faqSchema = generateFAQSchema(faqItems);
 <BaseLayout metaTags={metaTags} jsonLd={[serviceSchema, breadcrumbSchema, faqSchema]}>
   <Header slot="header" />
   <Hero
-    title={`${service.name} Profesional`}
+    title="Jasa Galvo Engraving Tangerang - Marking Kecepatan Tinggi"
     subtitle="Engraving Presisi | Logam, Plastik, Kayu | Kecepatan Tinggi"
     description="Teknologi galvo laser tercepat untuk engraving detail tinggi pada berbagai material. Ideal untuk branding produk, serial number, QR code, barcode, dan personalisasi dengan hasil yang tajam dan tahan lama."
     primaryCTA="Konsultasi Galvo Engraving"
@@ -48,7 +48,7 @@ const faqSchema = generateFAQSchema(faqItems);
     whatsappMessage={WHATSAPP_MESSAGES.engraving}
   />
 
-  <section class="section-padding bg-background">
+  <section class="section-padding bg-background cv-auto">
     <div class="container-custom">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div class="order-2 lg:order-1">
@@ -68,11 +68,75 @@ const faqSchema = generateFAQSchema(faqItems);
           <p class="text-xl text-text-secondary mb-8">
             Galvo Engraving kami menggunakan teknologi laser galvanometer tercepat untuk memberikan hasil engraving yang sangat detail dan presisi pada berbagai material, menjadikannya pilihan utama untuk branding produk dan personalisasi di Jabodetabek.
           </p>
+          <div class="space-y-6">
+             <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-container rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-button" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-text-main mb-2">Kecepatan Super Tinggi</h3>
+                <p class="text-text-secondary">Proses marking yang jauh lebih cepat dari metode CNC atau laser konvensional.</p>
+              </div>
+            </div>
+             <div class="flex items-start space-x-4">
+              <div class="w-12 h-12 bg-container rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-button" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-text-main mb-2">Permanen & Tahan Lama</h3>
+                <p class="text-text-secondary">Hasil marking tidak akan luntur oleh gesekan, air, atau bahan kimia.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <CTA />
+  <!-- Applications -->
+  <section class="section-padding bg-container cv-auto">
+    <div class="container-custom">
+      <div class="text-center mb-16">
+        <h2 class="heading-lg text-text-main mb-4">Aplikasi Galvo Engraving</h2>
+        <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+          Solusi identifikasi dan branding untuk berbagai produk
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-background p-6 rounded-xl shadow-md hover:-translate-y-1 transition-transform">
+          <h3 class="text-xl font-bold text-text-main mb-3">Industrial Marking</h3>
+          <p class="text-text-secondary text-sm">Serial number, Part number, Barcode, QR Code pada komponen mesin.</p>
+        </div>
+        <div class="bg-background p-6 rounded-xl shadow-md hover:-translate-y-1 transition-transform">
+          <h3 class="text-xl font-bold text-text-main mb-3">Product Branding</h3>
+          <p class="text-text-secondary text-sm">Logo pada tumbler, pulpen, powerbank, casing elektronik.</p>
+        </div>
+        <div class="bg-background p-6 rounded-xl shadow-md hover:-translate-y-1 transition-transform">
+          <h3 class="text-xl font-bold text-text-main mb-3">Medical Instruments</h3>
+          <p class="text-text-secondary text-sm">Marking UDI (Unique Device Identification) pada alat bedah yang tahan sterilisasi.</p>
+        </div>
+        <div class="bg-background p-6 rounded-xl shadow-md hover:-translate-y-1 transition-transform">
+          <h3 class="text-xl font-bold text-text-main mb-3">Jewelry & Accessories</h3>
+          <p class="text-text-secondary text-sm">Ukiran nama atau pola halus pada perhiasan cincin, kalung.</p>
+        </div>
+        <div class="bg-background p-6 rounded-xl shadow-md hover:-translate-y-1 transition-transform">
+          <h3 class="text-xl font-bold text-text-main mb-3">Automotive Parts</h3>
+          <p class="text-text-secondary text-sm">Marking pada tombol dashboard, VIN number, komponen mesin.</p>
+        </div>
+        <div class="bg-background p-6 rounded-xl shadow-md hover:-translate-y-1 transition-transform">
+          <h3 class="text-xl font-bold text-text-main mb-3">Awards & Plaques</h3>
+          <p class="text-text-secondary text-sm">Tulisan pada plakat logam atau piala.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA 
+    title="Branding Produk Anda Sekarang"
+    description="Tingkatkan nilai jual produk dengan marking logo yang presisi dan permanen."
+    variant="gradient"
+    size="lg"
+  />
+
   <Footer slot="footer" />
 </BaseLayout>

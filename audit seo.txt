@@ -1,0 +1,914 @@
+================================================================
+DOKUMEN AUDIT SEO - RAJACUTTINGLASER.COM
+Tanggal Audit: 21 Februari 2026
+Auditor: Comet (AI)
+================================================================
+
+RINGKASAN EKSEKUTIF
+================================================================
+Website rajacuttinglaser.com adalah website jasa laser cutting
+berbasis di Tangerang Selatan yang melayani area Jabodetabek.
+Total halaman yang diaudit: 16 halaman.
+
+TEMUAN KRITIS (HARUS SEGERA DIPERBAIKI):
+- 1 halaman blank/kosong: /material-ply-wood-multiplex/
+- Duplikasi title tag di 11 dari 16 halaman (sama persis)
+- Tidak ada meta description yang terdeteksi di hampir semua halaman
+- Tidak ada schema markup (structured data) yang terpasang
+- Inkonsistensi informasi jam operasional (halaman berbeda-beda)
+- H1 tidak mengandung keyword utama di beberapa halaman layanan
+- Blog berisi artikel dengan judul hampir identik (duplicate content)
+- Link internal rusak: /rajacuttinglaser/contact (URL tidak valid)
+
+
+================================================================
+AUDIT PER HALAMAN
+================================================================
+
+------------------------------------------------------------------------
+HALAMAN 1: BERANDA (HOME)
+URL: https://rajacuttinglaser.com/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Profesional & Akurat #1 indonesia - Akrilik, Kayu, Metal | raja cutting laser"
+- Panjang: ~95 karakter (TERLALU PANJANG - Google potong di ~60 karakter)
+- Masalah:
+  * Nama brand diulang 2x ("raja cutting laser ... | raja cutting laser")
+  * Melewati batas karakter optimal
+  * Kata kunci utama seperti "jasa laser cutting" atau "cutting laser jakarta" tidak ada
+  * Huruf kecil semua di nama brand, tidak konsisten
+
+REKOMENDASI TITLE:
+"Jasa Laser Cutting Tangerang Selatan | Raja Cutting Laser"
+(59 karakter - optimal)
+
+META DESCRIPTION:
+- Status: TIDAK TERDETEKSI / KOSONG
+- Dampak: Google akan otomatis generate snippet sendiri dari konten,
+  yang sering tidak relevan atau tidak menarik untuk diklik
+- Rekomendasi (150-160 karakter):
+  "Jasa laser cutting profesional di Tangerang Selatan. CNC Router,
+   Laser Fiber, CO2 & Galvo Engraving. 10+ tahun pengalaman, 1000+
+   proyek selesai. Konsultasi gratis!"
+
+HEADING STRUCTURE (H1, H2, H3):
+- H1: "Solusi Laser Cutting Terpercaya #1 di indonesia"
+  * Masalah: Kata "indonesia" tidak dikapitalisasi (Indonesia)
+  * Keyword kurang spesifik, tidak menyebut lokasi (kota/area)
+  * Tidak ada keyword utama pencarian seperti "jasa laser cutting"
+- H2 yang ada:
+  * "Layanan Laser Cutting Profesional" [BAGUS]
+  * "Material Pilihan Terbaik" [kurang keyword]
+  * "Portfolio Proyek Kami" [OK]
+  * "Apa Kata Klien Kami" [OK]
+  * "Pertanyaan Umum (FAQ)" [BAGUS untuk SEO]
+  * "Siap Memulai Proyek Laser Cutting Anda?" [OK]
+- H3 yang ada: CNC Router, Laser Fiber, Laser CO2, Galvo Engraving,
+  Acrylic, Metal/Stainless Steel, MDF, Plywood, PVC, ACP (BAGUS)
+
+KONTEN:
+- Kelebihan:
+  * Konten cukup lengkap mencakup layanan dan material
+  * Ada FAQ yang bagus untuk SEO
+  * Ada testimonial (baik untuk trust signal)
+  * Ada statistik (10+ tahun, 1000+ proyek)
+- Kekurangan:
+  * Tidak ada long-tail keyword di konten (contoh: "jasa laser cutting
+    acrylic tangerang", "harga laser cutting murah")
+  * Tidak menyebut kota/wilayah di H1 atau awal konten
+  * Tidak ada harga atau rentang harga (pengguna sering cari info harga)
+  * Gambar hero pakai background video gelap, teks sulit dibaca
+  * Alt text gambar layanan terlalu generik ("Layanan CNC Router di
+    indonesia1") - angka "1" sebaiknya dihapus
+
+INTERNAL LINKING:
+- Link ke portfolio, layanan, dan material: ADA [BAGUS]
+- CTA (Call to Action): ada WhatsApp dan Kontak [BAGUS]
+- Broken link ditemukan: "/rajacuttinglaser/contact" - URL TIDAK VALID,
+  seharusnya "/contact/"
+
+URL STRUCTURE:
+- URL: rajacuttinglaser.com/ [BAGUS - bersih]
+
+TECHNICAL:
+- Jam operasional di footer: "Senin - Sabtu, 08:00 - 17:00 WIB"
+- KONFLIK: Di halaman Contact jam operasional tertulis 08:00-18:00 WIB
+  (berbeda 1 jam - harus disamakan)
+
+SCHEMA MARKUP:
+- Status: TIDAK ADA
+- Rekomendasi yang perlu ditambahkan:
+  * LocalBusiness schema (nama, alamat, telepon, jam buka)
+  * FAQPage schema (untuk bagian FAQ)
+  * Service schema (untuk masing-masing layanan)
+
+SOCIAL MEDIA:
+- Facebook: https://www.facebook.com/profile.php?id=100054220779104
+  * Masalah: URL menggunakan angka ID, bukan username. Tidak profesional.
+  * Rekomendasi: Daftarkan username Facebook yang branded
+- Instagram: https://www.instagram.com/jasalasercutting.tangsel/ [OK]
+- YouTube: https://www.youtube.com/@heriasari4189
+  * Masalah: Channel name "heriasari4189" bukan nama brand.
+    Tidak akan dikenali sebagai akun resmi perusahaan.
+
+
+------------------------------------------------------------------------
+HALAMAN 2: LAYANAN - CNC ROUTER
+URL: https://rajacuttinglaser.com/jasa-cnc-router/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Panjang: ~70 karakter
+- Masalah KRITIS:
+  * Title SAMA PERSIS dengan halaman Laser CO2, About, Portfolio, Blog,
+    Contact, Material Acrylic, MDF, Metal, PVC, ACP (11 halaman duplikat!)
+  * Menyebut "Jawa Barat" padahal alamat di TANGERANG SELATAN (Banten)
+    - INI KESALAHAN SERIUS GEOGRAFIS!
+  * Tidak ada keyword spesifik "CNC Router"
+  * Brand diulang 2x
+
+REKOMENDASI TITLE:
+"Jasa CNC Router Tangerang Selatan - Presisi 0.1mm | Raja Cutting Laser"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+- Rekomendasi:
+  "Jasa CNC Router profesional untuk cutting & engraving kayu, MDF,
+   plastik. Presisi hingga 0.1mm, area kerja 2x3 meter. Melayani
+   Jabodetabek. Konsultasi gratis!"
+
+H1:
+- Isi: "CNC Router Profesional" [CUKUP]
+- Masalah: Terlalu pendek, tidak ada lokasi atau differentiator
+- Rekomendasi: "Jasa CNC Router Profesional di Tangerang - Cutting
+  Kayu & MDF Presisi Tinggi"
+
+H2 yang ada:
+- "Solusi Cutting & Engraving Presisi Tinggi" [OK]
+- "Proses Pengerjaan CNC Router" [BAGUS]
+- "Material yang Dapat Diproses" [BAGUS]
+- "Keunggulan Layanan CNC Router Kami" [BAGUS]
+- "Aplikasi CNC Router" [BAGUS]
+- "Butuh CNC Router Profesional?" [OK]
+
+KONTEN:
+- Kelebihan:
+  * Ada detail proses (Setup, Cutting, Finishing, Delivery)
+  * Ada list material yang bisa diproses
+  * Ada aplikasi industri yang ditangani
+- Kekurangan SERIUS:
+  * Deskripsi fitur unggulan IDENTIK untuk semua 6 poin:
+    "Feature unggulan yang menjadikan layanan kami terdepan di industri"
+    - INI PLACEHOLDER YANG BELUM DIISI! Harus diganti dengan deskripsi nyata
+  * Aplikasi industri juga hanya template:
+    "Solusi profesional untuk industri furniture custom" (copy-paste)
+  * Tidak ada harga estimasi
+  * Tidak ada contoh proyek CNC Router spesifik
+
+INTERNAL LINKING:
+- Link ke portfolio dan kontak: ADA
+- Broken link: "/rajacuttinglaser/contact" - SAMA seperti di beranda
+
+URL:
+- /jasa-cnc-router/ [BAGUS - keyword ada di URL]
+
+
+------------------------------------------------------------------------
+HALAMAN 3: LAYANAN - LASER FIBER
+URL: https://rajacuttinglaser.com/jasa-laser-fiber/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "Laser Fiber - Presisi Tinggi untuk Material Metal | raja cutting laser"
+- Panjang: ~69 karakter [OPTIMAL]
+- Komentar: INI SATU-SATUNYA HALAMAN LAYANAN DENGAN TITLE UNIK DAN BAIK
+- Masalah minor: Tidak ada lokasi (kota)
+
+REKOMENDASI TITLE:
+"Jasa Laser Fiber Tangerang - Cutting Metal & Stainless Steel Presisi"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+- Rekomendasi:
+  "Jasa laser fiber profesional untuk cutting & marking metal, stainless
+   steel, aluminium, tembaga. Presisi 0.05mm. Melayani Jabodetabek.
+   Konsultasi & quote gratis!"
+
+H1:
+- Isi: "Laser Fiber Profesional" [CUKUP, sama seperti pola CNC Router]
+
+KONTEN:
+- Masalah SERIUS:
+  * Konten halaman ini SANGAT TIPIS. Hanya ada:
+    - Hero section dengan deskripsi singkat
+    - Satu H2 "Solusi Cutting & Marking Logam Terdepan" dengan 1 paragraf
+    - Langsung CTA
+  * TIDAK ADA: list material yang bisa diproses, proses pengerjaan,
+    keunggulan layanan, aplikasi industri, FAQ - semua yang ada di CNC
+    Router TIDAK ADA di sini
+  * Ini membuat halaman sangat lemah secara konten dan SEO
+
+URL:
+- /jasa-laser-fiber/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 4: LAYANAN - LASER CO2
+URL: https://rajacuttinglaser.com/jasa-laser-co2/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT dengan CNC Router, About, Portfolio, dll
+- Masalah: Sama seperti yang dijelaskan di halaman CNC Router
+
+REKOMENDASI TITLE:
+"Jasa Laser CO2 Tangerang - Cutting Acrylic & Non-Metal | Raja Cutting Laser"
+
+H1:
+- Isi: "Laser CO2 Profesional" [Sama seperti pola halaman lain]
+
+KONTEN:
+- Status: SANGAT TIPIS (sama seperti Laser Fiber)
+  * Hanya ada hero section dan 1 paragraf deskripsi singkat
+  * Tidak ada detail material, proses, keunggulan, aplikasi
+  * Halaman ini jelas belum selesai dikembangkan
+
+URL:
+- /jasa-laser-co2/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 5: LAYANAN - GALVO ENGRAVING
+URL: https://rajacuttinglaser.com/jasa-galvo-engraving/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "Galvo Engraving - Engraving Presisi untuk Material Metal | raja cutting laser"
+- Panjang: ~77 karakter [sedikit panjang]
+- Komentar: Unik, ada keyword [BAGUS, sama seperti Laser Fiber]
+- Catatan: "Material Metal" kurang tepat karena galvo juga untuk plastik & kayu
+
+REKOMENDASI TITLE:
+"Jasa Galvo Engraving Tangerang - Branding & Serial Number Presisi"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+
+H1:
+- Isi: "Galvo Engraving Profesional" [Cukup]
+
+KONTEN:
+- Status: SANGAT TIPIS (sama seperti Laser Fiber dan Laser CO2)
+  * Hanya hero dan 1 paragraf deskripsi
+  * Tidak ada detail lebih lanjut
+
+URL:
+- /jasa-galvo-engraving/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 6: MATERIAL - ACRYLIC
+URL: https://rajacuttinglaser.com/material-acrylic/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT - sama dengan 10 halaman lain
+- Kesalahan: "Jawa Barat" tidak sesuai lokasi (harusnya Banten/Tangerang)
+
+REKOMENDASI TITLE:
+"Cutting Acrylic Laser CO2 - Toleransi ±0.02mm | Raja Cutting Laser"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+- Rekomendasi:
+  "Jasa cutting acrylic profesional dengan laser CO2. Ketebalan 1-50mm,
+   toleransi ±0.02mm, edge polished. Tersedia warna clear, opal, custom.
+   Hubungi untuk quote!"
+
+H1:
+- Isi: "raja cutting laser Acrylic"
+  * Masalah: Menggunakan brand name di H1, bukan keyword pencarian
+  * Orang tidak mencari "raja cutting laser acrylic" - mereka cari
+    "cutting acrylic jakarta" atau "jasa laser acrylic murah"
+- Rekomendasi: "Jasa Cutting Acrylic dengan Laser CO2 - Presisi &
+  Edge Polished"
+
+KONTEN:
+- Kelebihan:
+  * Ada spesifikasi teknis yang detail (ketebalan, ukuran, toleransi,
+    finishing
+    finishing, warna)
+  * Ada rekomendasi mesin yang sesuai (Laser CO2) [BAGUS]
+  * Ada gambar produk yang relevan
+- Kekurangan:
+  * Tidak ada konten tentang aplikasi/use case spesifik (nama-nama
+    aplikasi hanya "Contoh Aplikasi 1, 2, 3, 4" - PLACEHOLDER BELUM DIISI)
+  * Tidak ada harga atau estimasi biaya
+  * Tidak ada perbandingan dengan material lain
+
+URL:
+- /material-acrylic/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 7: MATERIAL - METAL/STAINLESS STEEL
+URL: https://rajacuttinglaser.com/material-metal/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT - sama dengan 10 halaman lain
+
+REKOMENDASI TITLE:
+"Cutting Stainless Steel & Metal - SS304, SS316 | Raja Cutting Laser"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+- Rekomendasi:
+  "Jasa cutting stainless steel & metal dengan laser fiber. Grade SS304,
+   SS316, SS201. Ketebalan 0.5-20mm, toleransi ±0.05mm. Finishing mirror,
+   hairline, brushed. Hubungi sekarang!"
+
+H1:
+- Isi: "raja cutting laser Metal/Stainless Steel"
+  * Masalah: Brand name di H1, bukan keyword pencarian
+- Rekomendasi: "Jasa Cutting Metal & Stainless Steel dengan Laser Fiber
+  - Presisi Industri"
+
+KONTEN:
+- Kelebihan:
+  * Spesifikasi teknis lengkap (grade SS304/316/201, toleransi, finishing)
+  * Ada info heat treatment available
+  * Rekomendasi mesin yang tepat (Laser Fiber)
+- Kekurangan:
+  * Contoh aplikasi masih "Contoh Aplikasi 1, 2, 3, 4" - PLACEHOLDER
+  * Tidak ada info ketebalan maksimum per grade
+  * Tidak ada info tentang carbon steel dan aluminium
+
+URL:
+- /material-metal/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 8: MATERIAL - MDF
+URL: https://rajacuttinglaser.com/material-mdf/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT
+
+REKOMENDASI TITLE:
+"Cutting MDF Laser CO2 - Furniture & Interior Premium | Raja Cutting Laser"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+- Rekomendasi:
+  "Jasa cutting MDF dengan laser CO2 presisi tinggi. Ketebalan 3-30mm,
+   density 600-800 kg/m³, toleransi ±0.1mm. Cocok untuk furniture,
+   dekorasi interior. Konsultasi gratis!"
+
+H1:
+- Isi: "raja cutting laser MDF (Medium Density Fiberboard)"
+  * Masalah: Brand name di H1, bukan keyword
+- Rekomendasi: "Jasa Cutting MDF (Medium Density Fiberboard) - Presisi
+  Tinggi untuk Furniture & Interior"
+
+KONTEN:
+- Kelebihan:
+  * Spesifikasi teknis lengkap (density, toleransi, finishing)
+  * Ada gambar produk yang relevan
+- Kekurangan:
+  * Contoh aplikasi masih PLACEHOLDER ("Contoh Aplikasi 1, 2, 3, 4")
+  * Tidak ada info harga per lembar/m2
+
+URL:
+- /material-mdf/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 9: MATERIAL - PLYWOOD/MULTIPLEX
+URL: https://rajacuttinglaser.com/material-ply-wood-multiplex/
+------------------------------------------------------------------------
+
+STATUS: *** HALAMAN KOSONG / BLANK ***
+
+- Halaman ini tidak menampilkan konten apapun (white screen)
+- Title tab hanya menampilkan URL, bukan nama halaman
+- Ini adalah masalah KRITIS karena:
+  * Halaman ini dilink dari beranda dan footer (dead end link)
+  * Google akan mengindex halaman kosong yang merusak crawl budget
+  * Pengguna yang klik akan mendapat halaman putih = bounce rate 100%
+  * Dari sisi SEO, ini seperti soft 404 yang tidak dihandle
+
+TINDAKAN SEGERA:
+  * Opsi 1: Isi halaman dengan konten seperti halaman material lainnya
+  * Opsi 2: Tambahkan redirect 301 ke halaman yang relevan (/material-mdf/)
+  * Opsi 3: Return proper 404 dan hapus semua link yang menuju halaman ini
+
+URL:
+- /material-ply-wood-multiplex/ [URL terlalu panjang, bisa dipersingkat
+  menjadi /material-plywood/]
+
+
+------------------------------------------------------------------------
+HALAMAN 10: MATERIAL - PVC
+URL: https://rajacuttinglaser.com/material-pvc/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT
+
+REKOMENDASI TITLE:
+"Cutting PVC Foam Board - Signage & Display Outdoor | Raja Cutting Laser"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+
+H1:
+- Isi: "raja cutting laser PVC"
+  * Masalah: Brand name di H1
+- Rekomendasi: "Jasa Cutting PVC untuk Signage Outdoor & Display - Tahan
+  Cuaca & Ekonomis"
+
+KONTEN:
+- Kelebihan:
+  * Spesifikasi teknis lengkap (ketebalan, ukuran, toleransi, warna)
+  * Highlight karakteristik: tahan kimia, fleksibel, ekonomis
+- Kekurangan:
+  * Contoh aplikasi masih PLACEHOLDER
+  * Tidak ada info perbandingan dengan material lain untuk signage
+
+URL:
+- /material-pvc/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 11: MATERIAL - ACP (ALUMINIUM COMPOSITE PANEL)
+URL: https://rajacuttinglaser.com/material-acp/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT
+
+REKOMENDASI TITLE:
+"Cutting ACP Aluminium Composite Panel - Fasad & Signage | Raja Cutting Laser"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+
+H1:
+- Isi: "raja cutting laser ACP (Aluminium Composite Panel)"
+  * Masalah: Brand name di H1
+
+KONTEN:
+- Kelebihan:
+  * Ada informasi core PE/FR
+  * Ada spesifikasi teknis
+  * Mesin rekomendasi (CNC Router) sudah sesuai
+- Kekurangan:
+  * Contoh aplikasi PLACEHOLDER
+  * Catatan teknis: Di spesifikasi disebutkan "Metode Cutting: CNC Router"
+    tapi tidak disebutkan apakah laser fiber juga bisa untuk ACP tipis
+  * Tidak ada info merk ACP yang bisa diproses (Seven, Alucobond, dll)
+
+URL:
+- /material-acp/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 12: PORTFOLIO
+URL: https://rajacuttinglaser.com/portfolio/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT
+
+REKOMENDASI TITLE:
+"Portfolio Laser Cutting & CNC Router - 1000+ Proyek Selesai | Raja Cutting Laser"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+- Rekomendasi:
+  "Lihat portfolio proyek laser cutting, CNC router, dan engraving dari
+   Raja Cutting Laser. Lebih dari 1000 proyek selesai untuk berbagai
+   industri di seluruh Indonesia."
+
+H1:
+- Isi: "Portfolio Hasil Kerja Kami" [CUKUP, bisa dioptimasi]
+- Rekomendasi: "Portfolio Proyek Laser Cutting & CNC Router - Hasil
+  Kerja Terbaik Kami"
+
+KONTEN:
+- Kelebihan:
+  * Ada filter kategori (Semua, Laser Fiber, CO2, CNC Router, Galvo)
+    [BAGUS untuk UX dan SEO]
+  * Setiap proyek ada detail klien, material, dan teknik
+  * Ada breadcrumb navigation [BAGUS untuk SEO]
+- Kekurangan SERIUS:
+  * Hanya ada 6 proyek - terlalu sedikit untuk halaman portfolio profesional
+  * Tidak ada gambar hasil nyata (dari deskripsi terlihat seperti
+    placeholder/stock image)
+  * Semua proyek link ke halaman yang sama (/portfolio/) bukan ke halaman
+    detail proyek individual - tidak ada halaman detail per proyek
+    (HILANG kesempatan keyword long-tail per proyek)
+  * Tidak ada testimoni atau review di halaman portfolio
+
+URL:
+- /portfolio/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 13: BLOG
+URL: https://rajacuttinglaser.com/blog/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT
+
+REKOMENDASI TITLE:
+"Blog Laser Cutting - Tips, Tutorial & Insight Manufaktur | Raja Cutting Laser"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+
+H1:
+- Isi: "Blog raja cutting laser" [OK, cukup]
+
+KONTEN - MASALAH SERIUS DUPLICATE CONTENT:
+Ditemukan artikel dengan topik SANGAT MIRIP/HAMPIR IDENTIK diterbitkan
+dalam rentang waktu berdekatan:
+
+KELOMPOK DUPLIKAT 1 - Laser Fiber vs CO2 (3 artikel sangat mirip):
+  * "Laser Fiber vs. CO2: Memilih Teknologi Cutting Logam yang Optimal"
+    (2 September 2025)
+  * "Laser Fiber vs. Laser CO2: Memilih Teknologi Cutting Metal Terbaik"
+    (1 September 2025)
+  * "Laser Fiber vs. CO2: Panduan Memilih Terbaik untuk Proyek Anda"
+    (1 September 2025)
+  MASALAH: 3 artikel dalam 2 hari dengan topik identik = DUPLICATE CONTENT
+  Google akan menganggap ini sebagai keyword stuffing/spam content
+  TINDAKAN: Pilih 1, redirect 2 lainnya ke artikel terbaik dengan 301
+
+KELOMPOK DUPLIKAT 2 - Fabrikasi Logam (8+ artikel sangat mirip):
+  * "Keunggulan Manufaktur Presisi: Solusi Fabrikasi Logam..." (29 Sep)
+  * "Raja Cutting Laser: Mengukir Keunggulan Industri..." (28 Sep)
+  * "Manufaktur Presisi Tinggi: Mengungkap Solusi Fabrikasi..." (27 Sep)
+  * "Keunggulan Manufaktur: Panduan Eksklusif Fabrikasi..." (26 Sep)
+  * "Presisi Tak Tertandingi: Panduan Strategis Jasa Fabrikasi..." (26 Sep)
+  * "Keunggulan Fabrikasi Logam & Konstruksi Baja Presisi..." (25 Sep)
+  * "Mengukir Keunggulan: Panduan Strategis Jasa Fabrikasi..." (23 Sep)
+  * "Fabrikasi Logam & Konstruksi Baja Tingkat Tinggi..." (23 Sep)
+  * "Strategi Presisi: Memilih Jasa Fabrikasi Logam..." (19 Sep)
+  * "Menguak Solusi Fabrikasi Logam & Konstruksi Baja..." (17 Sep)
+  MASALAH: 10 artikel dalam 2 minggu dengan tema identik (fabrikasi logam
+  & konstruksi baja) - ini POLA SPAM yang jelas dikenali Google sebagai
+  low-quality content farm
+  TINDAKAN: Pilih 1 artikel terbaik, HAPUS sisanya atau konsolidasikan
+  menjadi 1 artikel comprehensive
+
+ARTIKEL "Untitled" (1 Oktober 2025):
+  * Judul: "Untitled" - artikel TANPA JUDUL yang terpublikasi!
+  * Ini harus segera diperbaiki atau dihapus
+
+KONTEN BLOG YANG BAGUS (pertahankan & kembangkan):
+  * "Panduan Lengkap Memilih Material untuk Laser Cutting" (15 Jan 2025)
+  * "5 Keunggulan Teknologi Laser Fiber untuk Industri Metal" (12 Jan 2025)
+  * "Cara Optimasi File Design untuk Laser Cutting" (10 Jan 2025)
+  * "Perbandingan CNC Router vs Laser Cutting untuk Kayu" (8 Jan 2025)
+  * "Acrylic Cutting: Presisi Laser untuk Hasil Sempurna" (3 Sep 2025)
+
+URL:
+- /blog/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 14: TENTANG KAMI (ABOUT)
+URL: https://rajacuttinglaser.com/about/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT
+
+REKOMENDASI TITLE:
+"Tentang Raja Cutting Laser - 10+ Tahun Jasa Laser Cutting Profesional"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+- Rekomendasi:
+  "Raja Cutting Laser berdiri sejak 2014 di Tangerang Selatan. Lebih dari
+   10 tahun pengalaman, 1000+ proyek selesai. Tim profesional bersertifikasi.
+   Melayani seluruh Jabodetabek."
+
+H1:
+- Isi: "Tentang raja cutting laser" [OK]
+- Masalah: Huruf kecil di "raja cutting laser"
+
+KONTEN:
+- Kelebihan:
+  * Ada profil tim (Direktur, Technical Manager, Design Specialist) [BAGUS]
+  * Ada galeri workshop dan peralatan [BAGUS untuk E-E-A-T]
+- Kekurangan:
+  * Tidak ada cerita/sejarah
+    perusahaan (founding story, kapan berdiri, kenapa dibuat)
+  * Profil tim tidak ada foto nyata (hanya nama dan jabatan)
+  * Tidak ada sertifikasi, penghargaan, atau lisensi yang disebutkan
+  * Tidak ada info legal perusahaan (PT/CV/nama usaha resmi)
+  * Galeri workshop hanya label teks, tidak jelas apakah gambar tampil
+    dengan benar
+  * Statistik (10+ tahun, 1000+ proyek) tidak ada sumber/verifikasi
+  * Tidak ada video company profile (padahal punya YouTube channel)
+
+E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness):
+  * Google sangat memperhitungkan E-E-A-T untuk bisnis lokal
+  * Saat ini sinyal E-E-A-T LEMAH: tidak ada sertifikasi, tidak ada
+    foto tim nyata, tidak ada review platform eksternal (Google Maps, dll)
+
+URL:
+- /about/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 15: KONTAK
+URL: https://rajacuttinglaser.com/contact/
+------------------------------------------------------------------------
+
+TITLE TAG:
+- Isi: "raja cutting laser Terpercaya #1 di Jawa Barat | raja cutting laser"
+- Status: DUPLIKAT
+
+REKOMENDASI TITLE:
+"Kontak Raja Cutting Laser - Konsultasi & Quote Gratis Tangerang Selatan"
+
+META DESCRIPTION:
+- Status: TIDAK ADA
+- Rekomendasi:
+  "Hubungi Raja Cutting Laser untuk konsultasi dan quote gratis. Jl. BSD
+   Bintaro No. 1D, Pondok Aren, Tangerang Selatan. Telp: +62 851-6569-3179.
+   Senin-Sabtu 08.00-17.00 WIB."
+
+H1:
+- Isi: "Hubungi Kami" [Terlalu generik]
+- Rekomendasi: "Konsultasi & Request Quote Laser Cutting - Hubungi
+  Raja Cutting Laser"
+
+KONTEN:
+- Kelebihan:
+  * Ada form kontak dengan field yang relevan (nama, email, WA, pesan,
+    lampiran file)
+  * Ada 2 nomor Customer Service [BAGUS]
+  * Ada info area layanan (Jakarta, Bekasi, Bogor, Depok, Cimahi, Sukabumi)
+  * Ada FAQ accordion [BAGUS]
+- Kekurangan:
+  * INKONSISTENSI JAM OPERASIONAL:
+    - Di form info kiri: "Senin - Sabtu, 08:00 - 18:00 WIB"
+    - Di bagian Jam Operasional: "Senin - Sabtu: 08:00 - 17:00 WIB"
+    - Di footer: "Senin - Sabtu, 08:00 - 17:00 WIB"
+    - Harus disamakan ke 1 versi yang benar
+  * Tidak ada Google Maps embed - sangat penting untuk bisnis lokal
+  * Area layanan menyebut "Cimahi" dan "Sukabumi" yang jauh dari Tangerang
+    Selatan - tidak konsisten dengan klaim melayani "Jabodetabek"
+  * Tidak ada link ke Google Maps / Google Business Profile
+  * CTA "Dapatkan Quote" link ke "/rajacuttinglaser/contact" = BROKEN LINK
+  * FAQ tidak di-expand (accordion kosong, isi tidak terlihat di halaman)
+  * Form tidak menampilkan Google Maps - kehilangan sinyal geo lokal
+
+SCHEMA MARKUP YANG HARUS DITAMBAHKAN:
+  * ContactPage schema
+  * LocalBusiness schema dengan NAP (Name, Address, Phone) lengkap
+
+URL:
+- /contact/ [BAGUS]
+
+
+------------------------------------------------------------------------
+HALAMAN 16: BLOG - HALAMAN INDIVIDUAL (SAMPEL)
+URL: https://rajacuttinglaser.com/blog/[slug]/
+------------------------------------------------------------------------
+
+Berdasarkan list artikel yang terlihat di halaman blog, audit sampel
+dilakukan terhadap pola umum artikel:
+
+MASALAH UMUM ARTIKEL BLOG:
+  * Setiap artikel tidak diketahui apakah memiliki meta description unik
+  * Artikel yang diterbitkan dalam jumlah massal dalam waktu singkat
+    (contoh: 4-5 artikel per hari pada periode September 2025) sangat
+    berisiko dianggap AI-generated spam oleh Google
+  * Tidak ada author box / penulis yang jelas di artikel
+  * Tidak ada tanggal update artikel (hanya tanggal publish)
+  * Kategori blog tidak konsisten: ada "Teknologi Laser", "CNC Router",
+    "Tutorial", "Trend", "Maintenance" (bagus) tapi ada juga kategori
+    seperti "Premium Solutions", "Advanced Industrial Solutions",
+    "Manufacturing & Advanced Technology" yang sangat generik dan
+    tidak relevan untuk target pembaca lokal Indonesia
+  * URL artikel beberapa terlalu panjang, contoh:
+    "/blog/2025-08-29-kreasi-tanpa-batas-keunggulan-jasa-laser-fiber-
+    cutting-untuk-material-metal-dan-stainless-steel"
+    (terlalu panjang, sebaiknya max 5-6 kata)
+
+
+================================================================
+AUDIT TEKNIKAL GLOBAL
+================================================================
+
+------------------------------------------------------------------------
+1. SITEMAP & ROBOTS.TXT
+------------------------------------------------------------------------
+- Status: TIDAK DIVERIFIKASI dalam audit ini
+- Rekomendasi: Verifikasi bahwa sitemap XML tersedia di:
+  https://rajacuttinglaser.com/sitemap.xml
+- Pastikan robots.txt tidak memblokir halaman penting
+- Daftarkan sitemap di Google Search Console
+
+------------------------------------------------------------------------
+2. CANONICAL TAG
+------------------------------------------------------------------------
+- Status: TIDAK DIVERIFIKASI secara langsung
+- Dengan adanya 11 halaman yang title tag-nya identik, risiko canonical
+  issue sangat tinggi
+- Pastikan setiap halaman punya canonical tag yang menunjuk ke dirinya
+  sendiri (self-referential canonical)
+- Untuk artikel blog duplikat, gunakan canonical ke versi artikel terbaik
+
+------------------------------------------------------------------------
+3. OPEN GRAPH & TWITTER CARD
+------------------------------------------------------------------------
+- Status: TIDAK DIVERIFIKASI
+- Penting untuk ketika halaman dibagikan di WhatsApp, Facebook, Instagram
+- Rekomendasi: Pastikan setiap halaman punya:
+  * og:title
+  * og:description
+  * og:image (ukuran ideal 1200x630px)
+  * og:url
+
+------------------------------------------------------------------------
+4. PAGE SPEED & CORE WEB VITALS
+------------------------------------------------------------------------
+- Observasi dari loading halaman:
+  * Hero section pakai video/animasi background → berat untuk mobile
+  * Gambar produk terlihat ada (tapi beberapa halaman layanan seperti
+    Laser Fiber dan CO2 tidak ada gambar tambahan selain hero)
+- Rekomendasi:
+  * Gunakan Google PageSpeed Insights untuk cek score mobile & desktop
+  * Pastikan semua gambar menggunakan format WebP
+  * Lazy load gambar di bawah fold
+  * Minify CSS dan JavaScript
+  * Gunakan CDN jika hosting di Indonesia
+
+------------------------------------------------------------------------
+5. MOBILE RESPONSIVENESS
+------------------------------------------------------------------------
+- Status: Tidak bisa diverifikasi dari audit ini
+- Rekomendasi: Test di Google Mobile-Friendly Test Tool
+
+------------------------------------------------------------------------
+6. SSL / HTTPS
+------------------------------------------------------------------------
+- Status: AMAN - website sudah HTTPS [BAGUS]
+
+------------------------------------------------------------------------
+7. INTERNAL LINKING GLOBAL
+------------------------------------------------------------------------
+BROKEN LINKS YANG DITEMUKAN:
+  * "/rajacuttinglaser/contact" - muncul di BANYAK halaman sebagai
+    tombol CTA "Dapatkan Quote". URL ini tidak valid.
+    Seharusnya: "/contact/"
+    Ini harus diperbaiki di semua halaman sekaligus.
+
+MISSING INTERNAL LINKS:
+  * Halaman layanan tidak saling link satu sama lain
+    (contoh: halaman Laser Fiber tidak ada link ke Laser CO2 atau Galvo)
+  * Halaman material tidak ada link ke halaman layanan yang relevan
+    selain widget rekomendasi mesin
+  * Tidak ada breadcrumb di halaman layanan dan material
+    (hanya ada di Portfolio dan About)
+
+------------------------------------------------------------------------
+8. NAP CONSISTENCY (Name, Address, Phone)
+------------------------------------------------------------------------
+NAP adalah faktor KRITIS untuk Local SEO (Google Maps ranking).
+Berikut inconsistency yang ditemukan:
+
+NAMA BRAND:
+  * "raja cutting laser" (huruf kecil semua) - di sebagian besar halaman
+  * "Raja Cutting Laser" (kapitalisasi proper) - di beberapa teks artikel
+  → Harus pilih 1 format dan konsisten di semua halaman + Google Business
+
+ALAMAT:
+  * "Jl. BSD Bintaro. No 1D" (ada titik setelah "Jl. BSD Bintaro")
+  → Format alamat tidak standar, sebaiknya: "Jl. BSD Bintaro No. 1D"
+
+JAM OPERASIONAL (INKONSISTENSI):
+  * Footer semua halaman: 08:00 - 17:00 WIB
+  * Halaman Contact (info kanan): 08:00 - 18:00 WIB
+  * Halaman Contact (bagian Jam Operasional): 08:00 - 17:00 WIB
+  → HARUS DISERAGAMKAN ke 1 jam yang benar
+
+TELEPON:
+  * "+62 851 6569 3179" - format konsisten [BAGUS]
+  * CS2: "081210134134" - format berbeda (tidak ada +62)
+  → Samakan format: "+62 812-1013-4134"
+
+------------------------------------------------------------------------
+9. GOOGLE BUSINESS PROFILE
+------------------------------------------------------------------------
+- Status: Tidak diverifikasi dalam audit ini
+- Ini adalah PRIORITAS UTAMA untuk bisnis lokal
+- Pastikan:
+  * Google Business Profile sudah diklaim dan diverifikasi
+  * NAP di Google Business SAMA PERSIS dengan di website
+  * Kategori bisnis: "Laser Cutting Service" atau "CNC Machining Service"
+  * Foto workshop, mesin, dan hasil kerja sudah diupload (min. 10 foto)
+  * Area layanan sudah diatur (Jabodetabek)
+  * Jam operasional sudah benar dan sesuai website
+  * Sudah ada minimum 10 review Google
+
+------------------------------------------------------------------------
+10. KEYWORD COVERAGE ANALYSIS
+------------------------------------------------------------------------
+KEYWORD UTAMA YANG SEHARUSNYA DITARGET TAPI BELUM ADA HALAMAN KHUSUS:
+
+Keyword Volume Tinggi (perlu dibuatkan landing page):
+  * "jasa laser cutting jakarta" → belum ada halaman khusus Jakarta
+  * "jasa laser cutting tangerang" → belum ada halaman khusus Tangerang
+  * "harga laser cutting acrylic" → tidak ada info harga di website
+  * "laser cutting murah" → tidak ada halaman yang membahas harga
+  * "jasa cutting stiker" → tidak ada
+  * "laser engraving jakarta" → tidak ada halaman khusus engraving lokasi
+
+Keyword Long-Tail yang Bernilai Tinggi (konversi bagus):
+  * "jasa laser cutting acrylic tangerang selatan"
+  * "cutting plat besi custom jabodetabek"
+  * "engraving logo stainless steel jakarta"
+  * "cnc router kayu furniture jakarta"
+  * "laser cutting per lembar harga"
+
+Keyword yang Sudah Ada Halaman tapi Belum Optimal:
+  * "jasa cnc router" → ada di /jasa-cnc-router/ tapi konten masih lemah
+  * "cutting acrylic" → ada di /material-acrylic/ tapi title salah
+  * "laser fiber" → ada di /jasa-laser-fiber/ tapi konten sangat tipis
+
+
+================================================================
+AUDIT KONTEN KHUSUS - MASALAH TEMPLATE/PLACEHOLDER
+================================================================
+
+Ditemukan KONTEN TEMPLATE YANG BELUM DIISI di beberapa halaman.
+Ini harus menjadi PRIORITAS PERTAMA sebelum SEO lainnya:
+
+1. HALAMAN /jasa-cnc-router/ - Bagian "Keunggulan Layanan":
+   SEMUA 6 POIN keunggulan isinya sama persis:
+   "Feature unggulan yang menjadikan layanan kami terdepan di industri"
+   → Harus diganti dengan deskripsi nyata masing-masing keunggulan
+
+2. HALAMAN /jasa-cnc-router/ - Bagian "Aplikasi CNC Router":
+   SEMUA 6 POIN isinya:
+   "Solusi profesional untuk industri [nama industri]"
+   → Harus diganti dengan konten nyata tentang setiap aplikasi
+
+3. SEMUA HALAMAN MATERIAL - Bagian "Contoh Aplikasi":
+   Label "Contoh Aplikasi 1", "Contoh Aplikasi 2", dst - SEMUA PLACEHOLDER
+   → Perlu foto asli hasil kerja dengan caption yang deskriptif
+
+4. HALAMAN /jasa-laser-fiber/ dan /jasa-laser-co2/ dan
+   /jasa-galvo-engraving/:
+   Konten SANGAT TIPIS dibanding /jasa-cnc-router/
+   → Perlu dikembangkan dengan struktur yang sama seperti CNC Router
+
+5. ARTIKEL BLOG "Untitled" (1 Oktober 2025):
+   Artikel tanpa judul yang terpublikasi
+   → Harus segera diberi judul atau dihapus/unpublish
+
+
+================================================================
+DAFTAR PRIORITAS PERBAIKAN
+================================================================
+
+PRIORITAS 1 - DARURAT (Perbaiki dalam 1-3 hari):
+  [ ] Perbaiki broken link "/rajacuttinglaser/contact" di SEMUA halaman
+      → Ganti dengan "/contact/"
+  [ ] Perbaiki halaman blank /material-ply-wood-multiplex/
+      → Isi konten atau redirect 301 ke /material-mdf/
+  [ ] Unpublish atau beri judul artikel blog "Untitled"
+  [ ] Samakan jam operasional di SEMUA halaman (pilih 1 versi)
+
+PRIORITAS 2 - KRITIS SEO (Perbaiki dalam 1-2 minggu):
+  [ ] Buat title tag UNIK untuk setiap halaman (16 halaman berbeda)
+      Fokus utama: hilangkan "Jawa Barat" yang salah, ganti dengan
+      "Tangerang Selatan" atau "Jabodetabek"
+  [ ] Tulis meta description unik untuk setiap halaman (150-160 karakter)
+  [ ] Ubah H1 halaman material dari "raja cutting laser [nama material]"
+      menjadi keyword yang dicari pengguna
+  [ ] Isi konten placeholder di halaman CNC Router (6 keunggulan + 6 aplikasi)
+  [ ] Konsolidasikan artikel blog duplikat tentang fabrikasi logam
+      (10 artikel → 1 artikel terbaik + 301 redirect sisanya)
+  [ ] Konsolidas

@@ -74,9 +74,9 @@ const jsonLd = generateBlogPostSchema({
 });
 
 const breadcrumbs = [
-  { name: 'Beranda', url: '/rajacuttinglaser/' },
-  { name: 'Blog', url: '/rajacuttinglaser/blog/' },
-  { name: postView.title, url: `/rajacuttinglaser/blog/${postView.slug}/` }
+  { name: 'Beranda', url: '/' },
+  { name: 'Blog', url: '/blog/' },
+  { name: postView.title, url: `/blog/${postView.slug}/` }
 ];
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 ---
@@ -169,7 +169,7 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
               Konsultasi Gratis
             </a>
             <a 
-              href="/rajacuttinglaser/contact/" 
+              href="/contact/" 
               class="border-2 border-white text-white hover:bg-white hover:text-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               Request Quote
